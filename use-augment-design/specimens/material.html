@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Augment material specimens</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: var(--space-32);
+      font-family: var(--font-sans);
+      color: var(--ink);
+      background: var(--neutral-25);
+    }
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: grid;
+      gap: var(--space-32);
+    }
+    h1, h2, p { margin: 0; }
+    h1 {
+      font-size: var(--fs-40);
+      line-height: var(--lh-48);
+      letter-spacing: var(--tracking-tight);
+      font-weight: var(--fw-medium);
+    }
+    h2 {
+      font-size: var(--fs-18);
+      line-height: var(--lh-24);
+      font-weight: var(--fw-semibold);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-16);
+    }
+    .panel {
+      min-height: 180px;
+      padding: var(--space-24);
+      border-radius: var(--radius-16);
+      border: 1px solid var(--border-subtle);
+      background: var(--white);
+      overflow: hidden;
+    }
+    .label {
+      position: relative;
+      z-index: 1;
+      font-size: var(--fs-12);
+      line-height: var(--lh-16);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      font-weight: var(--fw-medium);
+      color: var(--cloud-burst);
+    }
+    .dark {
+      color: var(--white);
+      background: var(--ink);
+      border-color: var(--border-on-dark);
+    }
+    .dark .label, .brand .label { color: rgba(255, 255, 255, 0.72); }
+    .swirl {
+      position: relative;
+      min-height: 240px;
+      color: var(--white);
+      background: var(--burgundy-700);
+    }
+    .swirl::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: var(--brand-swirl);
+      filter: blur(48px) saturate(1.1);
+    }
+    .swirl::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(4, 9, 25, 0.52), transparent 60%);
+    }
+    .shadow-row {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(96px, 1fr));
+      gap: var(--space-16);
+    }
+    .shadow {
+      min-height: 96px;
+      border-radius: var(--radius-16);
+      background: var(--white);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--cloud-burst);
+    }
+    @media (max-width: 720px) {
+      .shadow-row { grid-template-columns: repeat(2, minmax(96px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Material specimens</h1>
+
+    <section class="grid" aria-label="Brand material">
+      <div class="panel swirl">
+        <p class="label">Brand swirl</p>
+      </div>
+      <div class="panel brand aug-glow aug-glow--brand">
+        <span class="aug-glow__layer" aria-hidden="true"></span>
+        <p class="label">Brand edge glow</p>
+      </div>
+      <div class="panel dark aug-grain">
+        <p class="label">Grain on dark surface</p>
+      </div>
+      <div class="panel dark aug-glow aug-glow--neutral">
+        <span class="aug-glow__layer" aria-hidden="true"></span>
+        <p class="label">Neutral edge glow</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="shadow">
+      <h2 id="shadow">Shadow elevation</h2>
+      <div class="shadow-row" style="margin-top: var(--space-16);">
+        <div class="shadow" style="box-shadow: var(--shadow-1);">shadow-1</div>
+        <div class="shadow" style="box-shadow: var(--shadow-2);">shadow-2</div>
+        <div class="shadow" style="box-shadow: var(--shadow-3);">shadow-3</div>
+        <div class="shadow" style="box-shadow: var(--shadow-4);">shadow-4</div>
+        <div class="shadow dark" style="box-shadow: var(--shadow-5);">shadow-5</div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
+

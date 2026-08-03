@@ -1,0 +1,75 @@
+/* Augment color system.
+   Primitives are raw named values. Semantic aliases assign meaning.
+   Neutral temperature stays stable; chromatic values are signal, atmosphere, or artwork. */
+
+:root {
+  /* — Brand / burgundy-plum — */
+  --burgundy-600: #660033; /* primary brand burgundy (wordmark) */
+  --burgundy-700: #4d0026;
+  --burgundy-800: #3d001e;
+  /* Plum is a deep SUPPORTING tone — kept off blue-violet (toward burgundy's
+     magenta side) and lower in chroma so it always recedes behind burgundy
+     rather than out-advancing it. */
+  --plum-500: #852d5a;
+  --plum-600: #621e50;
+  --plum-700: #4f2a3c;
+  --mark-pink: #cf0147; /* vivid mark/lockup pink-red */
+
+  /* — Ink & cool neutrals — */
+  --ink: #040919;
+  --woodsmoke: #2b2d39;
+  --cloud-burst: #6f7288;
+  --white: #ffffff;
+  --neutral-25: #fafbfb;
+  --neutral-50: #f4f6f6;
+  --neutral-75: #e8e8ec;
+  --neutral-85: #e3e3e8;
+  --neutral-100: #afaeb1;
+  --neutral-300: #6f7288;
+  --neutral-700: #2b2d39;
+
+  /* — Bone (warm paper neutrals) — */
+  --bone-100: #f6f1ef;
+  --bone-300: #e6dad8;
+  --bone-500: #e9e1e1;
+
+  /* — Accent / artwork hues — */
+  --arctic: #aee3e4;
+  --frost: #b4c1fa;
+  --oink: #f7c5da;
+  --peach: #fbd6a9;
+  --gold: #ffbe5c;
+
+  /* — Semantic state — */
+  --green: #00c000;
+  --red: #ed4343;
+
+  /* ── Semantic aliases ── */
+  --text-primary: var(--ink);
+  --text-secondary: var(--woodsmoke);
+  --text-tertiary: var(--cloud-burst);
+  --text-on-dark: var(--white);
+  --text-brand: var(--burgundy-600);
+
+  --surface-page: var(--white);
+  --surface-raised: var(--white);
+  --surface-sunken: var(--neutral-50);
+  --surface-muted: var(--neutral-25);
+  --surface-paper: var(--bone-100);
+  --surface-ink: var(--ink);
+  --surface-brand: var(--burgundy-600);
+
+  --border-subtle: var(--neutral-75);
+  --border-default: var(--neutral-85);
+  --border-strong: var(--neutral-100);
+  --border-on-dark: rgba(255, 255, 255, 0.16);
+
+  --accent-brand: var(--burgundy-600);
+  --accent-mark: var(--mark-pink);
+
+  --state-success: var(--green);
+  --state-error: var(--red);
+  --state-warning: var(--gold);
+
+  --focus-ring: var(--burgundy-600);
+}

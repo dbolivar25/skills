@@ -1,0 +1,11 @@
+/* Augment Design System — global entry point.
+   Consumers link this one file. Import lines only. */
+
+@import "tokens/fonts.css";
+@import "tokens/colors.css";
+@import "tokens/typography.css";
+@import "tokens/spacing.css";
+@import "tokens/effects.css";
+@import "tokens/glow.css";
+@import "tokens/grain.css";
+@import "tokens/motion.css";

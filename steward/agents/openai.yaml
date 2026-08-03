@@ -1,0 +1,4 @@
+interface:
+  display_name: "Steward"
+  short_description: "Keep owner intent authoritative through evolving work"
+  default_prompt: "Use $steward to lead this work through understanding, planning, execution, and independent sharpening while preserving the owner's Intent."

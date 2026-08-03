@@ -1,0 +1,54 @@
+/* Augment typography tokens — Matter SQ, with the brand type scale,
+   line heights, and tracking values. */
+
+:root {
+  --font-sans: "Matter SQ", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Weights */
+  --fw-light: 300; /* @kind font */
+  --fw-regular: 400; /* @kind font */
+  --fw-medium: 500; /* @kind font */
+  --fw-semibold: 600; /* @kind font */
+  --fw-bold: 700; /* @kind font */
+  --fw-heavy: 800; /* @kind font */
+
+  /* Type sizes */
+  --fs-72: 72px;
+  --fs-64: 64px;
+  --fs-48: 48px;
+  --fs-40: 40px;
+  --fs-32: 32px;
+  --fs-24: 24px;
+  --fs-20: 20px;
+  --fs-18: 18px;
+  --fs-15: 15px;
+  --fs-13: 13px;
+  --fs-12: 12px;
+
+  /* Line heights */
+  --lh-80: 80px;
+  --lh-68: 68px;
+  --lh-56: 56px;
+  --lh-48: 48px;
+  --lh-40: 40px;
+  --lh-32: 32px;
+  --lh-28: 28px;
+  --lh-24: 24px;
+  --lh-16: 16px;
+
+  /* Tracking (letter-spacing) */
+  --tracking-tightest: -2.5px; /* @kind other */
+  --tracking-tighter: -2.4px; /* @kind other */
+  --tracking-tight: -2px; /* @kind other */
+  --tracking-snug: -0.5px; /* @kind other */
+  --tracking-tiny: -0.25px; /* @kind other */
+  --tracking-wide: 0.04em; /* @kind other */
+  --tracking-wider: 0.08em; /* @kind other */
+
+  /* Measure (max line length) */
+  --measure-44: 44ch; /* @kind other */
+  --measure-56: 56ch; /* @kind other */
+  --measure-64: 64ch; /* @kind other */
+  --measure-72: 72ch; /* @kind other */
+}

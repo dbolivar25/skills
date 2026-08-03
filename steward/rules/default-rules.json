@@ -1,0 +1,38 @@
+[
+  {
+    "id": "intent-fidelity",
+    "version": "1",
+    "kind": "BEHAVIOR",
+    "when": "A phase result is reviewed or the next responsibility is selected.",
+    "expect": "The result advances the current Aim and Why, respects applicable Rules, and avoids every Non-goal.",
+    "owner": "AGENT",
+    "check": "Compare the candidate and proposed next responsibility with the complete current Intent."
+  },
+  {
+    "id": "support-aware-revision",
+    "version": "1",
+    "kind": "BEHAVIOR",
+    "when": "A governing backing, claim, assumption, or Intent changes.",
+    "expect": "Withdraw obsolete authority before continuing, preserve only independently supported work, and re-enter the phase needed to regain truth.",
+    "owner": "AGENT",
+    "check": "Inspect the Record order, live support, affected work, receipts, and newly selected phase."
+  },
+  {
+    "id": "evidence-bound-outcomes",
+    "version": "1",
+    "kind": "BEHAVIOR",
+    "when": "The work describes correctness, completion, delivery, attribution, or landing.",
+    "expect": "Each claim is limited to matching current evidence and every unproved gate remains open.",
+    "owner": "AGENT",
+    "check": "Distinguish local verification, review, CI, merge, deployment, and observed outcome evidence."
+  },
+  {
+    "id": "owner-authority",
+    "version": "1",
+    "kind": "AUTHORITY",
+    "when": "Evidence cannot decide a product meaning, tradeoff, permission, or external commitment owned by the user.",
+    "expect": "The owner makes the judgment while unrelated safe work may continue.",
+    "owner": "OWNER",
+    "check": "Confirm an Ask exposes the fork, explains why evidence cannot decide it, and blocks only affected work."
+  }
+]

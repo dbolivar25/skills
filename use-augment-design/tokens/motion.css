@@ -1,0 +1,45 @@
+/* Augment motion primitives: durations, easing curves, scale, rotation.
+   Motion maps a driver to a property range. Respect reduced motion. */
+
+:root {
+  /* Durations */
+  --dur-150: 150ms; /* @kind other */
+  --dur-200: 200ms; /* @kind other */
+  --dur-280: 280ms; /* @kind other */
+  --dur-320: 320ms; /* @kind other */
+  --dur-560: 560ms; /* @kind other */
+  --dur-2200: 2200ms; /* @kind other */
+  --dur-17000: 17000ms; /* @kind other */
+
+  /* Easing */
+  --ease-1: cubic-bezier(0.2, 0.6, 0.2, 1); /* @kind other */
+  --ease-2: cubic-bezier(0.17, 1, 0.32, 1); /* @kind other */
+  --ease-3: cubic-bezier(0.34, 1.4, 0.5, 1); /* @kind other */
+
+  /* Scale (press / hover) */
+  --scale-096: 0.96; /* @kind other */
+  --scale-098: 0.98; /* @kind other */
+  --scale-099: 0.99; /* @kind other */
+  --scale-101: 1.01; /* @kind other */
+  --scale-102: 1.02; /* @kind other */
+
+  /* Rotation */
+  --rotate-1: 1deg; /* @kind other */
+  --rotate-2: 2deg; /* @kind other */
+  --rotate-3: 3deg; /* @kind other */
+  --rotate-6: 6deg; /* @kind other */
+  --rotate-12: 12deg; /* @kind other */
+  --rotate-180: 180deg; /* @kind other */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-150: 0ms; /* @kind other */
+    --dur-200: 0ms; /* @kind other */
+    --dur-280: 0ms; /* @kind other */
+    --dur-320: 0ms; /* @kind other */
+    --dur-560: 0ms; /* @kind other */
+    --dur-2200: 0ms; /* @kind other */
+    --dur-17000: 0ms; /* @kind other */
+  }
+}

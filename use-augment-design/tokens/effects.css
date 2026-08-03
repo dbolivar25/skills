@@ -1,0 +1,37 @@
+/* Augment layer + material primitives: opacity, blur, shadow elevation.
+   Shadows carry depth; strokes carry true separation. */
+
+:root {
+  /* Opacity */
+  --opacity-0: 0; /* @kind other */
+  --opacity-4: 0.04; /* @kind other */
+  --opacity-8: 0.08; /* @kind other */
+  --opacity-12: 0.12; /* @kind other */
+  --opacity-16: 0.16; /* @kind other */
+  --opacity-24: 0.24; /* @kind other */
+  --opacity-32: 0.32; /* @kind other */
+  --opacity-48: 0.48; /* @kind other */
+  --opacity-64: 0.64; /* @kind other */
+  --opacity-80: 0.8; /* @kind other */
+  --opacity-100: 1; /* @kind other */
+
+  /* Blur (material / focus / artwork) */
+  --blur-0: 0; /* @kind other */
+  --blur-4: 4px; /* @kind other */
+  --blur-8: 8px; /* @kind other */
+  --blur-16: 16px; /* @kind other */
+  --blur-24: 24px; /* @kind other */
+  --blur-32: 32px; /* @kind other */
+  --blur-48: 48px; /* @kind other */
+  --blur-64: 64px; /* @kind other */
+  --blur-72: 72px; /* @kind other */
+
+  /* Shadow elevation — numbered levels */
+  --shadow-0: none;
+  --shadow-1: 0 1px 3px 0 rgba(4, 9, 25, 0.05);
+  --shadow-2: 0 6px 4px 0 rgba(4, 9, 25, 0.04), 0 1px 3px 0 rgba(4, 9, 25, 0.05);
+  --shadow-3: 0 6px 16px 0 rgba(4, 9, 25, 0.08);
+  --shadow-4: 0 12px 32px 0 rgba(0, 0, 0, 0.1);
+  --shadow-5: 0 0 3px 0 rgba(0, 0, 0, 0.25), 0 36px 100px 0 rgba(0, 0, 0, 0.4),
+    inset 0 0 3px 0 rgba(255, 255, 255, 0.1);
+}

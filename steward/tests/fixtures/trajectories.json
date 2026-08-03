@@ -1,0 +1,300 @@
+[
+  {
+    "id": "understand-plan-execute-to-reality",
+    "observedPattern": "A full mission accepts each phase only after independent sharpening and finishes from live receipts.",
+    "ruleIds": ["intent-fidelity", "evidence-bound-outcomes"],
+    "intent": {
+      "aim": "Ship the behavior the owner actually requested.",
+      "why": "Local correctness is insufficient when the result misses the product meaning.",
+      "nonGoals": ["Do not preserve an obsolete interface."],
+      "done": [
+        {"id": "verified", "expect": "The change passes focused verification.", "receipt": "verification.local"},
+        {"id": "landed", "expect": "The intended behavior is observed.", "receipt": "outcome.landed"}
+      ]
+    },
+    "steps": [
+      {
+        "events": [
+          {"type": "work.added", "payload": {"id": "W-UNDERSTAND", "phase": "UNDERSTAND", "text": "Ground owner meaning in current reality.", "needsClaims": [], "needsWork": []}}
+        ],
+        "expectNext": {"kind": "UNDERSTAND", "work": "W-UNDERSTAND"}
+      },
+      {
+        "events": [
+          {"type": "work.started", "payload": {"id": "W-UNDERSTAND", "actor": "researcher"}}
+        ],
+        "expectNext": {"kind": "WAIT", "active": ["W-UNDERSTAND"]}
+      },
+      {
+        "events": [
+          {"type": "work.reported", "payload": {"id": "W-UNDERSTAND", "report": "RP-UNDERSTAND", "actor": "researcher", "result": "Owner context and current source establish the intended behavior.", "evidence": ["owner request", "current source"]}}
+        ],
+        "expectNext": {"kind": "REVIEW", "work": "W-UNDERSTAND", "report": "RP-UNDERSTAND", "phase": "UNDERSTAND"}
+      },
+      {
+        "events": [
+          {"type": "review.added", "payload": {"id": "R-UNDERSTAND", "report": "RP-UNDERSTAND", "reviewer": "understanding-critic", "status": "ADHERES", "evidence": ["The result reconciles owner meaning with current source."], "confidence": "HIGH"}},
+          {"type": "backing.added", "payload": {"id": "B-MEANING", "kind": "EVIDENCE", "text": "Current source and owner context agree on the behavior."}},
+          {"type": "claim.added", "payload": {"id": "C-MEANING", "text": "The grounded behavior governs planning and execution.", "supports": [["backing:B-MEANING"]]}},
+          {"type": "work.added", "payload": {"id": "W-PLAN", "phase": "PLAN", "text": "Choose the narrow supported implementation path.", "needsClaims": ["C-MEANING"], "needsWork": ["W-UNDERSTAND"]}}
+        ],
+        "expectNext": {"kind": "PLAN", "work": "W-PLAN"}
+      },
+      {
+        "events": [
+          {"type": "work.started", "payload": {"id": "W-PLAN", "actor": "planner"}}
+        ],
+        "expectNext": {"kind": "WAIT", "active": ["W-PLAN"]}
+      },
+      {
+        "events": [
+          {"type": "work.reported", "payload": {"id": "W-PLAN", "report": "RP-PLAN", "actor": "planner", "result": "Use the existing service seam and verify the behavior at its boundary.", "evidence": ["architecture source", "test seam"]}}
+        ],
+        "expectNext": {"kind": "REVIEW", "work": "W-PLAN", "report": "RP-PLAN", "phase": "PLAN"}
+      },
+      {
+        "events": [
+          {"type": "review.added", "payload": {"id": "R-PLAN", "report": "RP-PLAN", "reviewer": "plan-critic", "status": "ADHERES", "evidence": ["The path fits the Intent and current architecture."], "confidence": "HIGH"}},
+          {"type": "work.added", "payload": {"id": "W-EXECUTE", "phase": "EXECUTE", "text": "Implement and verify the accepted path.", "needsClaims": ["C-MEANING"], "needsWork": ["W-PLAN"]}}
+        ],
+        "expectNext": {"kind": "EXECUTE", "work": "W-EXECUTE"}
+      },
+      {
+        "events": [
+          {"type": "work.started", "payload": {"id": "W-EXECUTE", "actor": "implementer"}}
+        ],
+        "expectNext": {"kind": "WAIT", "active": ["W-EXECUTE"]}
+      },
+      {
+        "events": [
+          {"type": "work.reported", "payload": {"id": "W-EXECUTE", "report": "RP-EXECUTE", "actor": "implementer", "result": "Implemented and observed the intended behavior.", "evidence": ["focused test", "observed outcome"]}}
+        ],
+        "expectNext": {"kind": "REVIEW", "work": "W-EXECUTE", "report": "RP-EXECUTE", "phase": "EXECUTE"}
+      },
+      {
+        "events": [
+          {"type": "review.added", "payload": {"id": "R-EXECUTE", "report": "RP-EXECUTE", "reviewer": "execution-critic", "status": "ADHERES", "evidence": ["Correctness, request fit, mission fit, and landing evidence hold."], "confidence": "HIGH"}},
+          {"type": "receipt.added", "payload": {"id": "RC-LOCAL", "type": "verification.local", "evidence": ["focused test passed"]}},
+          {"type": "receipt.added", "payload": {"id": "RC-LANDED", "type": "outcome.landed", "evidence": ["intended behavior observed"]}}
+        ],
+        "expectNext": {"kind": "DONE"}
+      }
+    ],
+    "expectState": {
+      "done": {"met": ["verified", "landed"], "open": []},
+      "claims": {"C-MEANING": "BACKED"},
+      "work": {"W-UNDERSTAND": "DONE", "W-PLAN": "DONE", "W-EXECUTE": "DONE"}
+    }
+  },
+  {
+    "id": "review-reenters-understanding",
+    "observedPattern": "A reviewer catches stale grounding and returns the same responsibility to a replacement actor.",
+    "ruleIds": ["intent-fidelity", "support-aware-revision"],
+    "intent": {
+      "aim": "Base the change on current product meaning.",
+      "why": "A stale ticket cannot outrank current reality and owner intent.",
+      "nonGoals": ["Do not implement directly from historical ticket wording."],
+      "done": [
+        {"id": "landed", "expect": "The currently intended behavior is observed.", "receipt": "outcome.landed"}
+      ]
+    },
+    "steps": [
+      {
+        "events": [
+          {"type": "work.added", "payload": {"id": "W-UNDERSTAND", "phase": "UNDERSTAND", "text": "Establish the current product meaning.", "needsClaims": [], "needsWork": []}}
+        ],
+        "expectNext": {"kind": "UNDERSTAND", "work": "W-UNDERSTAND"}
+      },
+      {
+        "events": [
+          {"type": "work.started", "payload": {"id": "W-UNDERSTAND", "actor": "ticket-reader"}}
+        ],
+        "expectNext": {"kind": "WAIT", "active": ["W-UNDERSTAND"]}
+      },
+      {
+        "events": [
+          {"type": "work.reported", "payload": {"id": "W-UNDERSTAND", "report": "RP-OLD", "actor": "ticket-reader", "result": "The historical ticket defines the product meaning.", "evidence": ["ticket text"]}}
+        ],
+        "expectNext": {"kind": "REVIEW", "work": "W-UNDERSTAND", "report": "RP-OLD", "phase": "UNDERSTAND"}
+      },
+      {
+        "events": [
+          {"type": "review.added", "payload": {"id": "R-OLD", "report": "RP-OLD", "reviewer": "meaning-critic", "status": "AT_RISK", "evidence": ["Current product and source were not checked."], "confidence": "HIGH"}}
+        ],
+        "expectNext": {"kind": "UNDERSTAND", "work": "W-UNDERSTAND", "review": "R-OLD"}
+      },
+      {
+        "events": [
+          {"type": "work.resumed", "payload": {"id": "W-UNDERSTAND", "actor": "current-source-reader", "reason": "Replace stale ticket context with current product evidence."}}
+        ],
+        "expectNext": {"kind": "WAIT", "active": ["W-UNDERSTAND"]}
+      },
+      {
+        "events": [
+          {"type": "work.reported", "payload": {"id": "W-UNDERSTAND", "report": "RP-CURRENT", "actor": "current-source-reader", "result": "Current source and owner context define a different meaning.", "evidence": ["current source", "owner context"]}}
+        ],
+        "expectNext": {"kind": "REVIEW", "work": "W-UNDERSTAND", "report": "RP-CURRENT", "phase": "UNDERSTAND"}
+      },
+      {
+        "events": [
+          {"type": "review.added", "payload": {"id": "R-CURRENT", "report": "RP-CURRENT", "reviewer": "current-meaning-critic", "status": "ADHERES", "evidence": ["The result uses current authoritative surfaces."], "confidence": "HIGH"}},
+          {"type": "backing.added", "payload": {"id": "B-CURRENT", "kind": "EVIDENCE", "text": "Current source and owner context agree."}},
+          {"type": "claim.added", "payload": {"id": "C-CURRENT", "text": "The current meaning governs planning.", "supports": [["backing:B-CURRENT"]]}},
+          {"type": "work.added", "payload": {"id": "W-PLAN", "phase": "PLAN", "text": "Plan from the current meaning.", "needsClaims": ["C-CURRENT"], "needsWork": ["W-UNDERSTAND"]}}
+        ],
+        "expectNext": {"kind": "PLAN", "work": "W-PLAN"}
+      }
+    ],
+    "expectState": {
+      "claims": {"C-CURRENT": "BACKED"},
+      "work": {"W-UNDERSTAND": "DONE", "W-PLAN": "AVAILABLE"},
+      "actors": {"W-UNDERSTAND": "current-source-reader"}
+    }
+  },
+  {
+    "id": "elastic-collaborator-team",
+    "observedPattern": "Independent understanding runs in parallel while a context-rich agent is paused and then replaced.",
+    "ruleIds": ["intent-fidelity"],
+    "intent": {
+      "aim": "Combine source and owner context before planning.",
+      "why": "Neither source nor owner context is sufficient alone.",
+      "nonGoals": [],
+      "done": [
+        {"id": "landed", "expect": "The combined understanding produces the observed outcome.", "receipt": "outcome.landed"}
+      ]
+    },
+    "steps": [
+      {
+        "events": [
+          {"type": "work.added", "payload": {"id": "W-SOURCE", "phase": "UNDERSTAND", "text": "Inspect current source.", "needsClaims": [], "needsWork": []}},
+          {"type": "work.added", "payload": {"id": "W-OWNER", "phase": "UNDERSTAND", "text": "Inspect owner context.", "needsClaims": [], "needsWork": []}},
+          {"type": "work.added", "payload": {"id": "W-PLAN", "phase": "PLAN", "text": "Plan from both accepted understandings.", "needsClaims": [], "needsWork": ["W-SOURCE", "W-OWNER"]}}
+        ],
+        "expectNext": {"kind": "UNDERSTAND", "work": "W-SOURCE"}
+      },
+      {
+        "events": [
+          {"type": "work.started", "payload": {"id": "W-SOURCE", "actor": "source-reader-one"}}
+        ],
+        "expectNext": {"kind": "UNDERSTAND", "work": "W-OWNER"}
+      },
+      {
+        "events": [
+          {"type": "work.started", "payload": {"id": "W-OWNER", "actor": "context-reader"}}
+        ],
+        "expectNext": {"kind": "WAIT", "active": ["W-SOURCE", "W-OWNER"]}
+      },
+      {
+        "events": [
+          {"type": "work.paused", "payload": {"id": "W-SOURCE", "actor": "source-reader-one", "reason": "A required source is temporarily unavailable."}}
+        ],
+        "expectNext": {"kind": "WAIT", "active": ["W-OWNER"]}
+      },
+      {
+        "events": [
+          {"type": "work.reported", "payload": {"id": "W-OWNER", "report": "RP-OWNER", "actor": "context-reader", "result": "Owner context establishes the desired behavior.", "evidence": ["owner request"]}}
+        ],
+        "expectNext": {"kind": "REVIEW", "work": "W-OWNER", "report": "RP-OWNER", "phase": "UNDERSTAND"}
+      },
+      {
+        "events": [
+          {"type": "review.added", "payload": {"id": "R-OWNER", "report": "RP-OWNER", "reviewer": "owner-context-critic", "status": "ADHERES", "evidence": ["The desired behavior is represented faithfully."], "confidence": "HIGH"}}
+        ],
+        "expectNext": {"kind": "WAIT", "paused": ["W-SOURCE"]}
+      },
+      {
+        "events": [
+          {"type": "work.resumed", "payload": {"id": "W-SOURCE", "actor": "source-reader-two", "reason": "A fresh agent can inspect the now-available source."}}
+        ],
+        "expectNext": {"kind": "WAIT", "active": ["W-SOURCE"]}
+      },
+      {
+        "events": [
+          {"type": "work.reported", "payload": {"id": "W-SOURCE", "report": "RP-SOURCE", "actor": "source-reader-two", "result": "Current source exposes the supported implementation seam.", "evidence": ["current source"]}}
+        ],
+        "expectNext": {"kind": "REVIEW", "work": "W-SOURCE", "report": "RP-SOURCE", "phase": "UNDERSTAND"}
+      },
+      {
+        "events": [
+          {"type": "review.added", "payload": {"id": "R-SOURCE", "report": "RP-SOURCE", "reviewer": "source-critic", "status": "ADHERES", "evidence": ["The implementation seam is grounded in current source."], "confidence": "HIGH"}}
+        ],
+        "expectNext": {"kind": "PLAN", "work": "W-PLAN"}
+      }
+    ],
+    "expectState": {
+      "work": {"W-SOURCE": "DONE", "W-OWNER": "DONE", "W-PLAN": "AVAILABLE"},
+      "actors": {"W-SOURCE": "source-reader-two", "W-OWNER": "context-reader"}
+    }
+  },
+  {
+    "id": "owner-presence-preserves-authority",
+    "observedPattern": "The owner sees a decision promptly while an absent owner does not block unrelated safe work.",
+    "ruleIds": ["owner-authority"],
+    "intent": {
+      "aim": "Use the owner-selected product meaning.",
+      "why": "Product authority cannot be inferred from implementation evidence.",
+      "nonGoals": [],
+      "done": [
+        {"id": "landed", "expect": "The owner-selected meaning is observed.", "receipt": "outcome.landed"}
+      ]
+    },
+    "steps": [
+      {
+        "events": [
+          {"type": "work.added", "payload": {"id": "W-DECISION", "phase": "PLAN", "text": "Plan from the owner-selected meaning.", "needsClaims": [], "needsWork": []}},
+          {"type": "work.added", "payload": {"id": "W-SAFE", "phase": "UNDERSTAND", "text": "Inspect an independent source.", "needsClaims": [], "needsWork": []}},
+          {"type": "ask.opened", "payload": {"id": "A-MEANING", "question": "Which product meaning should govern?", "owner": "OWNER", "why": "Evidence cannot choose the product promise.", "blocksWork": ["W-DECISION"]}}
+        ],
+        "presence": "PRESENT",
+        "expectNext": {"kind": "ASK", "ask": "A-MEANING", "owner": "OWNER"}
+      }
+    ],
+    "expectInspect": {
+      "PRESENT": {"kind": "ASK", "ask": "A-MEANING", "owner": "OWNER"},
+      "AWAY": {"kind": "UNDERSTAND", "work": "W-SAFE"}
+    },
+    "expectState": {
+      "work": {"W-DECISION": "AVAILABLE", "W-SAFE": "AVAILABLE"}
+    }
+  },
+  {
+    "id": "withdrawn-premise-stops-live-branch",
+    "observedPattern": "When a governing premise fails, active and downstream work stop before replacement work is chosen.",
+    "ruleIds": ["support-aware-revision"],
+    "intent": {
+      "aim": "Execute only a currently supported product meaning.",
+      "why": "Continuing after authority disappears creates polished wrong work.",
+      "nonGoals": [],
+      "done": [
+        {"id": "landed", "expect": "A supported outcome is observed.", "receipt": "outcome.landed"}
+      ]
+    },
+    "steps": [
+      {
+        "events": [
+          {"type": "backing.added", "payload": {"id": "B-OLD", "kind": "OWNER", "text": "The initial meaning governs."}},
+          {"type": "claim.added", "payload": {"id": "C-OLD", "text": "The initial meaning should be implemented.", "supports": [["backing:B-OLD"]]}},
+          {"type": "work.added", "payload": {"id": "W-EXECUTE", "phase": "EXECUTE", "text": "Implement the supported meaning.", "needsClaims": ["C-OLD"], "needsWork": []}},
+          {"type": "work.added", "payload": {"id": "W-VERIFY", "phase": "EXECUTE", "text": "Verify the implemented behavior.", "needsClaims": [], "needsWork": ["W-EXECUTE"]}}
+        ],
+        "expectNext": {"kind": "EXECUTE", "work": "W-EXECUTE"}
+      },
+      {
+        "events": [
+          {"type": "work.started", "payload": {"id": "W-EXECUTE", "actor": "implementer"}}
+        ],
+        "expectNext": {"kind": "WAIT", "active": ["W-EXECUTE"]}
+      },
+      {
+        "events": [
+          {"type": "backing.withdrawn", "payload": {"id": "B-OLD", "reason": "Current owner context contradicted it."}}
+        ],
+        "expectNext": {"kind": "STOP", "reason": "No work is available."}
+      }
+    ],
+    "expectState": {
+      "claims": {"C-OLD": "UNBACKED"},
+      "work": {"W-EXECUTE": "STOPPED", "W-VERIFY": "STOPPED"}
+    }
+  }
+]
