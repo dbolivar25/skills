@@ -1,0 +1,7 @@
+# Binary fonts are kept in GitHub but are not supported by the Amp package.
+*.woff2
+
+# These files implement publication and do not belong in the Amp projection.
+/.amp-publish-ignore
+/.githooks/
+/scripts/publish-amp

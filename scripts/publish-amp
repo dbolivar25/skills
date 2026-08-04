@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  echo "usage: scripts/publish-amp [--dry-run] [revision]" >&2
+}
+
+dry_run=false
+if [[ "${1:-}" == "--dry-run" ]]; then
+  dry_run=true
+  shift
+fi
+
+if (( $# > 1 )); then
+  usage
+  exit 2
+fi
+
+source_root="$(git rev-parse --show-toplevel)"
+source_revision="${1:-HEAD}"
+ignore_file="$source_root/.amp-publish-ignore"
+
+if ! source_commit="$(git -C "$source_root" rev-parse --verify "${source_revision}^{commit}")"; then
+  echo "Cannot resolve source revision: $source_revision" >&2
+  exit 1
+fi
+
+if [[ ! -f "$ignore_file" ]]; then
+  echo "Missing Amp publication filter: $ignore_file" >&2
+  exit 1
+fi
+
+if ! amp_url="$(git -C "$source_root" remote get-url amp)"; then
+  echo "Missing git remote: amp" >&2
+  exit 1
+fi
+
+temporary_root="$(mktemp -d "${TMPDIR:-/tmp}/skills-publish-amp.XXXXXX")"
+source_tree="$temporary_root/source"
+projection_tree="$temporary_root/projection"
+amp_checkout="$temporary_root/amp"
+
+cleanup() {
+  rm -rf -- "$temporary_root"
+}
+trap cleanup EXIT
+
+mkdir -p "$source_tree" "$projection_tree"
+
+git -C "$source_root" archive "$source_commit" | tar -xf - -C "$source_tree"
+
+rsync \
+  --archive \
+  --exclude-from="$ignore_file" \
+  "$source_tree/" \
+  "$projection_tree/"
+
+if find "$projection_tree" -type f -name '*.woff2' -print -quit | grep -q .; then
+  echo "Amp projection still contains a WOFF2 file." >&2
+  exit 1
+fi
+
+size_failure=false
+while IFS= read -r -d '' skill_directory; do
+  [[ -f "$skill_directory/SKILL.md" ]] || continue
+
+  package_size="$(find "$skill_directory" -type f -print0 | xargs -0 wc -c | tail -1 | awk '{print $1}')"
+  if (( package_size > 131072 )); then
+    echo "Amp package exceeds 131072 bytes: ${skill_directory##*/} ($package_size bytes)" >&2
+    size_failure=true
+  fi
+done < <(find "$projection_tree" -mindepth 1 -maxdepth 1 -type d -print0)
+
+if [[ "$size_failure" == true ]]; then
+  exit 1
+fi
+
+git clone --quiet --branch main --single-branch "$amp_url" "$amp_checkout"
+
+rsync \
+  --archive \
+  --delete \
+  --exclude='.git/' \
+  "$projection_tree/" \
+  "$amp_checkout/"
+
+git -C "$amp_checkout" add --all
+
+if git -C "$amp_checkout" diff --cached --quiet; then
+  echo "Amp User Skills are already current for ${source_commit:0:12}."
+  exit 0
+fi
+
+if [[ "$dry_run" == true ]]; then
+  echo "Amp publication dry run for ${source_commit:0:12}:"
+  git -C "$amp_checkout" diff --cached --stat
+  exit 0
+fi
+
+git -C "$amp_checkout" commit --quiet \
+  -m "sync skills from ${source_commit:0:12}"
+git -C "$amp_checkout" push origin main
+
+echo "Published filtered Amp User Skills from ${source_commit:0:12}."
