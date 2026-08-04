@@ -1,0 +1,23 @@
+<!-- @dsCard group="Type" viewport="700x150" name="Labels" subtitle="Small all-caps with positive tracking" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  html, body { margin: 0; }
+  body { font-family: var(--font-sans); background: var(--white); padding: 24px; color: var(--ink); }
+  .stack { display: flex; flex-direction: column; gap: 16px; }
+  .line { display: flex; align-items: center; gap: 16px; }
+  .spec { font-family: var(--font-mono); font-size: 11px; color: var(--cloud-burst); white-space: nowrap; width: 130px; flex-shrink: 0; }
+  .label { font-size: var(--fs-12); font-weight: var(--fw-medium); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--cloud-burst); }
+  .label-strong { font-size: var(--fs-13); font-weight: var(--fw-semibold); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--cloud-burst); }
+</style>
+</head>
+<body>
+  <div class="stack">
+    <div class="line"><span class="spec">13 · 0.08em · 600</span><span class="label-strong">Context engine</span></div>
+    <div class="line"><span class="spec">12 · 0.04em · 500</span><span class="label">Recent files</span></div>
+  </div>
+</body>
+</html>

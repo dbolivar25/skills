@@ -1,0 +1,77 @@
+<!-- @dsCard group="Controls" viewport="700x430" name="Controls" subtitle="Derived from tokens: one height scale, four field states, mixed tints" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+html,body{margin:0}
+body{font-family:var(--font-sans);background:var(--neutral-25);color:var(--ink);padding:24px;font-size:var(--fs-15)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:28px 32px}
+.lab{font-size:var(--fs-12);line-height:var(--lh-16);letter-spacing:var(--tracking-wide);text-transform:uppercase;font-weight:var(--fw-medium);color:var(--text-tertiary);margin-bottom:10px}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.stack{display:flex;flex-direction:column;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 16px;border-radius:var(--radius-8);font-family:var(--font-sans);font-size:var(--fs-15);font-weight:var(--fw-semibold);line-height:1;letter-spacing:-.1px;cursor:pointer;position:relative;overflow:hidden}
+.btn--brand{border:none;color:var(--white);background:var(--burgundy-600)}
+.btn--brand span{position:relative;z-index:2}
+.btn--brand.is-hover{filter:brightness(.93)}
+.btn--brand.is-press{transform:scale(var(--scale-098))}
+.btn--brand.is-focus{box-shadow:0 0 0 3px color-mix(in srgb,var(--burgundy-600) 24%,transparent)}
+.btn--secondary{background:var(--white);border:1px solid var(--neutral-85);color:var(--ink)}
+.field{display:flex;align-items:center;height:40px;padding:0 12px;background:var(--white);border:1px solid var(--neutral-85);border-radius:var(--radius-8);color:var(--text-tertiary)}
+.field.is-focus{border-color:var(--burgundy-600);box-shadow:0 0 0 3px color-mix(in srgb,var(--burgundy-600) 24%,transparent);color:var(--ink)}
+.field.is-error{border-color:var(--red);color:var(--ink)}
+.field.is-disabled{background:var(--neutral-50)}
+.msg{font-size:var(--fs-13);margin-top:6px;color:var(--text-tertiary)}
+.msg--error{color:var(--red)}
+.tint{display:inline-flex;align-items:center;height:22px;padding:0 10px;border-radius:var(--radius-pill);font-size:var(--fs-12);font-weight:var(--fw-semibold)}
+.sizes{display:flex;align-items:flex-end;gap:10px}
+.sz{display:inline-flex;align-items:center;justify-content:center;background:var(--white);border:1px solid var(--neutral-85);border-radius:var(--radius-8);color:var(--text-tertiary);font-size:var(--fs-12);padding:0 12px}
+a{color:var(--accent-brand)}a:hover{color:var(--burgundy-800)}
+</style>
+</head>
+<body data-aug-branch="product">
+<div class="grid">
+  <div>
+    <div class="lab">One height scale: 32 / 40 / 48</div>
+    <div class="sizes">
+      <span class="sz" style="height:32px">32</span>
+      <span class="sz" style="height:40px">40</span>
+      <span class="sz" style="height:48px">48</span>
+      <span class="sz" style="height:40px;width:40px;padding:0">40</span>
+    </div>
+  </div>
+  <div>
+    <div class="lab">Brand fill: rest, hover, press, focus</div>
+    <div class="row">
+      <span class="btn btn--brand aug-edge-glow" data-aug-role="identity"><span>Run</span></span>
+      <span class="btn btn--brand aug-edge-glow is-hover" style="--edge-glow-shift:-8%" data-aug-role="identity"><span>Run</span></span>
+      <span class="btn btn--brand aug-edge-glow is-press" style="--edge-glow-shift:6%" data-aug-role="identity"><span>Run</span></span>
+      <span class="btn btn--brand aug-edge-glow is-focus" style="--edge-glow-shift:-4%" data-aug-role="identity"><span>Run</span></span>
+    </div>
+  </div>
+  <div>
+    <div class="lab">Field: rest, focus, error, disabled</div>
+    <div class="stack">
+      <div><div class="field">Account name</div></div>
+      <div><div class="field is-focus">Northwind Traders</div></div>
+      <div><div class="field is-error">Northwind</div><div class="msg msg--error">Name must match the record.</div></div>
+      <div><div class="field is-disabled">Set by the source</div></div>
+    </div>
+  </div>
+  <div>
+    <div class="lab">State tint, mixed, with darkened text</div>
+    <div class="row">
+      <span class="tint" data-aug-role="signal" style="background:color-mix(in srgb,var(--green) 14%,white);color:#0a7a0a">Synced</span>
+      <span class="tint" data-aug-role="signal" style="background:color-mix(in srgb,var(--gold) 26%,white);color:#8a5a00">Stale</span>
+      <span class="tint" data-aug-role="signal" style="background:color-mix(in srgb,var(--red) 14%,white);color:#b32626">Failed</span>
+      <span class="tint" style="background:var(--neutral-50);color:var(--woodsmoke)">Indexing</span>
+    </div>
+    <div class="msg" style="margin-top:12px">The text is a darkened variant of the hue, because the state tokens fail contrast on their own tint.</div>
+    <div class="row" style="margin-top:14px">
+      <span class="btn btn--secondary">Secondary</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

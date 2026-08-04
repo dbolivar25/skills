@@ -1,0 +1,30 @@
+<!-- @dsCard group="Type" viewport="700x160" name="Monospace & tabular numerals" subtitle="Code and columnar numbers that compare cleanly" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  html, body { margin: 0; }
+  body { font-family: var(--font-sans); background: var(--white); padding: 24px; color: var(--ink); }
+  .wrap { display: flex; gap: 40px; align-items: flex-start; }
+  .mono { font-family: var(--font-mono); font-size: 14px; line-height: var(--lh-24); color: var(--woodsmoke); }
+  .k { color: var(--burgundy-600); }
+  .num { font-family: var(--font-sans); font-variant-numeric: tabular-nums; font-weight: var(--fw-medium); font-size: 15px; line-height: var(--lh-24); color: var(--ink); text-align: right; }
+  .lab { font-family: var(--font-mono); font-size: 11px; color: var(--cloud-burst); margin-bottom: 8px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div>
+      <div class="lab">font-mono</div>
+      <pre class="mono"><span class="k">const</span> data = <span class="k">await</span> augment.fetch(id);
+<span class="k">return</span> data.records.map(format);</pre>
+    </div>
+    <div>
+      <div class="lab">tabular-nums</div>
+      <div class="num">1,284<br>23,910<br>+1,204</div>
+    </div>
+  </div>
+</body>
+</html>

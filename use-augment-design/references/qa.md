@@ -1,62 +1,64 @@
 # QA
 
-Use this as the final pass before returning Augment-branded work.
+Nothing ships unrendered. This is the last step of the skill, and it catches
+polish applied to a composition nobody looked at.
 
-## Identity
+## Render and look
 
-- Official logo SVGs are used.
-- Wordmark contrast matches the surface.
-- The standalone mark is not used as generic chrome.
-- No recreated logo paths, distorted proportions, or off-brand colors.
+1. Render every page, screen, and state. Not just the first one.
+2. Look at each at full size, and read the copy as the reader will.
+3. Look at each at thumbnail size. The first thing you see is the focal point. If
+   you see texture instead of a thing, the composition is wrong, so fix that
+   before any styling.
+4. On print work, check at print size and confirm no page breaks mid-fact.
 
-## Color
+## Review questions
 
-- Burgundy is the brand spine.
-- Plum supports burgundy and does not turn the surface blue-violet.
-- Bone is used only when a warm paper canvas makes sense.
-- Cool neutrals carry chrome and text.
-- Artwork hues appear only as signal, atmosphere, or artwork.
-- State colors mean success, warning, or error.
+Answer each in a sentence. A no is a finding, and you name it with a cause from
+`composition.md`.
 
-## Type
+Composition:
 
-- Matter SQ is loaded or intentionally adapted to the host app constraints.
-- Display type uses the defined scale and tight tracking.
-- Body text uses readable sizes and measure.
-- Labels are functional.
-- No decorative eyebrows or kickers.
-- Numerals align when numbers compare.
+- Does every framed or elevated surface hold something the reader can address on
+  its own?
+- Does every pill carry state that can change?
+- Does every line of small type say something its heading does not?
+- Does every chromatic value have a role, and does the branch allow that role?
+- Does every fact appear once?
+- Does each view have one focal point?
 
-## Layout And Material
+Grammar:
 
-- Alignment uses shared edges, spines, baselines, and rational spacing.
-- Cards have appropriate radius, stroke, and shadow.
-- Shadows indicate depth; borders indicate separation.
-- Brand swirl appears only in large or cropped brand moments.
-- Edge-glow appears only on true brand controls, brand panels, or neutral dark elevation.
-- Grain appears only on large surfaces where texture earns its keep.
-- No nested card piles or generic gradient decoration.
+- Radius from 4, 8, 16, pill, or circle. Spacing from the 4px scale. Strokes
+  hairline neutral. Type from the token sizes and weights.
+- Are repeated elements of the same class composed identically?
 
-## Interaction
+Branch floor:
 
-- Controls have hover, press, focus, disabled, loading, and error states where relevant.
-- Hit targets are usable.
-- Icon-only buttons have accessible names.
-- Reduced motion is respected.
-- Transitions name changed properties.
+- Does the surface clear every line of the floor in its branch file?
 
-## Voice
+Copy:
 
-- Copy is sentence case.
-- Actions use concrete verbs.
-- Claims are backed by a source, number, context, record, or consequence.
-- Empty and error states are factual and useful.
-- No emoji, exclamation points, hype words, or generic AI language.
+- Run the prose loop in `references/voice.md`.
+- Does any string describe how the artifact was produced?
+- Would the conclusion fit a different document? Then it is not a conclusion.
 
-## Delivery
+## Audit
 
-- Production work follows the host app's conventions.
-- Static artifacts use local assets and render correctly.
-- Visual output has been inspected at relevant viewport sizes.
-- Any substitution, such as Lucide icons, is disclosed when it matters.
+Run `checks/audit.js` in the rendered page, either as `augAudit()` or by
+appending `?augaudit` to the URL. It checks what structure can prove: nested
+surfaces, chromatic fill and stroke against declared roles, off-scale radius,
+body type below the branch floor, inconsistent repetition across a set, and
+whether a document marks any source.
 
+Set `data-aug-branch="document|product|marketing"` on the root element, and
+`data-aug-role` on every chromatic fill and stroke.
+
+Treat findings as input to judgment. A finding you can justify is fine, so long
+as you justify it in writing. A clean run you did not examine is not a review,
+because the audit cannot see focal point, eyebrows, second homes, or prose.
+
+## When something feels generated
+
+Never leave it at the adjective. Name the cause and take the fix from the table
+at the end of `composition.md`.

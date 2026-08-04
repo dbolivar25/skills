@@ -1,0 +1,24 @@
+<!-- @dsCard group="Brand" viewport="700x180" name="Wordmark on dark & mark" subtitle="White/on-dark wordmark; the standalone mark" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  html, body { margin: 0; }
+  body { font-family: var(--font-sans); background: var(--white); }
+  .grid { display: grid; grid-template-columns: 2fr 1fr; height: 180px; }
+  .cell { display: flex; align-items: center; justify-content: center; }
+  .dark { background: var(--ink); }
+  .markcell { background: var(--white); border-left: 1px solid var(--neutral-75); }
+  .wm { width: 200px; height: auto; }
+  .mark { width: 56px; height: 56px; color: var(--burgundy-600); }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="cell dark"><img class="wm" src="../assets/logo/augment-wordmark-on-dark.svg" alt="Augment wordmark on dark"></div>
+    <div class="cell markcell"><img class="mark" src="../assets/logo/augment-mark.svg" alt="Augment mark"></div>
+  </div>
+</body>
+</html>

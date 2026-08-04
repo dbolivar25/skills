@@ -26,7 +26,7 @@
   --blur-64: 64px; /* @kind other */
   --blur-72: 72px; /* @kind other */
 
-  /* Shadow elevation — numbered levels */
+  /* Shadow elevation, numbered levels */
   --shadow-0: none;
   --shadow-1: 0 1px 3px 0 rgba(4, 9, 25, 0.05);
   --shadow-2: 0 6px 4px 0 rgba(4, 9, 25, 0.04), 0 1px 3px 0 rgba(4, 9, 25, 0.05);
@@ -34,4 +34,15 @@
   --shadow-4: 0 12px 32px 0 rgba(0, 0, 0, 0.1);
   --shadow-5: 0 0 3px 0 rgba(0, 0, 0, 0.25), 0 36px 100px 0 rgba(0, 0, 0, 0.4),
     inset 0 0 3px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Brand swirl: the large blurred colour field for hero artwork and marketing
+   surfaces. A value, not a mechanism. */
+:root {
+  --brand-swirl:
+    radial-gradient(40% 50% at 20% 30%, var(--oink) 0%, transparent 60%),
+    radial-gradient(45% 55% at 78% 22%, var(--peach) 0%, transparent 62%),
+    radial-gradient(50% 60% at 88% 75%, var(--frost) 0%, transparent 60%),
+    radial-gradient(55% 65% at 30% 88%, var(--plum-600) 0%, transparent 65%),
+    conic-gradient(from 200deg at 55% 50%, var(--burgundy-800), var(--plum-500), var(--burgundy-600), var(--plum-600), var(--burgundy-800)); /* @kind other */
 }

@@ -1,0 +1,46 @@
+<!-- @dsCard group="Controls" viewport="700x360" name="Edge glow" subtitle="A bar of coals below the surface, running past both ends" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+html,body{margin:0}
+body{font-family:var(--font-sans);background:var(--neutral-25);color:var(--ink);padding:26px 30px}
+.lab{font-size:var(--fs-12);line-height:var(--lh-16);letter-spacing:var(--tracking-wide);text-transform:uppercase;font-weight:var(--fw-medium);color:var(--text-tertiary);margin-bottom:12px}
+.grid{display:grid;grid-template-columns:1fr 220px;gap:28px;align-items:start}
+.btns{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 18px;border:none;border-radius:var(--radius-8);background:var(--burgundy-600);color:var(--white);font-family:var(--font-sans);font-size:var(--fs-15);font-weight:var(--fw-semibold);letter-spacing:-.1px;cursor:pointer}
+.btn.sm{height:32px;padding:0 12px;font-size:var(--fs-13)}
+.btn.lg{height:48px;padding:0 24px;font-size:var(--fs-18)}
+.btn span,.panel span{position:relative;z-index:2}
+.panel{height:150px;border-radius:var(--radius-16);background:var(--burgundy-600);color:var(--white);display:flex;align-items:flex-end;padding:18px;font-size:var(--fs-18);font-weight:var(--fw-semibold)}
+.note{font-size:var(--fs-13);line-height:var(--lh-24);color:var(--text-tertiary);max-width:46ch}
+a{color:var(--accent-brand)}a:hover{color:var(--burgundy-800)}
+</style>
+</head>
+<body data-aug-branch="product">
+<div class="grid">
+  <div>
+    <div class="lab">Controls at 0.8</div>
+    <div class="btns">
+      <span class="btn aug-edge-glow sm" data-aug-role="identity"><span>Run</span></span>
+      <span class="btn aug-edge-glow" style="--edge-glow-shift:-8%" data-aug-role="identity"><span>Run task</span></span>
+      <span class="btn aug-edge-glow lg" style="--edge-glow-shift:6%" data-aug-role="identity"><span>Connect a source</span></span>
+    </div>
+    <div class="lab">Repeated, each shifted</div>
+    <div class="btns">
+      <span class="btn aug-edge-glow" data-aug-role="identity"><span>Apply</span></span>
+      <span class="btn aug-edge-glow" style="--edge-glow-shift:-12%" data-aug-role="identity"><span>Apply</span></span>
+      <span class="btn aug-edge-glow" style="--edge-glow-shift:9%" data-aug-role="identity"><span>Apply</span></span>
+      <span class="btn aug-edge-glow aug-edge-glow--flat" data-aug-role="identity"><span>Flat</span></span>
+    </div>
+    <p class="note">The light comes from a bar of coals below the element that runs past both ends, so the bottom corners catch spill and the sides fade as it climbs. Grain sits on the light itself, masked to it.</p>
+  </div>
+  <div>
+    <div class="lab">Panel at 0.5</div>
+    <div class="panel aug-edge-glow aug-edge-glow--panel" data-aug-role="atmosphere"><span>Panel</span></div>
+  </div>
+</div>
+</body>
+</html>

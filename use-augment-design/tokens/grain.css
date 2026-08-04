@@ -1,20 +1,19 @@
-/* Augment film grain — a composable additive texture layer.
+/* Augment film grain, a composable additive texture layer.
 
    A single fixed SVG feTurbulence noise, desaturated to pure grayscale, laid
    over a surface at low opacity with mix-blend-mode: screen and pointer-events
-   off. Like the brand glow, it is an ADDITIVE overlay — it never owns the
+   off. Like the brand glow, it is an ADDITIVE overlay, so it never owns the
    background, never darkens, never intercepts clicks. It breaks up flatness and
    gradient banding on dark and brand surfaces and gives them a tactile,
    "material" quality rather than a flat paint fill.
 
-   Use it on large page surfaces — dark sections, hero/brand panels, document
-   and marketing canvases — where flatness and gradient banding show. It is not
+   Use it on large page surfaces: dark sections, hero and brand panels, document
+   and marketing canvases, where flatness and gradient banding show. It is not
    meant for small chrome like buttons or avatars (the tile is wasted there).
 
-   Use either way:
-     • .aug-grain on any positioned/clipped surface adds the texture via ::after.
-     • Pair with .aug-glow--brand on large brand panels so the glow never bands
-       (`.aug-glow--brand.aug-grain`).
+   Use .aug-grain on any positioned, clipped surface to add the texture via
+   ::after. An .aug-edge-glow surface already carries grain of its own, masked to
+   the light, and owns ::after, so the two do not combine on one element.
 
    The noise tile is grayscale so it tints to whatever it sits on. Strength is a
    token (--grain-opacity) so a surface can dial it up or down. */

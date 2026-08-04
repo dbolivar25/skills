@@ -1,21 +1,28 @@
 /* Augment color system.
    Primitives are raw named values. Semantic aliases assign meaning.
-   Neutral temperature stays stable; chromatic values are signal, atmosphere, or artwork. */
+
+   Neutral temperature stays stable. Every chromatic value names its role on the
+   surface before it is used: identity, signal, atmosphere, or artwork. A value
+   with no role to claim takes a neutral. Roles are marked @role below; branches
+   narrow which roles are available (documents.md allows one). */
 
 :root {
-  /* — Brand / burgundy-plum — */
+  /* Brand: burgundy-plum */
+  /* @role identity, atmosphere, signal (focus + selection) */
   --burgundy-600: #660033; /* primary brand burgundy (wordmark) */
   --burgundy-700: #4d0026;
   --burgundy-800: #3d001e;
-  /* Plum is a deep SUPPORTING tone — kept off blue-violet (toward burgundy's
+  /* Plum is a deep SUPPORTING tone, kept off blue-violet (toward burgundy's
      magenta side) and lower in chroma so it always recedes behind burgundy
      rather than out-advancing it. */
   --plum-500: #852d5a;
   --plum-600: #621e50;
   --plum-700: #4f2a3c;
+  /* @role identity, artwork. The color lockup and marketing artwork only.
+     Never document chrome, rules, arrows, accents, or labels. */
   --mark-pink: #cf0147; /* vivid mark/lockup pink-red */
 
-  /* — Ink & cool neutrals — */
+  /* Ink and cool neutrals */
   --ink: #040919;
   --woodsmoke: #2b2d39;
   --cloud-burst: #6f7288;
@@ -28,19 +35,21 @@
   --neutral-300: #6f7288;
   --neutral-700: #2b2d39;
 
-  /* — Bone (warm paper neutrals) — */
+  /* Bone: warm paper neutrals */
   --bone-100: #f6f1ef;
   --bone-300: #e6dad8;
   --bone-500: #e9e1e1;
 
-  /* — Accent / artwork hues — */
+  /* Accent and artwork hues. @role atmosphere, artwork.
+     These build the swirl. They are not accents for chrome. --gold doubles as
+     the warning signal. */
   --arctic: #aee3e4;
   --frost: #b4c1fa;
   --oink: #f7c5da;
   --peach: #fbd6a9;
   --gold: #ffbe5c;
 
-  /* — Semantic state — */
+  /* Semantic state. @role signal. Only where the state is real. */
   --green: #00c000;
   --red: #ed4343;
 

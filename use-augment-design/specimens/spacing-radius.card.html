@@ -1,0 +1,25 @@
+<!-- @dsCard group="Spacing" viewport="700x160" name="Corner radius" subtitle="4 / 8 / 16 / pill / circle" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  html, body { margin: 0; }
+  body { font-family: var(--font-sans); background: var(--white); padding: 24px; color: var(--ink); }
+  .row { display: flex; gap: 24px; align-items: flex-end; }
+  .col { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .box { width: 72px; height: 72px; background: var(--neutral-50); box-shadow: inset 0 0 0 1.5px var(--burgundy-600); }
+  .v { font-family: var(--font-mono); font-size: 11px; color: var(--cloud-burst); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="col"><div class="box" style="border-radius:var(--radius-4)"></div><div class="v">4px</div></div>
+    <div class="col"><div class="box" style="border-radius:var(--radius-8)"></div><div class="v">8px</div></div>
+    <div class="col"><div class="box" style="border-radius:var(--radius-16)"></div><div class="v">16px</div></div>
+    <div class="col"><div class="box" style="border-radius:var(--radius-pill);width:120px"></div><div class="v">pill 999</div></div>
+    <div class="col"><div class="box" style="border-radius:var(--radius-circle)"></div><div class="v">circle 50%</div></div>
+  </div>
+</body>
+</html>

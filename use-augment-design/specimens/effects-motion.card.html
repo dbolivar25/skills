@@ -1,0 +1,28 @@
+<!-- @dsCard group="Effects" viewport="700x170" name="Motion & easing" subtitle="Calm and purposeful. Hover to replay" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  html, body { margin: 0; }
+  body { font-family: var(--font-sans); background: var(--white); padding: 24px; color: var(--ink); }
+  .stack { display: flex; flex-direction: column; gap: 16px; }
+  .track { display: flex; align-items: center; gap: 16px; }
+  .lab { font-family: var(--font-mono); font-size: 11px; color: var(--cloud-burst); width: 180px; flex-shrink: 0; }
+  .rail { flex: 1; height: 8px; background: var(--neutral-50); border-radius: var(--radius-pill); position: relative; overflow: hidden; }
+  .dot { position: absolute; top: -4px; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--burgundy-600); }
+  body:hover .e1 { animation: run var(--dur-560) var(--ease-1) forwards; }
+  body:hover .e2 { animation: run var(--dur-560) var(--ease-2) forwards; }
+  body:hover .e3 { animation: run var(--dur-560) var(--ease-3) forwards; }
+  @keyframes run { from { left: 0; } to { left: calc(100% - 16px); } }
+</style>
+</head>
+<body>
+  <div class="stack">
+    <div class="track"><span class="lab">ease-1 · .2,.6,.2,1</span><div class="rail"><div class="dot e1"></div></div></div>
+    <div class="track"><span class="lab">ease-2 · .17,1,.32,1</span><div class="rail"><div class="dot e2"></div></div></div>
+    <div class="track"><span class="lab">ease-3 · .34,1.4,.5,1</span><div class="rail"><div class="dot e3"></div></div></div>
+  </div>
+</body>
+</html>

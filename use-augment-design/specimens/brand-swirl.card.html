@@ -1,0 +1,54 @@
+<!-- @dsCard group="Brand" viewport="700x240" name="Brand swirl" subtitle="Soft blurred color field: burgundy, plum, oink, peach, frost" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  html, body { margin: 0; }
+  body { font-family: var(--font-sans); }
+  .swirl {
+    position: relative;
+    height: 240px;
+    overflow: hidden;
+    background: var(--burgundy-700);
+  }
+  .swirl::before {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background:
+      radial-gradient(40% 55% at 22% 30%, var(--oink) 0%, transparent 60%),
+      radial-gradient(45% 60% at 70% 25%, var(--peach) 0%, transparent 62%),
+      radial-gradient(50% 60% at 85% 70%, var(--frost) 0%, transparent 60%),
+      radial-gradient(55% 70% at 35% 85%, var(--plum-600) 0%, transparent 65%),
+      conic-gradient(from 200deg at 55% 50%, var(--burgundy-700), var(--plum-500), var(--burgundy-600), var(--plum-600), var(--burgundy-700));
+    filter: blur(48px) saturate(1.1);
+  }
+  .label {
+    position: absolute;
+    left: 24px;
+    bottom: 20px;
+    color: var(--white);
+    font-size: 13px;
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    z-index: 2;
+    text-shadow: 0 1px 12px rgba(0,0,0,0.4);
+  }
+  /* dark overlay so type/logos stay legible */
+  .scrim {
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(4,9,25,0.45) 0%, transparent 45%);
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="swirl">
+    <div class="scrim"></div>
+    <span class="label">Brand swirl</span>
+  </div>
+</body>
+</html>

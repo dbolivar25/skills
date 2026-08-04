@@ -1,37 +1,63 @@
 ---
 name: use-augment-design
-description: "Use when creating, implementing, reviewing, or polishing Augment-branded visual work: product UI, websites, marketing pages, decks, reports, prototypes, static artifacts, or production code. Also use when another design or build skill needs Augment brand tokens, voice, logos, Matter SQ, component primitives, or brand QA."
+description: Use this skill when creating, implementing, reviewing, or polishing any Augment-branded surface: product UI, a generated document or report, a marketing page, a deck, a static artifact, or production code. Also use it when another skill needs Augment tokens, voice, logos, Matter SQ, or composition rules. It defines brand, voice, and composition. Product positioning and product names stay in the consuming app.
 ---
 
-Augment-branded work follows a design contract: official assets, token values, primitive components, and a final QA pass. It does not invent what Augment sells or what a surface should be used for.
+Augment is an enterprise AI platform. This skill makes a surface look and sound
+like Augment, and keeps generated work from drifting into decoration.
 
-## Process
+If someone invokes this skill without saying what they want, ask before reading
+further.
 
-1. Orient to the target surface.
-   Determine whether the work is production code, a prototype/static artifact, a deck/report, or a design review. Read the current target surface before applying the brand so the design solves the real medium instead of becoming a skin. If the user gives no target, ask what to build and for what medium.
-   Completion: medium, audience, constraints, and production/prototype status are explicit or stated as assumptions.
+## Steps
 
-2. Load the smallest relevant context.
-   For any visual work, read `references/design-contract.md`. For copy, states, labels, or marketing/product language, read `references/voice.md`. For token values or CSS integration, read `references/tokens.md`. For logo, wordmark, and font files, read `references/assets.md`. For material, glow, grain, elevation, motion, or layout rules, read `references/material.md`. For React primitives, read `references/components.md`, then the exact component `.prompt.md` and `.d.ts` files you use. For package contents, read `references/inventory.md`.
-   Completion: every used token, asset, component, and brand rule is traceable to a loaded file in this package or to the target codebase.
+Work in order. Each step has a completion criterion. Do not carry an unmet one
+forward.
 
-3. Design from the spine.
-   Use Matter SQ, the burgundy-plum brand spine, cool ink neutrals, warm bone canvases where appropriate, exact spacing, small rational radius, and factual copy. Chromatic color is signal, atmosphere, or artwork; it is not decoration. Brand swirl, edge-glow, and grain are material primitives for true brand or large-surface moments, not routine chrome.
-   Completion: the surface has a clear hierarchy, exact alignment, appropriate material depth, and no invented brand primitives.
+**1. Name the moment.** Write one sentence covering who is looking, what they
+want to do, and what happens next. *Done when the sentence names a person and a
+decision.*
 
-4. Build or adapt in the target medium.
-   In production code, adapt to the host app patterns and copy only the assets, tokens, and primitive code needed. In static artifacts, use local assets from this package and link `styles.css`. Preserve accessibility, responsive behavior, focus states, loading/disabled/error states, and reduced-motion behavior.
-   Completion: the implementation runs in the target medium and does not depend on files outside this package except the target app itself.
+**2. Route to a branch and read it.** Pick `references/documents.md`,
+`references/product-ui.md`, or `references/marketing.md`. The branch gives you a
+floor and a set of facets. If two branches apply, you have two surfaces.
+*Done when you can state the floor and three facets.*
 
-5. Run brand QA before returning work.
-   Apply `references/qa.md` against the final surface. For visual artifacts or frontend work, render and inspect the result at the relevant viewport(s). Fix visible overlap, illegible contrast, wrong logo use, decorative eyebrows, hype copy, decorative chromatic color, and missing states before final response.
-   Completion: QA findings are resolved or explicitly called out with the remaining tradeoff.
+**3. Read `references/composition.md`.** It applies to everything, and it governs
+containers, state, color roles, and where a fact lives. *Done when you have read
+it this session.*
 
-## Package Map
+**4. Read the foundations you will touch.** `readme.md` covers color, type,
+spacing, surfaces, material, motion, controls, and icons. `tokens/*.css` holds
+the values. Never invent a token. *Done when every value you plan to write
+already exists in a token file.*
 
-- `styles.css` imports the package token CSS.
-- `tokens/` holds fonts, colors, typography, spacing, effects, glow, grain, and motion primitives.
-- `assets/logo/` holds official Augment marks and wordmarks. `assets/fonts/` holds Matter SQ.
-- `components/` holds reusable primitive source files, each with `.jsx`, `.d.ts`, and `.prompt.md`.
-- `specimens/` holds neutral proof sheets for visual calibration. Specimens are not templates or recipes.
-- `references/` holds detailed design guidance.
+**5. Build** from the tokens, the utilities, and the control rules in
+`readme.md`. This system ships no components on purpose, and `readme.md` explains
+why. Copy any assets you need into the project you are building, since these
+files cannot be referenced across projects.
+
+**6. Write the copy through `references/voice.md`.** *Done when you have run that
+file's prose loop over every string you wrote.*
+
+**7. Review through `references/qa.md`.** Render every page or state, look at each
+at full size and at thumbnail size, then run `checks/audit.js`. *Done when you
+have answered the review questions and either cleared the audit or justified each
+finding in writing.*
+
+## Non-negotiables
+
+- Render identity from the official SVGs in `assets/logo/`. Never redraw them.
+- Matter SQ is the typeface. Use the token values.
+- Sentence case. No emoji. No exclamation points.
+- Keep customer names private unless someone has explicitly approved them.
+- Nothing ships unrendered. Step 7 is not optional.
+
+`readme.md` ends with a full index of the system.
+
+## Related skills
+
+These carry detail this skill leaves out. Use them where you have them:
+**designing-human-interfaces** for the moment, floor, and facet model and for
+interface craft; **humanizer** and **stop-slop** for prose repair; **simplify**
+for editing; **writing-great-skills** for editing this skill.

@@ -1,0 +1,20 @@
+/* Augment utilities: the few decisions that should be reachable in markup.
+   Everything else is a token. */
+
+/* Numbers that compare down a column. */
+.aug-nums { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+
+/* Long-form measure. Pair with a body size from the type scale. */
+.aug-measure { max-width: var(--measure-64); text-wrap: pretty; }
+.aug-measure--narrow { max-width: var(--measure-44); text-wrap: pretty; }
+
+/* Functional UI label: column header, field label, object type. An eyebrow is
+   something else. See references/composition.md. */
+.aug-label {
+  font-size: var(--fs-12);
+  line-height: var(--lh-16);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  font-weight: var(--fw-medium);
+  color: var(--text-tertiary);
+}

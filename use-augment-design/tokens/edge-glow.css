@@ -1,0 +1,101 @@
+/* Augment edge glow, the brand's lit-surface primitive.
+
+   A bar of coals sits below the element and runs past both ends of it. Light
+   crosses the bottom edge at full strength and dies about a third of the way
+   up. What reaches the sides is spill from the ends of the bar curling around
+   the bottom corners, so it fades as it climbs. There is no light source
+   alongside the element and none above it.
+
+   The light is one gradient stack, --edge-glow-light. Nothing is blurred:
+   softness lives in the stops, so the light never fades to transparency at the
+   boundary the way a blurred layer does. Every ramp interpolates in oklch and
+   ends on a zero-alpha colour at its own hue, which keeps the falloff out of
+   grey.
+
+   The layer is 140% of the element's width and centred, so --edge-glow-shift
+   can slide it without exposing an unpainted edge. Coal positions below are
+   expressed against that wider layer: the element's own left edge sits at
+   14.3% and its right edge at 85.7%.
+
+   USE
+     .aug-edge-glow on any element with a solid dark or brand fill.
+       ::before  the light
+       ::after   grain, masked by the same stack so it only sits on the light
+     Put real content in a positioned child so it stacks above both layers.
+
+   KNOBS
+     --edge-glow-strength    how much light (default .8; panels want less)
+     --edge-glow-shift       slides the bar sideways, as a share of the
+                             element's own width, up to about 20%
+     --edge-glow-grain       noise opacity over the light (default .18)
+     --edge-glow-grain-size  noise tile (default 26px)
+
+   An edge-glow surface carries no border, not even a transparent one, since a
+   border would clip the light layer to the padding box. */
+
+:root {
+  /* One row of matching coals spanning the full bar, centred 152% down. */
+  --edge-glow-light:
+    radial-gradient(27% 82% at -18% 155% in oklch, oklch(.68 .07 42) 0%, oklch(.51 .10 16) 45%, oklch(.38 .09 356 / .39) 73%, oklch(.38 .09 356 / 0) 93%),
+    radial-gradient(30% 88% at 1% 149% in oklch, oklch(.71 .07 36) 0%, oklch(.53 .11 14) 45%, oklch(.39 .09 356 / .43) 73%, oklch(.39 .09 356 / 0) 93%),
+    radial-gradient(27% 80% at 20% 156% in oklch, oklch(.67 .06 50) 0%, oklch(.50 .10 18) 47%, oklch(.37 .08 354 / .37) 75%, oklch(.37 .08 354 / 0) 93%),
+    radial-gradient(31% 90% at 39% 149% in oklch, oklch(.71 .07 30) 0%, oklch(.53 .11 12) 45%, oklch(.39 .09 356 / .43) 73%, oklch(.39 .09 356 / 0) 93%),
+    radial-gradient(28% 82% at 59% 155% in oklch, oklch(.68 .06 48) 0%, oklch(.51 .10 16) 46%, oklch(.38 .08 355 / .39) 74%, oklch(.38 .08 355 / 0) 93%),
+    radial-gradient(31% 88% at 79% 150% in oklch, oklch(.70 .07 34) 0%, oklch(.52 .11 14) 45%, oklch(.38 .09 356 / .41) 73%, oklch(.38 .09 356 / 0) 93%),
+    radial-gradient(29% 84% at 99% 154% in oklch, oklch(.68 .07 44) 0%, oklch(.51 .10 16) 45%, oklch(.38 .09 356 / .39) 73%, oklch(.38 .09 356 / 0) 93%),
+    radial-gradient(27% 82% at 118% 152% in oklch, oklch(.69 .06 38) 0%, oklch(.52 .10 14) 46%, oklch(.38 .08 355 / .39) 74%, oklch(.38 .08 355 / 0) 93%),
+    linear-gradient(to top in oklch, oklch(.74 .07 50 / .48) 0%, oklch(.51 .11 14 / .29) 16%, oklch(.38 .09 355 / .1) 37%, oklch(.38 .09 355 / 0) 61%); /* @kind other */
+
+  --edge-glow-strength: 0.8; /* @kind other */
+  --edge-glow-shift: 0%; /* @kind other */
+  --edge-glow-grain: 0.18; /* @kind other */
+  --edge-glow-grain-size: 26px; /* @kind other */
+}
+
+.aug-edge-glow {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.aug-edge-glow::before,
+.aug-edge-glow::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -20%;
+  right: -20%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background-repeat: no-repeat;
+  /* The layer is 1.4x the element's width, and a percentage translate resolves
+     against the layer, so divide to keep the knob measured in element widths.
+     The overhang is 0.2 per side, which is what caps the shift at about 20%. */
+  transform: translateX(calc(var(--edge-glow-shift) / 1.4));
+}
+.aug-edge-glow::before {
+  z-index: 0;
+  background-image: var(--edge-glow-light);
+  opacity: var(--edge-glow-strength);
+}
+/* The grain reads --edge-glow-light as its mask, so the noise cannot drift away
+   from the light it sits on. */
+.aug-edge-glow::after {
+  z-index: 1;
+  background-image: var(--grain-image);
+  background-size: var(--edge-glow-grain-size) var(--edge-glow-grain-size);
+  background-repeat: repeat;
+  opacity: var(--edge-glow-grain);
+  -webkit-mask-image: var(--edge-glow-light);
+          mask-image: var(--edge-glow-light);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+}
+
+/* A large surface needs less light to look equally lit, since the bar covers a
+   smaller share of it. */
+.aug-edge-glow--panel::before { opacity: 0.5; }
+
+/* Dense or repeated contexts: keep the fill, drop the fire. */
+.aug-edge-glow--flat::before,
+.aug-edge-glow--flat::after { display: none; }
