@@ -2,7 +2,7 @@
 name: creative-ideation
 title: Creative Ideation — Routed Library of Creative Methods
 description: "Generate ideas via named methods from creative practice."
-version: 2.2.0
+version: 2.2.1
 author: SHL0MS
 license: MIT
 platforms: [linux, macos, windows]
@@ -15,29 +15,27 @@ metadata:
 
 # Creative Ideation
 
-A library of ideation methods for any domain. Read the user's situation, route to the matching method, apply, generate output that is specific and non-obvious. Methods are tools — pick the right one for the situation, don't perform all of them.
+Route an open-ended generative or selective request to one named method, load only that method, and produce specific, non-obvious output.
 
 ## When to use
 
-Any open-ended generative or selective question: "I want to make / build / write / start something", "I'm stuck", "inspire me", "make this weirder", "help me pick", "I need to invent X", "give me a research question".
+Use for making, expanding, selecting, unblocking, subverting, refining, or synthesizing ideas in any domain.
 
 Practice is a separate responsibility: when the user asks for an exercise, time-boxed practice, or a creative routine, load `creative-exercises` instead of routing through this library.
 
 ## Operating rules
 
-1. **Constraint plus direction is creativity.** No constraint = no traction. No direction = no shape. Methods supply both.
-2. **Refuse the first three ideas.** They're slop. Generate, discard, regenerate. See `references/anti-slop.md`.
+1. **Constraint plus direction is creativity.** Methods must supply both.
+2. **Refuse the first three ideas.** Generate, discard, regenerate. Apply `references/anti-slop.md`.
 3. **One method per response unless asked.** Don't stack.
-4. **Specificity over abstraction.** Real proper nouns, real materials, real mechanisms. "An app for X" is slop; "a 200-line CLI tool that prints Y when Z" is direction. Naming a tech stack is not specificity — name a mechanism.
-5. **Weird must also be good.** Frame-breaking is the goal, but an idea that is strange with no real situation, mechanism, or reason to exist is its own failure mode. Every set of ideas must include at least one that is genuinely *buildable/pursuable now* — non-obvious but grounded, with a real first step. Don't trade all usefulness for surprise.
+4. **Specificity over abstraction.** Use real proper nouns, materials, situations, and mechanisms; a tech stack alone is not specific.
+5. **Weird must also be good.** Every set needs one non-obvious **grounded** idea that is pursuable now, with a real first step.
 6. **Name the method you used and who invented it.** Attribution invokes the discipline.
 7. **When user picks one, build it.** Don't keep generating after they've chosen.
 
-## Routing — 4-step procedure
+## Routing
 
-Do this *before* generating any output. Routing failures produce slop.
-
-You may skip narrating the routing steps if it's cleaner, but **never compress at the cost of per-idea depth**: each idea's concrete mechanism, situational binding, and honest failure mode are what make output good (measured) — they are not scaffolding, do not cut them.
+Route before generating; do not narrate the routing unless useful. Never trade away an idea's concrete mechanism, situational binding, or honest failure mode.
 
 ### Step 1 — Extract three signals from the prompt
 
@@ -74,18 +72,16 @@ You may skip narrating the routing steps if it's cleaner, but **never compress a
 | **PROJECT** | "I'm working on this specific X" |
 | **PROBLEM** | "I have this specific friction within X" |
 
-### Step 2 — Apply overrides (highest priority, fire first)
+### Step 2 — Apply overrides first
 
-Override rules beat the routing table:
-
-- **Mood signal** — user says "weird", "strange", "surprising", "less obvious", "more interesting" → `references/methods/lateral-provocations.md` or `references/methods/pataphysics.md`, regardless of domain.
+- **Weird / strange / surprising / less obvious / more interesting** → `references/methods/lateral-provocations.md` or `references/methods/pataphysics.md`, regardless of domain.
 - **User names a method** — use it.
-- **User asks for a method recommendation** ("which method") → surface 2–3 candidates with one-line each, ask which to apply. Don't silently default.
-- **High-slop terrain** — "AI ideas", "startup ideas", "habit tracker", "productivity / wellness / fitness / food / travel app" → force `references/methods/lateral-provocations.md` or `references/methods/pataphysics.md` over the obvious method. Refuse the first **5** ideas, not 3.
+- **User asks which method** → offer 2–3 one-line candidates and ask which to apply.
+- **High-slop terrain** — AI/startup ideas, habit trackers, productivity, wellness, fitness, food, or travel apps → force `references/methods/lateral-provocations.md` or `references/methods/pataphysics.md`; refuse the first **5** ideas.
 
-### Step 3 — Route by phase first, then domain
+### Step 3 — Route by phase, then domain
 
-**By phase (applies regardless of domain):**
+**By phase:**
 
 | Phase | Default route |
 |---|---|
@@ -100,7 +96,7 @@ Override rules beat the routing table:
 | SYNTHESIZING | `references/methods/affinity-diagrams.md` |
 | Volume needed fast | `references/methods/volume-generation.md` |
 
-**By domain (when GENERATING with DOMAIN known):**
+**By domain when GENERATING:**
 
 | Domain | Default route |
 |---|---|
@@ -124,21 +120,13 @@ Override rules beat the routing table:
 
 ### Step 4 — Handle ambiguity and contradiction
 
-- **Multiple paths plausible** → pick the one closest to the user's actual phrasing. Don't pick the most interesting method to seem sophisticated.
-- **Genuinely ambiguous** → ask ONE clarifying question, don't silently guess. Examples: *"Are you generating ideas or picking between ones you have?"* / *"Is this for fiction, essay, or something else?"*
-- **Signals contradict** (e.g., "weird startup ideas" → product domain + weird mood) → **stack two methods explicitly**. State what you're doing: *"Using `jobs-to-be-done` for the product framing + `lateral-provocations` to break the obvious shape."*
-- **No match** → constraint dispatch (`references/full-prompt-library.md`) is the safe fallback.
-- **Same question asked again** → switch methods. Variation in method = variation in idea distribution.
+- Multiple paths → follow the user's phrasing, not the most sophisticated method.
+- Genuine ambiguity → ask one clarifying question.
+- Contradictory signals → stack two methods explicitly and name each role (for example, jobs-to-be-done for product framing plus lateral provocations to break the frame).
+- No match → use constraint dispatch in `references/full-prompt-library.md`.
+- Repeated question → switch methods.
 
-### Anti-default check (run before generating)
-
-- About to write "Here are 5 ideas:" or a bare numbered list? → STOP. Pick a method first.
-- About to default to generic LLM-mode brainstorming? → STOP. Pick a path above.
-- Output looks like what an unrouted LLM would produce? → routing failed, redo.
-
-The default LLM mode is exactly what this skill exists to displace. If you generate without routing, you've defeated the skill.
-
-For deeper edge cases (mood signals, stacking, anti-patterns) see `references/heuristics.md`.
+Before generating, confirm that you selected a method. If the output resembles generic brainstorming or starts as a bare list, reroute. For edge cases see `references/heuristics.md`.
 
 ## Output format
 
@@ -158,12 +146,12 @@ For the constraint-dispatch default path:
 3. ...
 ```
 
-For other methods, use the format the method specifies (TRIZ produces a contradiction analysis; OuLiPo produces constrained text; Oblique Strategies produces a single applied card → next move). Don't force every method into the constraint template.
+Other methods use their own format; do not force them into this template.
 
 **Every idea set, regardless of method:**
-- Name the method used. On slop terrain, name the obvious ideas you refused.
-- Give each idea its concrete mechanism and its honest failure mode / tradeoff / who-it's-for. This depth is what makes ideas land — measured, not decorative.
-- Mark at least one idea as the **grounded** one — buildable/pursuable now, non-obvious but with a real first step. The others can run further toward the strange; this one has to be genuinely doable. Don't let the whole set be weird-but-impractical.
+- Name the method and inventor; on slop terrain, name the refused ideas.
+- Give each idea a mechanism, audience/situation, and honest failure mode or tradeoff.
+- Mark one non-obvious, pursuable idea **grounded** and give its first step.
 
 ## File map
 

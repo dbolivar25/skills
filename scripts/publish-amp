@@ -65,8 +65,8 @@ while IFS= read -r -d '' skill_directory; do
   [[ -f "$skill_directory/SKILL.md" ]] || continue
 
   package_size="$(find "$skill_directory" -type f -print0 | xargs -0 wc -c | tail -1 | awk '{print $1}')"
-  if (( package_size > 131072 )); then
-    echo "Amp package exceeds 131072 bytes: ${skill_directory##*/} ($package_size bytes)" >&2
+  if (( package_size > 128000 )); then
+    echo "Amp package exceeds 128000 bytes: ${skill_directory##*/} ($package_size bytes)" >&2
     size_failure=true
   fi
 done < <(find "$projection_tree" -mindepth 1 -maxdepth 1 -type d -print0)
