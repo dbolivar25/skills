@@ -19,6 +19,15 @@ continue execution, schedule agents, or decide an owner-owned question.
 
 ## Phase Axes
 
+### Understand And Plan
+
+Try to falsify:
+
+- **surplus specificity:** does the result close a material unknown, authority
+  fork, or implementation choice that current Intent, State, evidence, safety,
+  real constraints, or phase sufficiency does not require closing? If so, return
+  `AT_RISK` or `VIOLATED` and cite the excluded live alternative.
+
 ### Understand
 
 Try to falsify:
@@ -49,6 +58,9 @@ Try to falsify:
 
 Try to falsify:
 
+- **implementation proportionality:** is the implementation no more specific,
+  general, defensive, or broad than current Intent, accepted understanding and
+  plan, relevant conditions, and codebase coherence require?
 - **correctness:** does the result work under the relevant conditions?
 - **codebase fit:** does it match current architecture, conventions, and supported
   APIs?
