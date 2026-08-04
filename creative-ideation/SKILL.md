@@ -2,7 +2,7 @@
 name: creative-ideation
 title: Creative Ideation — Routed Library of Creative Methods
 description: "Generate ideas via named methods from creative practice."
-version: 2.1.0
+version: 2.2.0
 author: SHL0MS
 license: MIT
 platforms: [linux, macos, windows]
@@ -20,6 +20,8 @@ A library of ideation methods for any domain. Read the user's situation, route t
 ## When to use
 
 Any open-ended generative or selective question: "I want to make / build / write / start something", "I'm stuck", "inspire me", "make this weirder", "help me pick", "I need to invent X", "give me a research question".
+
+Practice is a separate responsibility: when the user asks for an exercise, time-boxed practice, or a creative routine, load `creative-exercises` instead of routing through this library.
 
 ## Operating rules
 
@@ -169,7 +171,6 @@ For other methods, use the format the method specifies (TRIZ produces a contradi
 - `references/method-catalog.md` — one-line summary + when-to-use per method
 - `references/heuristics.md` — extended decision tree for edge cases
 - `references/anti-slop.md` — anti-slop rules; apply to every output
-- `references/exercises.md` — time-boxed exercises (5min / 30min / 1hr / day / week)
 - `references/methods/` — 22 named methods, one file each, load only the one you're using
 
 ## Attribution
