@@ -19,25 +19,25 @@ Concrete exercises grouped by duration. Use when the user wants to *do* an exerc
 
 ## 5 minutes
 
-**Single Oblique Strategy** *(`creative-ideation`: `oblique-strategies`)* — pick a card at random, apply literally to the next decision, make the move. Output: one move.
+**Single Oblique Strategy** *(`creative-ideation`: `T&P / Oblique Strategies`)* — pick a card at random, apply literally to the next decision, make the move. Output: one move.
 
-**Random word provocation** *(`creative-ideation`: `lateral-provocations`)* — pick a random noun; force five connections to your problem; use the strongest. Output: one new angle.
+**Random word provocation** *(`creative-ideation`: `T&P / Lateral Provocations`)* — pick a random noun; force five connections to your problem; use the strongest. Output: one new angle.
 
 **Inversion check** *(`creative-ideation`: `premortem-and-inversion`)* — restate goal as opposite, list five things that would guarantee the inverted goal, check if you're doing any. Output: failure-paths self-check.
 
-**S+7 on a paragraph** *(`creative-ideation`: `oulipo`)* — replace every noun with the 7th noun after it in a dictionary. Output: defamiliarized version of your text.
+**S+7 on a paragraph** *(`creative-ideation`: `T&P / OuLiPo`)* — replace every noun with the 7th noun after it in a dictionary. Output: defamiliarized version of your text.
 
 ## 30 minutes
 
 **Constraint dispatch** *(`creative-ideation`: `full-prompt-library`)* — pick a constraint; 5 min per idea; generate 3; discard the obvious; generate a 4th; output the 3 strongest. Output: 3 candidate projects.
 
-**SCAMPER on a base idea** *(`creative-ideation`: `scamper`)* — write base in one sentence; run all 7 operators; surface the surprising one; elaborate. Output: 7 raw, 1 elaborated.
+**SCAMPER on a base idea** *(`creative-ideation`: `T&P / SCAMPER`)* — write base in one sentence; run all 7 operators; surface the surprising one; elaborate. Output: 7 raw, 1 elaborated.
 
 **Premortem** *(`creative-ideation`: `premortem-and-inversion`)* — imagine the project failed catastrophically; 10 min writing the failure narrative; 10 min identifying addressable causes; 10 min mitigation plan. Output: failure story + mitigation plan.
 
 **Crazy 8s** *(`creative-ideation`: `volume-generation`)* — fold sheet to 8 panels; 8 min total; 1 idea per panel; sketch don't write; pick 2 strongest. Output: 8 raw, 2 chosen.
 
-**Defamiliarization on a paragraph** *(`creative-ideation`: `defamiliarization`)* — pick something extremely familiar in your subject; describe it for 200 words as if seeing it for the first time, no technical vocabulary. Output: defamiliarized description + list of newly-visible features.
+**Defamiliarization on a paragraph** *(`creative-ideation`: `T&P / Defamiliarization`)* — pick something extremely familiar in your subject; describe it for 200 words as if seeing it for the first time, no technical vocabulary. Output: defamiliarized description + list of newly-visible features.
 
 ## 1 hour
 
@@ -55,7 +55,7 @@ Concrete exercises grouped by duration. Use when the user wants to *do* an exerc
 
 **Single-day dérive** *(`creative-ideation`: `derive-and-mapping`)* — pick a territory you don't know well; spend the day wandering, no agenda; follow attractions; at end, draw a Lynch-style map (paths, edges, districts, nodes, landmarks); note surprises. Output: map + surprises + possibly a project.
 
-**Hard-constraint writing day** *(`creative-ideation`: `oulipo`)* — pick one constraint (lipogram, univocalism, snowball, prisoner's, pilish); write 1000 words under it; resist abandoning when it gets hard. Output: 1000 constrained words.
+**Hard-constraint writing day** *(`creative-ideation`: `T&P / OuLiPo`)* — pick one constraint (lipogram, univocalism, snowball, prisoner's, pilish); write 1000 words under it; resist abandoning when it gets hard. Output: 1000 constrained words.
 
 **High concept low effort** *(`creative-ideation`: `full-prompt-library`)* — pick a brilliant idea; execute lazily; ship by end of day. Output: a finished thing that exists.
 

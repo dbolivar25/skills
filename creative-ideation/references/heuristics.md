@@ -2,32 +2,34 @@
 
 Decision tree for picking a method. Read top to bottom; first match wins.
 
+**T&P** means the named section in `methods/transform-and-provoke.md`.
+
 ## Phase signals — what stage is the user in?
 
 | Signal | Method |
 |---|---|
 | Blank page, no domain | constraint dispatch (`full-prompt-library.md`) |
 | Has a domain, no project | route by domain (next section) |
-| Has one idea, want variations | `methods/scamper.md` |
+| Has one idea, want variations | **T&P: SCAMPER** |
 | Need many ideas fast | `methods/volume-generation.md` |
-| Idea too safe | `methods/lateral-provocations.md` |
+| Idea too safe | **T&P: Lateral Provocations** |
 | Many ideas, need to choose | `methods/premortem-and-inversion.md` |
 | Have idea, want to sharpen | `methods/creative-discipline.md` (Tharp's spine) |
-| Stuck mid-project | `methods/oblique-strategies.md` |
+| Stuck mid-project | **T&P: Oblique Strategies** |
 | "Is this any good?" | `methods/premortem-and-inversion.md` + `methods/compression-progress.md` |
 
 ## Domain signals
 
 | Domain | Method |
 |---|---|
-| Fiction with formal interest | `methods/oulipo.md` |
+| Fiction with formal interest | **T&P: OuLiPo** |
 | Narrative with story shape | `methods/story-skeletons.md` |
-| Essay / non-fiction | `methods/defamiliarization.md` + `methods/compression-progress.md` |
-| Poetry | `methods/oulipo.md` or `methods/chance-and-remix.md` |
-| Lyrics / songwriting | `methods/oblique-strategies.md` + `methods/chance-and-remix.md` |
-| Music / sound | `methods/oblique-strategies.md` (origin domain) |
-| Visual art / sculpture / installation | `methods/oblique-strategies.md`, `methods/creative-discipline.md` (LeWitt) |
-| Performance / theater | `methods/defamiliarization.md` (Brecht) |
+| Essay / non-fiction | **T&P: Defamiliarization** + `methods/compression-progress.md` |
+| Poetry | **T&P: OuLiPo** or **Chance and Remix** |
+| Lyrics / songwriting | **T&P: Oblique Strategies** + **Chance and Remix** |
+| Music / sound | **T&P: Oblique Strategies** (origin domain) |
+| Visual art / sculpture / installation | **T&P: Oblique Strategies** + `methods/creative-discipline.md` (LeWitt) |
+| Performance / theater | **T&P: Defamiliarization** (Brecht) |
 | Site-specific | `methods/derive-and-mapping.md` |
 | Engineering invention | `methods/triz-principles.md` |
 | Software architecture | `methods/pattern-languages.md` |
@@ -46,13 +48,13 @@ Decision tree for picking a method. Read top to bottom; first match wins.
 | User wants | Method |
 |---|---|
 | Beautiful / elegant | `methods/compression-progress.md` |
-| Weird / strange | `methods/pataphysics.md`, `methods/chance-and-remix.md` |
+| Weird / strange | **T&P: Pataphysics** + **Chance and Remix** |
 | Useful / practical | `methods/triz-principles.md`, `methods/jobs-to-be-done.md`, "solve your own itch" |
-| Fun / playful | `methods/oulipo.md`, `methods/oblique-strategies.md` |
+| Fun / playful | **T&P: OuLiPo** + **Oblique Strategies** |
 | Serious / rigorous | `methods/polya.md`, `methods/first-principles.md`, `methods/compression-progress.md` |
 | Personal / intimate | `methods/creative-discipline.md`, `methods/derive-and-mapping.md` |
-| Political / intervention | `methods/leverage-points.md`, `methods/chance-and-remix.md` (détournement) |
-| Critical / subversive | `methods/defamiliarization.md`, `methods/pataphysics.md` |
+| Political / intervention | `methods/leverage-points.md` + **T&P: Chance and Remix** (détournement) |
+| Critical / subversive | **T&P: Defamiliarization** + **Pataphysics** |
 
 ## When to stack methods (rare)
 
@@ -69,7 +71,7 @@ Most invocations: one method. Stack only when:
 
 - **Wild prompt that fits no path** → constraint dispatch with the closest matching constraint.
 - **User asks for method recommendation, not ideas** → surface 2–3 candidate methods, ask which to apply. Don't silently default.
-- **High-slop terrain** ("AI ideas", "startup ideas", "habit tracker") → force `methods/lateral-provocations.md` or `methods/pataphysics.md` over the obvious method. Refuse the first 5 ideas, not 3.
+- **High-slop terrain** ("AI ideas", "startup ideas", "habit tracker") → force **T&P: Lateral Provocations** or **Pataphysics** over the obvious method. Refuse the first 5 ideas, not 3.
 - **Same question asked again** → switch methods. Variation in method = variation in idea distribution.
 - **User frustrated / says everything is bad** → don't keep generating. `methods/creative-discipline.md` (Cleese open mode, Tharp scratching). Sometimes the right move is to stop ideating.
 - **User wants to be talked out of starting** → premortem. Inversion. Sometimes the right answer is "don't do this".

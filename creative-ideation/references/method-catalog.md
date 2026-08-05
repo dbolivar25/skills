@@ -2,20 +2,22 @@
 
 One-line summary + when-to-use for every method. Cross-reference with `heuristics.md` and the routing table in `SKILL.md`.
 
+**T&P** means the named section in `methods/transform-and-provoke.md`.
+
 ## Random-stimulus
 
 | Method | Use when |
 |---|---|
-| `methods/oblique-strategies.md` | Stuck mid-project; have material, need to disrupt the loop. Native domain: music; works for anything. |
-| `methods/lateral-provocations.md` | Idea too safe; need to break frame with PO operator or random word. |
-| `methods/chance-and-remix.md` | Existing material feels exhausted; have media to remix (Cage chance ops, Burroughs cut-up, Surrealist exquisite corpse, Situationist détournement). |
+| **T&P: Oblique Strategies** | Stuck mid-project; have material, need to disrupt the loop. Native domain: music; works for anything. |
+| **T&P: Lateral Provocations** | Idea too safe; need to break frame with PO operator or random word. |
+| **T&P: Chance and Remix** | Existing material feels exhausted; have media to remix (Cage chance ops, Burroughs cut-up, Surrealist exquisite corpse, Situationist détournement). |
 
 ## Constraint-driven
 
 | Method | Use when |
 |---|---|
-| `methods/oulipo.md` | Writing, especially poetry/fiction. Lipograms, S+7, snowballs, palindromes. |
-| `methods/scamper.md` | Have a base idea, want 7 systematic variations cheaply. |
+| **T&P: OuLiPo** | Writing, especially poetry/fiction. Lipograms, S+7, snowballs, palindromes. |
+| **T&P: SCAMPER** | Have a base idea, want 7 systematic variations cheaply. |
 | `full-prompt-library.md` | Blank-page default. wttdotm-style project constraints. Sectioned by domain (General / Software / Physical / Social / Lists) — pick from the matching section, not the whole library. |
 
 ## Theoretical
@@ -23,8 +25,8 @@ One-line summary + when-to-use for every method. Cross-reference with `heuristic
 | Method | Use when |
 |---|---|
 | `methods/compression-progress.md` | Picking research questions or selecting between projects. Schmidhuber: a worthwhile project compresses your model of the world. |
-| `methods/analogy-and-blending.md` | Stuck inside one frame; need to import structure from a remote domain (Synectics, bisociation, conceptual blending). |
-| `methods/pataphysics.md` | Push past plausibility; specify the impossible thing in detail. |
+| **T&P: Analogy and Blending** | Stuck inside one frame; need to import structure from a remote domain (Synectics, bisociation, conceptual blending). |
+| **T&P: Pataphysics** | Push past plausibility; specify the impossible thing in detail. |
 
 ## Engineering / systems
 
@@ -49,7 +51,7 @@ One-line summary + when-to-use for every method. Cross-reference with `heuristic
 | Method | Use when |
 |---|---|
 | `methods/premortem-and-inversion.md` | Pressure-test a plan; choose between candidates (Klein + Munger). |
-| `methods/defamiliarization.md` | Subject is so familiar you've stopped seeing it (Shklovsky, Brecht). |
+| **T&P: Defamiliarization** | Subject is so familiar you've stopped seeing it (Shklovsky, Brecht). |
 
 ## Mapping / drift
 
