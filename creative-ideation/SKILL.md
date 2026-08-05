@@ -1,8 +1,8 @@
 ---
 name: creative-ideation
 title: Creative Ideation — Routed Library of Creative Methods
-description: "Generate ideas via named methods from creative practice."
-version: 2.2.1
+description: "Generate or shape ideas via named methods, or run a creative exercise."
+version: 3.0.0
 author: SHL0MS
 license: MIT
 platforms: [linux, macos, windows]
@@ -15,27 +15,31 @@ metadata:
 
 # Creative Ideation
 
-Route each request to one named method and load only that method.
+A library of ideation methods for any domain. Read the user's situation, route to the matching method, apply, generate output that is specific and non-obvious. Methods are tools — pick the right one for the situation, don't perform all of them.
 
 ## When to use
 
-Use to make, expand, select, unblock, subvert, refine, or synthesize ideas in any domain.
+Any open-ended generative, selective, or practice request: "I want to make / build / write / start something", "I'm stuck", "inspire me", "make this weirder", "help me pick", "I need to invent X", "give me a research question", "give me an exercise".
 
-For an exercise, time-boxed practice, or creative routine, load `creative-exercises` instead.
+When the user wants to do the creative work through a time-boxed exercise or routine, load `references/exercises.md`.
+
+When a route uses `creative-shaping` → **Method**, load that skill and its named method. Keep following this skill's operating rules and output requirements.
 
 ## Operating rules
 
-1. **Constraint plus direction is creativity.** Methods must supply both.
-2. **Refuse the first three ideas.** Generate, discard, regenerate. Apply `references/anti-slop.md`.
+1. **Constraint plus direction is creativity.** No constraint = no traction. No direction = no shape. Methods supply both.
+2. **Refuse the first three ideas.** They're slop. Generate, discard, regenerate. See `references/anti-slop.md`.
 3. **One method per response unless asked.** Don't stack.
-4. **Specificity over abstraction.** Use real proper nouns, materials, situations, and mechanisms; a tech stack alone is not specific.
-5. **When user picks one, build it.** Don't keep generating after they've chosen.
+4. **Specificity over abstraction.** Real proper nouns, real materials, real mechanisms. "An app for X" is slop; "a 200-line CLI tool that prints Y when Z" is direction. Naming a tech stack is not specificity — name a mechanism.
+5. **Weird must also be good.** Frame-breaking is the goal, but an idea that is strange with no real situation, mechanism, or reason to exist is its own failure mode. Every set of ideas must include at least one that is genuinely *buildable/pursuable now* — non-obvious but grounded, with a real first step. Don't trade all usefulness for surprise.
+6. **Name the method you used and who invented it.** Attribution invokes the discipline.
+7. **When user picks one, build it.** Don't keep generating after they've chosen.
 
-## Routing
+## Routing — 4-step procedure
 
-Route before generating. Explain the choice only when useful.
+Do this *before* generating any output. Routing failures produce slop.
 
-**T&P** means the named section in `references/methods/transform-and-provoke.md`.
+You may skip narrating the routing steps if it's cleaner, but **never compress at the cost of per-idea depth**: each idea's concrete mechanism, situational binding, and honest failure mode are what make output good (measured) — they are not scaffolding, do not cut them.
 
 ### Step 1 — Extract three signals from the prompt
 
@@ -72,38 +76,40 @@ Route before generating. Explain the choice only when useful.
 | **PROJECT** | "I'm working on this specific X" |
 | **PROBLEM** | "I have this specific friction within X" |
 
-### Step 2 — Apply overrides first
+### Step 2 — Apply overrides (highest priority, fire first)
 
-- **Weird / strange / surprising / less obvious / more interesting** → **T&P: Lateral Provocations** or **Pataphysics**, regardless of domain.
+Override rules beat the routing table:
+
+- **Mood signal** — user says "weird", "strange", "surprising", "less obvious", "more interesting" → `creative-shaping` → **Lateral Provocations** or `creative-shaping` → **Pataphysics**, regardless of domain.
 - **User names a method** — use it.
-- **User asks which method** → offer 2–3 one-line candidates and ask which to apply.
-- **High-slop terrain** — AI/startup ideas, habit trackers, productivity, wellness, fitness, food, or travel apps → force **T&P: Lateral Provocations** or **Pataphysics**; refuse the first **5** ideas.
+- **User asks for a method recommendation** ("which method") → surface 2–3 candidates with one-line each, ask which to apply. Don't silently default.
+- **High-slop terrain** — "AI ideas", "startup ideas", "habit tracker", "productivity / wellness / fitness / food / travel app" → force `creative-shaping` → **Lateral Provocations** or `creative-shaping` → **Pataphysics** over the obvious method. Refuse the first **5** ideas, not 3.
 
-### Step 3 — Route by phase, then domain
+### Step 3 — Route by phase first, then domain
 
-**By phase:**
+**By phase (applies regardless of domain):**
 
 | Phase | Default route |
 |---|---|
 | GENERATING + SPECIFICITY=NONE | `references/full-prompt-library.md` **General** section (constraint dispatch) |
 | GENERATING + DOMAIN known | route by domain (next table) |
-| EXPANDING | **T&P: SCAMPER** |
-| SELECTING | `references/methods/premortem-and-inversion.md` (or `references/methods/compression-progress.md` for upside) |
-| UNBLOCKING | **T&P: Oblique Strategies** |
-| SUBVERTING | **T&P: Lateral Provocations** (fallback **Pataphysics**) |
-| REFINING (text) | **T&P: Defamiliarization** |
-| REFINING (other) | `references/methods/creative-discipline.md` (Tharp's spine) |
-| SYNTHESIZING | `references/methods/affinity-diagrams.md` |
+| EXPANDING | `creative-shaping` → **SCAMPER** |
+| SELECTING | `creative-shaping` → **Premortem and Inversion** (or `creative-shaping` → **Compression Progress** for upside) |
+| UNBLOCKING | `creative-shaping` → **Oblique Strategies** |
+| SUBVERTING | `creative-shaping` → **Lateral Provocations** (fallback `creative-shaping` → **Pataphysics**) |
+| REFINING (text) | `creative-shaping` → **Defamiliarization** |
+| REFINING (other) | `creative-shaping` → **Creative Discipline** (Tharp's spine) |
+| SYNTHESIZING | `creative-shaping` → **Affinity Diagrams** |
 | Volume needed fast | `references/methods/volume-generation.md` |
 
-**By domain when GENERATING:**
+**By domain (when GENERATING with DOMAIN known):**
 
 | Domain | Default route |
 |---|---|
-| TEXT — formal / poetry | **T&P: OuLiPo** |
-| TEXT — narrative | `references/methods/story-skeletons.md` |
-| TEXT — has source material to remix | **T&P: Chance and Remix** |
-| OBJECT (music, visual, performance) | **T&P: Oblique Strategies** |
+| TEXT — formal / poetry | `references/methods/oulipo.md` |
+| TEXT — narrative | `creative-shaping` → **Story Skeletons** |
+| TEXT — has source material to remix | `creative-shaping` → **Chance and Remix** |
+| OBJECT (music, visual, performance) | `creative-shaping` → **Oblique Strategies** |
 | OBJECT — physical maker / wants a starting constraint | `references/full-prompt-library.md` **Physical / object** section |
 | ARTIFACT — wants a starting constraint | `references/full-prompt-library.md` **Software / artifact** section |
 | ARTIFACT — engineering invention with parameter conflict | `references/methods/triz-principles.md` |
@@ -113,24 +119,32 @@ Route before generating. Explain the choice only when useful.
 | SYSTEM (civic, org, institutional) | `references/methods/leverage-points.md` |
 | SYSTEM — collective / participatory | `references/full-prompt-library.md` **Social / collective** section |
 | SELF (life, career, what-to-study) | `references/methods/derive-and-mapping.md` |
-| RESEARCH — picking a question | `references/methods/compression-progress.md` |
+| RESEARCH — picking a question | `creative-shaping` → **Compression Progress** |
 | RESEARCH — attacking a known problem | `references/methods/polya.md` |
 | PRODUCT (business, service) | `references/methods/jobs-to-be-done.md` |
-| Need to break a frame / find analogy | **T&P: Analogy and Blending** |
+| Need to break a frame / find analogy | `creative-shaping` → **Analogy and Blending** |
 
 ### Step 4 — Handle ambiguity and contradiction
 
-- Multiple paths → follow the user's phrasing, not the most sophisticated method.
-- Genuine ambiguity → ask one clarifying question.
-- Contradictory signals → stack two methods and name each role.
-- No match → use constraint dispatch in `references/full-prompt-library.md`.
-- Repeated question → switch methods.
+- **Multiple paths plausible** → pick the one closest to the user's actual phrasing. Don't pick the most interesting method to seem sophisticated.
+- **Genuinely ambiguous** → ask ONE clarifying question, don't silently guess. Examples: *"Are you generating ideas or picking between ones you have?"* / *"Is this for fiction, essay, or something else?"*
+- **Signals contradict** (e.g., "weird startup ideas" → product domain + weird mood) → **stack two methods explicitly**. State what you're doing: *"Using `jobs-to-be-done` for the product framing + `lateral-provocations` to break the obvious shape."*
+- **No match** → constraint dispatch (`references/full-prompt-library.md`) is the safe fallback.
+- **Same question asked again** → switch methods. Variation in method = variation in idea distribution.
 
-Select a method before generating. Reroute generic brainstorming or bare lists. See `references/heuristics.md` for edge cases.
+### Anti-default check (run before generating)
+
+- About to write "Here are 5 ideas:" or a bare numbered list? → STOP. Pick a method first.
+- About to default to generic LLM-mode brainstorming? → STOP. Pick a path above.
+- Output looks like what an unrouted LLM would produce? → routing failed, redo.
+
+The default LLM mode is exactly what this skill exists to displace. If you generate without routing, you've defeated the skill.
+
+For deeper edge cases (mood signals, stacking, anti-patterns) see `references/heuristics.md`.
 
 ## Output format
 
-For constraint dispatch:
+For the constraint-dispatch default path:
 
 ```
 ## Constraint: [Name] — from [Source]
@@ -146,21 +160,23 @@ For constraint dispatch:
 3. ...
 ```
 
-Other methods keep their own format.
+For other methods, use the format the method specifies (TRIZ produces a contradiction analysis; OuLiPo produces constrained text; Oblique Strategies produces a single applied card → next move). Don't force every method into the constraint template.
 
-**For every idea set:**
-- Name the method and inventor; on slop terrain, name the refused ideas.
-- Give each idea a mechanism, audience/situation, and honest failure mode or tradeoff.
-- Mark one non-obvious, pursuable idea **grounded** and give its first step.
+**Every idea set, regardless of method:**
+- Name the method used. On slop terrain, name the obvious ideas you refused.
+- Give each idea its concrete mechanism and its honest failure mode / tradeoff / who-it's-for. This depth is what makes ideas land — measured, not decorative.
+- Mark at least one idea as the **grounded** one — buildable/pursuable now, non-obvious but with a real first step. The others can run further toward the strange; this one has to be genuinely doable. Don't let the whole set be weird-but-impractical.
 
 ## File map
 
-- `references/full-prompt-library.md` — domain-based constraint dispatch; default when SPECIFICITY=NONE
-- `references/method-catalog.md` — method summaries and uses
-- `references/heuristics.md` — routing edge cases
-- `references/anti-slop.md` — required anti-slop rules
-- `references/methods/` — 15 files covering 22 methods; load one file or named section
+- `references/full-prompt-library.md` — constraint library, sectioned by domain (General, Software, Physical, Social, Lists). Default path for SPECIFICITY=NONE.
+- `references/method-catalog.md` — one-line summary + when-to-use per method
+- `references/heuristics.md` — extended decision tree for edge cases
+- `references/anti-slop.md` — anti-slop rules; apply to every output
+- `references/exercises.md` — time-boxed exercises (5min / 30min / 1hr / day / week)
+- `references/methods/` — 10 methods for generating a new direction, one file each
+- `creative-shaping` — 12 methods for working with existing material, options, drafts, or notes
 
 ## Attribution
 
-Constraint dispatch adapted from [wttdotm.com/prompts.html](https://wttdotm.com/prompts.html). Primary sources are cited in each method file.
+Constraint-dispatch core adapted from [wttdotm.com/prompts.html](https://wttdotm.com/prompts.html). Methods drawn from primary sources cited in each method file.

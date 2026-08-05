@@ -1,32 +1,30 @@
 # Method Catalog
 
-One-line summary + when-to-use for every method. Cross-reference with `heuristics.md` and the routing table in `SKILL.md`.
-
-**T&P** means the named section in `methods/transform-and-provoke.md`.
+One-line summary + when-to-use for every method. Cross-reference with `heuristics.md` and the routing table in `SKILL.md`. A `creative-shaping` → **Method** entry means load that skill and use the named method.
 
 ## Random-stimulus
 
 | Method | Use when |
 |---|---|
-| **T&P: Oblique Strategies** | Stuck mid-project; have material, need to disrupt the loop. Native domain: music; works for anything. |
-| **T&P: Lateral Provocations** | Idea too safe; need to break frame with PO operator or random word. |
-| **T&P: Chance and Remix** | Existing material feels exhausted; have media to remix (Cage chance ops, Burroughs cut-up, Surrealist exquisite corpse, Situationist détournement). |
+| `creative-shaping` → **Oblique Strategies** | Stuck mid-project; have material, need to disrupt the loop. Native domain: music; works for anything. |
+| `creative-shaping` → **Lateral Provocations** | Idea too safe; need to break frame with PO operator or random word. |
+| `creative-shaping` → **Chance and Remix** | Existing material feels exhausted; have media to remix (Cage chance ops, Burroughs cut-up, Surrealist exquisite corpse, Situationist détournement). |
 
 ## Constraint-driven
 
 | Method | Use when |
 |---|---|
-| **T&P: OuLiPo** | Writing, especially poetry/fiction. Lipograms, S+7, snowballs, palindromes. |
-| **T&P: SCAMPER** | Have a base idea, want 7 systematic variations cheaply. |
+| `methods/oulipo.md` | Writing, especially poetry/fiction. Lipograms, S+7, snowballs, palindromes. |
+| `creative-shaping` → **SCAMPER** | Have a base idea, want 7 systematic variations cheaply. |
 | `full-prompt-library.md` | Blank-page default. wttdotm-style project constraints. Sectioned by domain (General / Software / Physical / Social / Lists) — pick from the matching section, not the whole library. |
 
 ## Theoretical
 
 | Method | Use when |
 |---|---|
-| `methods/compression-progress.md` | Picking research questions or selecting between projects. Schmidhuber: a worthwhile project compresses your model of the world. |
-| **T&P: Analogy and Blending** | Stuck inside one frame; need to import structure from a remote domain (Synectics, bisociation, conceptual blending). |
-| **T&P: Pataphysics** | Push past plausibility; specify the impossible thing in detail. |
+| `creative-shaping` → **Compression Progress** | Picking research questions or selecting between projects. Schmidhuber: a worthwhile project compresses your model of the world. |
+| `creative-shaping` → **Analogy and Blending** | Stuck inside one frame; need to import structure from a remote domain (Synectics, bisociation, conceptual blending). |
+| `creative-shaping` → **Pataphysics** | Push past plausibility; specify the impossible thing in detail. |
 
 ## Engineering / systems
 
@@ -44,27 +42,27 @@ One-line summary + when-to-use for every method. Cross-reference with `heuristic
 | Method | Use when |
 |---|---|
 | `methods/volume-generation.md` | Need many ideas fast (Crazy 8s, brainwriting, James Webb Young). |
-| `methods/creative-discipline.md` | Long-term practice (Tharp, LeWitt, Cleese, Cameron). Not single-session. |
+| `creative-shaping` → **Creative Discipline** | Long-term practice (Tharp, LeWitt, Cleese, Cameron). Not single-session. |
 
 ## Selection / refinement
 
 | Method | Use when |
 |---|---|
-| `methods/premortem-and-inversion.md` | Pressure-test a plan; choose between candidates (Klein + Munger). |
-| **T&P: Defamiliarization** | Subject is so familiar you've stopped seeing it (Shklovsky, Brecht). |
+| `creative-shaping` → **Premortem and Inversion** | Pressure-test a plan; choose between candidates (Klein + Munger). |
+| `creative-shaping` → **Defamiliarization** | Subject is so familiar you've stopped seeing it (Shklovsky, Brecht). |
 
 ## Mapping / drift
 
 | Method | Use when |
 |---|---|
 | `methods/derive-and-mapping.md` | Entering unfamiliar territory; life decision; site-specific work (Debord, Lynch, Bachelard). |
-| `methods/affinity-diagrams.md` | Pile of qualitative items needs structure (Kawakita KJ method). |
+| `creative-shaping` → **Affinity Diagrams** | Pile of qualitative items needs structure (Kawakita KJ method). |
 
 ## Domain-specific
 
 | Method | Use when |
 |---|---|
-| `methods/story-skeletons.md` | Narrative writing. Coats's Pixar 22, Saunders's escalation, Le Guin's carrier bag. Deliberately not Hero's Journey. |
+| `creative-shaping` → **Story Skeletons** | Narrative writing. Coats's Pixar 22, Saunders's escalation, Le Guin's carrier bag. Deliberately not Hero's Journey. |
 | `methods/jobs-to-be-done.md` | Product / service / business design. Christensen. |
 
 ## Choosing between similar methods
@@ -83,7 +81,7 @@ One-line summary + when-to-use for every method. Cross-reference with `heuristic
 
 ## Deliberately not in the catalog
 
-- **Hero's Journey / Save the Cat / 3-Act / Story Circle.** Story formulas, not ideation methods. They flatten work into tired shapes. `methods/story-skeletons.md` includes alternatives.
+- **Hero's Journey / Save the Cat / 3-Act / Story Circle.** Story formulas, not ideation methods. They flatten work into tired shapes. `creative-shaping` → **Story Skeletons** includes alternatives.
 - **Design Thinking** as franchise. The underlying methods (interviews, affinity mapping, ideation, prototyping) are here under their actual names.
 - **Mind maps, Six Hats, fishbone.** Containers for ideation, not generators. The methods here generate.
 - **Disrupt-X / blue-ocean / lean-startup.** Positioning frameworks, not generative ones.

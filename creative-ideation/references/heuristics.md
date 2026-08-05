@@ -1,8 +1,6 @@
 # Routing Heuristics
 
-Decision tree for picking a method. Read top to bottom; first match wins.
-
-**T&P** means the named section in `methods/transform-and-provoke.md`.
+Decision tree for picking a method. Read top to bottom; first match wins. A `creative-shaping` → **Method** entry means load that skill and use the named method.
 
 ## Phase signals — what stage is the user in?
 
@@ -10,51 +8,51 @@ Decision tree for picking a method. Read top to bottom; first match wins.
 |---|---|
 | Blank page, no domain | constraint dispatch (`full-prompt-library.md`) |
 | Has a domain, no project | route by domain (next section) |
-| Has one idea, want variations | **T&P: SCAMPER** |
+| Has one idea, want variations | `creative-shaping` → **SCAMPER** |
 | Need many ideas fast | `methods/volume-generation.md` |
-| Idea too safe | **T&P: Lateral Provocations** |
-| Many ideas, need to choose | `methods/premortem-and-inversion.md` |
-| Have idea, want to sharpen | `methods/creative-discipline.md` (Tharp's spine) |
-| Stuck mid-project | **T&P: Oblique Strategies** |
-| "Is this any good?" | `methods/premortem-and-inversion.md` + `methods/compression-progress.md` |
+| Idea too safe | `creative-shaping` → **Lateral Provocations** |
+| Many ideas, need to choose | `creative-shaping` → **Premortem and Inversion** |
+| Have idea, want to sharpen | `creative-shaping` → **Creative Discipline** (Tharp's spine) |
+| Stuck mid-project | `creative-shaping` → **Oblique Strategies** |
+| "Is this any good?" | `creative-shaping` → **Premortem and Inversion** + `creative-shaping` → **Compression Progress** |
 
 ## Domain signals
 
 | Domain | Method |
 |---|---|
-| Fiction with formal interest | **T&P: OuLiPo** |
-| Narrative with story shape | `methods/story-skeletons.md` |
-| Essay / non-fiction | **T&P: Defamiliarization** + `methods/compression-progress.md` |
-| Poetry | **T&P: OuLiPo** or **Chance and Remix** |
-| Lyrics / songwriting | **T&P: Oblique Strategies** + **Chance and Remix** |
-| Music / sound | **T&P: Oblique Strategies** (origin domain) |
-| Visual art / sculpture / installation | **T&P: Oblique Strategies** + `methods/creative-discipline.md` (LeWitt) |
-| Performance / theater | **T&P: Defamiliarization** (Brecht) |
+| Fiction with formal interest | `methods/oulipo.md` |
+| Narrative with story shape | `creative-shaping` → **Story Skeletons** |
+| Essay / non-fiction | `creative-shaping` → **Defamiliarization** + `creative-shaping` → **Compression Progress** |
+| Poetry | `methods/oulipo.md` or `creative-shaping` → **Chance and Remix** |
+| Lyrics / songwriting | `creative-shaping` → **Oblique Strategies** + `creative-shaping` → **Chance and Remix** |
+| Music / sound | `creative-shaping` → **Oblique Strategies** (origin domain) |
+| Visual art / sculpture / installation | `creative-shaping` → **Oblique Strategies**, `creative-shaping` → **Creative Discipline** (LeWitt) |
+| Performance / theater | `creative-shaping` → **Defamiliarization** (Brecht) |
 | Site-specific | `methods/derive-and-mapping.md` |
 | Engineering invention | `methods/triz-principles.md` |
 | Software architecture | `methods/pattern-languages.md` |
 | Algorithm / data structure | `methods/polya.md` + `methods/first-principles.md` |
 | Civic / policy | `methods/leverage-points.md` |
 | Org design | `methods/leverage-points.md` + `methods/pattern-languages.md` |
-| Research / picking a question | `methods/compression-progress.md` |
+| Research / picking a question | `creative-shaping` → **Compression Progress** |
 | Attacking a known problem | `methods/polya.md` + `methods/first-principles.md` |
 | Product strategy / why-does-this-exist | `methods/jobs-to-be-done.md` |
 | New venture from scratch | `full-prompt-library.md` "solve your own itch" + `methods/jobs-to-be-done.md` |
-| Career / what to study | `methods/derive-and-mapping.md` + `methods/compression-progress.md` |
-| Habit / discipline | `methods/creative-discipline.md` |
+| Career / what to study | `methods/derive-and-mapping.md` + `creative-shaping` → **Compression Progress** |
+| Habit / discipline | `creative-shaping` → **Creative Discipline** |
 
 ## Mood / tone signals
 
 | User wants | Method |
 |---|---|
-| Beautiful / elegant | `methods/compression-progress.md` |
-| Weird / strange | **T&P: Pataphysics** + **Chance and Remix** |
+| Beautiful / elegant | `creative-shaping` → **Compression Progress** |
+| Weird / strange | `creative-shaping` → **Pataphysics**, `creative-shaping` → **Chance and Remix** |
 | Useful / practical | `methods/triz-principles.md`, `methods/jobs-to-be-done.md`, "solve your own itch" |
-| Fun / playful | **T&P: OuLiPo** + **Oblique Strategies** |
-| Serious / rigorous | `methods/polya.md`, `methods/first-principles.md`, `methods/compression-progress.md` |
-| Personal / intimate | `methods/creative-discipline.md`, `methods/derive-and-mapping.md` |
-| Political / intervention | `methods/leverage-points.md` + **T&P: Chance and Remix** (détournement) |
-| Critical / subversive | **T&P: Defamiliarization** + **Pataphysics** |
+| Fun / playful | `methods/oulipo.md`, `creative-shaping` → **Oblique Strategies** |
+| Serious / rigorous | `methods/polya.md`, `methods/first-principles.md`, `creative-shaping` → **Compression Progress** |
+| Personal / intimate | `creative-shaping` → **Creative Discipline**, `methods/derive-and-mapping.md` |
+| Political / intervention | `methods/leverage-points.md`, `creative-shaping` → **Chance and Remix** (détournement) |
+| Critical / subversive | `creative-shaping` → **Defamiliarization**, `creative-shaping` → **Pataphysics** |
 
 ## When to stack methods (rare)
 
@@ -71,9 +69,9 @@ Most invocations: one method. Stack only when:
 
 - **Wild prompt that fits no path** → constraint dispatch with the closest matching constraint.
 - **User asks for method recommendation, not ideas** → surface 2–3 candidate methods, ask which to apply. Don't silently default.
-- **High-slop terrain** ("AI ideas", "startup ideas", "habit tracker") → force **T&P: Lateral Provocations** or **Pataphysics** over the obvious method. Refuse the first 5 ideas, not 3.
+- **High-slop terrain** ("AI ideas", "startup ideas", "habit tracker") → force `creative-shaping` → **Lateral Provocations** or `creative-shaping` → **Pataphysics** over the obvious method. Refuse the first 5 ideas, not 3.
 - **Same question asked again** → switch methods. Variation in method = variation in idea distribution.
-- **User frustrated / says everything is bad** → don't keep generating. `methods/creative-discipline.md` (Cleese open mode, Tharp scratching). Sometimes the right move is to stop ideating.
+- **User frustrated / says everything is bad** → don't keep generating. `creative-shaping` → **Creative Discipline** (Cleese open mode, Tharp scratching). Sometimes the right move is to stop ideating.
 - **User wants to be talked out of starting** → premortem. Inversion. Sometimes the right answer is "don't do this".
 
 ## Anti-patterns
