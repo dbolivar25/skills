@@ -15,13 +15,13 @@ metadata:
 
 # Creative Ideation
 
-Route an open-ended generative or selective request to one named method, load only that method, and produce specific, non-obvious output.
+Route a generative or selective request to one named method, load only it, and produce specific, non-obvious output.
 
 ## When to use
 
-Use for making, expanding, selecting, unblocking, subverting, refining, or synthesizing ideas in any domain.
+Use to make, expand, select, unblock, subvert, refine, or synthesize ideas in any domain.
 
-Practice is a separate responsibility: when the user asks for an exercise, time-boxed practice, or a creative routine, load `creative-exercises` instead of routing through this library.
+For an exercise, time-boxed practice, or creative routine, load `creative-exercises` instead.
 
 ## Operating rules
 
@@ -29,9 +29,7 @@ Practice is a separate responsibility: when the user asks for an exercise, time-
 2. **Refuse the first three ideas.** Generate, discard, regenerate. Apply `references/anti-slop.md`.
 3. **One method per response unless asked.** Don't stack.
 4. **Specificity over abstraction.** Use real proper nouns, materials, situations, and mechanisms; a tech stack alone is not specific.
-5. **Weird must also be good.** Every set needs one non-obvious **grounded** idea that is pursuable now, with a real first step.
-6. **Name the method you used and who invented it.** Attribution invokes the discipline.
-7. **When user picks one, build it.** Don't keep generating after they've chosen.
+5. **When user picks one, build it.** Don't keep generating after they've chosen.
 
 ## Routing
 
@@ -149,7 +147,7 @@ For the constraint-dispatch default path:
 Other methods use their own format; do not force them into this template.
 
 **Every idea set, regardless of method:**
-- Name the method and inventor; on slop terrain, name the refused ideas.
+- Name the method and inventor (attribution invokes the discipline); on slop terrain, name the refused ideas.
 - Give each idea a mechanism, audience/situation, and honest failure mode or tradeoff.
 - Mark one non-obvious, pursuable idea **grounded** and give its first step.
 
