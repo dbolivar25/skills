@@ -15,7 +15,7 @@ metadata:
 
 # Creative Ideation
 
-Route a generative or selective request to one named method, load only it, and produce specific, non-obvious output.
+Route each request to one named method and load only that method.
 
 ## When to use
 
@@ -33,7 +33,7 @@ For an exercise, time-boxed practice, or creative routine, load `creative-exerci
 
 ## Routing
 
-Route before generating; do not narrate the routing unless useful. Never trade away an idea's concrete mechanism, situational binding, or honest failure mode.
+Route before generating. Explain the choice only when useful.
 
 ### Step 1 — Extract three signals from the prompt
 
@@ -120,15 +120,15 @@ Route before generating; do not narrate the routing unless useful. Never trade a
 
 - Multiple paths → follow the user's phrasing, not the most sophisticated method.
 - Genuine ambiguity → ask one clarifying question.
-- Contradictory signals → stack two methods explicitly and name each role (for example, jobs-to-be-done for product framing plus lateral provocations to break the frame).
+- Contradictory signals → stack two methods and name each role.
 - No match → use constraint dispatch in `references/full-prompt-library.md`.
 - Repeated question → switch methods.
 
-Before generating, confirm that you selected a method. If the output resembles generic brainstorming or starts as a bare list, reroute. For edge cases see `references/heuristics.md`.
+Select a method before generating. Reroute generic brainstorming or bare lists. See `references/heuristics.md` for edge cases.
 
 ## Output format
 
-For the constraint-dispatch default path:
+For constraint dispatch:
 
 ```
 ## Constraint: [Name] — from [Source]
@@ -144,21 +144,21 @@ For the constraint-dispatch default path:
 3. ...
 ```
 
-Other methods use their own format; do not force them into this template.
+Other methods keep their own format.
 
-**Every idea set, regardless of method:**
-- Name the method and inventor (attribution invokes the discipline); on slop terrain, name the refused ideas.
+**For every idea set:**
+- Name the method and inventor; on slop terrain, name the refused ideas.
 - Give each idea a mechanism, audience/situation, and honest failure mode or tradeoff.
 - Mark one non-obvious, pursuable idea **grounded** and give its first step.
 
 ## File map
 
-- `references/full-prompt-library.md` — constraint library, sectioned by domain (General, Software, Physical, Social, Lists). Default path for SPECIFICITY=NONE.
-- `references/method-catalog.md` — one-line summary + when-to-use per method
-- `references/heuristics.md` — extended decision tree for edge cases
-- `references/anti-slop.md` — anti-slop rules; apply to every output
-- `references/methods/` — 22 named methods, one file each, load only the one you're using
+- `references/full-prompt-library.md` — domain-based constraint dispatch; default when SPECIFICITY=NONE
+- `references/method-catalog.md` — method summaries and uses
+- `references/heuristics.md` — routing edge cases
+- `references/anti-slop.md` — required anti-slop rules
+- `references/methods/` — 22 methods; load one
 
 ## Attribution
 
-Constraint-dispatch core adapted from [wttdotm.com/prompts.html](https://wttdotm.com/prompts.html). Methods drawn from primary sources cited in each method file.
+Constraint dispatch adapted from [wttdotm.com/prompts.html](https://wttdotm.com/prompts.html). Primary sources are cited in each method file.
