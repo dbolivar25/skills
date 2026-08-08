@@ -6,7 +6,8 @@ disable-model-invocation: true
 
 # Improve Codebase Architecture
 
-Run an **architecture scan** grounded in `../coding-standards/SKILL.md`. Return one ranked shortlist of refactor candidates within the scan boundary.
+Run an evidence-backed **architecture scan**. Return one ranked shortlist of
+refactor candidates within the scan boundary.
 
 **Scan, don’t spec.** Stop at evidence-backed **ownership moves**. Do not edit files, run refactors, update documentation, create ADRs, estimate effort, design final interfaces, or write a tech spec. Record migration, compatibility, rollout, or backfill only as current constraints supported by repository evidence or user intent; do not design them during the scan.
 
@@ -17,12 +18,28 @@ Use the scope supplied by the user: repository, directory, feature, module, file
 When no useful scope is supplied:
 
 1. Inspect the repository shape and major entrypoints.
-2. Infer the scope only when the repository is small or one area clearly dominates the request.
-3. Otherwise ask one question that lets the user choose the scope.
+2. Inspect roughly the last 20 commit messages and their changed paths. Give
+   actively changing areas more weight: deepening pays only where future changes
+   can cash in the leverage. Activity selects where to inspect; repository
+   evidence establishes architectural friction.
+3. Infer the scope only when the repository is small or one active area clearly
+   dominates. If changes are scattered, widen the scan or ask one question that
+   lets the user choose the scope.
 
-Read `../coding-standards/SKILL.md`. Search the boundary and its ancestors through the repository root for `CONTEXT.md`, `CONTEXT-MAP.md`, equivalent domain-language files, and decision indexes. Search repository documentation and ADR collections for decisions that name or govern the boundary. Inspect every governing source found, plus precedent in the scoped code, tests, and evidence halo.
+Read `../coding-standards/SKILL.md` and `../codebase-design/SKILL.md`. Use the
+shared vocabulary of module, interface, depth, seam, adapter, leverage, and
+locality when describing candidates. Search the boundary and its ancestors
+through the repository root for `CONTEXT.md`, `CONTEXT-MAP.md`, equivalent
+domain-language files, and decision indexes. Search repository documentation and
+ADR collections for decisions that name or govern the boundary. Inspect every
+governing source found, plus precedent in the scoped code, tests, and evidence
+halo.
 
-**Completion criterion:** The candidate boundary and any evidence halo are explicit; the coding standards are loaded; the prescribed context and decision locations have been searched; every governing source found has been inspected; and relevant precedent has been identified or its absence recorded.
+**Completion criterion:** The candidate boundary and any evidence halo are
+explicit; recent activity has informed an otherwise-unspecified boundary; the
+coding standards and shared design vocabulary are loaded; the prescribed context
+and decision locations have been searched; every governing source found has been
+inspected; and relevant precedent has been identified or its absence recorded.
 
 ## 2. Build an evidence map
 
@@ -55,6 +72,10 @@ For broad scans, parallel exploration may gather observations, but final candida
 ## 3. Form, rank, and prune candidates
 
 Architecture changes who owns an invariant, policy, translation, orchestration, side effect, resource lifetime, or runtime coordination. Turn each retained friction into an **ownership move** from the current owner or callers to a proposed owner. Do not design the owner’s final interface.
+
+Apply the **deletion test** to the proposed owner: deleting a useful module should
+concentrate its hidden complexity in callers, not merely move a pass-through
+wrapper elsewhere. Retain only candidates that pass this test.
 
 Rank all candidates within the scan boundary together, rather than by standards category. Rank by **architectural leverage**: the breadth and consequence of concrete burden or risk removed relative to the interface, indirection, or machinery introduced. Consider affected callers, behaviors, runtime ownership, and tests. When leverage is comparable, prefer stronger evidence and then the smaller coherent ownership move.
 

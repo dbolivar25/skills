@@ -15,18 +15,34 @@ description: Test-driven development. Use when the user wants to build features 
 
 See [tests.md](tests.md) for examples and [mocking.md](mocking.md) for mocking guidelines.
 
-## Anti-Pattern: Horizontal Slices
+## Seams — where tests go
 
-**DO NOT write all tests first, then all implementation.** This is "horizontal slicing" - treating RED as "write all tests" and GREEN as "write all code."
+A **seam** is the public boundary where behavior can be observed without reaching
+into implementation details. Tests live at seams. When the interface itself is
+unsettled, use `../codebase-design/SKILL.md` to decide where the seam belongs
+before starting the loop.
 
-This produces **crap tests**:
+## Anti-pattern: tautological tests
+
+A tautological test recomputes the expected value the same way the implementation
+does, so both can be wrong together and the test still passes. Expected values
+must come from an independent source of truth: a known literal, worked example,
+specification, or invariant. See [tests.md](tests.md) for an example.
+
+## Anti-pattern: horizontal slices
+
+Work in vertical slices: one failing test, one minimal implementation, then the
+next test. Writing all tests before any implementation is **horizontal slicing**;
+it produces tests of imagined behavior rather than evidence learned from the
+previous cycle:
 
 - Tests written in bulk test _imagined_ behavior, not _actual_ behavior
 - You end up testing the _shape_ of things (data structures, function signatures) rather than user-facing behavior
 - Tests become insensitive to real changes - they pass when behavior breaks, fail when behavior is fine
 - You outrun your headlights, committing to test structure before understanding the implementation
 
-**Correct approach**: Vertical slices via tracer bullets. One test → one implementation → repeat. Each test responds to what you learned from the previous cycle. Because you just wrote the code, you know exactly what behavior matters and how to verify it.
+Each test is a **tracer bullet** that responds to what the previous cycle taught
+you.
 
 ```
 WRONG (horizontal):
@@ -48,15 +64,14 @@ When exploring the codebase, read `CONTEXT.md` (if it exists) so that test names
 
 Before writing any code:
 
-- [ ] Confirm with user what interface changes are needed
-- [ ] Confirm with user which behaviors to test (prioritize)
+- [ ] Confirm the public interface and test seams with the user
+- [ ] Agree on a prioritized behavior list, concentrating effort on critical paths
+      and complex logic
 - [ ] Identify opportunities for deep modules (small interface, deep implementation) — see `../coding-standards/SKILL.md` for the design and testability standards
-- [ ] List the behaviors to test (not implementation steps)
 - [ ] Get user approval on the plan
 
-Ask: "What should the public interface look like? Which behaviors are most important to test?"
-
-**You can't test everything.** Confirm with the user exactly which behaviors matter most. Focus testing effort on critical paths and complex logic, not every possible edge case.
+Completion criterion: the public interface, test seams, and prioritized behavior
+list are explicit, and the user has approved them.
 
 ### 2. Tracer Bullet
 
@@ -68,6 +83,9 @@ GREEN: Write minimal code to pass → test passes
 ```
 
 This is your tracer bullet - proves the path works end-to-end.
+
+Completion criterion: the first test failed for the intended missing behavior,
+the minimal implementation makes it pass, and the existing suite remains green.
 
 ### 3. Incremental Loop
 
@@ -82,8 +100,11 @@ Rules:
 
 - One test at a time
 - Only enough code to pass current test
-- Don't anticipate future tests
+- Let each completed cycle determine the next test
 - Keep tests focused on observable behavior
+
+Completion criterion: every prioritized behavior has completed its own red-green
+cycle and the full relevant suite is green.
 
 ### 4. Refactor
 
@@ -95,23 +116,15 @@ After all tests pass, look for [refactor candidates](refactoring.md):
 - [ ] Consider what new code reveals about existing code
 - [ ] Run tests after each refactor step
 
-**Never refactor while RED.** Get to GREEN first.
+Refactor only from **GREEN**.
 
-## Checklist Per Cycle
+Completion criterion: refactoring began from green, preserves the agreed public
+behavior, and leaves the full relevant suite green.
 
-```
-[ ] Test describes behavior, not implementation
-[ ] Test uses public interface only
-[ ] Test would survive internal refactor
-[ ] Code is minimal for this test
-[ ] No speculative features added
-```
+## Local testing policy
 
-## Local overrides (dmmulroy/skills)
-
-This skill is vendored from mattpocock/skills. In this repository,
-`../coding-standards/SKILL.md` is the source of truth and **supersedes
-`mocking.md`** wherever they disagree:
+In this repository, `../coding-standards/SKILL.md` is the source of truth. Where
+it conflicts with [mocking.md](mocking.md), follow the coding standards:
 
 - Do not use module-patching APIs (`vi.mock`, `jest.mock`) or method-spy APIs
   (`vi.spyOn`, `jest.spyOn`). Replace behavior through a real seam instead
