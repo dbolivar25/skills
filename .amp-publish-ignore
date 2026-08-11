@@ -5,3 +5,5 @@
 /.amp-publish-ignore
 /.githooks/
 /scripts/publish-amp
+
+/augment-workflows/
