@@ -90,8 +90,12 @@ Return one review judgment:
 - `VIOLATED`: evidence shows the result conflicts with Intent or reality.
 - `UNCERTAIN`: evidence is insufficient to judge safely.
 
-Absence of a finding is not proof. Confidence describes the review's evidence,
-not the reviewer's tone.
+Evidence must name what the reviewer checked and any known material source or
+requested axis left unchecked. Return `ADHERES` only after checking every
+requested axis. Confidence measures the evidence behind the status. `HIGH`
+requires authoritative evidence for the judgment and every material finding.
+Lower confidence when support is indirect or incomplete. Return `UNCERTAIN`
+when missing evidence prevents a safe judgment.
 
 ## Timing And Independence
 
