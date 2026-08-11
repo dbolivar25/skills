@@ -35,6 +35,45 @@ Use canonical URIs returned by resources and tool receipts. Do not construct an
 id from a display name. Add `format=json` through the advertised query template
 when structured output is needed.
 
+## Workflow Authoring Resources
+
+The connected Augment MCP endpoint exposes versioned, read-only authoring
+contracts for four action nodes:
+
+```text
+decisionsite://workflow-authoring/create-pdf-artifact-v1{?format}
+decisionsite://workflow-authoring/publish-to-slack-v1{?format}
+decisionsite://workflow-authoring/send-email-v1{?format}
+decisionsite://workflow-authoring/publish-to-teams-v1{?format}
+```
+
+Their resource template names are `create-pdf-artifact-authoring`,
+`publish-to-slack-authoring`, `send-email-authoring`, and
+`publish-to-teams-authoring`. Read the relevant contract before authoring that
+node. These resources do not create or change a workflow.
+
+There is no Add Artifact to Decision Site authoring resource in this contract.
+Use the complete bundled contract in `node-registry.md`. Do not infer a URI from
+the other four names.
+
+## Workflow Author Access
+
+Workflow visibility and mutation depend on the current user's organization
+role:
+
+| Role | Read | Create or mutate |
+| --- | --- | --- |
+| Admin | All organization workflows | All organization workflows |
+| Creator | Workflows the user owns | Workflows the user owns |
+| Collaborator | None | None |
+| Guest | None | None |
+
+Only user identities can create workflows. A workflow owner must remain an
+eligible Admin or Creator when owner authority is validated. Demoting an owner
+does not automatically stop triggers from an already released version.
+Downstream sender, destination, placement, and resource authorization still
+apply at release or execution where their contracts require it.
+
 ## Public Tools
 
 All tools accept optional `auditReason` and `sourceAgent` unless the active
@@ -126,18 +165,19 @@ Connections are grouped by source node, output channel, and source port:
 ## Normal Sequence
 
 1. Read organizations and select a canonical `organizationUri`.
-2. Create a workflow with `create_workflow`, optionally supplying its first
+2. Read every node-specific authoring resource needed by the proposed graph.
+3. Create a workflow with `create_workflow`, optionally supplying its first
    document.
-3. Read the returned workflow/version resources and preserve the draft
+4. Read the returned workflow/version resources and preserve the draft
    `resourceUri` and `etag`.
-4. Replace a draft with `update_workflow_version_draft`, passing the fresh ETag
+5. Replace a draft with `update_workflow_version_draft`, passing the fresh ETag
    as `ifMatch`.
-5. Validate with `validate_workflow_version`.
-6. Obtain confirmation before release unless release was explicitly requested.
-7. Release with `release_workflow_version` and a fresh `ifMatch`.
-8. Use the released-version URI or returned `executionsResourceUri` for an
+6. Validate with `validate_workflow_version`.
+7. Obtain confirmation before release unless release was explicitly requested.
+8. Release with `release_workflow_version` and a fresh `ifMatch`.
+9. Use the released-version URI or returned `executionsResourceUri` for an
    approved execution.
-9. Read execution detail, node lifecycle, and bounded node output resources.
+10. Read execution detail, node lifecycle, and bounded node output resources.
 
 ## ETags And Version Results
 
@@ -201,7 +241,7 @@ required.
 ### Meeting ended
 
 `MEETING_ENDED` requires UUID `meetingPlanId`.
-`MEETING_ENDED_FOR_DEAL_ROOM` additionally requires positive integer
+`MEETING_ENDED_FOR_DEAL_ROOM` also requires positive integer
 `dealRoomId`.
 
 ### Meeting start buckets

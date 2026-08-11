@@ -19,8 +19,8 @@ that owns the whole job. The graph should own state, routing, pause/resume,
 approval, retries, side effects, and observability. AI nodes should do the
 language-sensitive work that deterministic nodes cannot do well.
 
-For Augment workflows, that means a high-quality workflow is not just a valid
-`ds-v1` document. It is a graph where:
+For Augment workflows, a valid `ds-v1` document is only the structural floor.
+A high-quality graph also has these properties:
 
 - predictable context is loaded before the AI step;
 - prompts are first-class authored behavior;
@@ -47,8 +47,8 @@ For Augment workflows, that means a high-quality workflow is not just a valid
 | Own control flow | Reliability comes from owning the loop: when to continue, branch, pause, retry, escalate, compact context, or stop. | Encode branches with `if`, approvals with `approval`, fan-in with `zip`, waits with `wait` or `waitUntil`, retries with retry config where supported, and terminal behavior with explicit sinks or actions. |
 | Compact errors into context | Errors can help an AI recover, but raw repeated failure noise can cause spin. Error information should be concise, actionable, and bounded. | Connect error ports. Convert failures into short recovery context: failed node, attempted input, concise error, retry count, and needed decision. Escalate or sink after a bounded number of attempts. |
 | Small focused agents | AI reliability drops as scope and context grow. Small, focused AI steps are easier to test, debug, and improve. | Keep each AI node to one job. Split prompts that both gather facts and write outputs, or both decide policy and perform action. Use several focused nodes plus graph control before using one broad AI node. |
-| Trigger from anywhere | Agentic work should start from the channel or event where the user or system already lives, not only from chat. | Design against the actual trigger payload: manual, scheduled, meeting, company, CRM, Slack, email, or other events. Do not assume a human message, meeting id, or thread exists unless the trigger or upstream loader provides it. |
-| Stateless reducer | A robust agent step should behave like a function of explicit state: current input plus prior events produce the next output. | Make nodes rerunnable from trigger, author, organization, and upstream Data Context. Avoid relying on ambient chat history, private memory, or unstated integration state. |
+| Trigger from anywhere | Agentic work should start from the channel or event where the user or system already lives instead of being limited to chat. | Design against the actual trigger payload: manual, scheduled, meeting, company, CRM, Slack, email, or other events. Do not assume a human message, meeting id, or thread exists unless the trigger or upstream loader provides it. |
+| Stateless reducer | A reliable agent step should behave like a function of explicit state: current input plus prior events produce the next output. | Make nodes rerunnable from trigger, author, organization, and upstream Data Context. Avoid relying on ambient chat history, private memory, or unstated integration state. |
 | Pre-fetch likely context | If the system can predict what context the AI will need, fetch it deterministically before calling the model. The model should use context, not spend steps discovering obvious context. | Add loader/search/context nodes before AI when the registry supports them. For meeting workflows, load meeting data before summarizing. For scheduled workflows, add an upstream node that creates the business object context before referencing it. |
 
 ## Detailed Carryover
@@ -105,6 +105,17 @@ For Augment workflows, that means a high-quality workflow is not just a valid
   prompt has enough context, that the selected human can approve, that external
   integrations are configured, or that the workflow's output will satisfy the
   business purpose.
+- Publication results from Publish to Slack, Send Email, and Publish to Teams
+  are business state. `accepted` records provider acceptance, not human receipt.
+  `unknown` records unresolved effect state, not a normal failure. Preserve that
+  distinction in routing, observation, and retry decisions.
+- Output creation and output exposure are separate authority boundaries. A PDF
+  Artifact can exist without being placed, emailed, or published. Keep those
+  actions in separate nodes so each destination, audience, and error path is
+  reviewable.
+- Owner-bound sender and destination facts are explicit state. Resolve Slack,
+  email, Teams, and Decision Site authority for the current Agent owner and
+  organization instead of treating integration ids as portable configuration.
 
 ## Quality Rubric
 
@@ -128,6 +139,13 @@ Before handing off or releasing a workflow, check these questions:
 - Is every downstream reference backed by trigger context or an upstream node?
 - Does validation prove only structure, or has runtime usefulness also been
   reviewed?
+- Could an `unknown` publication result enter a blind automatic retry?
+- Are provider acceptance, delivery, and human readership described as
+  different facts?
+- Can a reviewer see which node creates content, which node exposes it, and who
+  may access the result?
+- Do sender, connection, destination, and audience values belong to the actual
+  workflow owner and organization?
 
 ## Common Corrections
 
@@ -139,6 +157,9 @@ Before handing off or releasing a workflow, check these questions:
 | Error port is absent because the happy path validates. | Error port routes to retry, compacted failure notification, or explicit sink with accepted risk. |
 | AI prompt includes all prior data because "more context helps." | Prompt includes only the fields needed, bounded lists, relevant excerpts, and source labels. |
 | Workflow sends a final answer but nobody can tell if the external action completed. | Trigger response is followed by execution-resource reads or an explicit notification/CRM/state update that records outcome. |
+| Any publication error flows into the same retry loop. | Retry `not_created` only when `mayRetry` is true; inspect and escalate `unknown` without creating a duplicate. |
+| One implicit step creates a PDF, exposes it on a Decision Site, and emails it. | Create one ArtifactRef, then connect explicit placement and email nodes with separate audiences and error paths. |
+| A copied workflow keeps another owner's Slack, Microsoft, sender, or audience identifiers. | Resolve fixed destinations and authority for the current owner and organization before release. |
 
 ## Source Links
 

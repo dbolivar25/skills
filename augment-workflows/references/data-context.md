@@ -62,6 +62,29 @@ Wrong:
 
 The wrong form is parsed as a variable lookup.
 
+## Liquid Insertion By Destination Syntax
+
+Publish to Slack, Create PDF Artifact, Send Email, and Publish to Teams use
+strict missing-value behavior. A referenced path that is absent fails the
+current item. Use a condition or `default` only when the value is optional:
+
+```liquid
+{% if json.subtitle %}{{ json.subtitle }}{% endif %}
+{{ json.subtitle | default: "No subtitle" }}
+```
+
+Insert according to the surrounding syntax:
+
+```liquid
+JSON value: {{ json.value | json }}
+HTML text: {{ json.value | escape }}
+Plain text: {{ json.value }}
+```
+
+`json` serializes the complete Liquid value as JSON. Do not wrap it in quotes
+or hand-build string escaping. `escape` protects HTML text, not URLs,
+attributes, CSS, or intentional raw markup.
+
 ## Liquid Loop Limits
 
 Workflow Liquid validation requires bounded loops for unbounded roots. If a
@@ -202,6 +225,26 @@ CEL:
 items
 ports[1][0]
 ```
+
+## Action Output Lineage
+
+Create PDF Artifact makes its `ArtifactRef` the next node's `json`. Pass the
+complete reference to a direct consumer with:
+
+```cel
+json
+```
+
+Use that expression for Send Email `attachments` immediately after Create PDF
+Artifact. Add Artifact to Decision Site consumes the same reference, then
+wraps it under `json.artifact` and adds placement facts under `json.placement`.
+If Send Email follows placement sequentially, use `json.artifact` for its
+attachments instead.
+
+Slack, email, and Teams success outputs are publication receipts, not the input
+item. A downstream node sees the receipt under `json`; an error edge sees the
+node's error object there instead. Use the exact shapes in `node-registry.md`
+and the outcome rules in `12-factor-workflow-quality.md`.
 
 ## Trigger Context
 

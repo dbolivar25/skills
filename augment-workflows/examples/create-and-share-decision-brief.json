@@ -1,0 +1,122 @@
+{
+  "schema_version": "ds-v1",
+  "name": "Create and share a decision brief - replace recipient and Decision Site before saving",
+  "nodes": [
+    {
+      "id": "trigger",
+      "name": "Manual trigger",
+      "type": "ds.eventTrigger.perItem.in0.success1.error0",
+      "typeVersion": 1,
+      "mode": "per_item",
+      "position": [0, 0],
+      "parameters": {
+        "event": "MANUAL"
+      }
+    },
+    {
+      "id": "create-pdf",
+      "name": "Create decision brief",
+      "type": "ds.createPdfArtifact.perItem.in1.success1.error1",
+      "typeVersion": 1,
+      "mode": "per_item",
+      "position": [320, 0],
+      "parameters": {
+        "title": "Decision brief {{ trigger.systemEventType }}",
+        "source": "<main class=\"pdf-document\"><h1 class=\"pdf-title\">Decision brief</h1><p class=\"pdf-summary\">{{ trigger.systemEventType | escape }}</p></main>"
+      }
+    },
+    {
+      "id": "send-email",
+      "name": "Email decision brief",
+      "type": "ds.emailPublish.perItem.in1.success1.error1",
+      "typeVersion": 1,
+      "mode": "per_item",
+      "position": [680, -120],
+      "parameters": {
+        "to": "\"REPLACE_WITH_VERIFIED_RECIPIENT\"",
+        "subject": "Decision brief",
+        "html": "<main><h1>Decision brief</h1><p>{{ trigger.systemEventType | escape }}</p></main>",
+        "plaintext": "Decision brief: {{ trigger.systemEventType }}",
+        "attachments": "json"
+      }
+    },
+    {
+      "id": "place-artifact",
+      "name": "Add brief to Decision Site",
+      "type": "ds.addArtifactToDecisionSite.perItem.in1.success1.error1",
+      "typeVersion": 1,
+      "mode": "per_item",
+      "position": [680, 120],
+      "parameters": {
+        "decisionSiteId": "999999",
+        "access": {
+          "visibility": "EVERYONE"
+        }
+      }
+    },
+    {
+      "id": "completed",
+      "name": "Complete successful effects",
+      "type": "ds.sink.perItem.in1.success0.error0",
+      "typeVersion": 1,
+      "mode": "per_item",
+      "position": [1040, 0],
+      "parameters": {}
+    },
+    {
+      "id": "failed",
+      "name": "Stop failed effects for inspection",
+      "type": "ds.sink.perItem.in1.success0.error0",
+      "typeVersion": 1,
+      "mode": "per_item",
+      "position": [1040, 280],
+      "parameters": {}
+    }
+  ],
+  "connections": {
+    "trigger": {
+      "success": [
+        [
+          { "node_id": "create-pdf", "index": 0 }
+        ]
+      ]
+    },
+    "create-pdf": {
+      "success": [
+        [
+          { "node_id": "send-email", "index": 0 },
+          { "node_id": "place-artifact", "index": 0 }
+        ]
+      ],
+      "error": [
+        [
+          { "node_id": "failed", "index": 0 }
+        ]
+      ]
+    },
+    "send-email": {
+      "success": [
+        [
+          { "node_id": "completed", "index": 0 }
+        ]
+      ],
+      "error": [
+        [
+          { "node_id": "failed", "index": 0 }
+        ]
+      ]
+    },
+    "place-artifact": {
+      "success": [
+        [
+          { "node_id": "completed", "index": 0 }
+        ]
+      ],
+      "error": [
+        [
+          { "node_id": "failed", "index": 0 }
+        ]
+      ]
+    }
+  }
+}

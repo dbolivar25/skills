@@ -1,6 +1,6 @@
 ---
 name: augment-workflows
-description: Author, edit, validate, debug, release, execute, and inspect Augment or Decision Site MCP workflows. Use for WorkflowDocV1, workflow lifecycle tools and resources, public node types, Data Context, CEL, Liquid, custom AI output, schedules, execution nodes, or workflow quality.
+description: Author, edit, validate, debug, release, execute, and inspect Augment or Decision Site MCP workflows. Use for WorkflowDocV1, workflow lifecycle tools and resources, public node types, Data Context, CEL, Liquid, custom AI output, schedules, Slack, Teams, email, PDF Artifact or Decision Site placement nodes, execution nodes, or workflow quality.
 ---
 
 # Augment Workflows
@@ -26,6 +26,9 @@ does not license substituting a different workflow interface.
   [`references/data-context.md`](references/data-context.md).
 - Before reading or mutating workflow resources, load
   [`references/workflow-lifecycle.md`](references/workflow-lifecycle.md).
+- Before authoring, editing, reviewing, or debugging a Create PDF Artifact
+  body, read its live authoring resource and then load
+  [`references/pdf-artifact-authoring.md`](references/pdf-artifact-authoring.md).
 - For nontrivial AI, approval, retry, waiting, triggering, or external action
   design, load
   [`references/12-factor-workflow-quality.md`](references/12-factor-workflow-quality.md).
@@ -60,6 +63,9 @@ does not license substituting a different workflow interface.
   authorization.
 - Execution creation is asynchronous. Acceptance or enqueueing is not
   completion.
+- Treat PDF layout as ready only after the authored content cases have been
+  rendered as PDF pages and inspected. Workflow validation does not render the
+  document.
 
 ## Steps
 
@@ -73,10 +79,12 @@ does not license substituting a different workflow interface.
 2. **Load the required contracts.**
    Follow Reference Routing for every branch used by the request. If operating
    MCP, inspect the active server's listed tools and resource templates and
-   confirm the required operation-specific name is present. Stop before
-   mutation if it is absent. Completion criterion: every node, parameter, tool,
-   resource, and expression language in the proposed work has the expected
-   bundled contract and a callable server surface.
+   confirm the required operation-specific name is present. Read every
+   node-specific authoring resource required by the lifecycle reference before
+   writing that node. Stop before mutation if an expected tool or resource is
+   absent. Completion criterion: every node, parameter, tool, resource, and
+   expression language in the proposed work has the expected bundled contract
+   and a callable server surface.
 
 3. **Read current state.**
    Resolve canonical organization, workflow, version, execution, and node URIs
@@ -142,6 +150,8 @@ For authoring or edits, return:
 - Preflight and server-validation results.
 - Performed or required MCP operations and confirmation gates.
 - Observed execution state when applicable.
+- For PDF work, rendered content cases, observed page behavior, and any layout
+  proof that remains blocked by execution authorization.
 - Remaining risks or user decisions.
 
 For review/debug, lead with findings:
@@ -183,6 +193,17 @@ Each finding should cite the node id, field, and reason.
   or CRM events.
 - Hidden state: relying on memory, ambient integration state, or a previous
   conversation instead of explicit trigger and upstream node output.
+- Blind effect retry: treating an unresolved external effect as known not to
+  have happened.
+- Syntax mismatch: inserting a templated value without accounting for the
+  surrounding JSON, HTML, or plain-text syntax.
+- Page-blind PDF: composing variable data as a fixed browser canvas, applying
+  one keep rule to a growing region, or treating a continuous preview as proof
+  of paged output.
+- Effect collapse: hiding creation, exposure, and delivery inside one implicit
+  step instead of separate graph nodes.
+- Owner drift: selecting a sender, connection, destination, or audience that
+  belongs to a different Agent owner or organization.
 
 ## References
 
@@ -193,6 +214,9 @@ Each finding should cite the node id, field, and reason.
 - [`references/workflow-lifecycle.md`](references/workflow-lifecycle.md): MCP
   resources, write tools, validation, release, execution, cancel, retry, and
   archive behavior.
+- [`references/pdf-artifact-authoring.md`](references/pdf-artifact-authoring.md):
+  PDF content contracts, page composition, break behavior, tables, and rendered
+  QA.
 - [`references/12-factor-workflow-quality.md`](references/12-factor-workflow-quality.md):
   reliable-agent workflow-quality rubric adapted from HumanLayer's
   12-factor-agents material.

@@ -1,6 +1,6 @@
 # Node Registry Reference
 
-Use only these 35 public-authorable node type strings in Augment MCP workflow
+Use only these 40 public-authorable node type strings in Augment MCP workflow
 documents. Every node uses `typeVersion: 1`.
 
 The runtime registry also contains two `ds.internalHandler` variants. Public
@@ -58,6 +58,10 @@ An active server may accept a public type that the current user cannot add from
 the builder palette. Treat that as an availability constraint, not as a
 different node contract.
 
+The palette also combines per-item and batch variants into one visible choice,
+and it combines the three Zip arities. MCP authors must still select the exact
+type string that matches the required mode and port count.
+
 ## Parameter Modes
 
 | Mode | Authoring value | Runtime value |
@@ -95,12 +99,17 @@ For static strings in CEL fields, quote inside the expression:
 | Control | `ds.waitUntil.perItem.in1.success1.error0` | per item | `cronExpression: literal`, `timezone: literal` |
 | Control | `ds.approval.perItem.in1.success2.error1` | per item | `prompt: liquid`, `approverEmails: cel/stringOrStringArray`, optional `timeoutDays`, `approveLabel`, `denyLabel` |
 | Control | `ds.approval.batch.in1.success2.error1` | batch | Same as per-item Approval |
+| Action | `ds.slackPublish.perItem.in1.success1.error1` | per item | `connectionId: literal/number`, `channelId: literal/string`, `source: liquid`, `fallback: liquid` |
 | Action | `ds.slackPost.perItem.in1.success1.error1` | per item | `channel: cel/string`, `text: liquid` |
 | Action | `ds.slackPost.batch.in1.success1.error1` | batch | Same as per-item Slack Post |
-| Action | `ds.teamsPost.perItem.in1.success1.error1` | per item | `teamId: cel/string`, `channelId: cel/string`, `text: liquid` |
-| Action | `ds.teamsPost.batch.in1.success1.error1` | batch | Same as per-item Teams Post |
+| Action | `ds.emailPublish.perItem.in1.success1.error1` | per item | `to: cel/json`, optional `cc`, `bcc`, `attachments: cel/json`, `subject`, `html`, `plaintext: liquid` |
 | Action | `ds.emailSend.perItem.in1.success1.error1` | per item | `to: cel/stringOrStringArray`, `subject: liquid`, `body: liquid` |
 | Action | `ds.emailSend.batch.in1.success1.error1` | batch | Same as per-item Email Send |
+| Action | `ds.teamsPublish.perItem.in1.success1.error1` | per item | `configurationId: literal/number`, `teamId`, `channelId`, `importance: literal/string`, optional `bodyHtml`, `cards: liquid` |
+| Action | `ds.teamsPost.perItem.in1.success1.error1` | per item | `teamId: cel/string`, `channelId: cel/string`, `text: liquid` |
+| Action | `ds.teamsPost.batch.in1.success1.error1` | batch | Same as per-item Teams Post |
+| Action | `ds.createPdfArtifact.perItem.in1.success1.error1` | per item | `title: liquid`, `source: liquid` |
+| Action | `ds.addArtifactToDecisionSite.perItem.in1.success1.error1` | per item | `decisionSiteId: cel/number`, `access: literal/json` |
 | Action | `ds.smsSend.perItem.in1.success1.error1` | per item | `to: cel/stringOrStringArray`, `body: liquid` |
 | Action | `ds.smsSend.batch.in1.success1.error1` | batch | Same as per-item SMS Send |
 | Action | `ds.notify.perItem.in1.success1.error1` | per item | `contact_email: cel/stringOrStringArray`, `subject: liquid`, `body: liquid` |
@@ -478,7 +487,30 @@ Action nodes are side-effecting at execution time. Draft authoring does not run
 them. Before release or execution, surface the concrete external effects and
 apply the authorization rule in `SKILL.md`.
 
-All action error outputs use:
+Choose communication nodes by the format and execution behavior the workflow
+needs:
+
+| Job | Node | Authoring behavior |
+| --- | --- | --- |
+| Slack Block Kit | Publish to Slack | Exact Slack JSON, fixed connected destination, per item |
+| Slack Markdown | Slack Post | Markdown conversion, CEL channel, per item or batch |
+| Complete email | Send Email | HTML plus plain text, structured recipients, optional PDF Artifacts, per item |
+| Markdown email | Send Markdown Email | Markdown conversion, per item or batch |
+| Teams HTML or cards | Publish to Teams | Teams-compatible HTML or Adaptive Cards, fixed connected destination, per item |
+| Teams Markdown | Teams Post | Markdown conversion, CEL destination, per item or batch |
+
+Publish to Slack, Create PDF Artifact, Send Email, and Publish to Teams each
+require the corresponding live authoring resource listed in
+`workflow-lifecycle.md`. Read those resources for current destination grammars,
+limits, diagnostics, and examples. Add Artifact to Decision Site has no live
+authoring resource; its complete contract is bundled below.
+
+Publish to Slack, Create PDF Artifact, Add Artifact to Decision Site, Send
+Email, and Publish to Teams are per-item only. Each preserves successful sibling
+items when another item fails. Their sections define structured result and error
+contracts. Slack Post, Teams Post, Send Markdown Email, SMS Send, Notify, CRM
+Update Opportunity, Salesforce Task, and HubSpot Task use the generic error
+shape:
 
 ```json
 {
@@ -487,7 +519,55 @@ All action error outputs use:
 }
 ```
 
-### Slack Post
+### Slack
+
+#### Publish to Slack
+
+Type: `ds.slackPublish.perItem.in1.success1.error1`
+
+Params:
+
+| Field | Mode | Runtime type | Required |
+| --- | --- | --- | --- |
+| `connectionId` | literal | positive safe integer | yes |
+| `channelId` | literal | nonblank string | yes |
+| `source` | liquid | Slack message JSON object with `blocks` | yes |
+| `fallback` | liquid | plain text | yes |
+
+Success output:
+
+```json
+{
+  "publicationId": "publication_sample",
+  "workspaceId": "T0123456789",
+  "channelId": "C0123456789",
+  "messageTs": "1712345678.000100",
+  "acceptedAt": "2026-01-01T00:00:00.000Z"
+}
+```
+
+`messageTs` is `string | null`; the other success fields are strings. The error
+port returns:
+
+| Field | Type | Required |
+| --- | --- | --- |
+| `status` | one of `not_created`, `unknown` | yes |
+| `publicationId` | string | no |
+| `problems` | nonempty problem array | yes |
+| `mayRetry` | boolean | yes |
+| `retryAfterMs` | number | no |
+
+Each problem has `code: string`, `message: string`, and these exact enums:
+
+- `kind`: `source`, `connection`, `channel`, `provider`, or
+  `publication_changed`
+- `action`: `edit_source`, `choose_connection`, `choose_channel`, `reconnect`,
+  `retry`, or `check_slack`
+
+A problem may include `pointer: string` and `position` with numeric `offset`,
+`line`, and `column`.
+
+#### Slack Post
 
 Types:
 
@@ -509,20 +589,53 @@ Static channel:
 
 `text` is Markdown converted to Slack blocks.
 
-### Teams Post
+### Email
 
-Types:
+#### Send Email
 
-```text
-ds.teamsPost.perItem.in1.success1.error1
-ds.teamsPost.batch.in1.success1.error1
-```
+Type: `ds.emailPublish.perItem.in1.success1.error1`
 
-Params: `teamId: cel/string`, `channelId: cel/string`, `text: liquid`.
+Params:
 
-`text` is Markdown converted to HTML with raw HTML disabled.
+| Field | Mode | Runtime type | Required |
+| --- | --- | --- | --- |
+| `to` | cel | recipient or recipient array | yes |
+| `cc` | cel | recipient or recipient array | no |
+| `bcc` | cel | recipient or recipient array | no |
+| `subject` | liquid | complete subject | yes |
+| `html` | liquid | complete HTML body | yes |
+| `plaintext` | liquid | complete plain-text body | yes |
+| `attachments` | cel | PDF `ArtifactRef` or array | no |
 
-### Email Send
+A recipient is an email string or `{ "email": "...", "name": "..." }`.
+Use `attachments: "json"` directly after Create PDF Artifact.
+
+Success fields:
+
+| Field | Type |
+| --- | --- |
+| `status` | one of `accepted`, `simulated` |
+| `publicationId` | string |
+| `providerMessageId` | string or null |
+| `acceptedAt` | string or null |
+
+Error fields:
+
+| Field | Type | Required |
+| --- | --- | --- |
+| `status` | one of `not_created`, `unknown` | yes |
+| `publicationId` | string | no |
+| `code` | string | yes |
+| `kind` | one of `input`, `sender`, `attachment`, `provider`, `publication_changed` | yes |
+| `message` | string | yes |
+| `action` | one of `edit_message`, `change_owner`, `retry`, `contact_support` | yes |
+| `mayRetry` | boolean | yes |
+| `retryAfterMs` | number | no |
+
+This node is distinct from `ds.emailSend`, whose builder label is Send Markdown
+Email.
+
+#### Send Markdown Email
 
 Types:
 
@@ -535,7 +648,176 @@ Params: `to: cel/stringOrStringArray`, `subject: liquid`, `body: liquid`.
 
 `body` is Markdown rendered to HTML with raw HTML disabled.
 
-### SMS Send
+### Teams
+
+#### Publish to Teams
+
+Type: `ds.teamsPublish.perItem.in1.success1.error1`
+
+Params:
+
+| Field | Mode | Runtime type | Required |
+| --- | --- | --- | --- |
+| `configurationId` | literal | positive safe integer | yes |
+| `teamId` | literal | nonblank string | yes |
+| `channelId` | literal | nonblank string | yes |
+| `bodyHtml` | liquid | complete Teams-compatible HTML | no |
+| `cards` | liquid | JSON array of Adaptive Cards | no |
+| `importance` | literal | `normal`, `important`, or `urgent` | yes |
+
+Provide a nonblank `bodyHtml`, at least one card, or both. Success returns
+these fields:
+
+| Field | Type |
+| --- | --- |
+| `publicationId` | string |
+| `acceptedAt` | string |
+| `teamId` | string |
+| `channelId` | string |
+| `providerMessageId` | string or null |
+| `webUrl` | string or null |
+
+Error fields:
+
+| Field | Type | Required |
+| --- | --- | --- |
+| `status` | one of `not_created`, `unknown` | yes |
+| `publicationId` | string | no |
+| `code` | string | yes |
+| `kind` | one of `template`, `input`, `sender`, `destination`, `provider`, `publication_changed` | yes |
+| `message` | string | yes |
+| `action` | one of `edit_message`, `choose_destination`, `reconnect`, `retry`, `check_teams` | yes |
+| `mayRetry` | boolean | yes |
+| `retryAfterMs` | number | no |
+| `field` | one of `bodyHtml`, `cards`, `importance` | no |
+| `pointer` | string | no |
+| `position` | numeric `offset`, `line`, and `column` | no |
+
+#### Teams Post
+
+Types:
+
+```text
+ds.teamsPost.perItem.in1.success1.error1
+ds.teamsPost.batch.in1.success1.error1
+```
+
+Params: `teamId: cel/string`, `channelId: cel/string`, `text: liquid`.
+
+`text` is Markdown converted to HTML with raw HTML disabled.
+
+### Artifacts
+
+#### Create PDF Artifact
+
+Type: `ds.createPdfArtifact.perItem.in1.success1.error1`
+
+Params: `title: liquid`, `source: liquid`. Both are strict templates.
+
+Success is an `ArtifactRef`:
+
+```json
+{
+  "kind": "artifact",
+  "type": "DOCUMENT",
+  "organizationId": 42,
+  "artifactId": "11111111-1111-4111-8111-111111111111",
+  "title": "Customer decision brief"
+}
+```
+
+The node creates a durable organization Artifact and its first PDF version. It
+does not place, publish, email, or expose the Artifact. In the success object,
+`kind` is the literal `artifact`, `type` is the literal `DOCUMENT`,
+`organizationId` is a number, `artifactId` is a UUID string, and `title` is a
+string.
+
+Error fields:
+
+| Field | Type | Required |
+| --- | --- | --- |
+| `status` | one of `not_created`, `unknown` | yes |
+| `code` | string | yes |
+| `kind` | one of `input`, `render`, `storage`, `artifact` | yes |
+| `message` | string | yes |
+| `action` | one of `edit_source`, `retry`, `check_artifact`, `contact_support` | yes |
+| `mayRetry` | boolean | yes |
+| `artifactKey` | string | no |
+
+#### Add Artifact to Decision Site
+
+Type: `ds.addArtifactToDecisionSite.perItem.in1.success1.error1`
+
+Params:
+
+| Field | Mode | Runtime type | Required |
+| --- | --- | --- | --- |
+| `decisionSiteId` | cel | positive safe integer | yes |
+| `access` | literal | closed access object | yes |
+
+Allowed access objects:
+
+```json
+{ "visibility": "EVERYONE" }
+```
+
+```json
+{
+  "visibility": "RESTRICTED",
+  "scope": "DECISION_SITE",
+  "userIds": [101],
+  "groupIds": []
+}
+```
+
+```json
+{
+  "visibility": "RESTRICTED",
+  "scope": "ORGANIZATION",
+  "groupIds": [201]
+}
+```
+
+A fixed positive-integer `decisionSiteId` expression requires
+`scope: "DECISION_SITE"` for restricted access. A dynamic expression requires
+`scope: "ORGANIZATION"` and organization groups. Restricted access must name
+at least one allowed user or group.
+
+Success returns:
+
+| Field | Type |
+| --- | --- |
+| `artifact` | complete `ArtifactRef` from Create PDF Artifact |
+| `placement.kind` | literal `"artifactPlacement"` |
+| `placement.organizationId` | positive safe integer |
+| `placement.decisionSiteId` | positive safe integer |
+| `placement.placementId` | positive safe integer |
+| `placement.artifactId` | UUID string |
+| `placement.title` | string |
+| `placement.platformUrl` | authenticated URL string |
+
+Both error variants have `code: string`, `message: string`,
+`mayRetry: boolean`, and these exact enums:
+
+- `kind`: `input`, `artifact`, `decision_site`, `access`, or `placement`
+- `action`: `choose_input`, `choose_decision_site`, `edit_access`, `retry`,
+  `check_artifact`, or `contact_support`
+
+The `not_added` variant has only those common fields and
+`status: "not_added"`. The `unknown` variant also requires
+`artifactId: UUID string` and `decisionSiteId: positive safe integer` so the
+caller can inspect the effect before retrying.
+
+The two Artifact actions are separate effects. Create PDF Artifact emits one
+stable reference that can fan out to placement and email. If email follows
+placement sequentially, use the wrapped reference described in
+`data-context.md`. See
+[`../examples/create-and-share-decision-brief.json`](../examples/create-and-share-decision-brief.json)
+for a complete graph with separate error paths.
+
+### Other Communications
+
+#### SMS Send
 
 Types:
 
@@ -546,7 +828,7 @@ ds.smsSend.batch.in1.success1.error1
 
 Params: `to: cel/stringOrStringArray`, `body: liquid`.
 
-### Notify
+#### Notify
 
 Types:
 
@@ -558,13 +840,15 @@ ds.notify.batch.in1.success1.error1
 Params: `contact_email: cel/stringOrStringArray`, `subject: liquid`,
 `body: liquid`.
 
-### CRM Update Opportunity
+### CRM And Tasks
+
+#### CRM Update Opportunity
 
 Type: `ds.crmUpdateOpportunity.perItem.in1.success1.error1`
 
 Params: `deal_room_id: cel/number`, `meeting_plan_id: cel/string`.
 
-### Create Salesforce Task
+#### Create Salesforce Task
 
 Types:
 
@@ -595,7 +879,7 @@ Success output:
 }
 ```
 
-### Create HubSpot Task
+#### Create HubSpot Task
 
 Types:
 
@@ -653,12 +937,22 @@ side-effecting and returns:
 }
 ```
 
-## Retry And Timeout Defaults
+## Retry Defaults And Deadlines
 
-| Node family | Timeout | Retry |
-| --- | --- | --- |
-| AI Prompt | 120 seconds | 2 attempts, exponential jitter, 500 ms to 10 seconds |
-| AI Agent | 120 seconds | 2 attempts, exponential jitter, 500 ms to 10 seconds |
-| Approval | 7 days | Suspends until signal or timeout |
-| Slack, Teams, Email, SMS, Notify, CRM, Salesforce task, HubSpot task, Store Value | 30 seconds | 3 attempts, exponential, 1 second to 30 seconds |
-| Other trigger/control nodes | Adapter default | No explicit retry policy |
+The effective retry policy is node override, then registry default, then the
+workflow default. An omitted policy does not mean no retry.
+
+| Node family | Registry retry default |
+| --- | --- |
+| AI Prompt and AI Agent | 2 attempts, exponential jitter, 500 ms to 10 seconds |
+| Publish to Slack, Create PDF Artifact, Add Artifact to Decision Site, Send Email, and Publish to Teams | 3 attempts, exponential, 1 second to 30 seconds |
+| Other communication, CRM, task, and Store Value actions | 3 attempts, exponential, 1 second to 30 seconds |
+| Other trigger and control nodes | Workflow default unless the registry supplies one |
+
+Structured action errors can further forbid retry with `mayRetry: false` or set
+a longer minimum delay with `retryAfterMs`. Use the outcome-handling rules in
+`12-factor-workflow-quality.md` before connecting a retry path.
+
+Do not author node-level `timeout`. The document schema accepts it, but the
+executor does not enforce it. Approval timeouts, renderer capacity and
+deadlines, and provider request deadlines are separate surface behavior.

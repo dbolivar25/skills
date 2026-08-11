@@ -62,6 +62,7 @@ const HUBSPOT_STATUSES = new Set([
   'COMPLETED',
   'DEFERRED',
 ]);
+const TEAMS_IMPORTANCE = new Set(['normal', 'important', 'urgent']);
 const RETRY_STRATEGIES = new Set([
   'none',
   'fixed',
@@ -139,6 +140,7 @@ const ALLOWED_LIQUID_FILTERS = new Set([
   'date',
   'pluralize',
   'ordinal',
+  'json',
   'elm_prompt',
 ]);
 const LIQUID_ROOTS = new Set([
@@ -155,6 +157,10 @@ const MAX_FOR_LIMIT = 250;
 const MAX_TRUNCATE_LEN = 1000;
 const OUTPUT_SOFT_CAP = 50_000;
 const MIN_SCHEDULE_INTERVAL_SECONDS = 14_400;
+const SLACK_MAX_BLOCKS = 50;
+const SLACK_MAX_FALLBACK_CHARACTERS = 4_000;
+const PDF_MAX_TITLE_CODE_POINTS = 200;
+const PDF_MAX_BODY_BYTES = 262_144;
 const CUSTOM_OUTPUT_DRAFT7_URI = 'http://json-schema.org/draft-07/schema#';
 const CUSTOM_OUTPUT_LIMITS = {
   serializedBytes: 65_536,
@@ -366,6 +372,72 @@ const nodeSpecs = {
       denyLabel: optional(literal('string')),
     },
     sideEffect: true,
+  },
+  'ds.slackPublish.perItem.in1.success1.error1': {
+    inputs: 1,
+    success: 1,
+    error: 1,
+    params: {
+      connectionId: literal('number', { positiveSafeInteger: true }),
+      channelId: literal('string'),
+      source: liquid({ format: 'json' }),
+      fallback: liquid({ format: 'plain' }),
+    },
+    sideEffect: true,
+    actionContract: 'slackPublish',
+  },
+  'ds.createPdfArtifact.perItem.in1.success1.error1': {
+    inputs: 1,
+    success: 1,
+    error: 1,
+    params: {
+      title: liquid({ format: 'plain' }),
+      source: liquid({ format: 'html' }),
+    },
+    sideEffect: true,
+    actionContract: 'createPdfArtifact',
+  },
+  'ds.addArtifactToDecisionSite.perItem.in1.success1.error1': {
+    inputs: 1,
+    success: 1,
+    error: 1,
+    params: {
+      decisionSiteId: cel('number'),
+      access: literal('json'),
+    },
+    sideEffect: true,
+    actionContract: 'artifactPlacement',
+  },
+  'ds.emailPublish.perItem.in1.success1.error1': {
+    inputs: 1,
+    success: 1,
+    error: 1,
+    params: {
+      to: cel('json'),
+      cc: optional(cel('json')),
+      bcc: optional(cel('json')),
+      subject: liquid({ format: 'plain' }),
+      html: liquid({ format: 'html' }),
+      plaintext: liquid({ format: 'plain' }),
+      attachments: optional(cel('json')),
+    },
+    sideEffect: true,
+    actionContract: 'emailPublish',
+  },
+  'ds.teamsPublish.perItem.in1.success1.error1': {
+    inputs: 1,
+    success: 1,
+    error: 1,
+    params: {
+      configurationId: literal('number', { positiveSafeInteger: true }),
+      teamId: literal('string'),
+      channelId: literal('string'),
+      bodyHtml: optional(liquid({ format: 'html' })),
+      cards: optional(liquid({ format: 'json' })),
+      importance: literal('string', { enum: TEAMS_IMPORTANCE }),
+    },
+    sideEffect: true,
+    actionContract: 'teamsPublish',
   },
   'ds.slackPost.perItem.in1.success1.error1': {
     inputs: 1,
@@ -663,7 +735,7 @@ function checkNodes(nodes, issues, warnings) {
 
     checkNodeMode(label, node, issues);
     checkPosition(label, node, warnings, issues);
-    checkRuntimeControls(label, node, issues);
+    checkRuntimeControls(label, node, issues, warnings);
     checkParams(label, node.type, node.parameters ?? {}, spec, issues, warnings);
 
     if (spec.cron === 'scheduled') {
@@ -720,7 +792,7 @@ function checkPosition(label, node, warnings, issues) {
   }
 }
 
-function checkRuntimeControls(label, node, issues) {
+function checkRuntimeControls(label, node, issues, warnings) {
   if (node.timeout !== undefined) {
     if (
       typeof node.timeout !== 'number' ||
@@ -728,6 +800,10 @@ function checkRuntimeControls(label, node, issues) {
       node.timeout < 1
     ) {
       issues.push(`${label}: timeout must be a finite number >= 1 when present.`);
+    } else {
+      warnings.push(
+        `${label}: node timeout is accepted by the document schema but is not enforced by the executor; remove it.`
+      );
     }
   }
 
@@ -798,6 +874,16 @@ function checkParams(label, nodeType, params, spec, issues, warnings) {
     checkCustomOutputParameters(label, params, issues);
   }
 
+  if (spec.actionContract) {
+    checkActionContractParameters(
+      label,
+      spec.actionContract,
+      params,
+      issues,
+      warnings
+    );
+  }
+
   for (const field of Object.keys(params)) {
     if (field === '_executionMode') continue;
     if (!spec.params[field]) {
@@ -819,7 +905,15 @@ function checkParamValue(label, nodeType, field, value, descriptor, issues, warn
     if (typeof value !== 'string') {
       issues.push(`${label}.${field}: Liquid parameters must be strings.`);
     } else {
-      checkLiquid(label, field, value, expectedNodeMode(nodeType), issues, warnings);
+      checkLiquid(
+        label,
+        field,
+        value,
+        expectedNodeMode(nodeType),
+        issues,
+        warnings,
+        descriptor.format
+      );
     }
     return;
   }
@@ -853,6 +947,13 @@ function checkLiteral(label, field, value, descriptor, issues) {
       issues.push(`${label}.${field}: expected a positive number.`);
       return;
     }
+    if (
+      descriptor.positiveSafeInteger &&
+      (!Number.isSafeInteger(value) || value <= 0)
+    ) {
+      issues.push(`${label}.${field}: expected a positive safe integer.`);
+      return;
+    }
   }
 
   if (descriptor.valueType === 'array' && !Array.isArray(value)) {
@@ -868,6 +969,265 @@ function checkLiteral(label, field, value, descriptor, issues) {
   if (descriptor.enum && !descriptor.enum.has(value)) {
     issues.push(`${label}.${field}: unsupported value ${JSON.stringify(value)}.`);
   }
+}
+
+function checkActionContractParameters(
+  label,
+  contract,
+  params,
+  issues,
+  warnings
+) {
+  if (contract === 'slackPublish') {
+    checkNonblankTemplates(label, params, ['source', 'fallback'], issues);
+    if (
+      typeof params.fallback === 'string' &&
+      !hasLiquidSyntax(params.fallback) &&
+      Array.from(params.fallback).length > SLACK_MAX_FALLBACK_CHARACTERS
+    ) {
+      issues.push(
+        `${label}.fallback: static fallback exceeds ${SLACK_MAX_FALLBACK_CHARACTERS} characters.`
+      );
+    }
+    const source = parseStaticJsonTemplate(label, 'source', params.source, issues);
+    if (source !== undefined) {
+      if (!isPlainObject(source) || !Array.isArray(source.blocks)) {
+        issues.push(`${label}.source: static Slack JSON must be an object with a blocks array.`);
+      } else if (source.blocks.length > SLACK_MAX_BLOCKS) {
+        issues.push(`${label}.source: static Slack JSON exceeds ${SLACK_MAX_BLOCKS} blocks.`);
+      }
+    }
+    return;
+  }
+
+  if (contract === 'createPdfArtifact') {
+    checkNonblankTemplates(label, params, ['title', 'source'], issues);
+    if (
+      typeof params.title === 'string' &&
+      !hasLiquidSyntax(params.title) &&
+      Array.from(params.title.trim()).length > PDF_MAX_TITLE_CODE_POINTS
+    ) {
+      issues.push(
+        `${label}.title: static title exceeds ${PDF_MAX_TITLE_CODE_POINTS} Unicode code points.`
+      );
+    }
+    if (
+      typeof params.source === 'string' &&
+      !hasLiquidSyntax(params.source) &&
+      utf8ByteLength(params.source) > PDF_MAX_BODY_BYTES
+    ) {
+      issues.push(
+        `${label}.source: static PDF body exceeds ${PDF_MAX_BODY_BYTES} UTF-8 bytes.`
+      );
+    }
+    return;
+  }
+
+  if (contract === 'artifactPlacement') {
+    checkArtifactPlacementParameters(label, params, issues);
+    return;
+  }
+
+  if (contract === 'emailPublish') {
+    checkNonblankTemplates(
+      label,
+      params,
+      ['subject', 'html', 'plaintext'],
+      issues
+    );
+    if (typeof params.subject === 'string') {
+      if (/\r|\n/u.test(params.subject)) {
+        issues.push(`${label}.subject: email subject cannot contain line breaks.`);
+      }
+      if (
+        !hasLiquidSyntax(params.subject) &&
+        Array.from(params.subject).length > 200
+      ) {
+        issues.push(`${label}.subject: static email subject exceeds 200 characters.`);
+      }
+    }
+    return;
+  }
+
+  if (contract === 'teamsPublish') {
+    const hasBody =
+      typeof params.bodyHtml === 'string' && params.bodyHtml.trim().length > 0;
+    const hasCards =
+      typeof params.cards === 'string' && params.cards.trim().length > 0;
+    if (!hasBody && !hasCards) {
+      issues.push(`${label}: Publish to Teams requires a nonblank bodyHtml, cards, or both.`);
+    }
+    if (typeof params.cards === 'string' && params.cards.trim().length > 0) {
+      const cards = parseStaticJsonTemplate(label, 'cards', params.cards, issues);
+      if (cards !== undefined) {
+        if (!Array.isArray(cards) || cards.length === 0) {
+          issues.push(`${label}.cards: static cards must be a non-empty JSON array.`);
+        } else if (containsAdaptiveCardAction(cards)) {
+          issues.push(`${label}.cards: Adaptive Card Action.* objects are not supported.`);
+        }
+      }
+    }
+    if (
+      typeof params.bodyHtml === 'string' &&
+      params.bodyHtml.trim().length === 0
+    ) {
+      warnings.push(`${label}.bodyHtml: blank optional body is clearer when omitted.`);
+    }
+    return;
+  }
+}
+
+function checkNonblankTemplates(label, params, fields, issues) {
+  for (const field of fields) {
+    if (typeof params[field] === 'string' && params[field].trim().length === 0) {
+      issues.push(`${label}.${field}: required template cannot be blank.`);
+    }
+  }
+}
+
+function hasLiquidSyntax(value) {
+  return typeof value === 'string' && (value.includes('{{') || value.includes('{%'));
+}
+
+function parseStaticJsonTemplate(label, field, value, issues) {
+  if (typeof value !== 'string' || hasLiquidSyntax(value)) return undefined;
+  try {
+    return JSON.parse(value);
+  } catch (error) {
+    issues.push(`${label}.${field}: static JSON is invalid (${error.message}).`);
+    return undefined;
+  }
+}
+
+function containsAdaptiveCardAction(value) {
+  if (Array.isArray(value)) return value.some(containsAdaptiveCardAction);
+  if (!isPlainObject(value)) return false;
+  if (typeof value.type === 'string' && value.type.startsWith('Action.')) {
+    return true;
+  }
+  return Object.values(value).some(containsAdaptiveCardAction);
+}
+
+function checkArtifactPlacementParameters(label, params, issues) {
+  const expression =
+    typeof params.decisionSiteId === 'string'
+      ? params.decisionSiteId.trim()
+      : '';
+  const fixedDecisionSiteId = readPositiveSafeIntegerLiteral(expression);
+  if (/^-?\d+(?:\.\d+)?$/u.test(expression) && fixedDecisionSiteId === undefined) {
+    issues.push(`${label}.decisionSiteId: numeric literal must be a positive safe integer.`);
+  }
+
+  const access = params.access;
+  if (!isPlainObject(access)) {
+    issues.push(`${label}.access: expected a closed access object.`);
+    return;
+  }
+  if (access.visibility === 'EVERYONE') {
+    checkExactObjectKeys(label, 'access', access, ['visibility'], issues);
+    return;
+  }
+  if (access.visibility !== 'RESTRICTED') {
+    issues.push(`${label}.access.visibility: expected "EVERYONE" or "RESTRICTED".`);
+    return;
+  }
+
+  if (expression.length === 0) {
+    return;
+  }
+
+  const fixed = fixedDecisionSiteId !== undefined;
+  const expectedScope = fixed ? 'DECISION_SITE' : 'ORGANIZATION';
+  if (access.scope !== expectedScope) {
+    issues.push(
+      `${label}.access.scope: ${fixed ? 'fixed' : 'dynamic'} Decision Site target requires ${expectedScope}.`
+    );
+  }
+
+  if (fixed) {
+    checkExactObjectKeys(
+      label,
+      'access',
+      access,
+      ['visibility', 'scope', 'userIds', 'groupIds'],
+      issues
+    );
+    const usersValid = checkPositiveSafeIntegerArray(
+      label,
+      'access.userIds',
+      access.userIds,
+      issues
+    );
+    const groupsValid = checkPositiveSafeIntegerArray(
+      label,
+      'access.groupIds',
+      access.groupIds,
+      issues
+    );
+    if (
+      usersValid &&
+      groupsValid &&
+      access.userIds.length === 0 &&
+      access.groupIds.length === 0
+    ) {
+      issues.push(`${label}.access: restricted access needs at least one user or group.`);
+    }
+    return;
+  }
+
+  checkExactObjectKeys(
+    label,
+    'access',
+    access,
+    ['visibility', 'scope', 'groupIds'],
+    issues
+  );
+  if (
+    checkPositiveSafeIntegerArray(
+      label,
+      'access.groupIds',
+      access.groupIds,
+      issues
+    ) &&
+    access.groupIds.length === 0
+  ) {
+    issues.push(`${label}.access.groupIds: dynamic restricted access needs at least one organization group.`);
+  }
+}
+
+function readPositiveSafeIntegerLiteral(value) {
+  if (!/^[1-9]\d*$/u.test(value)) return undefined;
+  const parsed = Number(value);
+  return Number.isSafeInteger(parsed) ? parsed : undefined;
+}
+
+function checkExactObjectKeys(label, field, value, allowedKeys, issues) {
+  const allowed = new Set(allowedKeys);
+  const extras = Object.keys(value).filter((key) => !allowed.has(key));
+  if (extras.length > 0) {
+    issues.push(`${label}.${field}: unsupported keys ${extras.join(', ')}.`);
+  }
+  for (const key of allowedKeys) {
+    if (!Object.hasOwn(value, key)) {
+      issues.push(`${label}.${field}.${key}: missing required field.`);
+    }
+  }
+}
+
+function checkPositiveSafeIntegerArray(label, field, value, issues) {
+  if (!Array.isArray(value)) {
+    issues.push(`${label}.${field}: expected an array.`);
+    return false;
+  }
+  if (value.some((item) => !Number.isSafeInteger(item) || item <= 0)) {
+    issues.push(`${label}.${field}: every id must be a positive safe integer.`);
+    return false;
+  }
+  return true;
+}
+
+function utf8ByteLength(value) {
+  return new TextEncoder().encode(value).byteLength;
 }
 
 function checkCustomOutputParameters(label, params, issues) {
@@ -1426,12 +1786,23 @@ function findImmediateDownstream(sourceIds, connections) {
   return result;
 }
 
-function checkLiquid(label, field, value, nodeMode, issues, warnings) {
+function checkLiquid(
+  label,
+  field,
+  value,
+  nodeMode,
+  issues,
+  warnings,
+  format = 'markdown'
+) {
   if (value.length > OUTPUT_SOFT_CAP) {
     warnings.push(`${label}.${field}: template length ${value.length} exceeds soft cap ${OUTPUT_SOFT_CAP}.`);
   }
-  if (/<[a-zA-Z][^>]*>/u.test(value)) {
+  if (format === 'markdown' && /<[a-zA-Z][^>]*>/u.test(value)) {
     warnings.push(`${label}.${field}: Liquid-rendered message appears to contain raw HTML; use Markdown.`);
+  }
+  if (format === 'json') {
+    checkJsonLiquidInsertions(label, field, value, warnings);
   }
   if (hasUnbalancedLiquidDelimiters(value)) {
     issues.push(`${label}.${field}: Liquid delimiters appear incomplete or unbalanced.`);
@@ -1462,6 +1833,17 @@ function hasUnbalancedLiquidDelimiters(value) {
   const opensTag = (value.match(/\{%/gu) ?? []).length;
   const closesTag = (value.match(/%\}/gu) ?? []).length;
   return opensOutput !== closesOutput || opensTag !== closesTag;
+}
+
+function checkJsonLiquidInsertions(label, field, value, warnings) {
+  const outputRe = /\{\{([^}]*)\}\}/gu;
+  for (const match of value.matchAll(outputRe)) {
+    if (!/\|\s*json\b/u.test(match[1])) {
+      warnings.push(
+        `${label}.${field}: Liquid output inside JSON should usually use the json filter: ${JSON.stringify(match[0])}.`
+      );
+    }
+  }
 }
 
 function collectLiquidLocals(value) {
