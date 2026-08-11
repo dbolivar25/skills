@@ -63,9 +63,9 @@ does not license substituting a different workflow interface.
   authorization.
 - Execution creation is asynchronous. Acceptance or enqueueing is not
   completion.
-- Treat PDF layout as ready only after the authored content cases have been
-  rendered as PDF pages and inspected. Workflow validation does not render the
-  document.
+- Treat PDF layout as ready only when cases derived from Accepted content and
+  its interactions have current PDF renders. Each named invariant needs render
+  proof. Workflow validation does not render the document.
 
 ## Steps
 
@@ -150,8 +150,9 @@ For authoring or edits, return:
 - Preflight and server-validation results.
 - Performed or required MCP operations and confirmation gates.
 - Observed execution state when applicable.
-- For PDF work, rendered content cases, observed page behavior, and any layout
-  proof that remains blocked by execution authorization.
+- For PDF work, report Accepted content partitions and interaction cases, named
+  invariants, per-case current-render proof and provenance, and every invariant
+  that remains unverified or blocked by execution authorization.
 - Remaining risks or user decisions.
 
 For review/debug, lead with findings:
@@ -197,9 +198,8 @@ Each finding should cite the node id, field, and reason.
   have happened.
 - Syntax mismatch: inserting a templated value without accounting for the
   surrounding JSON, HTML, or plain-text syntax.
-- Page-blind PDF: composing variable data as a fixed browser canvas, applying
-  one keep rule to a growing region, or treating a continuous preview as proof
-  of paged output.
+- Sample-bound PDF: using a fixed canvas, broad keep rules, fit-driven caps, or
+  one-payload proof as evidence for the full Accepted content.
 - Effect collapse: hiding creation, exposure, and delivery inside one implicit
   step instead of separate graph nodes.
 - Owner drift: selecting a sender, connection, destination, or audience that
@@ -215,8 +215,8 @@ Each finding should cite the node id, field, and reason.
   resources, write tools, validation, release, execution, cancel, retry, and
   archive behavior.
 - [`references/pdf-artifact-authoring.md`](references/pdf-artifact-authoring.md):
-  PDF content contracts, page composition, break behavior, tables, and rendered
-  QA.
+  document systems, Accepted content region maps, fit-or-continue behavior,
+  page composition, tables, and provenance-backed render proof.
 - [`references/12-factor-workflow-quality.md`](references/12-factor-workflow-quality.md):
   reliable-agent workflow-quality rubric adapted from HumanLayer's
   12-factor-agents material.

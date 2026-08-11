@@ -2,77 +2,89 @@
 
 Use this reference after reading the current Create PDF Artifact authoring
 resource. The live resource owns the node contract, renderer version, document
-shell, published classes, limits, and error shapes. This guide owns the choices
-that turn variable data into an intentional paged document.
+shell, published classes, limits, and error shapes. Read it again for each
+authoring run.
 
-Page count follows from the content contract and the composition. A one-page
-requirement needs a bounded maximum and a render at that maximum. Variable
-content needs continuation treatment.
+A document system is the set of rules that turns each accepted payload into a
+complete, intentional sequence of pages. Page count can be a required invariant
+or an allowed change. Name that choice in the contract.
 
 ## 1. Write the document contract
 
-Define the document before writing HTML or CSS.
+Record the reader and job. State what the reader must understand or do. Define
+the information structure and semantics, including heading order, table
+relationships, links, image alternatives, language, and reading order. Name the
+page-count behavior and every other invariant before writing HTML or CSS.
 
-| Decision | Record |
-| --- | --- |
-| Reader and job | Who will read the artifact and what should they understand or do? |
-| Page geometry | Paper size, orientation, margins, edge-to-edge regions, and any named page types. |
-| Fixed content | Labels, furniture, marks, and images whose size the author knows. |
-| Variable content | Titles, paragraphs, lists, tables, images, and optional sections fed by Liquid. |
-| Rendered bounds | The shortest, typical, and longest accepted value for each field and collection. |
-| Excess behavior | What happens when source data exceeds the rendered cap. |
-| Page continuity | What repeats or changes after the first page so the reader keeps context. |
-| Required semantics | Heading order, table headers, links, image alternatives, language, and reading order. |
+Map each content region with these exact fields:
 
-Give every rendered collection an authored cap. Workflow Liquid enforces this
-for loops over `json`, `trigger`, `author`, and `organization`. The workflow
-receives a finite `items` array, but its document output can still grow. Choose
-a product behavior for records beyond the cap: summarize them upstream, rank
-and disclose a subset, place them in an appendix, or create more than one
-artifact. A Liquid `limit` must enact that choice. It must not hide records to
-make a layout fit.
+| Region | Accepted content | Must stay true | May change | Fit or continue | Outside behavior |
+| --- | --- | --- | --- | --- | --- |
+| Example: summary | Product-approved titles, text, and optional evidence | Heading stays with its first content; all evidence remains present | Height and page position | Continue in normal flow | Summarize upstream or create an appendix |
 
-When one page is a requirement, the contract must say what content can appear
-and how long it can be. Render the longest accepted payload. If it creates a
-second page, revise the content contract or the composition. Global font
-shrinking, clipping, and silent truncation do not satisfy the requirement.
+Write each `Must stay true` entry as a named invariant. Record allowed page-count
+change in `May change` for each affected region.
 
-Completion criterion: every dynamic field and collection has a rendered bound,
-optional state, excess behavior, and intended effect on page count.
+Accepted content is the semantic product boundary. It states what the artifact
+promises to handle. A technical ceiling is a validator, service, or execution
+limit. A sample-driven fit cap is only the largest sample observed to fit a
+particular composition. Keep these three concepts separate.
+
+`Fit` means the region stays as one unit. A kept region needs a semantic fit
+argument that explains why a split harms meaning and why every accepted unit is
+smaller than the printable area. It also needs current render proof for every
+demanding Accepted content case.
+`Continue` means Accepted content may cross a page boundary. A growing region
+needs authored continuation that preserves its context and reading order. The
+semantic boundary never serves as continuation. Outside behavior applies only
+after source content leaves the Accepted content boundary. It may summarize,
+rank and disclose a subset, move detail to an appendix, or create another
+artifact.
+
+When one page is a required invariant, render every Accepted content partition
+and interaction that can challenge it. If the invariant fails, change the
+composition or make an explicit product decision about Accepted content. Font
+shrinking, clipping, and silent truncation do not preserve the invariant.
+
+Completion criterion: the reader, job, information structure, semantics,
+page-count behavior, and every region-map cell are explicit. Each kept region
+has a semantic fit argument. Each growing region has authored continuation.
 
 ## 2. Assign break intent
 
-Map pagination at the smallest unit that carries meaning. Keep an item together
-when splitting that item would confuse the reader. Let its parent continue
-through normal flow.
+Map pagination at the smallest unit that carries meaning. Keep a unit together
+when a split would damage meaning. Let its parent continue through normal flow.
 
 | Intent | Authoring choice |
 | --- | --- |
-| Normal flow | Use ordinary block flow. Add `pdf-can-split` when a published component class protects a box that may grow. |
-| Independent atom | Add `pdf-atom` to one repeating item that you tested to fit on a page. |
-| Small group | Add `pdf-keep-together` to a bounded heading, summary, or related group that loses meaning when split. |
-| Growing table | Add `pdf-table-fragmentable` to the table and use semantic row groups. |
-| Bounded table | Add `pdf-table-keep-together` only after you render the maximum table on one page. |
-| Keep with next | Add a class with `break-after: avoid` to a heading, caption, or label. |
-| Start a page | Add a class with `break-before: page` when a section needs a deliberate page start. |
+| Normal flow | Use ordinary block flow. |
+| Independent atom | Consider the current `pdf-atom` hook and prove the full unit fits. |
+| Small semantic group | Consider the current `pdf-keep-together` hook and prove every accepted instance fits. |
+| Protected unit that may grow | Consider the current `pdf-can-split` hook and verify the observed split. |
+| Growing table | Consider the current `pdf-table-fragmentable` hook and verify row and header behavior. |
+| Kept table | Consider the current `pdf-table-keep-together` hook only with whole-table fit proof. |
+| Keep with next | Use `break-after: avoid` on a heading, caption, or label and verify the pairing. |
+| Start a page | Use `break-before: page` for a deliberate page start. |
 
-The Augment shell protects `tbody tr`, `pdf-card`, `pdf-stat`, and `pdf-atom`
-from page breaks. Add `pdf-can-split` when one of those units can exceed the
-printable page area. A keep rule can push a box to the next page and leave open
-space behind. It cannot make an oversized box fit.
+The live resource publishes pagination class names. It does not publish their
+complete CSS declarations, precedence, or interaction with author CSS. Treat a
+class as a candidate hook. The current render proves its behavior in this
+document system.
 
-Apply keep rules to a row, card, figure, or small heading group. Let a variable
-list, whole report section, or growing table fragment between its children.
+A keep rule can move a box to the next page and leave open space. It cannot make
+an oversized box fit. Apply keep intent to a row, card, figure, or small heading
+group only after fit proof for its demanding Accepted content cases. Let a
+growing list, report section, or table continue between semantic children.
 
-Completion criterion: for each variable region, name where a page may break,
-where it should avoid a break, and what happens when one unit grows taller than
-a page.
+Completion criterion: every variable region names its allowed break points,
+kept units have fit proof, and units taller than a page have a readable split or
+semantic decomposition.
 
 ## 3. Design pages and continuation
 
-Start from the page size and margins in the live authoring resource. Author CSS
-may set a different size, orientation, or margin with `@page`. Leave enough
-margin for running furniture and readable content.
+Choose page size, orientation, margins, edge-to-edge regions, and named page
+types here. Start from the current live resource. Leave enough margin for page
+furniture and readable content.
 
 ```html
 <style>
@@ -99,9 +111,9 @@ margin for running furniture and readable content.
 </style>
 ```
 
-Use margin boxes for page numbers, repeated labels, and other page furniture.
-For data-driven furniture, render escaped HTML into a running element and place
-that element in a margin box:
+Use margin boxes for page numbers, repeated labels, and other furniture. For
+data-driven furniture, render escaped HTML into a running element and place the
+element in a margin box:
 
 ```html
 <header class="running-header">
@@ -117,10 +129,8 @@ that element in a margin box:
 </style>
 ```
 
-Use named pages when a cover, body, appendix, or landscape table needs different
-geometry. A full-bleed cover can use `@page cover { margin: 0; }`, while the body
-uses a named page with reading margins and repeated furniture. Keep cover
-content bounded. Put variable text in the body flow.
+Use named pages when a cover, body, appendix, or landscape table needs distinct
+geometry. Keep a full-bleed cover bounded. Put growing text in body flow.
 
 ```html
 <style>
@@ -132,23 +142,25 @@ content bounded. Put variable text in the body flow.
 </style>
 ```
 
-A full-height color rail or panel beside a growing content column can become one
-layout box whose decoration and sibling columns do not continue with the text.
-Move the rail into the page background or margin furniture, or repeat a bounded
-header on each page.
+Author continuation pages with the context a reader needs. State which
+furniture, labels, counters, and section cues repeat or change. Put a full-height
+rail beside growing content in the page background or page furniture. A bounded
+rail inside one content box ends with that box.
 
-Completion criterion: the first page, continuation pages, special page types,
-and edge-to-edge regions each have authored geometry and context treatment.
+Completion criterion: the first page, continuation pages, named pages,
+furniture, rails, and edge-to-edge regions have authored geometry and context
+treatment.
 
 ## 4. Compose variable content in normal flow
 
 Use block and table flow for content whose height changes. Use grid and flex for
-bounded groups such as a short stat row. Inspect them in the PDF renderer because
-their fragmentation behavior differs from a browser layout.
+bounded groups such as a short stat row. Inspect every fragmentation choice in
+the PDF renderer.
 
 Fixed heights belong on fixed content. Let dynamic text set its own height.
-Avoid `overflow: hidden`, line clamps, and absolute positioning as layout
-repairs. Use absolute positioning for bounded decoration or a proven overlay.
+Remove hidden overflow, line clamps, and absolute positioning from growing
+content. Reserve absolute positioning for bounded decoration or a proven
+overlay.
 
 Set text break behavior in the source:
 
@@ -182,26 +194,35 @@ Set text break behavior in the source:
 ```
 
 Automatic hyphenation needs a matching `lang` attribute. Keep links and other
-tokens readable when they wrap. Test the longest title, identifier, and URL the
-contract accepts.
+tokens readable when they wrap. Test every accepted language and demanding
+title, identifier, and URL partition.
 
-Render optional sections only when they have content. Put the Liquid condition
-around the whole section so an absent value does not leave an empty card,
-heading, border, or gap.
+Render an optional section only when it has content. Put the Liquid condition
+around the whole section so an absent value leaves no empty heading, card,
+border, or gap.
 
-Images must use data URLs. Give each image a known aspect ratio, `max-width:
-100%`, and a height that fits inside the printable area. Keep a figure and its
-caption together when their maximum combined height fits. Split the surrounding
-section instead.
+Follow the live resource for allowed image sources. Choose one image fit
+behavior for each Accepted content partition:
 
-Completion criterion: dynamic content has no fixed-height ancestor, hidden
-overflow, empty optional wrapper, or untested long-token path.
+- Scale proportionally inside a bounded printable box.
+- Place the image on a dedicated page with suitable geometry.
+- Decompose a composite into separately labeled figures when each part keeps
+  its meaning.
+- Use a product-defined crop only when the crop preserves meaning for every
+  accepted image.
+
+Keep a figure and caption together only with fit proof for their combined unit.
+Let the surrounding section continue.
+
+Completion criterion: dynamic content uses normal flow, optional wrappers
+collapse, long text remains legible, and every image partition has a proven fit
+choice.
 
 ## 5. Compose tables for pagination
 
-Use a semantic `table` with `thead`, `tbody`, and `tfoot` when needed. The shell
-repeats `thead` and `tfoot` on continuation pages and protects ordinary body
-rows from splitting.
+Use a semantic `table` with `thead`, `tbody`, and `tfoot` when needed. Author
+header relationships in HTML. Treat repeated headers as behavior to verify in
+the current render.
 
 ```html
 <h2 class="table-heading">Evaluation</h2>
@@ -213,7 +234,7 @@ rows from splitting.
     </tr>
   </thead>
   <tbody>
-    <!-- bounded Liquid row loop -->
+    <!-- Liquid row loop -->
   </tbody>
 </table>
 
@@ -224,121 +245,133 @@ rows from splitting.
 
 Choose row behavior from the row contract:
 
-- Keep an ordinary row atomic when its longest accepted content fits within one
-  page.
-- Add `pdf-can-split` to a row that may exceed a page and can stay readable when
-  split.
-- Reshape a large record into smaller rows or stacked blocks when a split row
-  would lose labels or context.
-- Keep the whole table together only when the maximum table fits in the
-  printable area.
+- Keep a row atomic only when its demanding Accepted content cases fit within
+  one page.
+- Let a row split only when labels and reading order remain clear across the
+  break.
+- Reshape a large record into smaller rows or labeled blocks when a split would
+  lose context.
+- Keep the whole table together only with fit proof for every accepted table
+  case.
 
-Set column widths for the content, not for one sample. Test the widest label and
-longest cell text. A header that repeats is useful only when each continued row
-still makes sense under that header.
+Set column widths from Accepted content. Exercise the widest labels, longest
+cells, and combinations that can occur. Resolve width pressure by changing
+column allocation, using a named landscape page, stacking labeled values,
+splitting one table into semantically linked tables, or removing a column only
+through a product decision. Smaller type and tighter spacing remain subject to
+the legibility invariant.
 
-Completion criterion: the table has a repeated header, an authored row policy,
-a maximum row count, a longest-row case, and no whole-table keep rule without
-fit proof.
+If repeated headers are required, verify them at each observed page transition.
+Confirm that continued rows retain meaning under the repeated header.
+
+Completion criterion: the table has semantic groups, an authored row policy,
+width-pressure behavior, and render proof for required header repetition,
+splits, and whole-table keeps.
 
 ## 6. Align Liquid with the content contract
 
 Create PDF Artifact uses strict Liquid templates. A missing path fails the
-item. Guard optional values with `if` or give them an intentional `default`.
-Escape workflow values inserted as HTML text:
+item. Guard an optional value with `if` or give it an intentional `default`.
+Escape every workflow value inserted as HTML text:
 
 ```liquid
 {{ json.title | escape }}
 ```
 
-HTML escaping does not make a value safe for CSS, a URL, or an attribute. Keep
-untrusted workflow text out of `<style>` and write context-specific encoding
-for other insertion sites.
+HTML escaping covers HTML text. CSS, URLs, attributes, and intentional raw
+markup need their own trusted source or context-specific encoding.
 
-Use a numeric Liquid loop limit that matches the rendered cap from step 1. If
-the source collection can contain more records, disclose or handle the remainder
-before the PDF node.
+Follow [Data Context loop limits](data-context.md#liquid-loop-limits) for the
+validator requirements. A technical loop ceiling bounds template execution. It
+does not define visual scope or Accepted content. Visual scope comes from the
+region map. A Liquid limit may enact an explicit Outside behavior. It cannot
+silently remove accepted records to make the layout fit.
 
-A custom AI output schema can make section and field shapes predictable. The
-supported schema subset does not enforce string length or array size. Put those
-bounds in the AI prompt, define insufficient-context behavior, and test the
-longest accepted result.
+A custom AI output schema can make section and field shapes predictable. Prompt
+bounds are requested behavior, not enforced proof. They do not enforce string
+length or array size. Map possible outputs to Accepted content, define
+insufficient-context behavior, and render the demanding partitions.
 
-Completion criterion: each Liquid path exists or has an optional branch, the
-author escapes each HTML text insertion, and each loop cap matches a stated
-product behavior.
+Completion criterion: each Liquid path exists or has an optional branch, each
+HTML text insertion is escaped, validator loop requirements pass, and any loop
+limit implements named Outside behavior.
 
-## 7. Render the content matrix
+## 7. Render Accepted content cases
 
-Workflow validation checks the document and some template rules. It does not
-render PDF pages. A continuous browser preview also cannot show the actual page
-fragmentation.
+Workflow validation checks the document and template rules. It does not render
+PDF pages. A continuous browser preview does not prove paged output.
 
-Render these cases with the same PDF path used by the workflow:
+Partition every `Accepted content` cell into cases that can change layout or
+semantics. Include absent and present optional values, short and long text,
+long tokens, collection shapes around page transitions, image aspect ratios,
+required languages, and every product boundary. Add interaction cases for
+partitions that can occur together, such as a long title with a wide table or a
+large figure followed by a kept summary. Render each case through the current
+workflow path or a trusted local harness that uses the current shell and
+renderer.
 
-| Case | Stress tested |
+Apply these universal checks to every case:
+
+- completeness;
+- legibility;
+- semantics and reading order;
+- authored fit-or-continue behavior;
+- no clipping, overlap, hidden content, or accidental blank pages.
+
+Take artifact-specific visual checks from the region map's `Must stay true`
+cells. These checks include page count only when page count is a named invariant.
+Inspect every page at thumbnail scale and readable zoom.
+
+Record provenance for each case:
+
+| Render path | Required identity |
 | --- | --- |
-| Minimum | Smallest valid content and sparse-page balance. |
-| Typical | Expected hierarchy, density, and rhythm. |
-| Contract maximum | Page count, continuation, and every authored cap. |
-| Optional values absent | Conditional sections and collapsed spacing. |
-| Long title and token | Wrapping, heading height, identifiers, and links. |
-| Long paragraph or list item | Widows, orphans, hyphenation, and atom choice. |
-| Maximum table rows | Repeated headers and page transitions. |
-| Longest table row | Atomic-row fit or intentional row splitting. |
-| Image extremes | Scaling, aspect ratio, caption grouping, and page fit. |
-| Required languages | Glyph coverage, hyphenation, and text expansion. |
+| Workflow execution | Workflow version URI, execution URI, and the PDF node's returned `artifactId` |
+| Trusted local harness | Harness source file and hash, plus the PDF output path |
 
-Inspect every page at thumbnail scale and readable zoom. Check:
+Missing identity means the case is unverified. A proof belongs to the current
+document system version. Any HTML, CSS, content contract, shell, or renderer
+change invalidates the affected proof.
 
-- page size, margins, backgrounds, and edge-to-edge regions;
-- first-page and continuation furniture, including page counters;
-- complete content with no clipping, overlap, hidden records, or accidental
-  blank pages;
-- headings kept with the content they introduce;
-- atoms and small groups kept together only where intended;
-- table headers repeated and rows handled by their authored policy;
-- text rhythm, long-token wrapping, image scale, and caption placement.
+Inspect semantics through authored HTML and any available PDF structure view.
+Check heading order, `th` and `scope`, link targets, image `alt` text, and DOM
+reading order. Inspect the PDF tag tree when a tool exposes it. Page images prove
+appearance only. Mark unavailable structure or assistive reading-order proof as
+unverified. Semantic HTML alone does not prove PDF/UA conformance.
 
-Inspect semantics through the authored HTML and any available PDF structure
-view. Check heading order, `th` and `scope` use, link targets, image `alt` text,
-and DOM reading order in the source. Inspect the PDF tag tree when a tool exposes
-it. Page images prove appearance, not the tag tree or assistive reading order.
-When PDF structure inspection is unavailable, report those semantics as
-unverified.
+Creating the PDF is a side effect. Follow the execution authorization gate in
+`SKILL.md`. When authorization or a trusted harness is unavailable, report the
+affected cases and named invariants as unverified.
 
-Semantic HTML enables best-effort tagged output. It does not prove PDF/UA
-conformance.
-
-Creating the PDF is a side effect. `SKILL.md` still requires execution
-authorization. When no test execution or trusted harness with the same shell
-and renderer is available, report the layout as unverified instead of inferring
-readiness from validation.
-
-Completion criterion: every required content case has an inspected PDF result,
-and the author accepts each observed break or records it for correction.
+Completion criterion: every Accepted content partition and required interaction
+has an inspected, identified current render. Each named invariant has explicit
+proof or an unverified status.
 
 ## 8. Correct the smallest responsible unit
 
+The document contract governs correction. Keep this loop subordinate to its
+Accepted content and named invariants.
+
 | Symptom | Likely authoring correction |
 | --- | --- |
-| Heading stranded at page bottom | Add `break-after: avoid` to the heading or a small heading group. |
-| Large blank area before a section | Shrink the scope of `pdf-keep-together`; let the parent fragment. |
-| Whole table jumps to a new page | Use `pdf-table-fragmentable` unless the maximum table fits. |
-| Short row splits | Keep that row atomic and confirm its maximum height. |
-| Long row clips or overflows | Add `pdf-can-split` or reshape the record into smaller units. |
-| Full-height panel ends on page one | Move it to page furniture, a page background, or a bounded repeated region. |
+| Heading stranded at page bottom | Apply `break-after: avoid` to the heading or a small heading group, then verify the pairing. |
+| Large blank area before a section | Shrink the keep scope and let the parent continue. |
+| Whole table jumps to a new page | Use a fragmentable table candidate unless the whole table has fit proof. |
+| Short row splits | Keep that row atomic and prove every accepted row case fits. |
+| Long row clips or overflows | Let the row split or reshape the record into smaller semantic units. |
+| Table fails under width pressure | Reallocate columns, use a named landscape page, stack labeled values, or decompose the table. |
+| Full-height rail ends on page one | Move it to page furniture or a page background. |
 | Dynamic text clips | Remove fixed height, absolute placement, line clamp, or hidden overflow from its ancestors. |
-| One-page maximum creates page two | Reduce the accepted content, change the composition, or remove the one-page requirement. |
-| Content disappears at the cap | Implement the excess behavior instead of relying on Liquid `limit`, truncation, or clipping. |
+| Required page-count invariant fails | Change the composition or request a product decision about Accepted content. |
+| Accepted content disappears | Restore it and implement the named Outside behavior beyond the product boundary. |
+| A named invariant is lost | Correct the responsible region and rerender every case that exercises the invariant. |
 
-Fix the smallest element responsible for the bad break. A global font, spacing,
-or scale change can hide one overflow while weakening every other content case.
+Fix the smallest element responsible for the failed proof. A global font,
+spacing, or scale change affects every region and requires broad regression
+proof.
 
-After each correction, render the affected matrix case again. Rerun every case
-that shares changed CSS, structure, or content bounds. A shared style change
-usually requires the full matrix.
+After each correction, render the affected case and its interaction cases.
+Rerun every case that shares changed CSS, structure, content, shell, or renderer.
 
 Completion criterion: the corrected case and its regression cases pass the
-page inspection and applicable semantic checks, with any blocked proof reported
-as unverified.
+universal checks and their named invariants. Report blocked proof as unverified.
