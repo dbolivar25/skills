@@ -45,11 +45,12 @@ Copy:
 
 ## Audit
 
-Run `checks/audit.js` in the rendered page, either as `augAudit()` or by
-appending `?augaudit` to the URL. It checks what structure can prove: nested
-surfaces, chromatic fill and stroke against declared roles, off-scale radius,
-body type below the branch floor, inconsistent repetition across a set, and
-whether a document marks any source.
+Load `checks/audit.js` into the rendered page, then call `augAudit()`. When the
+script is part of the page, appending `?augaudit` runs it after load. It checks
+what markup and computed style can prove: nested `data-aug-surface` elements,
+chromatic fill and stroke roles, off-scale radius, document body type below the
+branch floor, inconsistent marked repetition, source markup, and whether Matter
+SQ loaded.
 
 Set `data-aug-branch="document|product|marketing"` on the root element, and
 `data-aug-role` on every chromatic fill and stroke.

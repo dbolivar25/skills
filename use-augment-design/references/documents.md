@@ -52,4 +52,6 @@ spacing separate sections where boxes would not.
 - 12pt minimum body text in print, 16px minimum on screen.
 - Long-form text inside the measure tokens, 44 to 72ch.
 - A source, date, or record for every number the reader could question.
+- Mark source elements with `data-aug-source` so rendered review can verify that
+  the document carries source structure.
 - Every page rendered and read at full size before delivery.

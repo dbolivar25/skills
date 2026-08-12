@@ -21,6 +21,10 @@ can be opened, dismissed, assigned, or referred to on its own. When the content
 inside cannot be addressed apart from the content beside it, the frame is
 drawing a boundary that does not exist.
 
+Mark a real addressable surface with `data-aug-surface`. When a set of repeated
+objects needs automated comparison, mark the container `data-aug-set` and each
+direct repeated object `data-aug-item`.
+
 What follows from that:
 
 - An analysis, a conclusion, or a paragraph of reasoning is not an object. It

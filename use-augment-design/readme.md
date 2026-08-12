@@ -237,6 +237,7 @@ No emoji, and no Unicode glyphs standing in for icons.
 | `references/marketing.md` | Branch: web, hero, campaign |
 | `references/voice.md` | Voice, generated-artifact copy, the prose loop |
 | `references/qa.md` | Rendered inspection, review questions, diagnosis |
+| `checks/audit.js` | In-page audit for structure and computable grammar |
 | `tokens/` | fonts, colors, typography, spacing, effects, grain, edge-glow, motion, utilities |
 | `assets/` | `logo/` official SVGs, `fonts/` Matter SQ woff2 |
 | `specimens/` | Rendered cards: color, type, spacing, effects, brand, controls |
