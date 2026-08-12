@@ -133,11 +133,24 @@ Git rather than maintaining a second active archive. Rename a skill when its
 human handle hides the capability, but do not normalize names merely for visual
 symmetry.
 
-When topology changes, run:
+## Invocation cases
+
+[`tests/invocation-cases.yml`](tests/invocation-cases.yml) records reviewable
+expectations for neighboring skills:
+
+- `primary` owns the requested outcome;
+- `also_load` supplies distinct supporting judgment; and
+- `do_not_load` names the nearest plausible capability that should stay out.
+
+The corpus includes positive, negative, and collision cases and accounts for
+every active skill. When topology or an invocation contract changes, update the
+cases and run:
 
 ```sh
 ruby scripts/validate-skills.rb
 ```
 
-The validator proves package structure and invocation-contract shape. It does
-not prove that a particular model will route every prompt correctly.
+The validator proves package structure, invocation-contract shape, case schema,
+referential integrity, and coverage. The cases remain reviewed expectations;
+deterministic validation does not prove that a particular model will route every
+prompt correctly.

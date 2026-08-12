@@ -1,6 +1,6 @@
 ---
 name: show-me
-description: Use when the user asks to see a topic, or when a material relationship is harder to understand in prose. Load it to choose the smallest useful diagram, code-shape sketch, or focused HTML artifact.
+description: Use when the user asks for a visual explanation or interactive demonstration, or when a material relationship is harder to understand in prose. Load it to choose the smallest useful diagram, code-shape sketch, or focused HTML artifact.
 ---
 
 Help the user understand the current topic of conversation visually. Skip the preamble and keep prose brief. Pick the smallest view that makes the key point clear.

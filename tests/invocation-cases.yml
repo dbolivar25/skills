@@ -1,0 +1,267 @@
+version: 1
+
+# These cases are reviewable routing expectations, not recorded model results.
+# `primary` owns the requested outcome. `also_load` supplies distinct supporting
+# judgment. `do_not_load` names the nearest plausible capability that should not
+# fire for this prompt.
+cases:
+  - id: ordinary-gh-read
+    kind: negative
+    prompt: Show me the title and URL for PR 42 with gh pr view.
+    expect:
+      primary:
+      also_load: []
+      do_not_load: [github-evidence, code-review, writing-pr-descriptions, show-me]
+    why: Ordinary GitHub porcelain is sufficient, and lexical "show me" requests data rather than a visual explanation, verdict, or publication artifact.
+
+  - id: complete-pr-evidence
+    kind: positive
+    prompt: Get the complete live state of this PR, including unresolved review threads and the failing CI step, but do not judge whether it should merge.
+    expect:
+      primary: github-evidence
+      also_load: []
+      do_not_load: [code-review, writing-pr-descriptions]
+    why: The request needs evidence that ordinary GitHub porcelain omits, while explicitly withholding the review verdict.
+
+  - id: current-pr-verdict
+    kind: collision
+    prompt: Review this pull request for correctness and tell me whether it is ready to merge, using current checks and unresolved threads.
+    expect:
+      primary: code-review
+      also_load: [github-evidence]
+      do_not_load: [writing-pr-descriptions]
+    why: Code review owns the verdict; GitHub evidence supplies live state; no publication artifact was requested.
+
+  - id: live-pr-description
+    kind: collision
+    prompt: Draft the pull request description for my current branch from the live base-to-head change.
+    expect:
+      primary: writing-pr-descriptions
+      also_load: [review-maps]
+      do_not_load: [code-review, github-evidence]
+    why: The requested artifact is a PR description derived from the local base-to-head change and its reviewer decision map, not a new merge verdict or a complete GitHub-state investigation.
+
+  - id: visualize-review-decision
+    kind: collision
+    prompt: Show me the three decisions this reviewer has to make and how the evidence feeds each one.
+    expect:
+      primary: show-me
+      also_load: [review-maps]
+      do_not_load: [writing-pr-descriptions]
+    why: The user requested a visual explanation of a review model, not PR publication copy.
+
+  - id: production-cause-only
+    kind: collision
+    prompt: Diagnose why this production request is slow using current Grafana traces and logs. Find the cause, but do not change code.
+    expect:
+      primary: diagnosing-bugs
+      also_load: [query-grafana]
+      do_not_load: [tdd, simplify]
+    why: Diagnosis owns hypothesis falsification and Grafana owns telemetry acquisition; the read-only boundary excludes implementation skills.
+
+  - id: test-first-bug-fix
+    kind: collision
+    prompt: Find the cause of this flaky TypeScript behavior and fix it test-first with one failing integration test per slice.
+    expect:
+      primary: tdd
+      also_load: [diagnosing-bugs, coding-standards]
+      do_not_load: [simplify]
+    why: The user explicitly chose test-driven implementation; diagnosis and TypeScript law support it, while the finishing pass waits for a verified boundary.
+
+  - id: authorized-finishing-pass
+    kind: collision
+    prompt: The authorized TypeScript implementation is complete and its focused tests pass. Simplify the changed code without changing behavior.
+    expect:
+      primary: simplify
+      also_load: [coding-standards]
+      do_not_load: [diagnosing-bugs, tdd]
+    why: The request is a behavior-preserving finishing pass at an already verified boundary, not renewed diagnosis or test-driven feature work.
+
+  - id: restore-human-voice
+    kind: positive
+    prompt: This note says what I mean, but it sounds synthetic and nothing like me. Humanize it without changing the claims.
+    expect:
+      primary: humanize
+      also_load: []
+      do_not_load: [simplified-technical-english]
+    why: Voice restoration is the protected outcome; controlled language would deliberately flatten the quality the user wants preserved.
+
+  - id: controlled-agent-instruction
+    kind: positive
+    prompt: Rewrite this tool instruction in Simplified Technical English so another agent cannot misparse its conditions.
+    expect:
+      primary: simplified-technical-english
+      also_load: []
+      do_not_load: [humanize]
+    why: Reliable parsing and explicit STE are the trigger; human voice is not the objective.
+
+  - id: ordinary-summary
+    kind: negative
+    prompt: Give me a two-sentence summary of the material above.
+    expect:
+      primary:
+      also_load: []
+      do_not_load: [humanize, simplified-technical-english]
+    why: Ordinary summarization needs neither voice repair nor a controlled-language standard.
+
+  - id: ideas-from-blank
+    kind: positive
+    prompt: I am stuck. Generate several specific directions for a new onboarding concept using one creative method.
+    expect:
+      primary: creative-ideation
+      also_load: []
+      do_not_load: [creative-shaping]
+    why: The user needs divergence from a blank starting point rather than transformation of supplied material.
+
+  - id: shape-existing-options
+    kind: collision
+    prompt: Take these five rough onboarding concepts, subvert the obvious ones, combine the strongest parts, and sharpen the final directions.
+    expect:
+      primary: creative-shaping
+      also_load: [creative-ideation]
+      do_not_load: []
+    why: Existing material activates the deep shaping branch while the parent retains method selection and anti-generic routing policy.
+
+  - id: generic-interface-design
+    kind: positive
+    prompt: Design the interaction states and responsive behavior for this unbranded settings panel.
+    expect:
+      primary: designing-human-interfaces
+      also_load: []
+      do_not_load: [augment-design, prototype]
+    why: The task needs production interface craft but has neither an Augment identity constraint nor a throwaway learning goal.
+
+  - id: throwaway-interface-prototype
+    kind: collision
+    prompt: Build a disposable local UI to learn whether this state transition makes sense. We will throw the code away.
+    expect:
+      primary: prototype
+      also_load: [designing-human-interfaces]
+      do_not_load: [augment-design]
+    why: The artifact exists to answer a question, while interface craft still shapes the experiment; no Augment brand was requested.
+
+  - id: augment-product-interface
+    kind: collision
+    prompt: Design and implement an Augment-branded approval settings screen with complete interaction states.
+    expect:
+      primary: designing-human-interfaces
+      also_load: [augment-design]
+      do_not_load: [prototype]
+    why: Interface craft owns the human interaction and Augment design supplies the brand law; the requested result is production work, not a disposable probe.
+
+  - id: visible-ai-work-product-workflow
+    kind: collision
+    prompt: Build an Augment workflow that derives a customer-facing decision brief from CRM state and renders it as an Augment document.
+    expect:
+      primary: augment-workflows
+      also_load: [faithful-derivation, augment-design]
+      do_not_load: []
+    why: Workflow mechanics own the executable graph, derivation owns evidential fidelity, and Augment design owns the visible branded surface.
+
+  - id: mechanical-workflow-inspection
+    kind: positive
+    prompt: Inspect this Decision Site workflow for invalid node references and lifecycle errors. It does not generate a visible AI work product.
+    expect:
+      primary: augment-workflows
+      also_load: []
+      do_not_load: [faithful-derivation, augment-design]
+    why: The request is limited to executable workflow mechanics and explicitly excludes the neighboring derivation and presentation triggers.
+
+  - id: compare-module-seams
+    kind: collision
+    prompt: Compare two interface and seam shapes for this TypeScript module. Do not scan the wider repository or write a full spec.
+    expect:
+      primary: codebase-design
+      also_load: [coding-standards]
+      do_not_load: [improve-codebase-architecture, tech-spec]
+    why: The task is a bounded module-design judgment under TypeScript law, not either user-invoked workflow.
+
+  - id: explicit-architecture-scan
+    kind: collision
+    prompt: /improve-codebase-architecture Scan this TypeScript feature and rank evidence-backed ownership moves. Stop before designing an interface.
+    expect:
+      primary: improve-codebase-architecture
+      also_load: [codebase-design, coding-standards]
+      do_not_load: [tech-spec]
+    why: The user explicitly selected the read-only scan, whose boundary excludes the downstream specification workflow.
+
+  - id: explicit-typed-spec
+    kind: collision
+    prompt: /tech-spec Turn the accepted ownership move into a typed call-stack architecture handoff. Do not implement it.
+    expect:
+      primary: tech-spec
+      also_load: [codebase-design, coding-standards, tdd]
+      do_not_load: [improve-codebase-architecture, domain-modeling]
+    why: The owner explicitly selected the design artifact after the scan decision; module vocabulary, TypeScript law, and its required test workflow support it, while no domain-language branch was requested.
+
+  - id: proposed-abstraction-gate
+    kind: collision
+    prompt: Should we introduce this new service abstraction, or can the present need be met through a smaller seam?
+    expect:
+      primary: engineering-restraint
+      also_load: [codebase-design]
+      do_not_load: [tech-spec]
+    why: The first judgment is whether the machinery is justified; detailed specification would be premature.
+
+  - id: sharpen-domain-language
+    kind: positive
+    prompt: Pressure-test whether Order, Reservation, and Hold are the right domain terms against these examples and invariants.
+    expect:
+      primary: domain-modeling
+      also_load: []
+      do_not_load: [codebase-design]
+    why: The uncertainty is in the domain model and ubiquitous language, not the shape of a code module.
+
+  - id: explicit-grill
+    kind: positive
+    prompt: Grill this launch plan through relentless dependency-aware questions, one round at a time.
+    expect:
+      primary: grilling
+      also_load: []
+      do_not_load: [steward, engineering-restraint]
+    why: The user explicitly requested the questioning protocol rather than durable mission state or an additive-machinery gate.
+
+  - id: durable-owner-mission
+    kind: positive
+    prompt: Steward this multi-week refactor so my intent survives handoffs and correctness, delivery, and landing are proved separately.
+    expect:
+      primary: steward
+      also_load: []
+      do_not_load: [grilling]
+    why: The user needs durable intent, independent acceptance, and landing receipts across time; questioning alone cannot preserve that state.
+
+  - id: ordinary-bounded-task
+    kind: negative
+    prompt: Rename this local variable and run the existing focused test.
+    expect:
+      primary:
+      also_load: []
+      do_not_load: [steward, herdr, grilling]
+    why: A small bounded edit needs neither durable mission machinery, explicit Herdr control, nor an owner interview.
+
+  - id: explicit-herdr-control
+    kind: positive
+    prompt: Use Herdr to inspect the active agent in this workspace, then stop before mutation.
+    expect:
+      primary: herdr
+      also_load: []
+      do_not_load: [steward]
+    why: Herdr has an explicit-only trigger and owns target anchoring for its own session; durable mission governance was not requested.
+
+  - id: repository-lint-policy
+    kind: collision
+    prompt: This TypeScript repository repeatedly violates a proved mechanical policy. Turn it into a tested Biome GritQL rule using the installed version.
+    expect:
+      primary: write-custom-lint
+      also_load: [coding-standards]
+      do_not_load: [simplify]
+    why: The outcome is durable mechanical enforcement under repository law, not a one-time readability edit.
+
+  - id: agent-facing-tool-contract
+    kind: collision
+    prompt: Rewrite this model-facing tool description so its invocation boundary is precise and downstream agents parse every condition consistently.
+    expect:
+      primary: writing-for-agents
+      also_load: [simplified-technical-english]
+      do_not_load: [humanize]
+    why: Agent-document architecture owns invocation, controlled English supports unambiguous parsing, and human voice is not the requested quality.
