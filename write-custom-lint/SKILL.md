@@ -1,69 +1,136 @@
 ---
 name: write-custom-lint
-description: Creates and manages Biome GritQL custom lint rules to enforce coding patterns. Use when creating linter rules, enforcing code conventions, preventing anti-patterns, or when the user mentions Biome, GritQL, custom lint rules, or AST-based linting.
-allowed-tools: ["Write","Read","Edit","Bash","Glob"]
+description: Use when a recurring, mechanically recognizable repository violation should become a Biome GritQL diagnostic or fix. Load it to prove the policy, pin the installed Biome behavior, and test both violations and allowed code before enforcement.
 ---
 
-# Biome GritQL Custom Lint Rules
+# Write a custom Biome lint rule
 
-Create AST-based custom lint rules using Biome's GritQL plugin system.
+A custom rule turns repository policy into permanent executable feedback. It is
+worth owning only when the policy is real, the syntax can recognize it with an
+acceptable false-positive rate, and tests prove both sides of the boundary.
 
-## Workflow
+## 1. Prove the policy
 
-1. Identify the pattern to ban or enforce
-2. Read `references/gritql-syntax.md` for syntax details
-3. Read `references/rule-patterns.md` for common pattern examples
-4. Create a `.grit` file in the project's `rules/` directory
-5. Add the plugin path to `biome.json` `"plugins"` array
-6. Test with the project's lint command (e.g., `biome check`, `biome lint`)
+Identify:
 
-## Quick Start
+- the repository-owned rule or invariant being protected;
+- concrete current violations and their consequence;
+- the preferred replacement or correction;
+- legitimate lookalikes that must remain allowed;
+- whether Biome already has a built-in rule; and
+- why documentation, types, an API change, or deleting the pattern would not
+  enforce the boundary better.
 
-Create a rule file (`rules/no-console-log.grit`):
+Do not import a generic preference into a repository merely because a GritQL
+pattern can detect it. Rules such as banning a framework hook, dynamic imports,
+or a language feature require current local policy and counterexamples.
 
-```gritql
-`console.log($args)` where {
-    register_diagnostic(
-        span = $args,
-        message = "Remove console.log before committing",
-        severity = "warn"
-    )
-}
-```
+Completion criterion: current repository evidence establishes a repeated policy
+violation, its correction, and its allowed exceptions; otherwise stop without
+creating a plugin.
 
-Register in `biome.json`:
+## 2. Pin the implementation surface
 
-```json
-{
-  "$schema": "https://biomejs.dev/schemas/2.0.0/schema.json",
-  "plugins": ["./rules/no-console-log.grit"]
-}
-```
+Inspect the repository's actual:
 
-## Project Structure
+- installed `@biomejs/biome` version and executable;
+- `biome.json` or `biome.jsonc` hierarchy;
+- plugin directory, naming, registration, suppression, and test conventions;
+- target languages and file scopes; and
+- lint commands used by local development and CI.
 
-```
-project/
-├── biome.json
-└── rules/
-    ├── no-console-log.grit
-    ├── prefer-query-hook.grit
-    └── no-dynamic-import.grit
-```
+Then check the current official Biome pages for
+[linter plugins](https://biomejs.dev/linter/plugins/),
+[GritQL](https://biomejs.dev/reference/gritql/), and the installed version's
+release or migration notes. Biome's GritQL support is evolving and does not
+implement every upstream Grit feature. CST node names can change with grammar
+versions.
 
-## Guidelines
+Keep existing config schema and conventions. Do not paste a remembered schema
+version or assume every repository uses `rules/`.
 
-- **Actionable messages**: Tell the user what to do instead, not just what's wrong
-- **Severity**: `"error"` for hard requirements, `"warn"` for preferences, `"info"` for suggestions
-- **Naming**: `no-X.grit` for bans, `prefer-Y.grit` for preferences
-- **One rule per file** for clarity and selective enablement
-- Always test against real project code before committing
+Completion criterion: the installed version, supported syntax, target language,
+plugin location, registration shape, and real validation command are current
+facts.
 
-## Why Lint Rules Over CLAUDE.md
+## 3. Build the behavior corpus
 
-Instructions in CLAUDE.md degrade as context fills. Lint rules give immediate, persistent feedback. When a pattern is violated, the error appears in output and self-corrects — no context drift.
+Before the rule, create the smallest fixture set that expresses the boundary:
 
-## Resources
+- at least one `flags-*` case for every syntax form the policy intends to catch;
+- at least one `allows-*` case for every plausible false positive;
+- an allowed correction for each diagnostic message; and
+- suppression or generated-code behavior when the repository permits it.
 
-- `references/gritql-syntax.md` — Full GritQL language reference (variables, operators, conditions)
-- `references/rule-patterns.md` — Ready-to-use patterns for common bans and enforcements
+Prefer real minimized repository examples. Keep each fixture focused enough that
+one diagnostic can be attributed to one construct.
+
+Completion criterion: the fixture corpus would reveal an over-broad rule as well
+as an under-matching one.
+
+## 4. Design the narrowest pattern
+
+Read [`references/gritql.md`](references/gritql.md). Start with structural code
+snippets. Use Biome CST node names only when snippets cannot express the boundary
+precisely enough, because grammar-specific patterns carry more upgrade cost.
+
+Prototype with `biome search` or the repository's isolated plugin harness before
+registration. Expand one syntax form at a time. When the engine handles a broad
+metavariable or nesting form unreliably, enumerate the intended forms rather than
+claiming unsupported coverage.
+
+The diagnostic must:
+
+- highlight the smallest useful span;
+- name the violated repository policy;
+- state the available correction; and
+- avoid asserting context the syntax cannot prove.
+
+Completion criterion: every intended flag matches, every allowed case remains
+clean, and each diagnostic points to an actionable correction.
+
+## 5. Test the real plugin
+
+Register the `.grit` file using the repository's current config shape. If the
+installed Biome supports scoped plugin objects, use `includes` to reduce the
+language and path surface when that makes the rule more honest.
+
+Test through the installed Biome binary with an isolated config that enables only
+the candidate plugin. Assert positive and negative fixtures separately. Then run
+the repository's normal lint or check command and inspect every new diagnostic.
+
+Do not rely on plugin parse success alone. A rule that matches nothing, matches
+generated fixtures only, or floods unrelated code is broken.
+
+Completion criterion: isolated fixtures and the repository's real lint command
+pass with the intended diagnostics and no unexplained new findings.
+
+## 6. Add a fix only when it is provably safe
+
+Read [`references/fixes.md`](references/fixes.md) before adding a rewrite. A
+diagnostic does not require an automatic fix.
+
+Keep Biome's default unsafe classification unless every match can be rewritten
+without changing runtime behavior, comments, type meaning, or surrounding
+syntax. Test the rewritten output and idempotence. Mark `fix_kind = "safe"` only
+when that stronger claim is proven for every supported match.
+
+Completion criterion: the fix classification matches evidence, fixed fixtures
+are exact, a second pass is clean, and the repository remains valid after the
+appropriate write command.
+
+## 7. Leave an ownership trail
+
+Document in the rule or its tests:
+
+- the invariant and correction;
+- why important exceptions are allowed;
+- any deliberate syntax omissions;
+- the installed Biome behavior the pattern depends on; and
+- how to run its focused tests.
+
+Keep repository-specific facts in that repository. This skill owns the method,
+not a catalog of policies every codebase should adopt.
+
+Completion criterion: a future Biome upgrade or policy change has one obvious
+test surface that will reveal whether the rule still earns enforcement.
