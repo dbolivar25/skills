@@ -65,5 +65,5 @@ finding in writing.*
 
 These carry detail this skill leaves out. Use them where you have them:
 **designing-human-interfaces** for the moment, floor, and facet model and for
-interface craft; **humanizer** and **stop-slop** for prose repair; **simplify**
-for editing; **writing-for-agents** for editing this skill.
+interface craft; **humanize** in strict mode for prose repair; **simplify** for
+editing; **writing-for-agents** for editing this skill.

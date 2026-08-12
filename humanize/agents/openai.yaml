@@ -1,0 +1,4 @@
+interface:
+  display_name: "Humanize"
+  short_description: "Restore a credible voice without changing meaning"
+  default_prompt: "Use $humanize to revise this prose in conservative mode while preserving its meaning, facts, uncertainty, and intended voice."
