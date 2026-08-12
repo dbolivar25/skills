@@ -59,11 +59,10 @@ routing policy.
 | Capability | Invocation | Owns |
 | --- | --- | --- |
 | [`github-evidence`](github-evidence/SKILL.md) | Model | Complete live PR state, review-thread state, and CI failure evidence where ordinary `gh` output is incomplete. |
-| [`query-grafana`](query-grafana/SKILL.md) | Model | Safely bounded current production logs, metrics, and traces. |
+| [`grafana-evidence`](grafana-evidence/SKILL.md) | Model | Reproducible, bounded production telemetry with explicit query receipts and coverage limits. |
 | [`diagnosing-bugs`](diagnosing-bugs/SKILL.md) | Model | Reproduction signals, ranked hypotheses, and a verified cause; diagnosis does not grant fix authority. |
 | [`code-review`](code-review/SKILL.md) | Model | The current correctness and merge verdict, including specialized dependency-bump analysis. |
-| [`review-maps`](review-maps/SKILL.md) | Model | The decision, evidence, uncertainty, and reviewer-attention model beneath a review artifact. |
-| [`writing-pr-descriptions`](writing-pr-descriptions/SKILL.md) | Model | A PR description derived from the live base-to-head change and the reviewer's decision map. |
+| [`reviewability`](reviewability/SKILL.md) | Model | Faithful review artifacts, including a live branch-grounded pull-request description branch. |
 
 ## Interfaces, language, and specialized systems
 
@@ -89,9 +88,13 @@ The arrows show evidence or judgment flowing to the owner on the right. They do
 not transfer mutation or publication authority.
 
 ```text
-github-evidence ──> code-review ──> review-maps ──> writing-pr-descriptions
-query-grafana ──> diagnosing-bugs ──> improve-codebase-architecture
-                                            └──> tech-spec ──> tdd ──> simplify
+grafana-evidence ──> diagnosing-bugs ──> cause
+grafana-evidence ──> code-review ──> verdict
+github-evidence ──> code-review ──> verdict
+github-evidence ──> reviewability ──> review artifact
+
+diagnosing-bugs ──> improve-codebase-architecture
+                               └──> tech-spec ──> tdd ──> simplify
 
 creative-ideation ──> creative-shaping
 
@@ -108,12 +111,12 @@ chain. It does not replace the leaf skill's domain judgment.
 
 | Responsibility | Primary owners | Boundary |
 | --- | --- | --- |
-| Acquire evidence | `github-evidence`, `query-grafana`, targeted Herdr reads | Evidence does not decide the final verdict. |
+| Acquire evidence | `github-evidence`, `grafana-evidence`, targeted Herdr reads | Evidence does not decide the final verdict or cause. |
 | Diagnose | `diagnosing-bugs` | A verified cause does not authorize a fix. |
 | Judge | `code-review`, `engineering-restraint`, `domain-modeling`, `codebase-design` | Judgment does not itself authorize mutation or publication. |
 | Design | `improve-codebase-architecture`, `tech-spec`, interface and workflow design skills | A design artifact is not implementation evidence. |
 | Mutate | `tdd`, `simplify`, `write-custom-lint`, workflow or Herdr operations | Mutation requires authority from the surrounding task and remains inside its scope. |
-| Communicate | `review-maps`, `writing-pr-descriptions`, `show-me`, language skills | Drafting an artifact does not publish it. |
+| Communicate | `reviewability`, `show-me`, language skills | Drafting an artifact does not publish it or supply the underlying verdict. |
 | Accept and land | The owning task, or `steward` when continuity warrants it | Local checks, review, delivery, and observed landing are separate receipts. |
 
 ## Evolving the library

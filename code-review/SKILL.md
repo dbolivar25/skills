@@ -87,9 +87,9 @@ Apply focused lenses only when the change earns them:
   returns compatibility evidence and residual risk; this skill retains the
   merge judgment.
 - Use `designing-human-interfaces` when visible interaction or UI state is material.
-- Use production evidence, `query-grafana`, or `diagnosing-bugs` when a claim
+- Use production evidence, `grafana-evidence`, or `diagnosing-bugs` when a claim
   depends on shipped behavior, reliability, or performance.
-- Use `review-maps` when the user asks for a large-change review guide.
+- Use `reviewability` when the user asks for a large-change review guide.
 
 The judge integrates the evidence. A lens does not own merge judgment.
 

@@ -11,7 +11,7 @@ cases:
     expect:
       primary:
       also_load: []
-      do_not_load: [github-evidence, code-review, writing-pr-descriptions, show-me]
+      do_not_load: [github-evidence, code-review, reviewability, show-me]
     why: Ordinary GitHub porcelain is sufficient, and lexical "show me" requests data rather than a visual explanation, verdict, or publication artifact.
 
   - id: complete-pr-evidence
@@ -20,7 +20,7 @@ cases:
     expect:
       primary: github-evidence
       also_load: []
-      do_not_load: [code-review, writing-pr-descriptions]
+      do_not_load: [code-review, reviewability]
     why: The request needs evidence that ordinary GitHub porcelain omits, while explicitly withholding the review verdict.
 
   - id: current-pr-verdict
@@ -29,15 +29,15 @@ cases:
     expect:
       primary: code-review
       also_load: [github-evidence]
-      do_not_load: [writing-pr-descriptions]
+      do_not_load: [reviewability]
     why: Code review owns the verdict; GitHub evidence supplies live state; no publication artifact was requested.
 
   - id: live-pr-description
     kind: collision
     prompt: Draft the pull request description for my current branch from the live base-to-head change.
     expect:
-      primary: writing-pr-descriptions
-      also_load: [review-maps]
+      primary: reviewability
+      also_load: []
       do_not_load: [code-review, github-evidence]
     why: The requested artifact is a PR description derived from the local base-to-head change and its reviewer decision map, not a new merge verdict or a complete GitHub-state investigation.
 
@@ -46,8 +46,8 @@ cases:
     prompt: Show me the three decisions this reviewer has to make and how the evidence feeds each one.
     expect:
       primary: show-me
-      also_load: [review-maps]
-      do_not_load: [writing-pr-descriptions]
+      also_load: [reviewability]
+      do_not_load: [code-review]
     why: The user requested a visual explanation of a review model, not PR publication copy.
 
   - id: production-cause-only
@@ -55,9 +55,18 @@ cases:
     prompt: Diagnose why this production request is slow using current Grafana traces and logs. Find the cause, but do not change code.
     expect:
       primary: diagnosing-bugs
-      also_load: [query-grafana]
+      also_load: [grafana-evidence]
       do_not_load: [tdd, simplify]
     why: Diagnosis owns hypothesis falsification and Grafana owns telemetry acquisition; the read-only boundary excludes implementation skills.
+
+  - id: production-evidence-only
+    kind: collision
+    prompt: Quantify this service's 5xx rate and latency change from current Grafana telemetry, with reproducible queries and deeplinks. Do not diagnose the cause.
+    expect:
+      primary: grafana-evidence
+      also_load: []
+      do_not_load: [diagnosing-bugs, code-review]
+    why: The requested outcome is a bounded reproducible evidence packet; causal diagnosis and merge judgment are explicitly outside scope.
 
   - id: test-first-bug-fix
     kind: collision
