@@ -1,5 +1,5 @@
 ---
-name: simplified-technical-english-asd-ste100
+name: simplified-technical-english
 description: "Use when English must be parsed reliably by an agent, system, translation path, or non-native reader, or the user asks for STE100. Load it to remove lexical and structural ambiguity; use humanize when voice is the goal."
 version: 0.1.0
 ---

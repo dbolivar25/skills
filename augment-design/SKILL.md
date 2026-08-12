@@ -1,5 +1,5 @@
 ---
-name: use-augment-design
+name: augment-design
 description: Use when an Augment-branded surface is created, implemented, reviewed, or polished, or another skill needs Augment assets or design law. Load it to keep identity, voice, evidence, privacy, tokens, and branch floors coherent; positioning stays with the app.
 ---
 

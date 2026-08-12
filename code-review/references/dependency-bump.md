@@ -20,7 +20,7 @@ From the live review target, establish:
 - whether the repository can reproduce the new resolution from its declared
   sources.
 
-Use `better-github` for live pull-request state. Inspect the actual lock graph and
+Use `github-evidence` for live pull-request state. Inspect the actual lock graph and
 repository configuration rather than relying on a bot-authored summary.
 
 Completion criterion: the exact before-and-after component and its runtime

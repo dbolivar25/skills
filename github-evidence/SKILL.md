@@ -1,9 +1,9 @@
 ---
-name: better-github
+name: github-evidence
 description: "Use when GitHub work needs a complete PR snapshot, review-thread resolution state, CI failure drilldown, or non-trivial gh/API query. Load it to avoid stale or partial evidence where GitHub porcelain has known gaps; use raw gh for ordinary operations."
 ---
 
-# better-github
+# GitHub Evidence
 
 Raw `gh` first when you know the command; the scripts replace only the flows
 agents repeatedly get wrong. Scripts run TS directly (node ≥ 23.6), no deps.
