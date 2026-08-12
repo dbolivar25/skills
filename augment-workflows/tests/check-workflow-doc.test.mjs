@@ -19,6 +19,10 @@ const artifactExamplePath = path.join(
 const artifactExample = JSON.parse(
   fs.readFileSync(artifactExamplePath, 'utf8')
 );
+const integrationDestinations = fs.readFileSync(
+  path.join(skillRoot, 'references', 'integration-destinations.md'),
+  'utf8'
+);
 
 function cloneArtifactExample() {
   return structuredClone(artifactExample);
@@ -143,6 +147,15 @@ test('accepts a focused Publish to Slack fixture with the json filter', () => {
 test('accepts a focused Publish to Teams fixture', () => {
   const result = runChecker(buildTeamsDocument());
   assert.equal(result.status, 0, result.stderr);
+});
+
+test('documents member-scoped Teams destination discovery', () => {
+  assert.doesNotMatch(integrationDestinations, /workflowUri/u);
+  assert.match(integrationDestinations, /owner\.memberUri/u);
+  assert.equal(
+    [...integrationDestinations.matchAll(/\{\?format,memberUri\}/gu)].length,
+    6
+  );
 });
 
 test('rejects the removed private Slack connection ID', () => {

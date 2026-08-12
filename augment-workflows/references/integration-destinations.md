@@ -19,15 +19,18 @@ Slack destination scope.
 
 Teams connections belong to the Agent owner:
 
-- For a new Agent, omit `workflowUri`. The directory uses the current author.
-- For an existing Agent, pass its canonical `workflowUri` to the Teams root.
-  The server checks that the caller can read that Agent, then uses its owner.
+- For a new Agent owned by the current author, omit `memberUri`. The directory
+  uses the current author.
+- For an existing Agent, read its exact resource and pass `owner.memberUri` to
+  the Teams root.
+- Admins may select any eligible Admin or Creator in the same organization.
+  Creators may select only themselves.
 - Follow every returned Teams URI. Each descendant keeps the same
-  `workflowUri` context.
+  `memberUri` context.
 
 Use the returned `credentialSubject` and safe owner name or email when reporting
-which Teams connection the node will use. A raw owner ID cannot select another
-person's credentials.
+which Teams connection the node will use. A numeric member or user ID is not a
+valid substitute for the canonical `memberUri`.
 
 ## Slack discovery
 
@@ -70,21 +73,21 @@ Expect these MCP resource template names: `teams-integrations`, `teams-tenant`,
 `teams-teams`, `teams-team`, `teams-channels`, and `teams-channel`. Stop if the
 active server does not advertise the template needed for the next read.
 
-Use these templates. Pass `workflowUri` for an existing Agent and omit it for a
-new Agent:
+Use these templates. Pass `owner.memberUri` for an existing Agent and omit
+`memberUri` for a new Agent owned by the current author:
 
 ```text
-decisionsite://organizations/{organizationSlug}/integrations/teams{?format,workflowUri}
-decisionsite://organizations/{organizationSlug}/integrations/teams/{tenantId}{?format,workflowUri}
-decisionsite://organizations/{organizationSlug}/integrations/teams/{tenantId}/teams{?format,workflowUri}
-decisionsite://organizations/{organizationSlug}/integrations/teams/{tenantId}/teams/{teamId}{?format,workflowUri}
-decisionsite://organizations/{organizationSlug}/integrations/teams/{tenantId}/teams/{teamId}/channels{?format,workflowUri}
-decisionsite://organizations/{organizationSlug}/integrations/teams/{tenantId}/teams/{teamId}/channels/{channelId}{?format,workflowUri}
+decisionsite://organizations/{organizationSlug}/integrations/teams{?format,memberUri}
+decisionsite://organizations/{organizationSlug}/integrations/teams/{tenantId}{?format,memberUri}
+decisionsite://organizations/{organizationSlug}/integrations/teams/{tenantId}/teams{?format,memberUri}
+decisionsite://organizations/{organizationSlug}/integrations/teams/{tenantId}/teams/{teamId}{?format,memberUri}
+decisionsite://organizations/{organizationSlug}/integrations/teams/{tenantId}/teams/{teamId}/channels{?format,memberUri}
+decisionsite://organizations/{organizationSlug}/integrations/teams/{tenantId}/teams/{teamId}/channels/{channelId}{?format,memberUri}
 ```
 
-Start from the Teams root with the intended credential subject. Do not use the
-unscoped Teams link from the top-level integration resource when editing an
-existing Agent.
+Start from the Teams root with the intended credential subject. For an existing
+Agent, use its `owner.memberUri`; the unscoped Teams root always selects the
+current author.
 
 Tenant entries include `tenantId`, a display label, and `state`. `available`
 means that Agent owner has a usable token. `reconnect_required` means that owner
@@ -108,9 +111,9 @@ Liquid expressions for them.
 ## Saved destinations and read failures
 
 Verify a saved destination by reading its exact channel URI from the stored
-provider-native IDs. For Teams, include the Agent's canonical `workflowUri`.
-Do this even when the destination does not appear in a list. Treat list omission
-as inconclusive.
+provider-native IDs. For Teams, include the Agent owner's canonical `memberUri`.
+Do this even when the destination does not appear in a list. Treat list
+omission as inconclusive.
 
 Interpret the exact read without inventing a cause:
 
