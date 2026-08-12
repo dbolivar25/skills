@@ -81,7 +81,11 @@ findings, not final prose or an independent verdict.
 
 Apply focused lenses only when the change earns them:
 
-- Use `review-dependency-bump` for dependency-upgrade compatibility evidence.
+- When the diff changes a dependency version, lock graph, runtime image, or
+  vendored tool, read
+  [`references/dependency-bump.md`](references/dependency-bump.md). The lens
+  returns compatibility evidence and residual risk; this skill retains the
+  merge judgment.
 - Use `designing-human-interfaces` when visible interaction or UI state is material.
 - Use production evidence, `query-grafana`, or `diagnosing-bugs` when a claim
   depends on shipped behavior, reliability, or performance.
@@ -195,4 +199,3 @@ the reviewed head, and is visible in live read-back.
   proof of correctness.
 - **Review-to-fix drift** — editing code during a review-only task.
 - **Mutation drift** — posting a different review action than the user requested.
-
