@@ -1,6 +1,6 @@
 ---
 name: faithful-derivation
-description: Derivation design for AI work-product workflows. Use when designing, reviewing, or implementing workflows that transform raw customer or operational state into generated artifacts, recommendations, plans, feed items, emails, decisions, or other work products; produces derivation specs with judgment DAGs, fidelity contracts, support packages, publication gates, structured confidence, and evals.
+description: Use when an AI workflow derives a visible work product or decision from customer or operational state. Load it to preserve evidential fidelity across judgments, support, confidence, publication, and evals; executable mechanics stay with the workflow skill.
 ---
 
 # Faithful Derivation

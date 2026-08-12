@@ -1,6 +1,6 @@
 ---
 name: simplified-technical-english-asd-ste100
-description: "Rewrites ambiguous English into ASD-STE100 style — one meaning per word, active voice, simple tense, short sentences. Use when agent output is hard to parse; triggers: simplify this, STE100 rewrite."
+description: "Use when English must be parsed reliably by an agent, system, translation path, or non-native reader, or the user asks for STE100. Load it to remove lexical and structural ambiguity; use humanize when voice is the goal."
 version: 0.1.0
 ---
 

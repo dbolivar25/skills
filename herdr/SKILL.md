@@ -1,6 +1,6 @@
 ---
 name: herdr
-description: "Control Herdr by anchoring the intended session, workspace, and explicit target. Use when the user explicitly asks Codex, a GUI agent, or another shell to inspect or control Herdr. Do not use merely because background terminals or parallel work would help."
+description: "Use only when the user explicitly asks an agent or shell to inspect or control Herdr. Load it to anchor the intended session, workspace, and target before any read or mutation can land in the wrong context."
 ---
 
 # Herdr

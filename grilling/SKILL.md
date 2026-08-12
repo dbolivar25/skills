@@ -1,6 +1,6 @@
 ---
 name: grilling
-description: Grill a plan, decision, or idea through relentless dependency-aware rounds. Use when the user wants to stress-test their thinking; when they ask to grill with docs, maintain resolved domain language and durable decisions during the interview.
+description: Use when the user explicitly wants a plan, decision, or idea grilled through questioning. Load it to expose dependency-aware weaknesses in relentless rounds while preserving resolved language and decisions when documents govern the interview.
 ---
 
 # Grilling

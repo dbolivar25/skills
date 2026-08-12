@@ -1,6 +1,6 @@
 ---
 name: writing-for-agents
-description: Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md.
+description: Use when creating or editing skills, AGENTS.md, CLAUDE.md, or another document that directs an agent. Load it to design invocation, context pointers, information hierarchy, and completion criteria for predictable behavior.
 ---
 
 Reference for writing any document an agent consumes — a skill, an `AGENTS.md` / `CLAUDE.md`, a doc reached by a pointer. The packaging differs; the writing does not: the same levers make each one predictable — the agent taking the same _process_ every run, not producing the same output.
@@ -16,11 +16,25 @@ When the document you're writing is a skill, read [`SKILL-MECHANICS.md`](SKILL-M
 
 A **context pointer** is a reference held in the agent's context that names some out-of-context material and encodes the condition for reaching it. A skill's description is one; a line in `AGENTS.md` naming a doc is the same object. The pointer's _wording_, not its target, decides when the agent reaches the material — and how reliably. A must-have target behind a weakly worded pointer is a variance bug: sharpen the wording first, and inline the material only if sharpening fails.
 
-A pointer does two jobs — state what the material is, and list the **branches** that should trigger reaching it (a branch is a distinct case the document handles, so different runs take different paths through it). Every word of an always-loaded pointer costs on every turn, so it earns even harder pruning than the body:
+A model-facing pointer is an **invocation contract**. It does two jobs: state
+**when** the material must load and **why** default context is insufficient. Add
+the nearest boundary only when a plausible neighbor could steal the trigger.
+Identity and procedure belong in the target document. A branch is a distinct
+case the document handles, so each branch needs its own observable trigger.
+
+For a model-invoked skill, prefer this shape:
+
+> Use when **[observable situation]**. Load it to **[distinct judgment,
+> protection, or authority]**. **[Neighbor boundary, only when needed.]**
+
+The why must name a behavior that would otherwise be lost. "Ensure quality" and
+"help with the task" do not change routing. Every word of an always-loaded
+pointer costs on every turn, so it earns even harder pruning than the body:
 
 - **Front-load the leading word** — the pointer is where it does its triggering work.
 - **One trigger per branch.** Synonyms that rename a single branch are one branch written twice; collapse them and keep only genuinely distinct branches.
-- **Cut identity the body already carries.**
+- **Cut identity the body already carries.** If a phrase does not change whether
+  or why the target loads, remove it from the pointer.
 
 ## The two loads
 

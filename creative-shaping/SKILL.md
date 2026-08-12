@@ -1,7 +1,7 @@
 ---
 name: creative-shaping
 title: Creative Shaping — Methods for Existing Work
-description: "Support creative-ideation when the user already has material, options, a draft, or notes to expand, select, unblock, subvert, refine, remix, or synthesize."
+description: "Use when existing material, options, drafts, or notes need creative expansion, selection, subversion, refinement, remixing, or synthesis. Load it as creative-ideation's deep existing-work method branch without duplicating its routing policy."
 version: 1.0.0
 author: SHL0MS
 license: MIT

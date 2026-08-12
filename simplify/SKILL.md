@@ -1,6 +1,6 @@
 ---
 name: simplify
-description: Use when an authorized code change has reached a verified review boundary, or when code comments need a clarity pass. Load it to reduce concepts and reading cost without changing behavior; invocation alone never grants edit authority.
+description: Use when an authorized code change reaches a verified review boundary, or code comments need a clarity pass. Load it to reduce concepts and reading cost without changing behavior; invocation never grants edit authority.
 ---
 
 # Simplify

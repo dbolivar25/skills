@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Review code changes into evidence-backed findings and merge judgment. Use for pull requests, branches, diffs, working-tree changes, rereviews, unresolved review comments, approval readiness, or posting a GitHub review. Separates request fit from codebase fit, verifies live target state, and avoids stale or duplicate findings.
+description: Use when code changes need a correctness or merge judgment across PRs, branches, diffs, rereviews, unresolved feedback, or approval readiness. Load it to keep request fit, codebase fit, evidence lenses, and one current verdict under the same judge.
 ---
 
 # Code Review

@@ -1,6 +1,6 @@
 ---
 name: writing-pr-descriptions
-description: Write pull request descriptions from the live base-to-head change. Use when drafting or updating a PR description or making a code branch ready for merge review.
+description: Use when a PR description must be drafted or updated from the live branch, or a branch must become legible for merge review. Load it to derive the reviewer's decision map from the current base-to-head change instead of stale development history.
 ---
 
 # Writing PR Descriptions

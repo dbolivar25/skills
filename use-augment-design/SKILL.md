@@ -1,12 +1,6 @@
 ---
 name: use-augment-design
-description: >-
-  Use this skill when creating, implementing, reviewing, or polishing any
-  Augment-branded surface: product UI, a generated document or report, a
-  marketing page, a deck, a static artifact, or production code. Also use it
-  when another skill needs Augment tokens, voice, logos, Matter SQ, or
-  composition rules. It defines brand, voice, and composition. Product
-  positioning and product names stay in the consuming app.
+description: Use when an Augment-branded surface is created, implemented, reviewed, or polished, or another skill needs Augment assets or design law. Load it to keep identity, voice, evidence, privacy, tokens, and branch floors coherent; positioning stays with the app.
 ---
 
 Augment is an enterprise AI platform. This skill makes a surface look and sound

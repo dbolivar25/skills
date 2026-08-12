@@ -1,6 +1,6 @@
 ---
 name: diagnosing-bugs
-description: Diagnosis loop for hard bugs and performance regressions. Use when the user says "diagnose"/"debug this", or reports something broken/throwing/failing/slow.
+description: Use when broken, failing, throwing, flaky, or slow behavior needs a verified cause. Load it to build a tight reproduction signal and falsify ranked hypotheses; diagnosis alone does not authorize a fix.
 ---
 
 # Diagnosing Bugs

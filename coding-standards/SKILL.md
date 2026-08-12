@@ -1,6 +1,6 @@
 ---
 name: coding-standards
-description: Correct-by-construction TypeScript standards. Use for TypeScript engineering or when another skill needs the user's coding standards.
+description: Use when TypeScript work changes contracts, domain types, failures, effects, mutation, observability, or verification. Load it as the source of truth for correct-by-construction engineering and testing evidence.
 ---
 
 # Coding Standards

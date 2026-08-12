@@ -1,6 +1,6 @@
 ---
 name: augment-workflows
-description: Author, edit, validate, debug, release, execute, and inspect Augment or Decision Site MCP workflows. Use for WorkflowDocV1, workflow lifecycle tools and resources, public node types, Data Context, CEL, Liquid, custom AI output, schedules, Slack, Teams, email, PDF Artifact or Decision Site placement nodes, execution nodes, or workflow quality.
+description: Use when work creates, changes, validates, releases, runs, or inspects an Augment or Decision Site MCP workflow. Load it to keep WorkflowDocV1, public nodes, expressions, lifecycle, validation, and side effects aligned with the live workflow system.
 ---
 
 # Augment Workflows

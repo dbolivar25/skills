@@ -1,6 +1,6 @@
 ---
 name: humanize
-description: Use when prose is factually sound but reads generic, synthetic, overproduced, or unlike its intended speaker. Load it to restore a credible human voice without changing meaning; activate the strict house-style branch only when the user or a consuming skill explicitly asks for it.
+description: Use when sound prose reads generic, synthetic, overproduced, or unlike its intended speaker. Load it to restore human voice without changing meaning; strict house style requires an explicit request or caller contract.
 license: MIT
 metadata:
   sources: "Humanizer by Siqi Chen and Stop Slop by Hardik Pandya"

@@ -1,7 +1,7 @@
 ---
 name: creative-ideation
 title: Creative Ideation — Routed Library of Creative Methods
-description: "Generate or shape ideas via named methods, or run a creative exercise."
+description: "Use when the user needs to generate, select, or sharpen ideas, escape a creative block, or run an exercise. Load it to route the situation through one named method and produce specific directions instead of a generic idea list."
 version: 3.0.0
 author: SHL0MS
 license: MIT

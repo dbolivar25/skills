@@ -1,6 +1,6 @@
 ---
 name: review-maps
-description: Build review maps for work that someone must evaluate. Use when making a change, proposal, design, investigation, or other body of work reviewable, or when another writing skill needs a faithful model of the reviewer's decision, evidence, uncertainty, and attention.
+description: Use when work must become reviewable, or when a publication skill first needs the reviewer's decision model. Load it to reconstruct decision, evidence, uncertainty, and attention before choosing a presentation format.
 ---
 
 # Review Maps

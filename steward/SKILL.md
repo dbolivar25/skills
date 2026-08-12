@@ -1,6 +1,6 @@
 ---
 name: steward
-description: Steward evolving work when the owner's Intent must govern understanding, planning, execution, collaborator handoffs, or changing reality. Use for consequential judgment, owner gates, changing premises, multiple collaborators, durable resumption, or distinct landing proof. Do not invoke solely because a task is large; ordinary bounded work with stable intent can proceed without Steward.
+description: Use when owner intent must survive changing premises, collaborators, phases, or time, or when correctness, delivery, and landing need separate proof. Load it to keep authoritative Intent, independent acceptance, and live receipts; size alone is not a trigger.
 ---
 
 # Steward

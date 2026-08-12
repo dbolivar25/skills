@@ -1,6 +1,6 @@
 ---
 name: query-grafana
-description: Use when an investigation needs current production logs, metrics, or traces from Grafana. Load it to bound the service and time window, query live telemetry safely, and state observability blind spots without turning absent Grafana evidence into proof of health.
+description: Use when an investigation needs current production logs, metrics, or traces from Grafana. Load it to bound the service and time window, query telemetry safely, and keep observability blind spots from becoming false health claims.
 ---
 
 # Query Grafana

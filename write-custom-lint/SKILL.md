@@ -1,6 +1,6 @@
 ---
 name: write-custom-lint
-description: Use when a recurring, mechanically recognizable repository violation should become a Biome GritQL diagnostic or fix. Load it to prove the policy, pin the installed Biome behavior, and test both violations and allowed code before enforcement.
+description: Use when a recurring, mechanically recognizable repository violation should become a Biome GritQL rule. Load it to prove the policy, pin installed Biome behavior, and test violations and allowed code before enforcement.
 ---
 
 # Write a custom Biome lint rule

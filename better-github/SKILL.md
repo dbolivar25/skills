@@ -1,6 +1,6 @@
 ---
 name: better-github
-description: "GitHub work via gh CLI: PRs, review conversations, CI failures, repo state. Use when inspecting a PR, reading a review (bodies, comments, inline threads), debugging CI (finding which run failed, why a check or Actions run is red, reading job logs), or composing non-trivial gh commands. Scripts cover what raw gh can't do (thread resolution state) or reliably fumbles (PR snapshots, CI log drilldown); use raw gh directly for everything else."
+description: "Use when GitHub work needs a complete PR snapshot, review-thread resolution state, CI failure drilldown, or non-trivial gh/API query. Load it to avoid stale or partial evidence where GitHub porcelain has known gaps; use raw gh for ordinary operations."
 ---
 
 # better-github

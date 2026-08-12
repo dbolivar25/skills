@@ -1,6 +1,6 @@
 ---
 name: bottom-line
-description: Give a short, plain-English version for a busy decision-maker. Use when the user asks for the bottom line, a simple version, or an executive summary of content.
+description: Use when the user asks for the bottom line, a simple version, or an executive summary. Load it to compress existing material for a busy decision-maker without dropping uncertainty or tradeoffs that change the decision.
 ---
 
 # Bottom Line

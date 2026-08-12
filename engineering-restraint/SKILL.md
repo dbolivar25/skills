@@ -1,6 +1,6 @@
 ---
 name: engineering-restraint
-description: Complexity gate for deciding whether an additive engineering proposal earns its ownership cost. Use for proposed features, dependencies, abstractions, services, workflows, or generalized implementations.
+description: Use when a proposed feature, dependency, abstraction, service, workflow, or generalization adds continuing ownership cost. Load it to compare present need, the smallest sufficient move, and lifetime burden before planning.
 ---
 
 # Engineering Restraint

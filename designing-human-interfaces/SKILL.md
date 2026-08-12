@@ -1,6 +1,6 @@
 ---
 name: designing-human-interfaces
-description: "Resolved interface design for human-facing UI. Use when designing, implementing, critiquing, or polishing an interface, including its visual grammar, interaction states, motion, and perceived performance."
+description: "Use when a human-facing interface is designed, implemented, critiqued, or polished. Load it to resolve the user's moment, interaction floor, visual grammar, states, motion, and perceived performance as one judgment."
 ---
 
 # Designing Human Interfaces
