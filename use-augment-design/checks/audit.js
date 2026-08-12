@@ -84,7 +84,7 @@
     }
 
     const documentRoles = new Set();
-    for (const element of root.querySelectorAll("*")) {
+    for (const element of [root, ...root.querySelectorAll("*")]) {
       if (!visible(element)) continue;
       const style = global.getComputedStyle(element);
       const role = element.dataset.augRole;
