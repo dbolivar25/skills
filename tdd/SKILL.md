@@ -5,15 +5,15 @@ description: Test-driven development. Use when the user wants to build features 
 
 # Test-Driven Development
 
-## Philosophy
+## Testing law and workflow
 
-**Core principle**: Tests should verify behavior through public interfaces, not implementation details. Code can change entirely; tests shouldn't.
+`../coding-standards/SKILL.md` is the source of truth for what counts as valid
+testing evidence. This skill owns the Red-Green-Refactor workflow.
 
-**Good tests** are integration-style: they exercise real code paths through public APIs. They describe _what_ the system does, not _how_ it does it. A good test reads like a specification - "user can checkout with valid cart" tells you exactly what capability exists. These tests survive refactors because they don't care about internal structure.
-
-**Bad tests** are coupled to implementation. They mock internal collaborators, test private methods, or verify through external means (like querying a database directly instead of using the interface). The warning sign: your test breaks when you refactor, but behavior hasn't changed. If you rename an internal function and tests fail, those tests were testing implementation, not behavior.
-
-See [tests.md](tests.md) for examples and [mocking.md](mocking.md) for mocking guidelines.
+Tests observe caller-visible behavior through real production seams. They should
+survive internal refactors and fail when the behavior changes. See
+[tests.md](tests.md) for examples and [mocking.md](mocking.md) for controlling
+dependencies without module patching or method spies.
 
 ## Seams — where tests go
 
@@ -121,15 +121,8 @@ Refactor only from **GREEN**.
 Completion criterion: refactoring began from green, preserves the agreed public
 behavior, and leaves the full relevant suite green.
 
-## Local testing policy
+## Evidence policy
 
-In this repository, `../coding-standards/SKILL.md` is the source of truth. Where
-it conflicts with [mocking.md](mocking.md), follow the coding standards:
-
-- Do not use module-patching APIs (`vi.mock`, `jest.mock`) or method-spy APIs
-  (`vi.spyOn`, `jest.spyOn`). Replace behavior through a real seam instead
-  (constructor-injected dependency, Effect service/layer, recording fake adapter,
-  local database, runtime binding).
-- Prefer recording fakes supplied through production seams over mocks, even at
-  system boundaries.
-- Match evidence to risk and use representative databases or runtimes for claims that depend on them.
+Match evidence to risk. Use representative databases, runtimes, migrations, and
+adapters for claims that depend on them. A fast fake can drive the loop, but it
+does not prove behavior that belongs to the real external implementation.

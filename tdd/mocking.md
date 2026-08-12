@@ -1,59 +1,56 @@
-# When to Mock
+# Controlling dependencies in tests
 
-Mock at **system boundaries** only:
+The coding standards own the policy: verify behavior through real seams, do not
+patch modules or spy on methods, and match evidence to consequence.
 
-- External APIs (payment, email, etc.)
-- Databases (sometimes - prefer test DB)
-- Time/randomness
-- File system (sometimes)
+## Use production seams
 
-Don't mock:
+Replace external behavior through the same narrow interface production uses:
 
-- Your own classes/modules
-- Internal collaborators
-- Anything you control
+- a constructor-injected port;
+- an Effect service or layer;
+- a runtime binding or composition-root capability;
+- a local server or database;
+- a deterministic clock, ID source, random source, or scheduler; or
+- a recording fake adapter implementing the production-owned interface.
 
-## Designing for Mockability
+A test-only seam is a design smell. The application owns the port because its
+policy needs a boundary; the test supplies another implementation of that port.
 
-At system boundaries, design interfaces that are easy to mock:
+## Prefer recording fakes
 
-**1. Use dependency injection**
-
-Pass external dependencies in rather than creating them internally:
+A recording fake returns controlled results and records caller-visible requests
+for assertions:
 
 ```typescript
-// Easy to mock
-function processPayment(order, paymentClient) {
-  return paymentClient.charge(order.total);
-}
+class RecordingPayments implements Payments {
+  readonly charges: ChargeRequest[] = [];
 
-// Hard to mock
-function processPayment(order) {
-  const client = new StripeClient(process.env.STRIPE_KEY);
-  return client.charge(order.total);
+  async charge(request: ChargeRequest): Promise<ChargeResult> {
+    this.charges.push(request);
+    return { status: "accepted", id: PaymentId.parse("pay_test") };
+  }
 }
 ```
 
-**2. Prefer SDK-style interfaces over generic fetchers**
+Assert on the adapter record only when the external request is part of the
+application's observable contract. Do not assert incidental internal call order.
 
-Create specific functions for each external operation instead of one generic function with conditional logic:
+## Use the real implementation when the claim belongs to it
 
-```typescript
-// GOOD: Each function is independently mockable
-const api = {
-  getUser: (id) => fetch(`/users/${id}`),
-  getOrders: (userId) => fetch(`/users/${userId}/orders`),
-  createOrder: (data) => fetch('/orders', { method: 'POST', body: data }),
-};
+A fake cannot establish SQL constraints, transaction behavior, serialization,
+network protocol, framework wiring, browser behavior, or a third-party SDK's
+current contract. Use a representative database, local server, supported runtime,
+or contract test at that boundary. Apply the production migration path when the
+claim depends on persisted shape.
 
-// BAD: Mocking requires conditional logic inside the mock
-const api = {
-  fetch: (endpoint, options) => fetch(endpoint, options),
-};
-```
+## Avoid
 
-The SDK approach means:
-- Each mock returns one specific shape
-- No conditional logic in test setup
-- Easier to see which endpoints a test exercises
-- Type safety per endpoint
+- `vi.mock`, `jest.mock`, import rewriting, and other module-patching APIs;
+- `vi.spyOn`, `jest.spyOn`, and assertions on private collaborators;
+- generic fetch fakes with conditional branches for many unrelated operations;
+- in-memory substitutes presented as proof of database or runtime behavior; and
+- fake types or interfaces created only because a test wants to intercept a call.
+
+If the current code offers no real seam, keep that architectural constraint
+visible. Do not hide it behind test magic.
