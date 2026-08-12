@@ -76,12 +76,6 @@ Completion criterion: the decision follows from checked evidence, the next move
 stays within the user's authorization, and a concrete reopen trigger states
 what would change it. An answer-changing unknown requires `Defer`.
 
-## Relationship to make-the-map
-
-Use this gate to test whether an additive proposal earned its ownership cost.
-Use `make-the-map` when the decision remains multidimensional afterward, or is
-primarily product, strategy, organizational, or architectural.
-
 ## Failure modes
 
 - **Austerity theater** — treating less engineering as inherently virtuous.
