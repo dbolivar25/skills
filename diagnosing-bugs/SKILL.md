@@ -7,6 +7,25 @@ description: Diagnosis loop for hard bugs and performance regressions. Use when 
 
 A discipline for hard bugs. Skip phases only when explicitly justified.
 
+## Authority boundary
+
+Invocation for `diagnose`, `debug`, or a report that something is broken grants
+authority to investigate and explain the cause. It does not grant authority to
+edit product code, apply a fix, or leave instrumentation in the repository.
+
+At the start, classify the task:
+
+- **Diagnosis-only** — inspect, reproduce with existing surfaces, and return the
+  cause, evidence, and correction direction. Keep the repository unchanged. Use
+  ephemeral commands or redacted artifacts only when they do not mutate the
+  target system.
+- **Fix authorized** — carry the verified cause through regression test, fix,
+  cleanup, and validation within the user's stated scope.
+
+If a tight loop requires a repository change or production instrumentation that
+the user has not authorized, explain the smallest diagnostic change and ask for
+that authority. Do not treat the skill's later phases as permission.
+
 When exploring the codebase, read `CONTEXT.md` (if it exists) to get a clear mental model of the relevant modules, and check ADRs in the area you're touching.
 
 ## Redact
@@ -23,18 +42,19 @@ Spend disproportionate effort here. **Be aggressive. Be creative. Refuse to give
 
 ### Ways to construct one — try them in roughly this order
 
-1. **Failing test** at whatever seam reaches the bug — unit, integration, e2e.
+1. **Existing failing test** at whatever seam reaches the bug — unit,
+   integration, e2e. Add a new test only when source edits are authorized.
 2. **Curl / HTTP script** against a running dev server.
 3. **CLI invocation** with a fixture input, diffing stdout against a known-good snapshot.
 4. **Headless browser script** (Playwright / Puppeteer) — drives the UI, asserts on DOM/console/network.
 5. **Replay a captured trace.** Save a real network request / payload / event log to disk; replay it through the code path in isolation.
-6. **Throwaway harness.** Spin up a minimal subset of the system (one service, mocked deps) that exercises the bug code path with a single function call.
+6. **Throwaway harness.** When diagnostic writes are authorized, spin up a
+   minimal subset of the system that exercises the bug path with one call. Keep
+   it outside the repository when practical and remove it before completion.
 7. **Property / fuzz loop.** If the bug is "sometimes wrong output", run 1000 random inputs and look for the failure mode.
 8. **Bisection harness.** If the bug appeared between two known states (commit, dataset, version), automate "boot at state X, check, repeat" so you can `git bisect run` it.
 9. **Differential loop.** Run the same input through old-version vs new-version (or two configs) and diff outputs.
 10. **HITL bash script.** Last resort. If a human must click, drive _them_ with `scripts/hitl-loop.template.sh` so the loop is still structured. Captured output feeds back to you.
-
-Build the right feedback loop, and the bug is 90% fixed.
 
 ### Tighten the loop
 
@@ -52,7 +72,10 @@ The goal is not a clean repro but a **higher reproduction rate**. Loop the trigg
 
 ### When you genuinely cannot build a loop
 
-Stop and say so explicitly. List what you tried. Ask the user for: (a) access to whatever environment reproduces it, (b) a redacted captured artifact (HAR file, log dump, core dump, screen recording with timestamps), or (c) permission to add temporary production instrumentation. Do **not** proceed to hypothesise without a loop.
+Stop and say so explicitly. List what you tried. Ask the user for: (a) access to
+whatever environment reproduces it, (b) a redacted captured artifact (HAR file,
+log dump, core dump, screen recording with timestamps), or (c) permission to add
+temporary instrumentation. Do **not** proceed to hypothesise without a loop.
 
 ### Completion criterion — a tight loop that goes red
 
@@ -111,7 +134,22 @@ Tool preference:
 
 **Perf branch.** For performance regressions, logs are usually wrong. Instead: establish a baseline measurement (timing harness, `performance.now()`, profiler, query plan), then bisect. Measure first, fix second.
 
+## Diagnosis handoff
+
+In diagnosis-only mode, stop after the tested hypotheses identify the cause or
+after the available evidence reaches its limit. Return:
+
+- the exact symptom and reproduction signal;
+- the verified cause, or the ranked remaining causes if evidence is incomplete;
+- evidence that falsified the discarded hypotheses;
+- the smallest correction direction and regression seam; and
+- any access or authorization needed to continue.
+
+Do not enter the fix phases until the user has authorized implementation.
+
 ## Phase 5 — Fix + regression test
+
+Run this phase only in fix-authorized mode.
 
 Write the regression test **before the fix** — but only if there is a **correct seam** for it.
 
@@ -128,6 +166,8 @@ If a correct seam exists:
 5. Re-run the Phase 1 feedback loop against the original (un-minimised) scenario.
 
 ## Phase 6 — Cleanup + post-mortem
+
+Run this phase only in fix-authorized mode.
 
 Required before declaring done:
 

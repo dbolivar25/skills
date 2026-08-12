@@ -1,8 +1,23 @@
 ---
 name: simplify
-description: Use this skill automatically when you feel your code is ready for human review, and whenever writing or reviewing code comments. Ready means the code works and achieves a stated goal, verified by your own tests and/or, if you deem it necessary, human testing.
+description: Use when an authorized code change has reached a verified review boundary, or when code comments need a clarity pass. Load it to reduce concepts and reading cost without changing behavior; invocation alone never grants edit authority.
 ---
-Review changes in the current branch, or in the scope the user specifies. Apply these criteria without changing behavior. Only touch code in that scope, and run the relevant existing checks after changes.
+
+# Simplify
+
+Review changes in the current branch, or in the scope the user specifies. Apply
+these criteria without changing behavior or public contracts.
+
+Invocation does not grant mutation authority:
+
+- When the current task already authorizes implementation, apply simplifications
+  only inside that same scope and run the relevant existing checks afterward.
+- During review, diagnosis, explanation, or another read-only task, return
+  simplification findings without editing files.
+
+State which mode applies before changing anything. A finding that would alter
+behavior, compatibility, or architecture belongs to the owning task, not this
+finishing pass.
 
 ## Word choice in code and comments
 
@@ -50,4 +65,3 @@ Code must stand on its own. If a change only makes sense to someone who watched 
 
 - If a name or comment needs the conversation to be understood, rewrite it against the codebase's own vocabulary.
 - **No backwards compatibility with unshipped code.** Supporting an old signature, alias, or data shape that only existed earlier in the same branch is compatibility with something that was never deployed. Delete the old path and update its callers.
-
