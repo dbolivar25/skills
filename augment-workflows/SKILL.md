@@ -13,9 +13,9 @@ configurable node, validate before release, and distinguish accepted execution
 from observed execution.
 
 This package is standalone. It must work without a source checkout. The bundled
-node registry, Data Context, and lifecycle references are the cold-start
-contract. MCP discovery confirms that the expected contract is available; it
-does not license substituting a different workflow interface.
+node registry, Data Context, destination, and lifecycle references are the
+cold-start contract. MCP discovery confirms that the expected contract is
+available; it does not license substituting a different workflow interface.
 
 ## Reference Routing
 
@@ -26,6 +26,9 @@ does not license substituting a different workflow interface.
   [`references/data-context.md`](references/data-context.md).
 - Before reading or mutating workflow resources, load
   [`references/workflow-lifecycle.md`](references/workflow-lifecycle.md).
+- Before choosing, changing, preserving, or verifying a Publish to Slack or
+  Publish to Teams destination, load
+  [`references/integration-destinations.md`](references/integration-destinations.md).
 - Before authoring, editing, reviewing, or debugging a Create PDF Artifact
   body, read its live authoring resource and then load
   [`references/pdf-artifact-authoring.md`](references/pdf-artifact-authoring.md).
@@ -150,6 +153,8 @@ For authoring or edits, return:
 - Preflight and server-validation results.
 - Performed or required MCP operations and confirmation gates.
 - Observed execution state when applicable.
+- For Slack or Teams destination work, the destination scope or credential
+  subject, provider-native IDs, and exact-read outcome.
 - For PDF work, report Accepted content partitions and interaction cases, named
   invariants, per-case current-render proof and provenance, and every invariant
   that remains unverified or blocked by execution authorization.
@@ -214,6 +219,9 @@ Each finding should cite the node id, field, and reason.
 - [`references/workflow-lifecycle.md`](references/workflow-lifecycle.md): MCP
   resources, write tools, validation, release, execution, cancel, retry, and
   archive behavior.
+- [`references/integration-destinations.md`](references/integration-destinations.md):
+  provider-native Slack and Teams destination discovery, ownership, and exact
+  verification.
 - [`references/pdf-artifact-authoring.md`](references/pdf-artifact-authoring.md):
   document systems, Accepted content region maps, fit-or-continue behavior,
   page composition, tables, and provenance-backed render proof.

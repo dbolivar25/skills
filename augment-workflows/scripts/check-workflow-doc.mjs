@@ -378,7 +378,7 @@ const nodeSpecs = {
     success: 1,
     error: 1,
     params: {
-      connectionId: literal('number', { positiveSafeInteger: true }),
+      workspaceId: literal('string'),
       channelId: literal('string'),
       source: liquid({ format: 'json' }),
       fallback: liquid({ format: 'plain' }),
@@ -429,7 +429,7 @@ const nodeSpecs = {
     success: 1,
     error: 1,
     params: {
-      configurationId: literal('number', { positiveSafeInteger: true }),
+      tenantId: literal('string'),
       teamId: literal('string'),
       channelId: literal('string'),
       bodyHtml: optional(liquid({ format: 'html' })),
@@ -979,6 +979,13 @@ function checkActionContractParameters(
   warnings
 ) {
   if (contract === 'slackPublish') {
+    rejectRemovedDestinationParameter(
+      label,
+      params,
+      'connectionId',
+      'workspaceId',
+      issues
+    );
     checkNonblankTemplates(label, params, ['source', 'fallback'], issues);
     if (
       typeof params.fallback === 'string' &&
@@ -1050,6 +1057,13 @@ function checkActionContractParameters(
   }
 
   if (contract === 'teamsPublish') {
+    rejectRemovedDestinationParameter(
+      label,
+      params,
+      'configurationId',
+      'tenantId',
+      issues
+    );
     const hasBody =
       typeof params.bodyHtml === 'string' && params.bodyHtml.trim().length > 0;
     const hasCards =
@@ -1075,6 +1089,19 @@ function checkActionContractParameters(
     }
     return;
   }
+}
+
+function rejectRemovedDestinationParameter(
+  label,
+  params,
+  removed,
+  replacement,
+  issues
+) {
+  if (!Object.hasOwn(params, removed)) return;
+  issues.push(
+    `${label}.${removed}: removed private parameter; use provider-native ${replacement}.`
+  );
 }
 
 function checkNonblankTemplates(label, params, fields, issues) {

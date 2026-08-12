@@ -52,6 +52,11 @@ Their resource template names are `create-pdf-artifact-authoring`,
 `publish-to-teams-authoring`. Read the relevant contract before authoring that
 node. These resources do not create or change a workflow.
 
+Publish to Slack and Publish to Teams also use live destination data. Before
+choosing, changing, preserving, or verifying either destination, read
+[`integration-destinations.md`](integration-destinations.md). Use it for the
+integration resource hierarchy, Agent-owner rules, and exact-read semantics.
+
 There is no Add Artifact to Decision Site authoring resource in this contract.
 Use the complete bundled contract in `node-registry.md`. Do not infer a URI from
 the other four names.

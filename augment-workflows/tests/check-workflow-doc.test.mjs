@@ -81,7 +81,7 @@ function buildSlackDocument() {
     name: 'Publish to Slack',
     type: 'ds.slackPublish.perItem.in1.success1.error1',
     parameters: {
-      connectionId: 999999,
+      workspaceId: 'T_FAKE_REPLACE_ME',
       channelId: 'C_FAKE_REPLACE_ME',
       fallback: 'Workflow update: {{ trigger.systemEventType }}',
       source:
@@ -96,7 +96,7 @@ function buildTeamsDocument() {
     name: 'Publish to Teams',
     type: 'ds.teamsPublish.perItem.in1.success1.error1',
     parameters: {
-      configurationId: 999999,
+      tenantId: '00000000-0000-0000-0000-000000000001',
       teamId: '00000000-0000-0000-0000-000000000001',
       channelId: '19:FAKE_REPLACE_ME@thread.tacv2',
       bodyHtml:
@@ -143,6 +143,44 @@ test('accepts a focused Publish to Slack fixture with the json filter', () => {
 test('accepts a focused Publish to Teams fixture', () => {
   const result = runChecker(buildTeamsDocument());
   assert.equal(result.status, 0, result.stderr);
+});
+
+test('rejects the removed private Slack connection ID', () => {
+  const document = buildSlackDocument();
+  nodeById(document, 'publish-slack').parameters.connectionId = 999999;
+  const result = runChecker(document);
+  assert.equal(result.status, 1);
+  assert.match(
+    result.stderr,
+    /connectionId: removed private parameter; use provider-native workspaceId/u
+  );
+});
+
+test('rejects a numeric Slack workspace ID', () => {
+  const document = buildSlackDocument();
+  nodeById(document, 'publish-slack').parameters.workspaceId = 999999;
+  const result = runChecker(document);
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /workspaceId: expected string/u);
+});
+
+test('rejects the removed private Teams configuration ID', () => {
+  const document = buildTeamsDocument();
+  nodeById(document, 'publish-teams').parameters.configurationId = 999999;
+  const result = runChecker(document);
+  assert.equal(result.status, 1);
+  assert.match(
+    result.stderr,
+    /configurationId: removed private parameter; use provider-native tenantId/u
+  );
+});
+
+test('rejects a numeric Teams tenant ID', () => {
+  const document = buildTeamsDocument();
+  nodeById(document, 'publish-teams').parameters.tenantId = 999999;
+  const result = runChecker(document);
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /tenantId: expected string/u);
 });
 
 test('rejects fixed Decision Site access with organization scope', () => {

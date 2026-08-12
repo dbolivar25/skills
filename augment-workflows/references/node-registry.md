@@ -99,13 +99,13 @@ For static strings in CEL fields, quote inside the expression:
 | Control | `ds.waitUntil.perItem.in1.success1.error0` | per item | `cronExpression: literal`, `timezone: literal` |
 | Control | `ds.approval.perItem.in1.success2.error1` | per item | `prompt: liquid`, `approverEmails: cel/stringOrStringArray`, optional `timeoutDays`, `approveLabel`, `denyLabel` |
 | Control | `ds.approval.batch.in1.success2.error1` | batch | Same as per-item Approval |
-| Action | `ds.slackPublish.perItem.in1.success1.error1` | per item | `connectionId: literal/number`, `channelId: literal/string`, `source: liquid`, `fallback: liquid` |
+| Action | `ds.slackPublish.perItem.in1.success1.error1` | per item | `workspaceId: literal/string`, `channelId: literal/string`, `source: liquid`, `fallback: liquid` |
 | Action | `ds.slackPost.perItem.in1.success1.error1` | per item | `channel: cel/string`, `text: liquid` |
 | Action | `ds.slackPost.batch.in1.success1.error1` | batch | Same as per-item Slack Post |
 | Action | `ds.emailPublish.perItem.in1.success1.error1` | per item | `to: cel/json`, optional `cc`, `bcc`, `attachments: cel/json`, `subject`, `html`, `plaintext: liquid` |
 | Action | `ds.emailSend.perItem.in1.success1.error1` | per item | `to: cel/stringOrStringArray`, `subject: liquid`, `body: liquid` |
 | Action | `ds.emailSend.batch.in1.success1.error1` | batch | Same as per-item Email Send |
-| Action | `ds.teamsPublish.perItem.in1.success1.error1` | per item | `configurationId: literal/number`, `teamId`, `channelId`, `importance: literal/string`, optional `bodyHtml`, `cards: liquid` |
+| Action | `ds.teamsPublish.perItem.in1.success1.error1` | per item | `tenantId: literal/string`, `teamId`, `channelId`, `importance: literal/string`, optional `bodyHtml`, `cards: liquid` |
 | Action | `ds.teamsPost.perItem.in1.success1.error1` | per item | `teamId: cel/string`, `channelId: cel/string`, `text: liquid` |
 | Action | `ds.teamsPost.batch.in1.success1.error1` | batch | Same as per-item Teams Post |
 | Action | `ds.createPdfArtifact.perItem.in1.success1.error1` | per item | `title: liquid`, `source: liquid` |
@@ -525,11 +525,14 @@ shape:
 
 Type: `ds.slackPublish.perItem.in1.success1.error1`
 
+Choose and verify `workspaceId` and `channelId` with
+[`integration-destinations.md`](integration-destinations.md).
+
 Params:
 
 | Field | Mode | Runtime type | Required |
 | --- | --- | --- | --- |
-| `connectionId` | literal | positive safe integer | yes |
+| `workspaceId` | literal | nonblank string | yes |
 | `channelId` | literal | nonblank string | yes |
 | `source` | liquid | Slack message JSON object with `blocks` | yes |
 | `fallback` | liquid | plain text | yes |
@@ -654,11 +657,14 @@ Params: `to: cel/stringOrStringArray`, `subject: liquid`, `body: liquid`.
 
 Type: `ds.teamsPublish.perItem.in1.success1.error1`
 
+Choose and verify `tenantId`, `teamId`, and `channelId` with
+[`integration-destinations.md`](integration-destinations.md).
+
 Params:
 
 | Field | Mode | Runtime type | Required |
 | --- | --- | --- | --- |
-| `configurationId` | literal | positive safe integer | yes |
+| `tenantId` | literal | nonblank string | yes |
 | `teamId` | literal | nonblank string | yes |
 | `channelId` | literal | nonblank string | yes |
 | `bodyHtml` | liquid | complete Teams-compatible HTML | no |
