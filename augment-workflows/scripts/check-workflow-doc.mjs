@@ -386,7 +386,31 @@ const nodeSpecs = {
     sideEffect: true,
     actionContract: 'slackPublish',
   },
+  'ds.slackPublish.batch.in1.success1.error1': {
+    inputs: 1,
+    success: 1,
+    error: 1,
+    params: {
+      workspaceId: literal('string'),
+      channelId: literal('string'),
+      source: liquid({ format: 'json' }),
+      fallback: liquid({ format: 'plain' }),
+    },
+    sideEffect: true,
+    actionContract: 'slackPublish',
+  },
   'ds.createPdfArtifact.perItem.in1.success1.error1': {
+    inputs: 1,
+    success: 1,
+    error: 1,
+    params: {
+      title: liquid({ format: 'plain' }),
+      source: liquid({ format: 'html' }),
+    },
+    sideEffect: true,
+    actionContract: 'createPdfArtifact',
+  },
+  'ds.createPdfArtifact.batch.in1.success1.error1': {
     inputs: 1,
     success: 1,
     error: 1,
@@ -424,7 +448,38 @@ const nodeSpecs = {
     sideEffect: true,
     actionContract: 'emailPublish',
   },
+  'ds.emailPublish.batch.in1.success1.error1': {
+    inputs: 1,
+    success: 1,
+    error: 1,
+    params: {
+      to: cel('json'),
+      cc: optional(cel('json')),
+      bcc: optional(cel('json')),
+      subject: liquid({ format: 'plain' }),
+      html: liquid({ format: 'html' }),
+      plaintext: liquid({ format: 'plain' }),
+      attachments: optional(cel('json')),
+    },
+    sideEffect: true,
+    actionContract: 'emailPublish',
+  },
   'ds.teamsPublish.perItem.in1.success1.error1': {
+    inputs: 1,
+    success: 1,
+    error: 1,
+    params: {
+      tenantId: literal('string'),
+      teamId: literal('string'),
+      channelId: literal('string'),
+      bodyHtml: optional(liquid({ format: 'html' })),
+      cards: optional(liquid({ format: 'json' })),
+      importance: literal('string', { enum: TEAMS_IMPORTANCE }),
+    },
+    sideEffect: true,
+    actionContract: 'teamsPublish',
+  },
+  'ds.teamsPublish.batch.in1.success1.error1': {
     inputs: 1,
     success: 1,
     error: 1,
@@ -898,7 +953,15 @@ function checkParamValue(label, nodeType, field, value, descriptor, issues, warn
     return;
   }
   if (descriptor.kind === 'cel') {
-    checkCel(label, field, value, descriptor.resultType, issues, warnings);
+    checkCel(
+      label,
+      field,
+      value,
+      descriptor.resultType,
+      expectedNodeMode(nodeType),
+      issues,
+      warnings
+    );
     return;
   }
   if (descriptor.kind === 'liquid') {
@@ -1843,14 +1906,10 @@ function checkLiquid(
   if (/\{\{[^}]*$/u.test(value)) {
     issues.push(`${label}.${field}: unclosed Liquid output expression.`);
   }
-  if (nodeMode === 'batch' && /\{\{[^}]*\bjson\b/u.test(value)) {
-    issues.push(`${label}.${field}: batch mode should reference items instead of json.`);
-  }
-
   const locals = collectLiquidLocals(value);
   checkLiquidTags(label, field, value, nodeMode, issues, warnings);
   checkLiquidFilters(label, field, value, issues, warnings);
-  checkLiquidRoots(label, field, value, locals, issues);
+  checkLiquidRoots(label, field, value, locals, nodeMode, issues);
   checkReservedProps(label, field, value, issues);
 }
 
@@ -1988,12 +2047,15 @@ function checkLiquidFilters(label, field, value, issues, warnings) {
   }
 }
 
-function checkLiquidRoots(label, field, value, locals, issues) {
+function checkLiquidRoots(label, field, value, locals, nodeMode, issues) {
   const expressionRe = /\{\{([^}]*)\}\}|\{%-?\s*(?:if|elsif|unless|when|assign)\b([^%}]*)-?%\}/gu;
   const reported = new Set();
   for (const match of value.matchAll(expressionRe)) {
     const expression = match[1] ?? match[2] ?? '';
     const leadingRoot = /^\s*([A-Za-z_]\w*)\b/u.exec(expression)?.[1];
+    if (nodeMode === 'batch' && leadingRoot === 'json') {
+      reportUnavailableBatchRoot(label, field, reported, issues);
+    }
     if (
       leadingRoot &&
       !LIQUID_ROOTS.has(leadingRoot) &&
@@ -2006,6 +2068,9 @@ function checkLiquidRoots(label, field, value, locals, issues) {
     const rootRe = /(?:^|[^\w.])([A-Za-z_]\w*)\s*(?=\.|\[)/gu;
     for (const rootMatch of expression.matchAll(rootRe)) {
       const root = rootMatch[1];
+      if (nodeMode === 'batch' && root === 'json') {
+        reportUnavailableBatchRoot(label, field, reported, issues);
+      }
       if (
         !LIQUID_ROOTS.has(root) &&
         !locals.has(root) &&
@@ -2016,6 +2081,12 @@ function checkLiquidRoots(label, field, value, locals, issues) {
       }
     }
   }
+}
+
+function reportUnavailableBatchRoot(label, field, reported, issues) {
+  if (reported.has('json')) return;
+  reported.add('json');
+  issues.push(`${label}.${field}: batch mode should reference items instead of json.`);
 }
 
 function reportUnknownLiquidRoot(label, field, root, reported, issues) {
@@ -2053,7 +2124,7 @@ function checkReservedProps(label, field, value, issues) {
   }
 }
 
-function checkCel(label, field, value, resultType, issues, warnings) {
+function checkCel(label, field, value, resultType, nodeMode, issues, warnings) {
   if (typeof value !== 'string') {
     issues.push(`${label}.${field}: CEL parameters must be strings.`);
     return;
@@ -2064,6 +2135,10 @@ function checkCel(label, field, value, resultType, issues, warnings) {
   }
   if (/\{\{|\}\}|\{%|%\}/u.test(value)) {
     issues.push(`${label}.${field}: CEL field contains Liquid delimiters.`);
+  }
+  const leadingIdentifier = /^\s*([A-Za-z_]\w*)/u.exec(value)?.[1];
+  if (nodeMode === 'batch' && leadingIdentifier === 'json') {
+    issues.push(`${label}.${field}: batch mode should reference items instead of json.`);
   }
   if (!hasBalancedExpressionDelimiters(value)) {
     issues.push(`${label}.${field}: CEL expression has unbalanced quotes or brackets.`);

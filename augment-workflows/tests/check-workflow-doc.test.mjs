@@ -23,6 +23,10 @@ const integrationDestinations = fs.readFileSync(
   path.join(skillRoot, 'references', 'integration-destinations.md'),
   'utf8'
 );
+const nodeRegistry = fs.readFileSync(
+  path.join(skillRoot, 'references', 'node-registry.md'),
+  'utf8'
+);
 
 function cloneArtifactExample() {
   return structuredClone(artifactExample);
@@ -45,7 +49,7 @@ function buildActionDocument(action) {
       {
         ...action,
         typeVersion: 1,
-        mode: 'per_item',
+        mode: action.type.includes('.batch.') ? 'batch' : 'per_item',
         position: [320, 0],
       },
       {
@@ -79,11 +83,13 @@ function buildActionDocument(action) {
   };
 }
 
-function buildSlackDocument() {
+function buildSlackDocument(
+  type = 'ds.slackPublish.perItem.in1.success1.error1'
+) {
   return buildActionDocument({
     id: 'publish-slack',
     name: 'Publish to Slack',
-    type: 'ds.slackPublish.perItem.in1.success1.error1',
+    type,
     parameters: {
       workspaceId: 'T_FAKE_REPLACE_ME',
       channelId: 'C_FAKE_REPLACE_ME',
@@ -94,11 +100,13 @@ function buildSlackDocument() {
   });
 }
 
-function buildTeamsDocument() {
+function buildTeamsDocument(
+  type = 'ds.teamsPublish.perItem.in1.success1.error1'
+) {
   return buildActionDocument({
     id: 'publish-teams',
     name: 'Publish to Teams',
-    type: 'ds.teamsPublish.perItem.in1.success1.error1',
+    type,
     parameters: {
       tenantId: '00000000-0000-0000-0000-000000000001',
       teamId: '00000000-0000-0000-0000-000000000001',
@@ -108,6 +116,37 @@ function buildTeamsDocument() {
       cards:
         '[{"type":"AdaptiveCard","version":"1.5","body":[{"type":"TextBlock","text":{{ trigger.systemEventType | json }}}]}]',
       importance: 'normal',
+    },
+  });
+}
+
+function buildPdfDocument() {
+  return buildActionDocument({
+    id: 'create-pdf',
+    name: 'Create PDF Artifact',
+    type: 'ds.createPdfArtifact.batch.in1.success1.error1',
+    parameters: {
+      title: 'Portfolio brief for {{ items | size }} records',
+      source:
+        '<main>{% for item in items limit: 250 %}<p>{{ item | json | escape }}</p>{% endfor %}</main>',
+    },
+  });
+}
+
+function buildEmailDocument() {
+  return buildActionDocument({
+    id: 'send-email',
+    name: 'Send Email',
+    type: 'ds.emailPublish.batch.in1.success1.error1',
+    parameters: {
+      to: 'author.email',
+      cc: '"json@example.com"',
+      subject: 'Workflow digest for {{ items | size }} records',
+      html:
+        '<h1>Workflow digest</h1>{% for item in items limit: 250 %}<p>{{ item | json | escape }}</p>{% endfor %}',
+      plaintext:
+        'Workflow digest\n{% for item in items limit: 250 %}{{ item | json }}\n{% endfor %}',
+      attachments: 'items',
     },
   });
 }
@@ -147,6 +186,90 @@ test('accepts a focused Publish to Slack fixture with the json filter', () => {
 test('accepts a focused Publish to Teams fixture', () => {
   const result = runChecker(buildTeamsDocument());
   assert.equal(result.status, 0, result.stderr);
+});
+
+test('accepts a batch Publish to Slack fixture', () => {
+  const result = runChecker(
+    buildSlackDocument('ds.slackPublish.batch.in1.success1.error1')
+  );
+  assert.equal(result.status, 0, result.stderr);
+});
+
+test('rejects the json root in a batch Liquid field', () => {
+  const document = buildSlackDocument(
+    'ds.slackPublish.batch.in1.success1.error1'
+  );
+  nodeById(document, 'publish-slack').parameters.fallback = '{{ json.value }}';
+  const result = runChecker(document);
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /batch mode should reference items instead of json/u);
+});
+
+test('accepts a batch Create PDF Artifact fixture', () => {
+  const result = runChecker(buildPdfDocument());
+  assert.equal(result.status, 0, result.stderr);
+});
+
+test('accepts a batch Send Email fixture', () => {
+  const result = runChecker(buildEmailDocument());
+  assert.equal(result.status, 0, result.stderr);
+});
+
+test('rejects the json root in every batch Send Email CEL field', () => {
+  for (const [field, value] of [
+    ['to', 'json.recipients'],
+    ['cc', 'json.cc'],
+    ['bcc', 'json.bcc'],
+    ['attachments', 'json'],
+  ]) {
+    const document = buildEmailDocument();
+    nodeById(document, 'send-email').parameters[field] = value;
+    const result = runChecker(document);
+    assert.equal(result.status, 1, `${field}: ${result.stderr}`);
+    assert.match(
+      result.stderr,
+      new RegExp(
+        `${field}: batch mode should reference items instead of json`,
+        'u'
+      )
+    );
+  }
+});
+
+test('accepts a batch Publish to Teams fixture', () => {
+  const result = runChecker(
+    buildTeamsDocument('ds.teamsPublish.batch.in1.success1.error1')
+  );
+  assert.equal(result.status, 0, result.stderr);
+});
+
+test('rejects a fabricated Add Artifact to Decision Site batch type', () => {
+  const document = cloneArtifactExample();
+  const node = nodeById(document, 'place-artifact');
+  node.type = 'ds.addArtifactToDecisionSite.batch.in1.success1.error1';
+  node.mode = 'batch';
+  const result = runChecker(document);
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /unknown public node type/u);
+});
+
+test('documents per-item retry isolation without changing batch retry scope', () => {
+  assert.match(
+    nodeRegistry,
+    /next attempt invokes only unresolved\noriginal item indexes/u
+  );
+  assert.match(nodeRegistry, /Intermediate attempts\npublish no outputs/u);
+  assert.match(
+    nodeRegistry,
+    /Batch nodes do not use per-item checkpoints: a retry invokes the whole batch\nagain/u
+  );
+});
+
+test('documents mode-specific PDF attachment expressions', () => {
+  assert.match(
+    nodeRegistry,
+    /attachments: "json"` in per-item mode\nor `attachments: "items"` in batch mode/u
+  );
 });
 
 test('documents member-scoped Teams destination discovery', () => {

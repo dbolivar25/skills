@@ -1,6 +1,6 @@
 # Node Registry Reference
 
-Use only these 40 public-authorable node type strings in Augment MCP workflow
+Use only these 44 public-authorable node type strings in Augment MCP workflow
 documents. Every node uses `typeVersion: 1`.
 
 The runtime registry also contains two `ds.internalHandler` variants. Public
@@ -100,15 +100,19 @@ For static strings in CEL fields, quote inside the expression:
 | Control | `ds.approval.perItem.in1.success2.error1` | per item | `prompt: liquid`, `approverEmails: cel/stringOrStringArray`, optional `timeoutDays`, `approveLabel`, `denyLabel` |
 | Control | `ds.approval.batch.in1.success2.error1` | batch | Same as per-item Approval |
 | Action | `ds.slackPublish.perItem.in1.success1.error1` | per item | `workspaceId: literal/string`, `channelId: literal/string`, `source: liquid`, `fallback: liquid` |
+| Action | `ds.slackPublish.batch.in1.success1.error1` | batch | Same as per-item Publish to Slack |
 | Action | `ds.slackPost.perItem.in1.success1.error1` | per item | `channel: cel/string`, `text: liquid` |
 | Action | `ds.slackPost.batch.in1.success1.error1` | batch | Same as per-item Slack Post |
 | Action | `ds.emailPublish.perItem.in1.success1.error1` | per item | `to: cel/json`, optional `cc`, `bcc`, `attachments: cel/json`, `subject`, `html`, `plaintext: liquid` |
+| Action | `ds.emailPublish.batch.in1.success1.error1` | batch | Same as per-item Send Email |
 | Action | `ds.emailSend.perItem.in1.success1.error1` | per item | `to: cel/stringOrStringArray`, `subject: liquid`, `body: liquid` |
 | Action | `ds.emailSend.batch.in1.success1.error1` | batch | Same as per-item Email Send |
 | Action | `ds.teamsPublish.perItem.in1.success1.error1` | per item | `tenantId: literal/string`, `teamId`, `channelId`, `importance: literal/string`, optional `bodyHtml`, `cards: liquid` |
+| Action | `ds.teamsPublish.batch.in1.success1.error1` | batch | Same as per-item Publish to Teams |
 | Action | `ds.teamsPost.perItem.in1.success1.error1` | per item | `teamId: cel/string`, `channelId: cel/string`, `text: liquid` |
 | Action | `ds.teamsPost.batch.in1.success1.error1` | batch | Same as per-item Teams Post |
 | Action | `ds.createPdfArtifact.perItem.in1.success1.error1` | per item | `title: liquid`, `source: liquid` |
+| Action | `ds.createPdfArtifact.batch.in1.success1.error1` | batch | Same as per-item Create PDF Artifact |
 | Action | `ds.addArtifactToDecisionSite.perItem.in1.success1.error1` | per item | `decisionSiteId: cel/number`, `access: literal/json` |
 | Action | `ds.smsSend.perItem.in1.success1.error1` | per item | `to: cel/stringOrStringArray`, `body: liquid` |
 | Action | `ds.smsSend.batch.in1.success1.error1` | batch | Same as per-item SMS Send |
@@ -492,11 +496,11 @@ needs:
 
 | Job | Node | Authoring behavior |
 | --- | --- | --- |
-| Slack Block Kit | Publish to Slack | Exact Slack JSON, fixed connected destination, per item |
+| Slack Block Kit | Publish to Slack | Exact Slack JSON, fixed connected destination, per item or batch |
 | Slack Markdown | Slack Post | Markdown conversion, CEL channel, per item or batch |
-| Complete email | Send Email | HTML plus plain text, structured recipients, optional PDF Artifacts, per item |
+| Complete email | Send Email | HTML plus plain text, structured recipients, optional PDF Artifacts, per item or batch |
 | Markdown email | Send Markdown Email | Markdown conversion, per item or batch |
-| Teams HTML or cards | Publish to Teams | Teams-compatible HTML or Adaptive Cards, fixed connected destination, per item |
+| Teams HTML or cards | Publish to Teams | Teams-compatible HTML or Adaptive Cards, fixed connected destination, per item or batch |
 | Teams Markdown | Teams Post | Markdown conversion, CEL destination, per item or batch |
 
 Publish to Slack, Create PDF Artifact, Send Email, and Publish to Teams each
@@ -505,12 +509,23 @@ require the corresponding live authoring resource listed in
 limits, diagnostics, and examples. Add Artifact to Decision Site has no live
 authoring resource; its complete contract is bundled below.
 
-Publish to Slack, Create PDF Artifact, Add Artifact to Decision Site, Send
-Email, and Publish to Teams are per-item only. Each preserves successful sibling
-items when another item fails. Their sections define structured result and error
-contracts. Slack Post, Teams Post, Send Markdown Email, SMS Send, Notify, CRM
-Update Opportunity, Salesforce Task, and HubSpot Task use the generic error
-shape:
+For Publish to Slack, Create PDF Artifact, Send Email, and Publish to Teams,
+choose the variant by effect cardinality:
+
+- Per-item evaluates against each `json` input and creates one effect for each
+  item.
+- Batch evaluates once against the complete `items` collection, has no `json`,
+  and creates exactly one effect.
+
+Add Artifact to Decision Site remains per-item only. To place several Artifact
+references, emit them with Select Many and connect that output to per-item
+placement.
+
+The per-item variants of these five native actions retain successful sibling
+outputs when the terminal node outcome also contains item errors. Their
+sections define structured result and error contracts. Slack Post, Teams Post,
+Send Markdown Email, SMS Send, Notify, CRM Update Opportunity, Salesforce Task,
+and HubSpot Task use the generic error shape:
 
 ```json
 {
@@ -523,7 +538,12 @@ shape:
 
 #### Publish to Slack
 
-Type: `ds.slackPublish.perItem.in1.success1.error1`
+Types:
+
+```text
+ds.slackPublish.perItem.in1.success1.error1
+ds.slackPublish.batch.in1.success1.error1
+```
 
 Choose and verify `workspaceId` and `channelId` with
 [`integration-destinations.md`](integration-destinations.md).
@@ -596,7 +616,12 @@ Static channel:
 
 #### Send Email
 
-Type: `ds.emailPublish.perItem.in1.success1.error1`
+Types:
+
+```text
+ds.emailPublish.perItem.in1.success1.error1
+ds.emailPublish.batch.in1.success1.error1
+```
 
 Params:
 
@@ -611,7 +636,8 @@ Params:
 | `attachments` | cel | PDF `ArtifactRef` or array | no |
 
 A recipient is an email string or `{ "email": "...", "name": "..." }`.
-Use `attachments: "json"` directly after Create PDF Artifact.
+Directly after Create PDF Artifact, use `attachments: "json"` in per-item mode
+or `attachments: "items"` in batch mode.
 
 Success fields:
 
@@ -655,7 +681,12 @@ Params: `to: cel/stringOrStringArray`, `subject: liquid`, `body: liquid`.
 
 #### Publish to Teams
 
-Type: `ds.teamsPublish.perItem.in1.success1.error1`
+Types:
+
+```text
+ds.teamsPublish.perItem.in1.success1.error1
+ds.teamsPublish.batch.in1.success1.error1
+```
 
 Choose and verify `tenantId`, `teamId`, and `channelId` with
 [`integration-destinations.md`](integration-destinations.md).
@@ -716,7 +747,12 @@ Params: `teamId: cel/string`, `channelId: cel/string`, `text: liquid`.
 
 #### Create PDF Artifact
 
-Type: `ds.createPdfArtifact.perItem.in1.success1.error1`
+Types:
+
+```text
+ds.createPdfArtifact.perItem.in1.success1.error1
+ds.createPdfArtifact.batch.in1.success1.error1
+```
 
 Params: `title: liquid`, `source: liquid`. Both are strict templates.
 
@@ -958,6 +994,19 @@ workflow default. An omitted policy does not mean no retry.
 Structured action errors can further forbid retry with `mayRetry: false` or set
 a longer minimum delay with `retryAfterMs`. Use the outcome-handling rules in
 `12-factor-workflow-quality.md` before connecting a retry path.
+
+When a per-item node schedules another attempt, it checkpoints successful items
+and explicit terminal item errors. The next attempt invokes only unresolved
+original item indexes; completed items are not run again. Intermediate attempts
+publish no outputs and release no downstream nodes. Once the node is terminal,
+it rebuilds outputs in original input order and applies the node's mixed-outcome
+policy.
+
+Retry isolation does not make external effects exactly once. A process failure
+after a provider accepts an effect but before the checkpoint commits can still
+repeat that item, so provider idempotency remains part of the action contract.
+Batch nodes do not use per-item checkpoints: a retry invokes the whole batch
+again.
 
 Do not author node-level `timeout`. The document schema accepts it, but the
 executor does not enforce it. Approval timeouts, renderer capacity and
