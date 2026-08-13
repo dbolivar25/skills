@@ -517,9 +517,8 @@ choose the variant by effect cardinality:
 - Batch evaluates once against the complete `items` collection, has no `json`,
   and creates exactly one effect.
 
-Add Artifact to Decision Site remains per-item only. To place several Artifact
-references, emit them with Select Many and connect that output to per-item
-placement.
+Add Artifact to Decision Site remains per-item only. It places each input
+`ArtifactRef` independently.
 
 The per-item variants of these five native actions retain successful sibling
 outputs when the terminal node outcome also contains item errors. Their
