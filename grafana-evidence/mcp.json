@@ -1,7 +1,8 @@
 {
   "grafana": {
-    "command": "uvx",
+    "command": "pipx",
     "args": [
+      "run",
       "mcp-grafana"
     ],
     "env": {
