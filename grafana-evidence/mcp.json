@@ -6,7 +6,7 @@
       "mcp-grafana"
     ],
     "env": {
-      "GRAFANA_URL": "augmentco.grafana.net",
+      "GRAFANA_URL": "https://augmentco.grafana.net",
       "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${GRAFANA_TOKEN}"
     }
   }
