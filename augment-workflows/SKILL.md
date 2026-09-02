@@ -1,238 +1,187 @@
 ---
 name: augment-workflows
-description: Use when work creates, changes, validates, releases, runs, or inspects an Augment or Decision Site MCP workflow. Load it to keep WorkflowDocV1, public nodes, expressions, lifecycle, validation, and side effects aligned with the live workflow system.
+description: Use when work creates, changes, validates, releases, runs, reviews, or diagnoses an Augment or Decision Site workflow. Load it to turn the request into an explicit graph while taking product contracts and live workspace state from current Decision Site resources.
 ---
 
 # Augment Workflows
 
-## Mission
+Use this skill as an operating discipline, not a cache of the product. Three live
+sources govern the work:
 
-Build workflows graph-first and purpose-first. Use only the public node
-contracts bundled with this skill, map the runtime Data Context at every
-configurable node, validate before release, and distinguish accepted execution
-from observed execution.
+```text
+decisionsite://docs/workflows   product behavior and authoring contracts
+decisionsite://organizations    current workspace state and dependencies
+MCP tools and receipts          available operations and observed results
+```
 
-This package is standalone. It must work without a source checkout. The bundled
-node registry, Data Context, destination, and lifecycle references are the
-cold-start contract. MCP discovery confirms that the expected contract is
-available; it does not license substituting a different workflow interface.
+The docs explain what a workflow means. Organization resources supply the
+owners, Skills, destinations, workflows, versions, and executions that exist
+now. Tool schemas define the current call shape. When these sources disagree,
+stop before mutation and report the exact mismatch.
 
-## Reference Routing
+## 1. Name the job and the authority
 
-- Before choosing or editing node types, load
-  [`references/node-registry.md`](references/node-registry.md).
-- Before writing CEL, Liquid, downstream references, `zip`, `broadcast`, or
-  batch behavior, load
-  [`references/data-context.md`](references/data-context.md).
-- Before reading or mutating workflow resources, load
-  [`references/workflow-lifecycle.md`](references/workflow-lifecycle.md).
-- Before choosing, changing, preserving, or verifying a Publish to Slack or
-  Publish to Teams destination, load
-  [`references/integration-destinations.md`](references/integration-destinations.md).
-- Before authoring, editing, reviewing, or debugging a Create PDF Artifact
-  body, read its live authoring resource and then load
-  [`references/pdf-artifact-authoring.md`](references/pdf-artifact-authoring.md).
-- For nontrivial AI, approval, retry, waiting, triggering, or external action
-  design, load
-  [`references/12-factor-workflow-quality.md`](references/12-factor-workflow-quality.md).
+Classify the request as inspection, authoring, editing, validation, release,
+execution, cancellation, retry, archive, or diagnosis. State:
 
-## Operating Rules
+- the event or schedule that starts the workflow;
+- the result a successful run must produce;
+- the evidence that would prove that result;
+- the conditions that make a run wrong even if it completes; and
+- every durable or external effect, including its owner, recipient, and
+  destination.
 
-- Never invent node types, parameter names, tool names, resource templates, or
-  event fields.
-- Use literal JSON for literal parameters, CEL expression strings for CEL
-  parameters, and Liquid template strings for Liquid parameters.
-- Quote static strings inside CEL expressions. `"\"C0123456789\""` is a CEL
-  string literal; `"C0123456789"` is a variable lookup.
-- Do not persist `parameters._executionMode`. Execution variant comes from the
-  node type.
-- Use node-level `mode` and `position` when producing builder-ready documents.
-  `mode` is `per_item` for `.perItem.` types and `batch` for `.batch.` types.
-- Use AI only for bounded language or judgment work. Keep routing,
-  permissions, recipients, waits, retries, approvals, and external actions in
-  explicit graph nodes and parameters.
-- Connect, recover, or intentionally sink every meaningful error path.
-- Treat validation as necessary but not sufficient. It does not prove
-  integration availability, expression usefulness, prompt quality, or business
+A request to create or edit a workflow authorizes the scoped draft mutation.
+Release, execution, cancellation, retry, archive, and unarchive require that
+exact authority from the user. Authoring a graph that contains an action does
+not authorize the action.
+
+This step is complete when the intended result, unacceptable result, requested
+mutation, and any later authority gate are explicit.
+
+## 2. Read the live contract
+
+Inspect the active MCP server's tools and resources. Prefer native resource
+reads. Use `read_resource` only when the client cannot expose native resource
+reads to the model.
+
+Start at `decisionsite://docs/workflows`, then follow the branch that matches
+the job:
+
+| Job | Required live docs |
+| --- | --- |
+| Design, create, edit, or validate | `decisionsite://docs/workflows/authoring` |
+| Select or configure nodes | `decisionsite://docs/workflows/nodes`, then the exact page for every selected node type |
+| Release, run, observe, retry, cancel, or diagnose | `decisionsite://docs/workflows/operating` |
+| Learn from a complete graph | `decisionsite://docs/workflows/examples`, then one relevant example |
+| Use or change a Skill dependency | `decisionsite://docs/skills`, then the task-relevant Skill guide |
+
+Follow links returned by the docs. Read only the branches the task needs, but
+read every exact node page used by the graph. Treat the live tool schema as the
+call contract and the docs as the usage contract. Never reconstruct a node,
+parameter, port, resource URI, or tool name from memory.
+
+This step is complete when every proposed node and operation is backed by a
+current docs page and a callable MCP surface.
+
+## 3. Read the live workspace
+
+Start at `decisionsite://organizations` and follow returned canonical URIs.
+Resolve owners, Decision Sites, Skills, recipients, integrations, workflows,
+versions, and executions from current resources instead of remembered names or
+hand-built paths.
+
+Before changing a draft or releasing a version, read that exact Workflow
+Version and retain its complete document, state, canonical URIs, and ETag. A
+docs page or Skill can explain a method; neither grants access to customer
+state or permission to mutate it.
+
+This step is complete when every fixed dependency has a current canonical
+resource and every concurrency-sensitive write has a fresh ETag.
+
+## 4. Design the explicit graph
+
+Put each concern in the module that can own it cleanly:
+
+| Module | Owns |
+| --- | --- |
+| Workflow graph | Sequence, branching, waits, retries, approvals, and effects |
+| Agent prompt | The node-local task, supplied context, Skill use, and required result |
+| Skill | Reusable methodology whose implementation may vary by workspace |
+| Live docs and tool schema | Product behavior and the current call contract |
+
+Then draw the smallest graph that owns the required behavior:
+
+```text
+trigger
+  -> deterministic routing and preparation
+  -> bounded AI judgment or language work, when needed
+  -> explicit approval, wait, retry, or effect nodes
+  -> observable success and failure terminals
+```
+
+Map each node's input ports to concrete upstream outputs before writing its
+parameters. Connect meaningful error paths or terminate them intentionally.
+Keep permissions, recipients, routing, retries, waits, approvals, and external
+effects in graph structure and typed parameters rather than prompt prose.
+
+When an Agent node uses a Skill, keep the reusable method in the live Skill.
+The Agent prompt supplies the task, relevant context, when the Skill applies,
+and the result the workflow needs. A Skill's name, trigger, responsibility,
+result, and insufficient-context behavior form the interface its consumers rely
+on; its implementation can vary by workspace. Prompt length is not a design
+target. Clear ownership is.
+
+This step is complete when every downstream value has a source, every effect
+has an owner, and no prompt secretly carries graph control or authority.
+
+## 5. Author and validate through MCP
+
+Build the complete document from the live authoring and node contracts. Use the
+document tools named by the active server. For replacement, preserve fields the
+user did not ask to change and pass the fresh ETag required by the tool.
+
+Validate the stored draft with the current server. Resolve structural and
+expression findings, then review what validation cannot prove: live dependency
+availability, useful runtime values, prompt and Skill quality, recipient and
+destination suitability, business correctness, and effect safety.
+
+This step is complete when the stored document matches the intended graph,
+server validation is known, and each remaining semantic risk is either resolved
+or named.
+
+## 6. Perform only authorized operations
+
+For an authorized release or execution operation, reread the target, use the
+exact current tool, and retain the returned receipt and canonical resource
+URIs. Before an unrequested gated action, state what it changes and ask for the
+missing authority.
+
+This step is complete when the requested operation has an MCP receipt or the
+missing authority is the only remaining blocker.
+
+## 7. Observe the result
+
+An accepted asynchronous operation is not a completed operation. Follow the
+returned execution, node, and bounded-output resource URIs until the requested
+claim can be supported. Match the claim to the evidence: terminal execution,
+correct node output, provider acceptance, external delivery, and human action
+are different observations.
+
+This step is complete when the requested outcome is observed or the report
+states the last observed state and the exact remaining uncertainty.
+
+## Composition
+
+- Load `writing-for-agents` when the work changes an Agent prompt or Skill
+  body. It owns invocation, information hierarchy, and completion criteria.
+- Load `faithful-derivation` when the workflow derives a visible work product
+  or decision from customer or operational state. It owns evidential fidelity;
+  this skill still owns the executable graph and MCP lifecycle.
+- Use a task-specific domain Skill when the workflow's method depends on one.
+  The domain Skill supplies methodology, not workflow permissions or product
+  contracts.
+
+## Report
+
+For authoring or editing, report the workflow purpose, graph, changed resource,
+node types, external effects, live dependencies, docs read, validation result,
+performed operations, observed execution state, and unresolved risks.
+
+For review or diagnosis, lead with the first condition that can make the graph
+fail, no-op, contact the wrong person, produce the wrong result, or hide a
+failure. Cite the node and field when one exists, then name the live resource or
+observation that supports the finding.
+
+## Failure boundaries
+
+- **Contract cache:** a bundled registry, copied tool list, or remembered node
+  shape replaces the live docs.
+- **Guessed state:** names or IDs stand in for canonical workspace resources.
+- **Prompt-owned system:** prompt text hides routing, authority, retries,
+  approvals, or effects that belong in the graph.
+- **Validation overreach:** structural acceptance is reported as business
   correctness.
-- Read a fresh workflow-version resource before draft replacement or release.
-  Pass its current `etag` as `ifMatch`.
-- Set optional `sourceAgent` to the actual invoking agent or client when useful;
-  never use this skill name as a placeholder identity.
-- A request to create or edit a workflow authorizes the scoped draft mutation.
-  Unless already explicit in the user's request, get confirmation before
-  release, execution, cancellation, retry, archive, or unarchive.
-- Authoring a draft that contains an action node is not itself execution
-  authorization.
-- Execution creation is asynchronous. Acceptance or enqueueing is not
-  completion.
-- Treat PDF layout as ready only when cases derived from Accepted content and
-  its interactions have current PDF renders. Each named invariant needs render
-  proof. Workflow validation does not render the document.
-
-## Steps
-
-1. **Classify the operation.**
-   Identify whether the request is authoring, editing, validation, lifecycle
-   operation, execution operation, inspection, or explanation. Name the
-   workflow purpose, trigger, done condition, bad-run condition, and external
-   effects. Completion criterion: the requested mutation and any later
-   confirmation gate are explicit.
-
-2. **Load the required contracts.**
-   Follow Reference Routing for every branch used by the request. If operating
-   MCP, inspect the active server's listed tools and resource templates and
-   confirm the required operation-specific name is present. Read every
-   node-specific authoring resource required by the lifecycle reference before
-   writing that node. Stop before mutation if an expected tool or resource is
-   absent. Completion criterion: every node, parameter, tool, resource, and
-   expression language in the proposed work has the expected bundled contract
-   and a callable server surface.
-
-3. **Read current state.**
-   Resolve canonical organization, workflow, version, execution, and node URIs
-   from resource responses. For version changes, retain the full current
-   document, state, `resourceUri`, `executionsResourceUri`, and `etag`.
-   Completion criterion: the next read or write uses a canonical URI and, when
-   required, a fresh ETag.
-
-4. **Map the graph.**
-   Define the trigger, nodes, input ports, success/error ports, fan-in labels,
-   terminal nodes, and side-effecting nodes before writing parameters. For each
-   configurable node, map `json`, `items`, `ports`, `trigger`, `author`, and
-   `organization` from the node's actual upstream position. Completion
-   criterion: every downstream expression has a concrete runtime source.
-
-5. **Author the document.**
-   Use `schema_version: "ds-v1"`, one trigger, unique node ids, public type
-   strings, `typeVersion: 1`, builder-ready node envelopes, exact parameters,
-   and explicit connections. For AI nodes, define one job, bounded prompt
-   context, exact return type, downstream consumer, and insufficient-context
-   behavior. For `return_type: "custom"`, include a supported `value_schema`.
-   Completion criterion: all required input ports are connected and no prompt
-   secretly owns graph control or external authority.
-
-6. **Run deterministic preflight.**
-   For a JSON file, resolve the script relative to this skill folder and run:
-
-   ```bash
-   node scripts/check-workflow-doc.mjs path/to/workflow.json
-   ```
-
-   For inline documents, apply the same registry, parameter, connection, CEL,
-   Liquid, cron, custom-output, and runtime-trap checks manually. Completion
-   criterion: all errors are fixed and every remaining warning is understood.
-
-7. **Persist and validate.**
-   Create with `create_workflow` or `create_workflow_version`. Replace an
-   existing draft with `update_workflow_version_draft` and a fresh `ifMatch`.
-   Validate the stored or supplied document with `validate_workflow_version`.
-   Completion criterion: the local preflight and current server validation
-   results are both known.
-
-8. **Perform approved lifecycle or execution actions.**
-   Use the exact operation-specific tool from the lifecycle reference. Before a
-   gated action, summarize what it can change and obtain confirmation unless
-   the user already requested that exact action. Completion criterion: the
-   action receipt and returned canonical resource URIs are captured.
-
-9. **Observe the run.**
-   After execution creation or retry, read execution detail, then node
-   lifecycle and output resources as needed. Use bounded output chunks for
-   large outputs. Completion criterion: report observed status and node output,
-   or state plainly that only acceptance has been observed.
-
-## Output Contract
-
-For authoring or edits, return:
-
-- Workflow purpose, trigger, done condition, and bad-run risk.
-- Document or document location.
-- Node list with type strings and side-effecting nodes.
-- Nontrivial Data Context and AI-output assumptions.
-- Preflight and server-validation results.
-- Performed or required MCP operations and confirmation gates.
-- Observed execution state when applicable.
-- For Slack or Teams destination work, the destination scope or credential
-  subject, provider-native IDs, and exact-read outcome.
-- For PDF work, report Accepted content partitions and interaction cases, named
-  invariants, per-case current-render proof and provenance, and every invariant
-  that remains unverified or blocked by execution authorization.
-- Remaining risks or user decisions.
-
-For review/debug, lead with findings:
-
-- P0: will fail validation or execute the wrong side effect.
-- P1: can validate but likely fail, no-op, spin, contact the wrong human, or
-  produce unusable output at runtime.
-- P2: confusing, brittle, too broad, under-observed, or hard to operate.
-
-Each finding should cite the node id, field, and reason.
-
-## Failure Modes
-
-- Blind registry guessing: writing plausible node names or fields that are not
-  in the bundled public registry.
-- Context flattening: assuming `json.value` exists everywhere, especially after
-  `zip`.
-- Language confusion: using Liquid braces in CEL fields, or unquoted static CEL
-  strings.
-- Validation overtrust: server validation can pass documents that still fail on
-  first execution due to expression context, integration state, prompt quality,
-  missing human gates, or wrong business assumptions.
-- Monolithic AI node: asking one prompt to retrieve, reason, decide, write,
-  route, approve, and act.
-- Context dumping: feeding an AI node large raw objects, transcripts, or lists
-  instead of a compact, bounded context package.
-- Tool-call theater: letting AI text imply an action, recipient, permission, or
-  branch that the graph does not explicitly encode.
-- Control-flow drift: retries, approvals, waits, escalation, and terminal states
-  exist only as prompt advice.
-- Unowned error path: error ports are missing, accidentally dropped, or passed
-  downstream as raw noise the next node cannot use.
-- Authority drift: treating draft authoring as execution approval, or treating
-  release, execution, archive, cancel, or retry as harmless.
-- Scheduled-meeting confusion: referencing meeting paths in scheduled workflows
-  without an upstream node that creates meeting data.
-- Chat-only design: assuming every trigger includes a human message or
-  conversational thread when the workflow can run from cron, meeting, company,
-  or CRM events.
-- Hidden state: relying on memory, ambient integration state, or a previous
-  conversation instead of explicit trigger and upstream node output.
-- Blind effect retry: treating an unresolved external effect as known not to
-  have happened.
-- Syntax mismatch: inserting a templated value without accounting for the
-  surrounding JSON, HTML, or plain-text syntax.
-- Sample-bound PDF: using a fixed canvas, broad keep rules, fit-driven caps, or
-  one-payload proof as evidence for the full Accepted content.
-- Effect collapse: hiding creation, exposure, and delivery inside one implicit
-  step instead of separate graph nodes.
-- Owner drift: selecting a sender, connection, destination, or audience that
-  belongs to a different Agent owner or organization.
-
-## References
-
-- [`references/node-registry.md`](references/node-registry.md): public node
-  types, parameters, modes, and port shapes.
-- [`references/data-context.md`](references/data-context.md): CEL and Liquid
-  runtime context, root availability, and common traps.
-- [`references/workflow-lifecycle.md`](references/workflow-lifecycle.md): MCP
-  resources, write tools, validation, release, execution, cancel, retry, and
-  archive behavior.
-- [`references/integration-destinations.md`](references/integration-destinations.md):
-  provider-native Slack and Teams destination discovery, ownership, and exact
-  verification.
-- [`references/pdf-artifact-authoring.md`](references/pdf-artifact-authoring.md):
-  document systems, Accepted content region maps, fit-or-continue behavior,
-  page composition, tables, and provenance-backed render proof.
-- [`references/12-factor-workflow-quality.md`](references/12-factor-workflow-quality.md):
-  reliable-agent workflow-quality rubric adapted from HumanLayer's
-  12-factor-agents material.
-
-## Freshness Rule
-
-Use the bundled contracts without attempting repository discovery. MCP
-discovery is an availability check: if an expected operation-specific tool or
-resource is absent, stop before mutation and report the exact mismatch. Do not
-substitute an unbundled workflow operation or reconstruct a different
-interface.
+- **Receipt overreach:** request acceptance is reported as execution or landing.
+- **Authority drift:** draft access is treated as permission to release, run,
+  retry, cancel, archive, or contact someone.
