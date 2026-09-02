@@ -41,7 +41,7 @@ One-line summary + when-to-use for every method. Cross-reference with `heuristic
 
 | Method | Use when |
 |---|---|
-| `methods/volume-generation.md` | Need many ideas fast (Crazy 8s, brainwriting, James Webb Young). |
+| `methods/volume-generation.md` | Need many ideas fast (Crazy 8s, brainwriting, James Webb Young), or use **Seeded Range** when AI candidates keep converging on one structure. |
 | `creative-shaping` → **Creative Discipline** | Long-term practice (Tharp, LeWitt, Cleese, Cameron). Not single-session. |
 
 ## Selection / refinement
