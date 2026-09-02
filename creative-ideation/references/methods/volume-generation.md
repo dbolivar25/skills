@@ -51,6 +51,38 @@ Honest about the *temporal* structure of idea formation. Most methods assume ide
 
 The drop stage is non-negotiable. Compressing it back into 1→2→4 produces incomplete ideas.
 
+## Seeded Range
+
+Use when an AI produces several candidates that are cosmetically varied but
+structurally identical. The seed distributes a batch across different regions;
+it does not decide which result is good.
+
+1. **Lock the invariant brief.** Hold the user, purpose, required content,
+   constraints, and quality floor constant across the batch. Randomness must not
+   rewrite the problem.
+2. **Choose the range axes.** Name the dimensions on which meaningful difference
+   can appear: sequence, composition, density, relationship, material,
+   interaction, mechanism, voice, or another domain-specific structure.
+3. **Draw one real seed per direction.** Use an external random source: a random
+   noun, object, place, artwork, physical mechanism, reference, or random indices
+   into explicit axis-value lists. Prefer semantic stimuli or procedural
+   assignments over an opaque string. An opaque value may identify the run, but
+   leaves the model free to invent a familiar interpretation after the fact.
+4. **Translate before making.** Record `seed → stimulus → forced decisions`.
+   State which range axes the stimulus changes and how. If the translation does
+   not force a structural decision, draw again.
+5. **Generate independently.** Give each direction only its invariant brief and
+   its own translation. Do not let later directions imitate or merely restyle
+   earlier ones.
+6. **Compare after the batch exists.** Reject directions that violate the brief
+   or differ only cosmetically. Select with domain judgment, then deepen the
+   winner through the appropriate development method.
+
+For every surfaced direction, report the seed or random draw, its stimulus, the
+structural decisions it forced, what remained invariant, and its likely failure
+mode. Completion criterion: each surviving direction differs on at least two
+named range axes while satisfying the same invariant brief.
+
 ## When to use which
 
 | Time available | Group size | Use |
@@ -62,10 +94,16 @@ The drop stage is non-negotiable. Compressing it back into 1→2→4 produces in
 | 1 hour | Group | Brainwriting + 30 min affinity diagram |
 | 1 day | Solo | Young stages 1–3 |
 | 1 week | Solo or small group | Full Young 5 stages |
+| One AI-generated batch | Solo or small group | Seeded Range |
 
 ## Anti-slop notes
 
 - **Volume of equal quality is not volume.** Eight panels of identical structure is one idea drawn eight times. Force divergence by applying different generative methods to different panels.
+- **Entropy is not direction.** A random token with no recorded translation can
+  become a post-hoc excuse for the model's default taste. Make the stimulus and
+  forced decisions inspectable.
+- **Randomness creates candidates, not verdicts.** Preserve the invariant brief
+  and use human or domain judgment to select what earns depth.
 - Don't pad to round numbers. If only 5 of the 8 panels produced anything, surface 5.
 - Surface 1–3 to the user, not all 8 / all 108.
 - Don't conflate volume with depth. Volume is breadth-first; depth comes later with elaboration methods.

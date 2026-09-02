@@ -101,6 +101,7 @@ Override rules beat the routing table:
 | REFINING (other) | `creative-shaping` → **Creative Discipline** (Tharp's spine) |
 | SYNTHESIZING | `creative-shaping` → **Affinity Diagrams** |
 | Volume needed fast | `references/methods/volume-generation.md` |
+| Multiple AI directions keep converging | `references/methods/volume-generation.md` → **Seeded Range** |
 
 **By domain (when GENERATING with DOMAIN known):**
 
