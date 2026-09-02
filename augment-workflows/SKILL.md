@@ -52,7 +52,7 @@ the job:
 | --- | --- |
 | Design, create, edit, or validate | `decisionsite://docs/workflows/authoring` |
 | Select or configure nodes | `decisionsite://docs/workflows/nodes`, then the exact page for every selected node type |
-| Release, run, observe, retry, cancel, or diagnose | `decisionsite://docs/workflows/operating` |
+| Release, run, observe, retry, cancel, archive, unarchive, or diagnose | `decisionsite://docs/workflows/operating` |
 | Learn from a complete graph | `decisionsite://docs/workflows/examples`, then one relevant example |
 | Use or change a Skill dependency | `decisionsite://docs/skills`, then the task-relevant Skill guide |
 
@@ -121,18 +121,19 @@ Build the complete document from the live authoring and node contracts. Use the
 document tools named by the active server. For replacement, preserve fields the
 user did not ask to change and pass the fresh ETag required by the tool.
 
-Validate the stored draft with the current server. Resolve structural and
-expression findings, then review what validation cannot prove: live dependency
-availability, useful runtime values, prompt and Skill quality, recipient and
-destination suitability, business correctness, and effect safety.
+For a validation-only request, validate the supplied document without persisting
+it. After creating or editing a draft, validate the stored document. Resolve
+structural and expression findings, then review what validation cannot prove:
+live dependency availability, useful runtime values, prompt and Skill quality,
+recipient and destination suitability, business correctness, and effect safety.
 
-This step is complete when the stored document matches the intended graph,
+This step is complete when the validated document matches the intended graph,
 server validation is known, and each remaining semantic risk is either resolved
 or named.
 
 ## 6. Perform only authorized operations
 
-For an authorized release or execution operation, reread the target, use the
+For an authorized lifecycle or execution operation, reread the target, use the
 exact current tool, and retain the returned receipt and canonical resource
 URIs. Before an unrequested gated action, state what it changes and ask for the
 missing authority.
