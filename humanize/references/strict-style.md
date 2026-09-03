@@ -30,6 +30,8 @@ correct when responsibility is genuinely unknown, irrelevant, or protected.
 - Use one precise term per concept instead of synonym cycling.
 - Delete sentences that only repeat the heading, announce the section, or
   produce a generic conclusion.
+- Split or simplify sentences that make the intended reader backtrack, unless
+  the genre or authoritative voice sample calls for that density.
 - Trust the reader with direct facts rather than reassurance or hand-holding.
 
 Keep adverbs, hedges, repetition, and explanation when they carry scope,
@@ -39,6 +41,8 @@ certainty, sequence, safety, or voice.
 
 - Remove em and en dashes unless an explicit user constraint or authoritative
   voice sample uses them.
+- Rewrite the sentence's structure when removing a dash. Swapping in
+  parentheses or a colon usually preserves the same staged aside.
 - Break padded rule-of-three lists; use the natural number of items.
 - Avoid runs of dramatic fragments and manufactured punchlines.
 - Vary sentence and paragraph endings without forcing visible variety.

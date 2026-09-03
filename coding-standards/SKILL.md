@@ -1,6 +1,6 @@
 ---
 name: coding-standards
-description: Use when TypeScript work changes contracts, domain types, failures, effects, mutation, observability, or verification. Load it as the source of truth for correct-by-construction engineering and testing evidence.
+description: Use when TypeScript work changes contracts, domain types, decision logic, failures, effects, mutation, observability, or verification. Load it as the source of truth for correct-by-construction engineering and testing evidence.
 ---
 
 # Coding Standards
@@ -51,7 +51,16 @@ Build **correct by construction**. A principle applies when the change introduce
 - Raw external types stay at the composition root or inside Adapters.
 - Every interface must hide meaningful invariants, policy, sequencing, or translation; reject globals, mega-interfaces, and pass-through wrappers.
 
-### 6. Every side effect has an owner
+### 6. Keep decision complexity explicit
+
+- A unit's **proof surface** is the behaviorally distinct paths and condition interactions that must be understood and verified.
+- Treat cyclomatic complexity (independent control-flow paths), cognitive complexity (nesting and reader burden), and state-space growth (interacting conditions and states) as diagnostic signals of proof burden, not targets to optimize. Respect existing repository checks; introduce or change numerical thresholds only for a concrete repository-wide need.
+- When the proof surface grows, look for a missing domain concept: a closed variant, legal state transition, named policy, domain predicate, or decision table.
+- Extract concepts, not branches. Moving conditionals into helpers without reducing possible states or clarifying ownership does not simplify the code.
+- Keep intrinsically coupled rules together when splitting them would hide the governing invariant. Preserve essential domain complexity while removing accidental representation and control-flow complexity.
+- Match verification to the proof surface: cover boundary cases and meaningful condition interactions; use exhaustive or table-driven tests for closed rules and property tests for general invariants.
+
+### 7. Every side effect has an owner
 
 - Acquire each resource in the scope that owns its lifetime and release it on every exit.
 - Enforce **no floating promises**: every promise is awaited, returned, collected, or handed to explicit detached-work machinery.
@@ -59,20 +68,20 @@ Build **correct by construction**. A principle applies when the change introduce
 - Modules do not acquire resources or perform I/O at import time.
 - When independent work benefits from overlap, use **structured concurrency**: bound fan-out, propagate caller cancellation, await all child work, and prevent it from outliving the owning scope.
 
-### 7. Make mutation retry-safe
+### 8. Make mutation retry-safe
 
 - Make retried commands idempotent and guard concurrent transitions atomically.
 - Do not hold database transactions open across network calls; use a **transactional outbox** or equivalent when commit and delivery must agree.
 - Persist coordination state when progress must survive crashes or redelivery; introduce durable workflow machinery only when that need exists.
 
-### 8. Observe without exposing
+### 9. Observe without exposing
 
 - Wrap sensitive values in redaction-safe types at ingress and unwrap them only at the use site.
 - Secrets never enter errors, logs, traces, metrics, snapshots, or diagnostic strings.
 - Apply **data minimization** to correlated, structured telemetry: record only stable fields for relevant operations, dependencies, states, retries, safe correlation identifiers, and error tags; never serialize arbitrary payloads, thrown values, or environments.
 - Preserve existing reporting hooks, and keep telemetry out of domain decisions.
 
-### 9. Verify behavior through real seams
+### 10. Verify behavior through real seams
 
 - Assert caller-visible results, failures, persisted state, messages, responses, or adapter records—not private helpers or incidental call order.
 - Replace dependencies through production seams; do not use module mocks or method spies.
@@ -81,7 +90,7 @@ Build **correct by construction**. A principle applies when the change introduce
 - Use property tests for general invariants.
 - Verify database and runtime claims against the actual implementation, applying the production migration path when persistence semantics matter.
 
-### 10. Preserve TypeScript's checks
+### 11. Preserve TypeScript's checks
 
 - Keep compiler strictness and precise, readonly contracts.
 - Avoid `any`, non-null assertions, unchecked casts, hidden mutation, and accidental thenables.

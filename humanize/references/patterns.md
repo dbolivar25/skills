@@ -52,6 +52,12 @@ lists, vague extremes, and conclusions that could end any document.
 No word is banned in isolation. Prefer the ordinary term when it carries the
 same meaning. Repeat a precise noun instead of cycling through synonyms.
 
+In explanatory, product, and technical prose, test generic value claims by
+swapping the subject. If the sentence could describe an unrelated product
+unchanged, prefer the source-backed mechanism, constraint, or measurement. If
+the source does not supply one, preserve the claim and flag the missing support
+rather than inventing proof.
+
 ## Synthetic rhythm
 
 Patterns include metronomic medium-length sentences, repeated paragraph shapes,
