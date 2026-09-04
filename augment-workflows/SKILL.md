@@ -1,6 +1,6 @@
 ---
 name: augment-workflows
-description: Use when an Augment or Decision Site workflow is designed, changed, operated, reviewed, or diagnosed. Load it to turn intent into an explicit graph, preserve operation authority, and prove results from live product and workspace evidence.
+description: Use when an Augment or Decision Site workflow is designed, changed, operated, reviewed, or diagnosed through the Augment MCP. Load it to turn intent into an explicit graph, preserve operation authority, and prove results from live product and workspace evidence.
 ---
 
 # Augment Workflows
