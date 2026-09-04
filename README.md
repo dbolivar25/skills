@@ -74,7 +74,7 @@ routing policy.
 | [`simplified-technical-english`](simplified-technical-english/SKILL.md) | Model | Controlled English for reliable parsing by agents, systems, translation paths, and non-native readers. |
 | [`show-me`](show-me/SKILL.md) | Model | The smallest useful diagram, code-shape sketch, or focused HTML artifact when prose hides a material relationship. |
 | [`writing-for-agents`](writing-for-agents/SKILL.md) | Model | Invocation contracts, context pointers, information hierarchy, and completion criteria in documents that direct agents. |
-| [`augment-workflows`](augment-workflows/SKILL.md) | Model | Live-doc-driven workflow design, MCP operation, authority, and observed execution. |
+| [`augment-workflows`](augment-workflows/SKILL.md) | Model | Live-doc-driven workflow design, operation authority, and observed outcomes. |
 | [`faithful-derivation`](faithful-derivation/SKILL.md) | Model | Evidential fidelity from operational state through judgments, support, confidence, publication gates, and evals. |
 | [`herdr`](herdr/SKILL.md) | Model | Explicitly targeted Herdr inspection or control with session, workspace, mutation, and landing authority anchored first. |
 
