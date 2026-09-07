@@ -6,7 +6,7 @@ Build **correct by construction**. These standards govern TypeScript work; the d
 
 ### 1. Repository before invention
 
-- Inspect existing contracts, modules, adapters, tests, and dependencies before introducing a library, pattern, module, or seam.
+- A proposed library, pattern, module, or seam must be grounded in the existing contracts, modules, adapters, tests, and dependencies. Missing repository context is an evidence need for the shell.
 - Make the smallest coherent improvement.
 - Speculative abstractions and migration, rollout, or compatibility machinery require a concrete current constraint or explicit user intent.
 
@@ -82,8 +82,8 @@ Apply [testing evidence](testing-evidence.md), the single owner of testing law:
 observable contracts, production seams, independent oracles, controlled
 nondeterminism, risk-proportionate evidence, and the limits of substitutes.
 A test passes this obligation only when its observation can establish the
-behavior claimed. Apply the production migration path when persistence semantics
-matter.
+behavior claimed. Persistence claims require observations from the production
+migration path; missing execution evidence remains a need for the shell.
 
 ### 11. Preserve TypeScript's checks
 

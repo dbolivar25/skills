@@ -1,5 +1,10 @@
 # Independently useful skill modules
 
+Historical extraction design at 95b0a27. The invocation interfaces remain; the
+[core/shell design](core-shell.md) supersedes the internal allocation and caller
+paths below.
+
+
 This pass starts from b8bc170. It replaces the current topology described in
 [the first module pass](skill-modules.md). The library now has 30 invocations.
 The goal is independently usable judgment with less caller knowledge, not a

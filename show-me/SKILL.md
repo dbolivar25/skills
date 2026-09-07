@@ -5,24 +5,16 @@ description: Use when the user asks for a visual explanation or interactive demo
 
 # Show me
 
-Make the relationship the user needs to understand visible. Inspect the actual
-source, then read [visual forms](references/visual-forms.md) to choose a sketch,
-diagram, call tree, component tree, diff or focused HTML artifact. Match the
-representation to the question, not to an inventory of available visual tools.
+Read the [core](core.md) and visual forms. Acquire enough actual source to establish
+the relationship the user wants explained. Preserve the requested scope; "show
+me the PR URL" can be an ordinary data retrieval rather than a visual artifact.
 
-Keep real names, relevant states, ownership and ordering. Preserve context when
-omitting it would change the explanation. Use actual data or clearly identified
-examples. Match an existing product's grammar when representing its interface.
-Place the visual next to the brief explanation it supports and open local
-artifacts through the available viewer. Inspect rendering for accuracy and
-legibility; do not claim an artifact was exercised when only its source exists.
+Apply the core. For an unsettled question requiring experimentation, call prototype
+with the question and constraints, then use its observed learning if an explanation
+is still requested. Do not apply experimental shortcuts to a known explanation.
 
-An interactive explanation can present a known answer. When the answer is still
-unsettled and requires trying logic or alternative layouts, use
-[prototype](../prototype/SKILL.md) with the question, constraints and needed
-observation. Consume its learning; experiment shortcuts do not apply to source
-accuracy in an explanation. A request to explain does not authorize product
-redesign or implementation.
-
-Deliver the smallest sufficient visual and the inference it supports. Keep
-uncertainty visible when the source cannot establish the relationship.
+Deliver inline diagrams directly. For a requested or useful HTML artifact, write
+one focused file using the product's real grammar, inspect its rendering and open
+it through the host's viewer. Keep prose brief and the visual next to its point.
+Report unavailable rendering instead of claiming it was exercised. Explanation
+does not authorize product redesign or production changes.

@@ -22,8 +22,8 @@ supporting <larger conclusion>.
 ```
 
 Do not discount evidence because of who found it. Separate observations,
-assumptions, and conclusion, then verify observations against the system that
-would carry the change.
+assumptions, and conclusion. Observations need provenance from the system that
+would carry the change; return missing verification as an evidence need.
 
 For “easy to build,” name the lasting ownership cost. For “we may need it,” name
 the trigger and cost of waiting. Build speed and hypothetical reuse are not
@@ -40,6 +40,6 @@ should proceed with <safeguards and verification> and revisit the design if
 
 ## Durable decision record
 
-When the decision must survive the conversation, record the protected outcome,
+When the decision must survive the conversation, propose a record containing the protected outcome,
 evidence, accepted or rejected shape, material ownership costs, smallest move,
 reopen trigger, and verification.

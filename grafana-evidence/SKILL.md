@@ -5,6 +5,7 @@ description: Use when a diagnosis, review, incident question, or production clai
 
 # Grafana Evidence
 
+Read the [core](core.md) before planning evidence acquisition.
 Use Grafana as a read-only evidence substrate. Current tools, datasources,
 dashboards, labels, attributes, deployments, and instrumentation are live state;
 discover them during each investigation.
@@ -86,31 +87,12 @@ read-only path.
 Completion criterion: each selected signal can distinguish at least two live
 explanations or quantify the question directly.
 
-## 4. Establish the population before specimens
+## 4. Query the required population and comparison
 
-Start with bounded aggregation. Measure the population's magnitude,
-distribution, affected surface, and time shape before opening individual logs or
-traces. Use a comparison window when the question is about change.
-
-If only specimens exist, state that limitation instead of turning examples into
-a rate. If an expected population is absent, verify the selector and another
-relevant signal before interpreting the absence.
-
-Completion criterion: the evidence packet contains a quantified population or
-names the exact missing aggregate and what the remaining specimens cannot prove.
-
-## 5. Isolate the change
-
-Compare one material dimension at a time: window, environment, service, route,
-status, version, instance, or dependency. Preserve denominators when comparing
-rates. Confirm units and aggregation semantics before combining series.
-
-Treat a deployment boundary as causal context only when current release evidence
-establishes it. A temporal coincidence is a hypothesis, not a deployment result
-or incident cause.
-
-Completion criterion: the changed population and baseline are comparable, or
-the mismatch is explicit.
+Apply the [core](core.md) to the discovered surface and available observations.
+Before specimens, execute the bounded population and comparison queries it needs.
+Resolve selector, unit or baseline questions from metadata or actual reads.
+Feed results and failures back; an absent population is not automatically health.
 
 ## 6. Retrieve representative evidence safely
 
@@ -128,52 +110,13 @@ Completion criterion: each specimen is representative of a measured population
 or explicitly labeled an anecdote, and the packet contains the least-sensitive
 evidence capable of supporting the observation.
 
-## 7. Triangulate and grade support
+## 7. Integrate observations and return
 
-Metrics, logs, traces, and profiles observe different failure surfaces. Check a
-second relevant signal when instrumentation can fail before an event is emitted
-or completed.
+Supply the core with query receipts, metadata, aggregates, comparisons and
+specimens. Acquire its next relevant signal when available, with the same scope
+and least-sensitive fields. Return its evidence packet, support grades, coverage
+limits and exact query receipts; generate supported deeplinks through the actual
+capability. Preserve failed/empty queries that constrain interpretation.
 
-Grade statements as:
-
-- **Observed** — directly present in the recorded query result and scope.
-- **Supported inference** — multiple observations fit the statement and material
-  alternatives were checked.
-- **Hypothesis** — plausible and testable, but the current packet does not settle
-  it.
-- **Unknown** — the needed signal is unavailable or outside current coverage.
-
-Do not grade a cause here. `diagnosing-bugs` owns hypothesis falsification and a
-causal conclusion.
-
-Completion criterion: every statement has a grade, evidence source, and visible
-alternative or coverage limit.
-
-## 8. Return an Evidence Packet
-
-Return:
-
-```md
-Question, scope, and absolute window:
-Live telemetry surface:
-Population and comparison:
-Representative evidence:
-Observed findings:
-Supported inferences and live hypotheses:
-Blind spots and alternative explanations:
-Query receipts:
-Smallest next evidence:
-```
-
-For every material query, include a receipt with datasource, tool or query
-family, exact query or redacted arguments, absolute window, concise result,
-coverage note, and a generated Grafana deeplink when supported. Record failed or
-empty queries that materially constrain interpretation.
-
-Say “Grafana recorded no matching events under this query and window,” not “the
-service had no errors.” Name affected users, severity, release state, cause, or
-health only when the evidence establishes that exact claim.
-
-Completion criterion: another investigator can reproduce each material
-observation, distinguish evidence from inference, and see what Grafana could not
-observe.
+Do not turn a correlation into a cause or extend read-only authority to incident
+or administrative actions. The caller owns causal diagnosis and next operations.

@@ -2,10 +2,10 @@
 
 The artifact supports a merge decision about the **current base-to-head change**.
 Existing descriptions, commits, tickets, and explanations provide intent; they
-do not override the implemented change. Read the [reconstruction method](../../understand-change/SKILL.md)
-and, for a live PR, [PR operations](../../github-evidence/references/pr-operations.md)
-for target, source, discussion, and validation acquisition. For a local draft,
-pin the local comparison and state the lack of live PR evidence without inventing it.
+do not override the implemented change. Read the [change-understanding core](../../understand-change/core.md)
+with supplied current source and evidence. For a local draft, use the pinned
+local comparison and retain the lack of live PR evidence. If a required source
+version is stale or absent, return an evidence need to the shell.
 
 ## Specialize the map
 
@@ -47,11 +47,11 @@ reproduce or evaluate a claim.
 ## Final read
 
 Lead with the outcome and the condition that most affects how to understand it.
-Use stable concepts from the map, not a tour of files or commits. Check the draft
-again against the current base and head: facts, measurements, scope, and checks
+Use stable concepts from the map, not a tour of files or commits. Compare the draft
+with the supplied base/head receipts: facts, measurements, scope, and checks
 must still match; old prose must not describe an earlier branch state; follow-ups
 must not appear completed.
 
 The description is ready when a reviewer can state the behavioral delta, navigate
 important responsibilities, assess evidence, and see where judgment is needed.
-Publishing it requires explicit publication intent and a read-back.
+Publication authority and read-back belong to the shell.

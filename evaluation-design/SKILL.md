@@ -5,39 +5,17 @@ description: Use when an AI workflow or instruction change needs a concrete way 
 
 # Evaluation design
 
-Given the intended behavior, failure consequences, candidate system or change,
-and available evidence, return a runnable evaluation plan: cases, observations,
-oracles, comparison, decision rules and gaps. This skill designs evaluations;
-execution occurs only within the surrounding task's authority.
+Read the [core](core.md) and evaluation library. Gather the intended quality,
+candidate behavior, known failures, current observations and consequences of
+error. A proposed system is a valid input; actual output is needed only for claims
+about observed quality. Distinguish design examples from held-out evaluation data.
 
-Read [evals and ablations](references/evals-and-ablations.md) for the multi-level
-method. Use the levels the system actually contains; record inapplicability
-instead of inventing a retrieval layer or a business metric.
+Apply the core to produce cases, oracles, comparisons, ablations and decision
+rules. Resolve missing system facts or representative examples from available
+sources. Return owner thresholds as decisions rather than guessing them.
 
-1. **Define the decision.** State what evidence would lead to adoption, revision,
-   rejection or more investigation. Obtain owner thresholds when consequences
-   require their judgment; do not invent numeric targets to complete a template.
-2. **Build representative cases.** Include expected use, plausible false
-   positives, boundary conditions, rare consequential failures and known
-   regressions. Preserve source provenance and access constraints. Separate
-   cases used for development from those used to judge the final change.
-3. **Choose independent observations.** For each case identify the expected
-   behavior, source or expert basis, observation point and failure meaning.
-   A grader repeating the implementation's assumptions is not independent proof.
-   Define the rubric and calibration examples when human or model judgment is
-   needed; leave unresolved expert disagreement visible.
-4. **Localize failure.** Connect output checks to the retrieval, judgment,
-   transformation, support or publication boundary that could cause the error.
-   The final artifact passing does not prove every intermediate is reusable.
-5. **Compare and ablate.** Hold inputs and relevant conditions fixed. State what
-   is removed, why it should matter, expected degradation, observed metric and
-   the design decision that follows. Account for stochastic variation with a
-   justified repeat or uncertainty plan; one favorable run is not a general win.
-6. **Return an executable plan.** Specify inputs, setup, checks, rubric, comparison,
-   failure drilldown, owners of unresolved judgments and where results will be
-   recorded. Distinguish planned tests from executed results.
-
-Ablations may justify deletion as well as additions. Optimize cost or speed only
-while preserving the quality and risk constraints the evaluation was built to
-protect. Do not assert improvement from a plan, structural validation, or a
-model's uncalibrated confidence in its own work.
+For a design-only request, return the plan and stop. If evaluation execution is
+also requested, run it through the actual environment, keep raw observations and
+conditions, and supply them back for interpretation. Failures of access or
+execution are evidence gaps, not passing cases. Report planned and executed work
+separately and never infer a general improvement from one favorable run.

@@ -13,6 +13,9 @@ analysis. Do not refactor, update docs, create ADRs, estimate effort, design fin
 interfaces or write a specification. Migration, compatibility, rollout and
 backfill enter only as evidenced current constraints, not plans designed here.
 
+Read the [core](core.md) before discovery so the evidence inventory serves its
+coverage and ranking judgment. The following steps are the read-only shell.
+
 ## 1. Bound the candidates and discover their governing sources
 
 Use the user's repository, directory, feature, module, file set or concern as
@@ -77,37 +80,12 @@ all eleven standards are accounted for; every applicable standard has inspected
 evidence; and retained observations are concrete friction. Discard unsupported
 observations.
 
-## 3. Form one ranking and prune it
+## 3. Obtain the ranking
 
-For each retained friction, name who owns the invariant, policy, translation,
-orchestration, effect, resource lifetime or runtime coordination **now**, and who
-should own it. Do not specify that owner's final interface.
-
-Apply the deletion test: deleting a useful proposed module would make its hidden
-complexity reappear in callers. A pass-through merely relocated elsewhere fails.
-
-Rank all candidates in the boundary together by **architectural leverage**:
-breadth and consequence of burden or risk removed relative to the interface,
-indirection or machinery introduced. Consider affected callers, behaviors,
-runtime ownership and tests. For comparable leverage, prefer stronger evidence,
-then the smaller coherent ownership move.
-
-Merge candidates with the same root friction or ownership move; related standards
-improvements become gains of that candidate. Drop aesthetic changes, unsupported
-claims, speculative flexibility, isolated cleanup, implementation disguised as
-architecture and proposals contradicted by sound precedent. Keep **at most five**,
-including zero when nothing earns the change.
-
-- **Strong:** friction, ownership move and leverage have concrete evidence.
-- **Worth exploring:** friction is evidenced but ownership or leverage depends on
-  an exact claim unavailable through source inspection.
-
-Resolve every claim available through permitted reads/searches before using
-“Worth exploring.” Do not use uncertainty as a substitute for inspection.
-
-Done when each survivor carries friction, ownership move, leverage, existing test
-evidence, verification seam and recommendation strength; every gap is exactly
-source-unverifiable; and no more than five remain.
+Give the [core](core.md) the boundary, evidence map, governing sources and test
+observations. Resolve its source-verifiable needs through permitted reads before
+presenting a candidate as Worth exploring. Use its one integrated ranking; do
+not replace it with unranked parallel observations.
 
 ## 4. Present and stop
 

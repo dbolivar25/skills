@@ -30,7 +30,7 @@ publication gates resolve.
 8. Define publication gates separately from generation.
    Completion criterion: candidate generation, provisional display, confident publication, downgrade, qualification, omission, and evidence-request behavior are distinguished.
 
-9. Define evals and ablations using [evaluation-design](../evaluation-design/SKILL.md).
+9. Define evals and ablations using [evaluation-design](../evaluation-design/core.md).
    Completion criterion: the spec includes final-output, judgment, edge/fidelity, retrieval, and ablation evals; ablations name dimensions whose removal should or should not hurt quality.
 
 10. Optimize only after quality is real.

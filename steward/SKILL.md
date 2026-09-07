@@ -9,6 +9,9 @@ Keep the owner's Intent authoritative as premises, collaborators, and execution
 change. Preserve why the work exists so the next action can be re-derived when a
 plan stops fitting. Completion requires the evidence the owner actually needs.
 
+Read the [core](core.md) to assess commitments and next actions against supplied
+Intent and evidence, then apply its judgment through the runtime.
+
 Read [durable stewardship](branches/durable-work.md) when the task needs this
 continuity. It owns Intent, State, Record, phase sharpening, support, reopening,
 and receipts. A bounded task without a durable need continues without runtime.

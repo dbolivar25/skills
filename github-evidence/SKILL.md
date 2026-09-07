@@ -5,6 +5,9 @@ description: "Use when GitHub work needs a complete PR snapshot, review-thread r
 
 # GitHub Evidence
 
+Read the [core](core.md) to interpret receipts and their limits. Supply actual
+results to it after acquisition; a report succeeding is not green CI or a verdict.
+
 Raw `gh` first when you know the command; the scripts replace only the flows
 agents repeatedly get wrong. Scripts run TS directly (node ≥ 23.6), no deps.
 

@@ -5,7 +5,8 @@ description: Use when an Augment or Decision Site workflow is designed, changed,
 
 # Augment Workflows
 
-This skill owns the workflow-engineering discipline. Current Decision Site
+Read the [core](core.md) before acquisition to frame the judgment and its inputs.
+This shell owns workflow operations and integration with current product state. Current Decision Site
 resources own the product.
 
 | Source | Owns |
@@ -56,31 +57,12 @@ Read the current target again before a concurrency-sensitive mutation.
 Done means every node, operation, and fixed dependency is backed by a current
 product source or live canonical resource.
 
-## 3. Design the explicit system
+## 3. Compose the explicit system
 
-Put each concern where it can be owned cleanly:
-
-| Module | Owns |
-| --- | --- |
-| Workflow graph | Sequence, branches, waits, retries, approvals, effects, and failure paths |
-| Agent prompt | One node-local task, its supplied context, any Skill use, and the required result |
-| Workspace Skill | Reusable methodology that may vary by workspace |
-
-Build the smallest graph that owns the required behavior. Map every input to a
-concrete upstream output. Give every meaningful error a recovery path or an
-intentional terminal. Keep routing, authority, recipients, waits, retries,
-approvals, and effects in graph structure and typed parameters rather than
-prompt prose. Use AI for bounded judgment or language work, not hidden control
-flow.
-
-When an Agent uses a Skill, the Skill owns the reusable method. Its name,
-trigger, responsibility, promised result, and missing-context behavior are the
-interface consumers depend on. The Agent prompt supplies the local task,
-available context, when to use the Skill, and the result this graph needs.
-Prompt length is not the target; clear ownership is.
-
-Done means every value has a source, every effect has an owner, every failure
-has a disposition, and no prompt secretly carries graph control or authority.
+Give the [core](core.md) the framed task, acquired current contracts, canonical
+dependencies, graph and authority. Resolve its exact product/source needs before
+using the proposed graph or findings. It owns graph/prompt/Skill separation and
+the proof obligations; the shell owns live operations and observation.
 
 ## 4. Change only what was authorized, then prove it
 
@@ -88,7 +70,7 @@ For read-only work, use the current validation and resource surfaces to support
 the finding, then stop before mutation. For an authorized change, use the
 current docs and the chosen product surface to change the complete workflow
 document. Preserve state the user did not ask to change. Validate the stored
-draft, resolve structural findings, and separately judge what validation cannot
+draft, resolve structural findings, and supply the result to the core and separately assess what validation cannot
 prove: useful runtime data, prompt and Skill quality, live credentials,
 recipient and destination suitability, business correctness, and effect
 safety.

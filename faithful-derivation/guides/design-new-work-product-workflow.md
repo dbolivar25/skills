@@ -2,8 +2,9 @@
 
 Use this guide for a new workflow, a major redesign, or a product idea that needs a derivation spec before implementation.
 
-Apply the shared [derivation contract](../CONTRACT.md). This guide owns the
-task-specific method below; read its references before their governed decisions.
+Apply the shared [derivation contract](../CONTRACT.md). This guide is a core method over supplied context. Missing source content or
+execution evidence is returned to the shell; read its method references before
+the governed judgment.
 
 Use the complete [derivation spec](../templates/derivation-spec.md) as the artifact
 contract; read it before drafting so its required coverage remains visible.
@@ -211,7 +212,7 @@ Completion criterion: publication gates have inputs, pass conditions, fail behav
 
 ## Step 11: Evals And Ablations
 
-Before this decision, read [`evals-and-ablations`](../../evaluation-design/SKILL.md).
+Before this decision, read [`evals-and-ablations`](../../evaluation-design/core.md).
 
 Define evals at multiple levels:
 

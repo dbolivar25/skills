@@ -51,10 +51,13 @@ _Avoid_: Client, buyer, account
 - **Ordering ↔ Billing**: Shared types for `CustomerId` and `Money`
 ```
 
-The skill infers which structure applies:
+Infer structure from the supplied repository layout and context contents:
 
-- If `CONTEXT-MAP.md` exists, read it to find contexts
-- If only a root `CONTEXT.md` exists, single context
-- If neither exists, create a root `CONTEXT.md` lazily when the first term is resolved
+- A `CONTEXT-MAP.md` identifies multiple contexts and their locations.
+- Only a root `CONTEXT.md` indicates a single context.
+- Neither file means a root glossary can be proposed with the first settled term.
 
-When multiple contexts exist, infer which one the current topic relates to. If unclear, ask.
+For multiple contexts, place the proposed delta in the context supported by the
+topic and examples. Missing map contents are an evidence need; an ambiguous
+meaning boundary is an owner decision. The shell owns reads, questions and lazy
+file creation within the authorized documentation scope.

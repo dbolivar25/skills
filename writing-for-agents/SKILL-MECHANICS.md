@@ -1,6 +1,6 @@
 # Skill mechanics
 
-The skill-specific branch of [`writing-for-agents`](SKILL.md): what changes when the document is a skill — metadata, the invocation choice, and router skills. Everything else about writing it is the universal reference in `SKILL.md`.
+The skill-specific branch of [instruction core](core.md): what changes when the document is a skill — metadata, the invocation choice, and router skills. Everything else about writing it is the universal reference in `SKILL.md`.
 
 ## Invocation
 
@@ -18,7 +18,7 @@ Use the current host's supported metadata rather than assuming a universal front
 - For hosts supporting `disable-model-invocation`, set `disable-model-invocation: true` for explicit-only workflows.
 - In Codex, set `policy.allow_implicit_invocation: false` in `agents/openai.yaml`. This disables implicit invocation while keeping explicit `$skill-name` invocation available. Preserve unrelated metadata. The installed official skill-creator reference `references/openai_yaml.md` documents this setting.
 
-Catalog visibility, automatic content injection, invocation permission, and physical file readability are separate mechanisms. Verify the target host before claiming zero context load or inaccessible content. Do not infer Codex behavior from another host's frontmatter.
+Catalog visibility, automatic content injection, invocation permission, and physical file readability are separate mechanisms. Require supplied target-host evidence before claiming zero context load or inaccessible content. Do not infer Codex behavior from another host's frontmatter.
 
 Shared reference needed by two explicit workflows can live in a plain file that both point to, or in a clearly named reference within one package. Choose its home by ownership and reliable reachability; reading that reference does not select its owner's workflow.
 

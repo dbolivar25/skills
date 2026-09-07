@@ -61,5 +61,5 @@ function calculateDiscount(cart: Cart): Discount;
 
 A small surface reduces what callers and tests must learn; it does not eliminate
 behavioral cases. Keep essential complexity together when splitting it would
-hide its invariant. When the user wants competing interface designs, run
-[design alternatives](../branches/alternatives.md).
+hide its invariant. Compare alternative interfaces when supplied; the shell owns any selected
+independent exploration that produces them.

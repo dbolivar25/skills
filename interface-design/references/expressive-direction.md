@@ -46,8 +46,8 @@ moment, what familiar expectation it preserves, and its likely failure mode.
 Do not use font bans, fashionable effects, surprise, or visual loudness as a
 substitute for a direction.
 
-When AI-generated directions keep collapsing into the same structure, load
-`creative-ideation` → **Seeded Range**. Keep the moment, content, floor, brand,
+When supplied directions keep collapsing into the same structure, return a
+need for additional range. The shell can use `creative-ideation` → **Seeded Range**. Keep the moment, content, floor, brand,
 and accessibility requirements invariant; use each seed to force decisions
 across at least two of the axes above. The seed creates range. Judge the batch
 against the invariant brief before choosing what earns depth.

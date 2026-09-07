@@ -5,6 +5,9 @@ description: Use when an unresolved question about logic, state, interaction, or
 
 # Prototype an uncertainty
 
+Read the [core](core.md) before construction. Use its experiment design, then
+return actual observations to it before claiming learning.
+
 Start from the question the experiment must answer, the decisions it could
 change, and the observations that distinguish possible answers. If the answer
 is already established, use an explanation rather than this experimental method.

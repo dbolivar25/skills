@@ -2,8 +2,9 @@
 
 Use this guide to audit a proposed, designed, implemented, or deployed workflow against faithful derivation.
 
-Apply the shared [derivation contract](../CONTRACT.md). This guide owns the
-task-specific method below; read its references before their governed decisions.
+Apply the shared [derivation contract](../CONTRACT.md). This guide is a core method over supplied context. Missing source content or
+execution evidence is returned to the shell; read its method references before
+the governed judgment.
 
 ## Review Stance
 
@@ -30,7 +31,7 @@ its full coverage obligations.
    Completion criterion: the review names the raw sources actually inspected, missing raw sources, scope rules, retrieval handles, permissions, windows, prior state, and stale-source risks.
 
 5. Inspect compression boundaries.
-   Read [`compression-and-dimensions`](../../information-preservation/SKILL.md) before judging coverage.
+   Read [`compression-and-dimensions`](../../information-preservation/core.md) before judging coverage.
    Completion criterion: every summarization, extraction, classification, aggregation, cache, state write, or context handoff says what survives and what may be lost.
 
 6. Inspect the DAG.
@@ -38,7 +39,7 @@ its full coverage obligations.
    Completion criterion: nodes and edges express real judgment dependencies; speculative generation, verification, invalidation, scope, fidelity, and policy gates are not collapsed into one linear chain.
 
 7. Inspect support packages.
-   Read [`evidence-support-and-confidence`](../../claim-support/SKILL.md) before judging coverage.
+   Read [`evidence-support-and-confidence`](../../claim-support/core.md) before judging coverage.
    Completion criterion: rendered claims and actions can be traced to judgment sources, source support, confidence, contradictions, open questions, and rendering policy.
 
 8. Inspect confidence and rendering.
@@ -49,7 +50,7 @@ its full coverage obligations.
    Completion criterion: the workflow distinguishes generating a candidate from showing, sending, recommending, persisting, or acting on it.
 
 10. Inspect evals.
-   Read [`evals-and-ablations`](../../evaluation-design/SKILL.md) before judging coverage.
+   Read [`evals-and-ablations`](../../evaluation-design/core.md) before judging coverage.
     Completion criterion: final-output, judgment, edge/fidelity, retrieval, and ablation evals exist or are listed as gaps.
 
 ## Findings To Prioritize

@@ -13,6 +13,12 @@ When interface ownership, depth or testability needs judgment, use
 implementation. Design alternatives belong to that module; ordinary coding does
 not select its exploration branch.
 
+Read the [engineering core](core.md) before choosing an implementation path.
+Acquire current code, requirements and governing evidence; give them to the core
+and resolve its named facts before committing to an uncertain behavior. Use its
+result to preserve correctness throughout the edit/test loop, then return actual
+check receipts for final assessment.
+
 ## Select the work
 
 | Observable situation | Required material | Result and stopping boundary |
@@ -22,7 +28,7 @@ not select its exploration branch.
 | A proved repository policy should become a Biome GritQL rule | [Lint enforcement](branches/lint-enforcement.md) | Establish policy and allowed cases, pin the installed engine, and prove the real diagnostics before enforcement. |
 | An authorized change reaches a verified review boundary, or the user requests code/comment clarity | [Finishing](branches/finishing.md) | Simplify behavior-preservingly within existing edit authority, or return findings in read-only work. A standalone comment request needs no prior implementation workflow. |
 
-Read the selected material before doing its work. Several rows may apply, but
+Read the selected operational material before doing its work. Several rows may apply, but
 one row does not silently select the others. The TypeScript standards do not
 become a language requirement for general module design or finishing.
 

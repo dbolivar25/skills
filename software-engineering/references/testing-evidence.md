@@ -49,8 +49,8 @@ expect(retrieved.name).toBe("Alice");
 ```
 
 A write-only repository may instead promise **durable storage**. For that claim,
-query the real database independently after the write; reading through the same
-in-memory cache does not prove persistence. Database observations are valid when
+the evidence must include an independent real-database observation after the
+write; reading through the same in-memory cache does not prove persistence. Database observations are valid when
 the database owns the claimed behavior.
 
 ## Control dependencies through production seams
@@ -105,10 +105,11 @@ or table-driven tests for closed rules and property tests for general invariants
 
 A fake can drive a fast loop but cannot establish SQL constraints, transaction
 behavior, serialization, network protocols, framework wiring, browser behavior,
-or a third-party SDK's current contract. Use the actual implementation in a
-representative database, local server, supported runtime or contract test at that
-boundary. Apply the production migration path when the claim depends on
-persistence semantics or stored shape. Report precisely what each substitute
+or a third-party SDK's current contract. Such claims require observations of the
+actual implementation in a representative database, local server, supported
+runtime or contract test at that boundary. Persistence semantics and stored-shape
+claims also require evidence from the production migration path. A core reports
+missing observations as evidence needs; the shell executes the required checks. Report precisely what each substitute
 proved and what still needs real-boundary evidence.
 
 ## Preserve evidence when moving a seam

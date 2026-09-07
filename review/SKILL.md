@@ -5,27 +5,28 @@ description: Use when code changes need a correctness, request-fit, or merge jud
 
 # Review
 
-Return findings and one code judgment grounded in the actual change, its intended
-behavior, and the repository that must carry it. The work and its evidence outrank
-the author's preferred story; preserve disagreements between them.
+Read the [core](core.md). Own the complete code judgment: acquire the right target,
+resolve its evidence, integrate the findings, and perform only requested actions.
 
-Read [code judgment](branches/code-judgment.md) to pin the target, investigate
-both axes, and falsify findings. It consumes the shared
-[reconstruction method](../understand-change/SKILL.md); reuse a current review
-map already established in the task rather than reconstructing it twice.
+Use the user's PR, branch, fixed point, range or named files. Without one, use
+dirty working-tree changes first; otherwise compare against the merge base with
+upstream, main or master. Verify a supplied fixed point resolves and its three-dot
+diff is nonempty. Record the comparison and commit list once. Ask only when the
+repository cannot identify an honest target.
 
-The result identifies supported defects, request fit, codebase fit, checked
-validation, and remaining uncertainty. A summary alone does not provide a verdict.
-Recheck the target when its source changes; an old head cannot support a current
-merge recommendation.
+Read governing instructions, neighboring implementations, tests and domain docs.
+For a PR, follow [PR operations](../github-evidence/references/pr-operations.md)
+to pin live state and relevant unresolved/resolved discussion. Use
+understand-change for a current map and evidence capabilities for named gaps.
+Do not rely on author prose or old heads as current proof.
 
-Review does not itself authorize fixes or live actions. Carry forward actions the
-user already requested within their scope. Before publishing a GitHub review,
-read [PR operations](../github-evidence/references/pr-operations.md), verify the
-current head, and read back the result. Draft, comment, approval, requested changes,
-reply and thread resolution are distinct outcomes.
+Apply the core. When independent surfaces improve coverage, give investigators
+the pinned target, criteria and relevant evidence; integrate their observations
+through the core rather than pasting competing verdicts. Resolve obtainable
+evidence needs and preserve unverified scope. Tests and source reads must stay
+within the task's authority; a review does not silently fix code.
 
-A PR description or review guide is a separate result owned by
-[reviewability](../reviewability/SKILL.md). When the task requests both, finish the
-judgment and pass its current review map to that skill. Do not start review writing
-merely because a verdict would be useful to explain.
+Return the integrated judgment, scope and limits. When review writing is also
+requested, pass the current map and verdict to reviewability. Before a requested
+live review action, reread the head, reapply affected judgment and follow PR
+operations for the exact action and read-back. A draft verdict is not publication.

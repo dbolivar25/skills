@@ -1,34 +1,27 @@
-# Judge code
+# Review core
+
+Read the [core/shell contract](../contracts/core-shell.md).
+
+**Inputs:** Pinned comparison and source versions, user intent, repository standards/precedent, change map, current code and review context, check receipts and supporting assessments.
 
 Use this branch for correctness, request fit, or a merge recommendation. One
 **judge** integrates all evidence. Specialist lenses return candidate findings
 and support; they do not issue competing verdicts.
 
-## Pin the exact target
+## Establish the supplied target
 
-Use the user's PR, branch, fixed point, commit range, staged/unstaged changes, or
-named files. Without a supplied target, use dirty working-tree changes first;
-otherwise compare the current branch with its merge base against the upstream,
-`main`, or `master`. Ask only when repository state cannot identify an honest
-target. Verify a fixed point resolves and its three-dot diff against `HEAD` is
-non-empty. Record the comparison and commit list once.
+Use the pinned target, currentness receipt, requested outcome, governing
+instructions, relevant source and validation observations. A stale head or absent
+comparison is an evidence need; it cannot support a current merge recommendation.
+Apply [engineering standards](../software-engineering/references/standards.md)
+and [testing evidence](../software-engineering/references/testing-evidence.md)
+for relevant TypeScript changes. A preferred pattern is not a defect until it
+conflicts with the governing contract and local precedent.
 
-For a PR, follow [PR operations](../../github-evidence/references/pr-operations.md). Recheck
-its live head when resuming after interruption or feedback. State the exact
-comparison and whether the task includes a requested live action.
-
-Read repository instructions, standards, neighboring code, tests, domain docs,
-and existing implementations. For TypeScript changes, apply the law in
-[engineering standards](../../software-engineering/references/standards.md) and
-[testing evidence](../../software-engineering/references/testing-evidence.md). A difference from a
-preferred pattern is not a defect until compared with the governing contract and
-local precedent. Read unresolved threads and relevant resolved history before
-forming new findings; existing comments are claims to verify, not findings to
-copy.
-
-Use the shared [reconstruction method](../../understand-change/SKILL.md). The
-request source, standards, precedent, and review context must be known or their
-absence explicit before the verdict is ready.
+Use a supplied current change map, or the
+[change-understanding core](../understand-change/core.md) with supplied evidence.
+Prior reviewer comments are claims to assess against current source, not facts
+to copy. Record material missing request, standards or review context as limits.
 
 ## Investigate both axes
 
@@ -37,28 +30,24 @@ absence explicit before the verdict is ready.
 - **Codebase fit:** correctness and coherence within the repository's contracts,
   architecture, tests, runtime, and conventions.
 
-Keep separate working evidence for the axes. Trace material inputs, state
+Keep separate working evidence for the axes. Trace supplied evidence for material inputs, state
 transitions, failures, persistence, protocol projections, callers, side effects,
-and tests far enough beyond the hunk to establish the observable consequence.
+and tests far enough to establish the observable consequence; return an evidence need
+for absent callers or paths whose behavior could change the judgment.
 Every material changed behavior must be accounted for on both axes or marked
 outside available evidence.
 
-Use parallel investigators only when independent surfaces improve coverage.
-Give each the pinned target and relevant sources; integrate their evidence
-instead of pasting their reports. Apply a lens when the changed behavior earns it:
+Apply a supporting core when the changed behavior earns it, using the evidence
+available for that concern:
 
-- Dependency version, lock graph, runtime image, or vendored tool:
-  [dependency compatibility](../../dependency-compatibility/SKILL.md).
-- Material interaction or visible UI state: `interface-design`.
-- Shipped behavior, reliability, or performance claims: production evidence,
-  `grafana-evidence`, or `diagnosing-bugs`.
+- External version or runtime changes: [dependency compatibility](../dependency-compatibility/core.md).
+- Interaction or visible states: [interface design](../interface-design/core.md).
+- Causal claims with reproduction/probe receipts: [diagnosis](../diagnosing-bugs/core.md).
 
-A requested review guide is a subsequent outcome: hand the current review map
-to [reviewability](../../reviewability/SKILL.md) after the judgment. It is not
-an investigative lens and is not required for a verdict.
-
-Every lens must return evidence relevant to the pinned target. The judge retains
-the final recommendation.
+Consume their results and limits; do not invoke their operational shells from
+this core. No supporting assessment owns the final recommendation. Missing
+telemetry or compatibility evidence returns to the shell for acquisition.
+A review guide is a separate outcome and is not an investigative lens.
 
 ## Falsify candidate findings
 
@@ -67,7 +56,7 @@ missing contract, a material consequence, and a plausible correction direction
 or decision the author must make. A location may be a file/line, symbol, check,
 artifact, or other source.
 
-Try to disprove each candidate through adjacent callers, parsers, constructors,
+Try to disprove each candidate against supplied adjacent callers, parsers, constructors,
 adapters, middleware, tests, framework behavior, precedent, and current threads.
 Green checks and resolved threads are evidence, not proof that a path is correct.
 Group one root cause into one finding. Drop tooling-enforced style preferences
@@ -102,5 +91,5 @@ and gaps. Do not manufacture a finding to make the review look useful.
 The result must enable one coherent decision without hiding unverified scope.
 Stale heads, parallel report dumps, untraced checklists, duplicate comments, taste
 promoted to blockers, review-to-fix drift, and unauthorized review-state changes
-all defeat that purpose. Requested publication follows PR operations and requires
-current-head verification plus live read-back.
+all defeat that purpose. Publication and current-head verification belong to the shell; the core
+returns the supported verdict and identifies the source version it covers.

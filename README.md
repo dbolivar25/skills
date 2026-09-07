@@ -4,6 +4,22 @@ Choose a skill by the judgment or result the task needs. Its implementation may
 be deep; the caller should not need to learn every internal method. Shared
 references supply knowledge without starting their owner's workflow.
 
+Each of the 28 owned modules has two parts:
+
+- **`core.md`** applies the method to supplied purpose, candidate, evidence and
+  constraints. It returns a result, an exact evidence need, or an owner decision.
+- **`SKILL.md`** is the normal invocation shell. It acquires context, applies the
+  core, resolves obtainable gaps, and performs the task's authorized actions.
+
+Cores can compose other cores without starting their acquisition or execution
+workflows. Their methods remain deep: examples, standards, exceptions and domain
+references stay with their owner. The unchanged creative pair keeps its existing
+behavior.
+
+The [architecture](docs/architecture/core-shell.md) explains the allocation and
+feedback loop. The [shared contract](contracts/core-shell.md) defines the boundary;
+[verification](docs/architecture/core-shell-verification.md) records what was checked.
+
 ## Choose the work
 
 | Request | Entry point | Result |
@@ -59,14 +75,19 @@ faithful-derivation ──────→ preservation + claim support + evaluat
 writing-for-agents ───────→ evaluation-design
 ```
 
-Use a supporting skill for its result while retaining responsibility for the
-whole task. Read an owner's internal reference when only its method or vocabulary
-is needed. Reading testing law does not start SWE; critique does not open Steward;
-designing a future support policy does not fabricate an assessment of actual claims.
+Use a supporting shell when its evidence acquisition or operational capability is
+needed. With sufficient supplied inputs, read its core and consume the judgment
+directly. The caller retains responsibility for the whole task.
 
-[The extraction design and graph](docs/architecture/extracted-modules.md) explain
-inputs, outputs, callers, retained internals and the distinction between invoking
-a judgment and reading its method. Cross-package references require their named
+For example, review can pass a pinned change map to the compatibility core. If
+that core needs an upstream migration contract, the shell retrieves it and feeds
+it back. The core does not browse. Before publishing an authorized review, the
+review shell rechecks the head and reapplies judgment to changed evidence.
+
+This is an instruction boundary, not a tool sandbox or a deterministic runtime.
+The [earlier extraction design](docs/architecture/extracted-modules.md) records
+why these invocation interfaces exist; the core/shell architecture supersedes
+its internal dependency paths. Cross-package references require their named
 owners to be available; independent distribution does not bundle them automatically.
 
 ## Migration
@@ -99,7 +120,8 @@ owners to be available; publishing one package alone does not bundle dependencie
 Run `ruby scripts/validate-skills.rb` for metadata, owned Markdown links and
 [routing expectations](tests/invocation-cases.yml). Run
 `ruby tests/validate-skills_test.rb` for the validator's regression fixtures.
-The cases include shared-method reads that exclude the owning workflow. They
+The 59 cases include direct core and shared-method reads that exclude the owning
+operational workflow. They
 validate the corpus, not model routing accuracy or an installed host reload.
 
 The earlier [intent audit](docs/intent-audit/results.md) records preservation up

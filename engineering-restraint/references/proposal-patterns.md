@@ -5,8 +5,9 @@ do not replace current-system evidence.
 
 ## Dependency
 
-Ask what makes the current stack incapable or prohibitively expensive. Test its
-configuration, platform features, and narrower guarantees first. Price updates,
+Ask what makes the current stack incapable or prohibitively expensive. Assess supplied evidence about its
+configuration, platform features, and narrower guarantees first; return missing
+comparisons as evidence needs. Price updates,
 security, transitive code, runtime behavior, failure, and diagnosis.
 
 ## Abstraction
@@ -38,9 +39,9 @@ assumptions trapped in the generating conversation.
 
 ## Process or workflow
 
-Ask what recurring failure it prevents. Test an owner, checklist, or existing
+Ask what recurring failure it prevents. Assess evidence for an owner, checklist, or existing
 tool setting before durable statuses, reports, meetings, automations, or
-handoffs. Price attention, training, exceptions, stale state, enforcement, and
+handoffs; propose a bounded comparison when that evidence is absent. Price attention, training, exceptions, stale state, enforcement, and
 repair.
 
 ## Complexity lenses
