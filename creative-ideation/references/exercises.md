@@ -1,71 +1,85 @@
-# Time-Boxed Exercises
+# Time-boxed exercises
 
-Concrete exercises grouped by duration. Use when the user wants to *do* an exercise, not be given ideas. Each entry names its parent method and expected output. For a `creative-shaping` method, load that skill and use the named method.
+Use for requested practice, not an ordinary request for ideas. Read the named
+method through [routing](routing.md). The core proposes the activity; the shell
+facilitates it and receives actual work. Time passing is not an observed result.
 
 ## 5 minutes
 
-**Single Oblique Strategy** *(`creative-shaping` → **Oblique Strategies**)* — pick a card at random, apply literally to the next decision, make the move. Output: one move.
-
-**Random word provocation** *(`creative-shaping` → **Lateral Provocations**)* — pick a random noun; force five connections to your problem; use the strongest. Output: one new angle.
-
-**Inversion check** *(`creative-shaping` → **Premortem and Inversion**)* — restate goal as opposite, list five things that would guarantee the inverted goal, check if you're doing any. Output: failure-paths self-check.
-
-**S+7 on a paragraph** *(`methods/oulipo.md`)* — replace every noun with the 7th noun after it in a dictionary. Output: defamiliarized version of your text.
+- **Single Oblique Strategy:** randomly draw a real card; apply it literally to
+  the next decision. Output: one move.
+- **Lateral Provocations:** random noun → five connections to the problem →
+  strongest connection. Output: a new angle.
+- **Inversion:** invert the goal; list five actions guaranteeing the opposite;
+  check which you are doing. Output: failure-path self-check.
+- **OuLiPo S+7:** replace each noun in a paragraph with the seventh subsequent
+  dictionary noun. Output: transformed text.
 
 ## 30 minutes
 
-**Constraint dispatch** *(`full-prompt-library.md`)* — pick a constraint; 5 min per idea; generate 3; discard the obvious; generate a 4th; output the 3 strongest. Output: 3 candidate projects.
-
-**SCAMPER on a base idea** *(`creative-shaping` → **SCAMPER**)* — write base in one sentence; run all 7 operators; surface the surprising one; elaborate. Output: 7 raw, 1 elaborated.
-
-**Premortem** *(`creative-shaping` → **Premortem and Inversion**)* — imagine the project failed catastrophically; 10 min writing the failure narrative; 10 min identifying addressable causes; 10 min mitigation plan. Output: failure story + mitigation plan.
-
-**Crazy 8s** *(`methods/volume-generation.md`)* — fold sheet to 8 panels; 8 min total; 1 idea per panel; sketch don't write; pick 2 strongest. Output: 8 raw, 2 chosen.
-
-**Defamiliarization on a paragraph** *(`creative-shaping` → **Defamiliarization**)* — pick something extremely familiar in your subject; describe it for 200 words as if seeing it for the first time, no technical vocabulary. Output: defamiliarized description + list of newly-visible features.
+- **Constraint dispatch:** pick a constraint; spend five minutes per idea on
+  three; discard the obvious; generate a fourth; keep three. Output: projects.
+- **SCAMPER:** state the base; run all seven operators; elaborate the surprising
+  result. Output: seven raw variations and one elaborated direction.
+- **Premortem:** ten minutes each for concrete failure narrative, addressable
+  causes and mitigations. Output: failure story and plan.
+- **Crazy 8s:** eight panels, eight minutes, one sketch per panel; choose two.
+  Output: eight raw ideas and two selections.
+- **Defamiliarization:** describe a familiar subject in 200 words as if first
+  encountered, without technical vocabulary. Output: passage and newly seen features.
 
 ## 1 hour
 
-**TRIZ contradiction analysis** *(`methods/triz-principles.md`)* — state problem as contradiction (improving X degrades Y); look up 2–3 candidate principles; for each, generate one mechanism in your specific case; pick the strongest. Output: contradiction statement + 1 elaborated mechanism.
-
-**James Webb Young, compressed** *(`methods/volume-generation.md`)* — gather specific material (15min) → digest, make connections (15min) → walk away (10min) → idea arrives (variable) → shape (20min). Output: a written idea that has been incubated.
-
-**Affinity diagram** *(`creative-shaping` → **Affinity Diagrams**)* — write each note/quote on its own card; spread them out; cluster silently; name each cluster; note orphans and gaps. Output: bottom-up taxonomy + list of gaps.
-
-**Sol LeWitt instruction** *(`creative-shaping` → **Creative Discipline**)* — define the work as an instruction not an object; write it as a single sentence; the work is the instruction. Optionally execute it once. Output: an instruction-as-work.
+- **TRIZ:** state “improving X degrades Y”; identify 2–3 principles; derive a
+  mechanism for each; choose the strongest. Output: contradiction and mechanism.
+- **Young, compressed:** gather specific material (15 min), digest connections
+  (15), leave it alone (10), then shape (20). Idea arrival remains variable;
+  never claim incubation or arrival from a schedule alone. Output when available:
+  a written idea that has actually been incubated.
+- **Affinity:** one note/quote per card; spread, silently cluster, name clusters;
+  retain orphans and gaps. Output: bottom-up taxonomy and gaps.
+- **LeWitt, under Creative Discipline:** define the work as a single-sentence
+  instruction, optionally execute it. Output: instruction-as-work.
 
 ## 1 day
 
-**Tharp's box** *(`creative-shaping` → **Creative Discipline**)* — get a literal box; spend the day collecting everything related to your project (clippings, references, sketches, sources, objects); label it; keep adding for the project's duration. Output: physical archive + practice of returning.
-
-**Single-day dérive** *(`methods/derive-and-mapping.md`)* — pick a territory you don't know well; spend the day wandering, no agenda; follow attractions; at end, draw a Lynch-style map (paths, edges, districts, nodes, landmarks); note surprises. Output: map + surprises + possibly a project.
-
-**Hard-constraint writing day** *(`methods/oulipo.md`)* — pick one constraint (lipogram, univocalism, snowball, prisoner's, pilish); write 1000 words under it; resist abandoning when it gets hard. Output: 1000 constrained words.
-
-**High concept low effort** *(`full-prompt-library.md`)* — pick a brilliant idea; execute lazily; ship by end of day. Output: a finished thing that exists.
+- **Tharp's box, under Creative Discipline:** collect project clippings,
+  references, sketches, sources and objects in a labeled physical box; keep
+  adding throughout the project. Output: archive and practice of returning.
+- **Dérive:** wander unfamiliar territory without a destination; follow attention;
+  finish with a Lynch map (paths, edges, districts, nodes, landmarks) and surprises.
+  Output: map and possibly a project; no fabricated field notes.
+- **OuLiPo writing day:** choose lipogram, univocalism, snowball, prisoner's or
+  pilish constraint; write 1,000 words without abandoning it when difficult.
+- **High concept, low effort, under Constraint dispatch:** pursue a strong idea
+  through deliberately simple execution. Output: a finished thing by day's end;
+  delivery actions still follow the user's authority.
 
 ## 1 week
 
-**Compression-progress research week** *(`creative-shaping` → **Compression Progress**)* — Day 1–2: identify a domain you have weak predictions in. Day 3–5: read deeply. Day 6: write the new patterns you can predict. Day 7: pick the question whose answer would most compress your model further. Output: a research question grounded in your current model.
-
-**Pattern-language week** *(`methods/pattern-languages.md`)* — Day 1–2: identify ten recurring problems. Day 3–4: write each as a pattern (context, problem, generative solution). Day 5: arrange in partial order. Day 6: design using the patterns as vocabulary. Day 7: review. Output: a small pattern language and a design that uses it.
-
-**Cleese open-mode week** *(`creative-shaping` → **Creative Discipline**)* — each day: protect 90 minutes during which you do nothing useful, don't check messages, don't finish anything. The work is to not be in closed mode. Output: not an idea — the conditions for ideas.
+- **Compression Progress:** days 1–2 choose a domain of weak predictions; 3–5 read
+  deeply; 6 record newly predictable patterns; 7 select the question that would
+  further compress your model. Output: grounded research question.
+- **Pattern Languages:** days 1–2 identify ten recurring problems; 3–4 express
+  context/problem/generative solution; 5 arrange a partial order; 6 design with
+  the patterns; 7 review. Output: small pattern language and design.
+- **Cleese, under Creative Discipline:** protect 90 minutes daily without messages,
+  finishing or useful closed-mode work. Output: conditions for ideas, not a
+  promised idea.
 
 ## Multi-week
 
-**Cameron's *Artist's Way* (12 weeks)** *(`creative-shaping` → **Creative Discipline**)* — daily morning pages (3 longhand pages, stream of consciousness, don't reread for 8 weeks). Weekly artist date (2 hours solo, doing something that interests you). Output: a different relationship to the work.
+- **Cameron, under Creative Discipline:** 12 weeks of daily three-page longhand
+  stream-of-consciousness morning pages; no rereading for eight weeks; weekly
+  two-hour solo artist date. Output: changed relationship to the work.
+- **Barry image-bath, under Creative Discipline:** daily for several weeks, list
+  ten things seen; choose one; draw it imperfectly; write from the surfaced memory.
+  Output: archive of recovered specifics.
 
-**Lynda Barry image-bath** *(`creative-shaping` → **Creative Discipline**)* — daily for several weeks: list 10 things you saw today; pick one; draw it (badly is fine); write a paragraph from inside the memory it surfaces. Output: an archive of recovered specifics.
+## Unspecified exercise
 
-## When the user wants an exercise but doesn't say which
-
-| Situation | Default exercise |
-|---|---|
-| "Want to make something but unsure what" | 30 min: constraint dispatch + 3 ideas |
-| "Stuck" | 5 min: single Oblique Strategy |
-| "Have ideas, can't pick" | 30 min: premortem on each |
-| "Need to know more about X" | 1 hour: James Webb Young compressed, OR 1 day: dérive |
-| "Want a long-term practice" | multi-week: morning pages, image-bath, Tharp's box |
-
-Don't stack exercises on first invocation. Pick one, run it, see what comes back.
+Unsure what to make → 30-minute constraint dispatch. Stuck → five-minute Oblique.
+Cannot choose → 30-minute premortem per option. Need domain knowledge → one-hour
+Young or day-long Dérive. Want sustained practice → morning pages, image-bath or
+Tharp's box. Select one exercise initially and assess what comes back before
+adding another.

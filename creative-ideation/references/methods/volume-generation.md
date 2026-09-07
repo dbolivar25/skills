@@ -1,5 +1,8 @@
 # Volume Generation
 
+Core: external steps below are proposals or supplied evidence; the shell executes them.
+
+
 Three traditions for producing many ideas fast:
 - **Crazy 8s** — Google Ventures Sprint method. Codified in *Sprint* (Knapp et al., 2016).
 - **Brainwriting 6-3-5** — Bernd Rohrbach, 1968. German design-method literature.

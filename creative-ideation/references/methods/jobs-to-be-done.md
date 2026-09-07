@@ -1,5 +1,8 @@
 # Jobs to Be Done
 
+Core: external steps below are proposals or supplied evidence; the shell executes them.
+
+
 Clayton Christensen et al., *Competing Against Luck* (HarperBusiness, 2016). Customers don't buy products based on demographics — they "hire" products to do specific jobs in specific situations.
 
 ## When to use

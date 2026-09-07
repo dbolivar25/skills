@@ -1,9 +1,9 @@
 # Functional cores and operational shells
 
 Baseline: 95b0a27. This design replaces the extraction pass's implementation
-structure while retaining its useful invocation interfaces. No new router or
-skill name is needed. Creative packages remain unchanged under the owner's
-existing exclusion; they are imported methods, not claimed pure cores.
+structure while retaining its useful invocation interfaces. The subsequent
+[creative consolidation](creative-consolidation.md) brings creative shaping into
+creative-ideation, yielding 29 modules with the same core/shell boundary.
 
 ## The seam
 
@@ -69,7 +69,7 @@ Prose, a table, a proposed diff or a domain-specific status can carry them.
 | writing-for-agents, humanize | Instruction architecture and truth-preserving prose transformation | File/context reads, edits, validation and delivery |
 | grafana-evidence, github-evidence | Population/support interpretation and PR receipt semantics | Live queries/APIs, pagination, redaction and requested platform actions |
 | augment-design, augment-workflows | Supplied brand-law application and graph/authority design | Assets/audit and live product contracts, canonical state and authorized operations |
-| creative-ideation, creative-shaping | Existing imported creative methods | Existing behavior retained; no purity claim |
+| creative-ideation | Method routing, supplied-material transformation, idea quality and exercise proposals | Brief/source acquisition, real random draws, exercises, independent generation when required, and authorized making |
 
 ## Dependency direction
 

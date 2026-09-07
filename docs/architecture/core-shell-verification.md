@@ -1,5 +1,9 @@
 # Core/shell verification
 
+Historical receipt for 849e56d. The later [creative consolidation](creative-consolidation.md)
+updates the creative exception and library count.
+
+
 Date: 2026-09-07. Baseline: 95b0a27. Scope: this repository's 30 skill packages;
 28 converted modules and the two deliberately unchanged creative packages.
 

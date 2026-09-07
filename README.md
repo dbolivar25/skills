@@ -4,7 +4,7 @@ Choose a skill by the judgment or result the task needs. Its implementation may
 be deep; the caller should not need to learn every internal method. Shared
 references supply knowledge without starting their owner's workflow.
 
-Each of the 28 owned modules has two parts:
+Each of the 29 modules has two parts:
 
 - **`core.md`** applies the method to supplied purpose, candidate, evidence and
   constraints. It returns a result, an exact evidence need, or an owner decision.
@@ -13,8 +13,8 @@ Each of the 28 owned modules has two parts:
 
 Cores can compose other cores without starting their acquisition or execution
 workflows. Their methods remain deep: examples, standards, exceptions and domain
-references stay with their owner. The unchanged creative pair keeps its existing
-behavior.
+references stay with their owner. The [consolidated creative library](docs/architecture/creative-consolidation.md)
+retains all 22 methods in 20 files.
 
 The [architecture](docs/architecture/core-shell.md) explains the allocation and
 feedback loop. The [shared contract](contracts/core-shell.md) defines the boundary;
@@ -48,8 +48,7 @@ feedback loop. The [shared contract](contracts/core-shell.md) defines the bounda
 | Design quality measurement | [evaluation-design](evaluation-design/SKILL.md) | Cases, observations, oracles, comparisons and ablations |
 | Write instructions for an agent | [writing-for-agents](writing-for-agents/SKILL.md) | Reachable, well-structured instructions that change the intended behavior |
 | Restore human voice | [humanize](humanize/SKILL.md) | Natural prose with meaning and uncertainty preserved |
-| Generate or select a creative direction | [creative-ideation](creative-ideation/SKILL.md) | A selected creative method and concrete directions |
-| Transform existing creative material | [creative-shaping](creative-shaping/SKILL.md) | The selected deep method under creative-ideation's routing |
+| Generate or select a creative direction | [creative-ideation](creative-ideation/SKILL.md) | A selected method for new or existing work, concrete directions or a guided exercise |
 
 ## Specialist resources
 
@@ -108,8 +107,9 @@ owners to be available; independent distribution does not bundle them automatica
 | faithful derivation fidelity/support/evaluation references | Owned by information-preservation, claim-support, evaluation-design |
 | Steward general falsification method | critique; phase-specific acceptance stays in Steward |
 | steward immediate branch | decision-rights: independently reachable judgment without durable runtime |
+| creative-shaping | creative-ideation: internal named methods |
 
-The creative pair is unchanged. Herdr and Simplified Technical English remain
+Creative shaping is now an internal part of creative-ideation. Herdr and Simplified Technical English remain
 retired at the owner's request. No alias packages remain for removed invocations.
 This repository owns this library; built-in skills, managed plugins and other
 installations are outside its scope. Cross-package references require the named
@@ -120,7 +120,8 @@ owners to be available; publishing one package alone does not bundle dependencie
 Run `ruby scripts/validate-skills.rb` for metadata, owned Markdown links and
 [routing expectations](tests/invocation-cases.yml). Run
 `ruby tests/validate-skills_test.rb` for the validator's regression fixtures.
-The 59 cases include direct core and shared-method reads that exclude the owning
+Run `ruby tests/creative-package_test.rb` for the creative package budget and method routes.
+The 64 cases include direct core and shared-method reads that exclude the owning
 operational workflow. They
 validate the corpus, not model routing accuracy or an installed host reload.
 

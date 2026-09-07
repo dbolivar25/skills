@@ -120,17 +120,18 @@ cases:
     expect:
       primary: creative-ideation
       also_load: []
-      do_not_load: ["creative-shaping"]
+      do_not_load: ["prototype"]
     why: "The user needs divergence from a blank starting point rather than transformation of supplied material."
 
   - id: shape-existing-options
-    kind: collision
+    kind: positive
     prompt: "Take these five rough onboarding concepts, subvert the obvious ones, combine the strongest parts, and sharpen the final directions."
     expect:
-      primary: creative-shaping
-      also_load: ["creative-ideation"]
+      primary: creative-ideation
+      also_load: []
+      read: ["creative-ideation/core.md","creative-ideation/references/routing.md"]
       do_not_load: []
-    why: "Existing material activates the deep shaping branch while the parent retains method selection and anti-generic routing policy."
+    why: "One creative owner routes existing material; shaping methods are internal references, not another invocation."
 
   - id: generic-interface-design
     kind: positive
@@ -619,3 +620,55 @@ cases:
       read: ["augment-design/core.md","augment-design/references/voice.md","humanize/core.md"]
       do_not_read: ["humanize/SKILL.md","augment-design/operations.md"]
     why: "The brand core composes the prose core with supplied constraints; proposed text cannot establish rendered compliance."
+
+  - id: creative-seeded-range
+    kind: collision
+    prompt: "The AI layout variants all have the same structure. Use Seeded Range while keeping the brief fixed."
+    expect:
+      primary: creative-ideation
+      also_load: []
+      do_not_load: ["prototype"]
+      read: ["creative-ideation/core.md","creative-ideation/references/methods/volume-generation.md"]
+      do_not_read: ["creative-ideation/references/methods/constraints.md"]
+    why: "Seeded Range needs real seeds and separate generation; the shell supplies operations and the core judges structural range."
+
+  - id: creative-scamper-existing-base
+    kind: collision
+    prompt: "Apply SCAMPER to this supplied base idea; return the strongest variations."
+    expect:
+      primary: creative-ideation
+      also_load: []
+      do_not_load: ["prototype"]
+      read: ["creative-ideation/references/methods/constraints.md"]
+      do_not_read: ["creative-ideation/references/methods/selection.md"]
+    why: "The SCAMPER section runs all seven transformations; sharing a file with OuLiPo does not select it."
+
+  - id: creative-recommend-method
+    kind: collision
+    prompt: "Recommend a creative method for this stalled draft. Do not apply one yet."
+    expect:
+      primary: creative-ideation
+      also_load: []
+      do_not_load: ["humanize"]
+      read: ["creative-ideation/core.md","creative-ideation/references/routing.md"]
+    why: "Return 2–3 method choices with reasons and await the owner's choice; no silent default or prose rewrite."
+
+  - id: creative-high-slop
+    kind: collision
+    prompt: "Give me less obvious AI startup ideas for this supplied situation."
+    expect:
+      primary: creative-ideation
+      also_load: []
+      do_not_load: ["prototype"]
+      read: ["creative-ideation/references/routing.md","creative-ideation/references/methods/provocation.md","creative-ideation/references/anti-slop.md"]
+    why: "The high-slop override selects provocation, rejects five obvious candidates and retains a grounded direction; a product label alone does not bypass it."
+
+  - id: creative-drift-without-notes
+    kind: collision
+    prompt: "Use the creative core to propose a dérive for this neighborhood. No observations or field notes are supplied."
+    expect:
+      primary: creative-ideation
+      also_load: []
+      do_not_load: ["prototype"]
+      read: ["creative-ideation/core.md","creative-ideation/references/methods/derive-and-mapping.md"]
+    why: "Return an activity proposal or evidence need, without fabricating a walk, observations or elapsed time."
