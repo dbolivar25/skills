@@ -10,7 +10,7 @@ branch governs the order in which it is learned.
 Read project `CONTEXT.md` when present and governing ADRs. Inspect local test
 patterns. Establish the public interface, test seams, and a prioritized behavior
 list, focusing effort on critical paths and complex logic. If the interface is
-unsettled, use [module design](../references/module-design.md) before the loop.
+unsettled, use [module design](../../module-design/references/design.md) before the loop.
 Look for opportunities to hide behavior behind a small interface.
 
 Confirm the plan with the user before coding: interface, seams and prioritized

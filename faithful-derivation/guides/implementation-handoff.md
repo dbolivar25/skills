@@ -31,11 +31,11 @@ Follow local repository conventions, architecture, validation commands, and owne
    Completion criterion: candidate generation can run speculatively when useful, but display, send, persist, recommend, or act behavior is controlled by publication gates.
 
 6. Implement structured confidence and rendering.
-   Read [`evidence-support-and-confidence`](../reference/evidence-support-and-confidence.md) before implementation.
+   Read [`evidence-support-and-confidence`](../../claim-support/references/evidence-and-confidence.md) before implementation.
    Completion criterion: confidence axes can change output assertiveness, qualification, omission, escalation, or demotion.
 
 7. Implement evals at the right layers.
-   Read [`evals-and-ablations`](../reference/evals-and-ablations.md) before implementation.
+   Read [`evals-and-ablations`](../../evaluation-design/SKILL.md) before implementation.
    Completion criterion: test coverage or eval harnesses cover final output, judgments, edge/fidelity, retrieval, and ablation where feasible.
 
 8. Decide durable state intentionally.

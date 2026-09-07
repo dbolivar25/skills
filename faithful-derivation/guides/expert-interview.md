@@ -54,7 +54,7 @@ Before this decision, read [`raw-state-and-semantics`](../reference/raw-state-an
 
 Judgment and evidence:
 
-Before this decision, read [`compression-and-dimensions`](../reference/compression-and-dimensions.md), [`evidence-support-and-confidence`](../reference/evidence-support-and-confidence.md).
+Before this decision, read [`compression-and-dimensions`](../../information-preservation/references/dimensions.md), [`evidence-support-and-confidence`](../../claim-support/references/evidence-and-confidence.md).
 
 - What should the model avoid saying unless directly supported?
 - What would count as strong evidence?
@@ -91,11 +91,11 @@ False positives:
 Before translating answers or supplied context, read the references governing
 the resulting decisions even when their question-bank sections were skipped:
 [raw state](../reference/raw-state-and-semantics.md),
-[dimensions and fidelity](../reference/compression-and-dimensions.md),
-[support and confidence](../reference/evidence-support-and-confidence.md), and
+[dimensions and fidelity](../../information-preservation/references/dimensions.md),
+[support and confidence](../../claim-support/references/evidence-and-confidence.md), and
 [publication and rendering](../reference/publication-and-rendering.md).
 
-Before this decision, read [`evals-and-ablations`](../reference/evals-and-ablations.md).
+Before this decision, read [`evals-and-ablations`](../../evaluation-design/SKILL.md).
 
 Read the [derivation spec](../templates/derivation-spec.md) before translating the
 first round. After each interview round, translate answers into:

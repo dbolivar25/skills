@@ -283,3 +283,11 @@ context.
 When an objection may block, redirect, or repeatedly challenge an owner choice,
 read [decision rights](../decision-rights/SKILL.md). Use its supported
 next action and settlement in this task; reading it does not start stewardship.
+
+## Experiments as a supporting module
+
+When an unresolved interaction or layout question needs a runnable comparison,
+use [prototype](../prototype/SKILL.md). Supply the moment, floor, domain states,
+brand and accessibility constraints and the observation needed. Use its evidence
+to choose the direction; interface design retains the product judgment and the
+rendered-quality obligations for any implementation.

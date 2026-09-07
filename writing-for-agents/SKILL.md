@@ -145,3 +145,9 @@ revision with the original intent on representative cases, especially where
 something was merged, disclosed, or removed. Verify needed references are reached
 and real constraints survive. Do not declare a no-op or an improvement from word
 count alone.
+
+When a consequential instruction change needs behavioral evidence, use
+[evaluation-design](../evaluation-design/SKILL.md) with the behavior it should
+change, representative caller tasks and failure consequences. Apply the returned
+comparison plan within the task's authority; a valid description or a shorter
+file does not establish better agent behavior.

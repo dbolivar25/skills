@@ -83,7 +83,7 @@ Completion criterion: every high-risk judgment names raw signals, counter-signal
 
 ## Step 5: Dimension Discovery
 
-Before this decision, read [`compression-and-dimensions`](../reference/compression-and-dimensions.md).
+Before this decision, read [`compression-and-dimensions`](../../information-preservation/references/dimensions.md).
 
 Name a dimension only when it can change a judgment.
 
@@ -169,7 +169,7 @@ Completion criterion: after every transformation, downstream nodes can still mak
 
 ## Step 9: Evidence, Support, And Confidence
 
-Before this decision, read [`evidence-support-and-confidence`](../reference/evidence-support-and-confidence.md).
+Before this decision, read [`evidence-support-and-confidence`](../../claim-support/references/evidence-and-confidence.md).
 
 Define evidence relative to the question.
 
@@ -211,7 +211,7 @@ Completion criterion: publication gates have inputs, pass conditions, fail behav
 
 ## Step 11: Evals And Ablations
 
-Before this decision, read [`evals-and-ablations`](../reference/evals-and-ablations.md).
+Before this decision, read [`evals-and-ablations`](../../evaluation-design/SKILL.md).
 
 Define evals at multiple levels:
 

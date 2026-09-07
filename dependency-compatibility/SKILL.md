@@ -1,15 +1,21 @@
-# Dependency bump lens
+---
+name: dependency-compatibility
+description: Use when an upgrade or externally versioned component needs compatibility judgment against actual repository usage and runtime. Load it to trace the version delta, affected behavior, migration obligations, and missing proof.
+---
 
-Load this reference only when the reviewed change updates a dependency version,
+# Dependency compatibility
+
+Use this method when a proposed or actual change updates a dependency version,
 lock graph, runtime image, generated client, browser/toolchain release, or other
 externally versioned component.
 
-This lens supplies evidence to the review code-judgment branch. It never owns the merge
-recommendation.
+Return a compatibility assessment to the caller: affected usage, migration
+obligations, supported conclusions and exact proof gaps. It supports upgrade
+planning and code review without selecting either implementation or a merge verdict.
 
 ## Pin the real delta
 
-From the live review target, establish:
+From the selected component and target repository, establish:
 
 - package, image, tool, or generated component;
 - old and new exact versions, including every intermediate release;
@@ -20,7 +26,7 @@ From the live review target, establish:
 - whether the repository can reproduce the new resolution from its declared
   sources.
 
-Use `github-evidence` for live pull-request state. Inspect the actual lock graph and
+Use `github-evidence` when the task includes live pull-request state. Inspect the actual lock graph and
 repository configuration rather than relying on a bot-authored summary.
 
 Completion criterion: the exact before-and-after component and its runtime
@@ -84,7 +90,7 @@ protocols, and unsupported platforms can still change behavior.
 Completion criterion: compatibility conclusions follow from usage plus upstream
 behavior plus runtime evidence; lack of overlap is never the sole safety claim.
 
-## Return evidence to the judge
+## Return the compatibility assessment
 
 Return:
 
@@ -108,6 +114,8 @@ Return:
 - <exact runtime, platform, or migration evidence still missing>
 ```
 
-Do not return `safe to merge`, `approve`, or another final verdict. The parent
-judge integrates this evidence with request fit, the rest of the diff, CI,
-review history, and all other lenses.
+Do not return `safe to merge`, `approve`, or another final verdict. The caller
+combines this assessment with its own decision criteria. A review includes
+request fit, other changes, CI and discussion; upgrade planning includes the
+requested version and migration scope. Unknown target versions must be resolved
+from current sources or left explicit, never guessed.

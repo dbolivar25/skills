@@ -40,7 +40,7 @@ Homes:
 
 - `GLOSSARY.md` Purpose-Conditioned Reducer, Raw State, Minimal Sufficient Representation
 - `reference/raw-state-and-semantics.md` Raw State Is Canonical
-- `reference/compression-and-dimensions.md` Compression Principle and Work-Product-Specific Projection
+- `../information-preservation/references/dimensions.md` Compression Principle and Work-Product-Specific Projection
 - `SKILL.md` Core Posture and Invariant Method
 
 ## 3. Most Important v0.2 Correction
@@ -81,7 +81,7 @@ Homes:
 
 - `SKILL.md` Core Posture and Failure Modes
 - `reference/anti-patterns.md` Summary Soup, Schema Worship, Fixed Pipeline Thinking
-- `reference/compression-and-dimensions.md` Work-Product-Specific Projection
+- `../information-preservation/references/dimensions.md` Work-Product-Specific Projection
 - `guides/design-new-work-product-workflow.md` Step 1 and Step 6
 
 ## 5. Raw State, Retrieval Substrate, And Workflow-Derived Semantics
@@ -128,9 +128,9 @@ Ideas:
 Homes:
 
 - `GLOSSARY.md` Work Product through Ablation
-- `reference/compression-and-dimensions.md` Dimension Definition and Dimension Survival Policies
+- `../information-preservation/references/dimensions.md` Dimension Definition and Dimension Survival Policies
 - `reference/judgment-dags-and-edges.md` Derivation DAG, Edge Types, Node Granularity
-- `reference/evidence-support-and-confidence.md` Workflow-Scoped Evidence, Claim / Action Support Package, Structured Confidence
+- `../claim-support/references/evidence-and-confidence.md` Workflow-Scoped Evidence, Claim / Action Support Package, Structured Confidence
 - `templates/derivation-spec.md` Judgment Inventory, Derived Dimensions, Judgment DAG, Intermediate Representation Contracts, Claim / Action Support
 
 ## 7. Compression Principle
@@ -148,7 +148,7 @@ Ideas:
 
 Homes:
 
-- `reference/compression-and-dimensions.md` Compression Principle and Work-Product-Specific Projection
+- `../information-preservation/references/dimensions.md` Compression Principle and Work-Product-Specific Projection
 
 ## 8. Dimension Problem
 
@@ -166,9 +166,9 @@ Ideas:
 
 Homes:
 
-- `reference/compression-and-dimensions.md` Dimension Problem through Work-Product-Specific Dimensions
+- `../information-preservation/references/dimensions.md` Dimension Problem through Work-Product-Specific Dimensions
 - `guides/design-new-work-product-workflow.md` Steps 4 and 5
-- `reference/evals-and-ablations.md` Dimension Library Evolution
+- `../evaluation-design/references/evals-and-ablations.md` Dimension Library Evolution
 
 ## 9. Dimension Discovery And Promotion
 
@@ -182,7 +182,7 @@ Ideas:
 
 Homes:
 
-- `reference/compression-and-dimensions.md` Dimension Definition, Example Dimension, Dimension Lifecycle
+- `../information-preservation/references/dimensions.md` Dimension Definition, Example Dimension, Dimension Lifecycle
 - `guides/design-new-work-product-workflow.md` Step 5
 - `templates/derivation-spec.md` Derived Dimensions
 - `reference/durable-state-and-promotion.md` Candidate Reuse
@@ -203,7 +203,7 @@ Ideas:
 Homes:
 
 - `GLOSSARY.md` Dimension Survival
-- `reference/compression-and-dimensions.md` Dimension Survival Policies and Live Dimension Rule
+- `../information-preservation/references/dimensions.md` Dimension Survival Policies and Live Dimension Rule
 - `guides/design-new-work-product-workflow.md` Step 8
 - `templates/derivation-spec.md` Judgment DAG and Intermediate Representation Contracts
 
@@ -300,7 +300,7 @@ Ideas:
 
 Homes:
 
-- `reference/evidence-support-and-confidence.md` Workflow-Scoped Evidence and Evidence Plan
+- `../claim-support/references/evidence-and-confidence.md` Workflow-Scoped Evidence and Evidence Plan
 - `reference/raw-state-and-semantics.md` Workflow-Derived Semantics
 - `guides/design-new-work-product-workflow.md` Step 9
 - `templates/derivation-spec.md` Workflow-Scoped Evidence Plan
@@ -348,7 +348,7 @@ Ideas:
 Homes:
 
 - `GLOSSARY.md` Structured Confidence
-- `reference/evidence-support-and-confidence.md` Structured Confidence and Confidence Controls Language
+- `../claim-support/references/evidence-and-confidence.md` Structured Confidence and Confidence Controls Language
 - `templates/derivation-spec.md` Structured Confidence
 
 ## 20. Rendering Policy
@@ -365,7 +365,7 @@ Homes:
 
 - `GLOSSARY.md` Rendering Policy
 - `reference/publication-and-rendering.md` Rendering Is A Judgment
-- `reference/evidence-support-and-confidence.md` Confidence Controls Language
+- `../claim-support/references/evidence-and-confidence.md` Confidence Controls Language
 - `templates/derivation-spec.md` Claim / Action Support and Structured Confidence
 
 ## 21. Publication Gates
@@ -436,7 +436,7 @@ Ideas:
 
 Homes:
 
-- `reference/evals-and-ablations.md` all sections
+- `../evaluation-design/references/evals-and-ablations.md` all sections
 - `templates/derivation-spec.md` Evals
 - `guides/design-new-work-product-workflow.md` Step 11
 
@@ -475,7 +475,7 @@ Ideas:
 
 Homes:
 
-- `reference/compression-and-dimensions.md` Work-Product-Specific Projection
+- `../information-preservation/references/dimensions.md` Work-Product-Specific Projection
 - `reference/publication-and-rendering.md` Decay And Disappearance
 - `templates/derivation-spec.md` Output Obligations, Judgment Inventory, Publication Gates
 
@@ -492,7 +492,7 @@ Ideas:
 
 Homes:
 
-- `reference/compression-and-dimensions.md` Work-Product-Specific Projection
+- `../information-preservation/references/dimensions.md` Work-Product-Specific Projection
 - `templates/derivation-spec.md` Output Obligations, Judgment Inventory, Claim / Action Support
 
 ## 28. Source Section: Longitudinal Strategic Product
@@ -508,9 +508,9 @@ Ideas:
 
 Homes:
 
-- `reference/compression-and-dimensions.md` Work-Product-Specific Projection
+- `../information-preservation/references/dimensions.md` Work-Product-Specific Projection
 - `reference/judgment-dags-and-edges.md` Joint Inference Nodes
-- `reference/evidence-support-and-confidence.md` Claim / Action Support Package
+- `../claim-support/references/evidence-and-confidence.md` Claim / Action Support Package
 
 ## 29. Source Section: Prospective Tactical Product
 
@@ -524,7 +524,7 @@ Ideas:
 
 Homes:
 
-- `reference/compression-and-dimensions.md` Work-Product-Specific Projection
+- `../information-preservation/references/dimensions.md` Work-Product-Specific Projection
 - `reference/judgment-dags-and-edges.md` Judgment Dependency Planning
 - `templates/derivation-spec.md` Raw State Scope, Judgment Inventory, Publication Gates
 
@@ -588,11 +588,11 @@ Homes:
 
 - `SKILL.md` Core Posture and Invariant Method
 - `GLOSSARY.md`
-- `reference/compression-and-dimensions.md`
+- `../information-preservation/references/dimensions.md`
 - `reference/judgment-dags-and-edges.md`
-- `reference/evidence-support-and-confidence.md`
+- `../claim-support/references/evidence-and-confidence.md`
 - `reference/publication-and-rendering.md`
-- `reference/evals-and-ablations.md`
+- `../evaluation-design/references/evals-and-ablations.md`
 - `reference/durable-state-and-promotion.md`
 
 ## 33. Anti-Patterns
@@ -635,6 +635,6 @@ Homes:
 
 - `SKILL.md` Core Posture and Invariant Method
 - `GLOSSARY.md` Purpose-Conditioned Reducer, Derivation DAG, Dimension Survival
-- `reference/compression-and-dimensions.md` Live Dimension Rule
+- `../information-preservation/references/dimensions.md` Live Dimension Rule
 - `reference/publication-and-rendering.md`
-- `reference/evals-and-ablations.md`
+- `../evaluation-design/references/evals-and-ablations.md`

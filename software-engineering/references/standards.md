@@ -37,7 +37,7 @@ Build **correct by construction**. These standards govern TypeScript work; the d
 
 ### 5. Design deep modules around real seams
 
-- Use the [module-design vocabulary](module-design.md): depth is caller leverage per unit of interface.
+- Use the [module-design vocabulary](../../module-design/references/design.md): depth is caller leverage per unit of interface.
 - An **Application Service Module** owns one cohesive use case or capability, applying application policy and sequencing effects through narrow, application-owned ports.
 - An **Adapter Module** owns boundary translation and technology mechanics. It either:
   - translates an external request or event into an Application Service call and projects the result; or

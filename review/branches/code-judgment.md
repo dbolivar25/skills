@@ -26,7 +26,7 @@ local precedent. Read unresolved threads and relevant resolved history before
 forming new findings; existing comments are claims to verify, not findings to
 copy.
 
-Use the shared [reconstruction method](../references/reconstruct-work.md). The
+Use the shared [reconstruction method](../../understand-change/SKILL.md). The
 request source, standards, precedent, and review context must be known or their
 absence explicit before the verdict is ready.
 
@@ -48,7 +48,7 @@ Give each the pinned target and relevant sources; integrate their evidence
 instead of pasting their reports. Apply a lens when the changed behavior earns it:
 
 - Dependency version, lock graph, runtime image, or vendored tool:
-  [dependency compatibility](../references/dependency-bump.md).
+  [dependency compatibility](../../dependency-compatibility/SKILL.md).
 - Material interaction or visible UI state: `interface-design`.
 - Shipped behavior, reliability, or performance claims: production evidence,
   `grafana-evidence`, or `diagnosing-bugs`.

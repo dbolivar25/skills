@@ -1,8 +1,8 @@
 # Deepening across dependencies
 
 Classify a shallow cluster's dependencies before deciding where its deeper
-module can be tested. Use [module design](module-design.md) for the vocabulary
-and [testing evidence](testing-evidence.md) for what each test can prove.
+module can be tested. Use [module design](design.md) for the vocabulary
+and [testing evidence](../../software-engineering/references/testing-evidence.md) for what each test can prove.
 
 | Dependency | Design and test strategy |
 | --- | --- |
@@ -17,4 +17,4 @@ in-memory adapter in tests, so deployment across a network does not scatter the
 logic.” Internal seams stay private to the implementation.
 
 When replacing shallow-module tests with deeper-interface tests, use the
-[regression-preservation rule](testing-evidence.md#preserve-evidence-when-moving-a-seam).
+[regression-preservation rule](../../software-engineering/references/testing-evidence.md#preserve-evidence-when-moving-a-seam).

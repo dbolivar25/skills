@@ -14,7 +14,7 @@ Do not implement or ask to implement by default.
 ## 1. Establish the design problem
 
 Read [engineering standards](../software-engineering/references/standards.md),
-[module design](../software-engineering/references/module-design.md),
+[module design](../module-design/SKILL.md),
 [testing evidence](../software-engineering/references/testing-evidence.md) and
 [the RGR workflow](../software-engineering/branches/test-first.md) as planning
 reference, not implementation authority. Inspect local code/docs for vocabulary,
@@ -55,7 +55,7 @@ For each alternative sketch:
 Compare caller burden, depth/leverage, locality of invariants/change, seam
 placement, parsing/projections, error/cancellation model, real-seam testability,
 operational fit and implementation complexity. The
-[divergent-interface method](../software-engineering/branches/design-alternatives.md)
+[divergent-interface method](../module-design/branches/alternatives.md)
 is available when the user selects that exploration; preserve its distinct
 technical briefs and comparison if used.
 

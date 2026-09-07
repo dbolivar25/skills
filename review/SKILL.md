@@ -11,7 +11,7 @@ the author's preferred story; preserve disagreements between them.
 
 Read [code judgment](branches/code-judgment.md) to pin the target, investigate
 both axes, and falsify findings. It consumes the shared
-[reconstruction method](references/reconstruct-work.md); reuse a current review
+[reconstruction method](../understand-change/SKILL.md); reuse a current review
 map already established in the task rather than reconstructing it twice.
 
 The result identifies supported defects, request fit, codebase fit, checked

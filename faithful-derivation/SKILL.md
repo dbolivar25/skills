@@ -48,3 +48,24 @@ A design or interview uses the [derivation spec](templates/derivation-spec.md);
 a review uses the [review report](templates/review-report.md). Local product,
 repository, and execution mechanics come from their actual owners. This skill
 owns faithful derivation, not a cache of those systems' schemas.
+
+## Compose the supporting modules
+
+This skill owns the complete work-product design and its acceptance. Use the
+supporting modules at the level the current task can actually supply:
+
+- When designing or interviewing, read the owned preservation and support
+  references linked by the guide to define required fidelity and support policy.
+  Do not pretend a concrete output or source assessment already exists.
+- When reviewing an actual source-to-output transformation, use
+  [information-preservation](../information-preservation/SKILL.md) with the source,
+  candidate representation and downstream judgments.
+- When assessing concrete claims, use [claim-support](../claim-support/SKILL.md)
+  with their sources, scope and consequence; preserve its uncertainty in the
+  review rather than treating an intended support policy as observed support.
+- Use [evaluation-design](../evaluation-design/SKILL.md) with the accepted quality
+  obligations and proposed system to obtain the evaluation plan. Executed quality
+  and publication decisions still need their own evidence.
+
+A supporting result does not accept the whole derivation. Integrate it with the
+DAG, raw-state semantics, publication policy and consumer obligations owned here.

@@ -1,5 +1,8 @@
 # Skill modules and dependency design
 
+Historical first pass (b8bc170). [The extraction pass](extracted-modules.md)
+supersedes this topology; retain these decisions as their original context.
+
 The interface is the request that selects a judgment and the result its caller
 can use. Depth comes from hiding a coherent method behind that interface, not
 from collecting related topics under a broad name.

@@ -27,7 +27,7 @@ clearly dominates. If activity is scattered, widen the scan or ask one question
 that lets the user choose.
 
 Read the [eleven engineering standards](../software-engineering/references/standards.md)
-and [module-design vocabulary](../software-engineering/references/module-design.md).
+and [module-design vocabulary](../module-design/SKILL.md).
 Search the boundary and its ancestors through the repository root for
 `CONTEXT.md`, `CONTEXT-MAP.md`, equivalent domain-language files and decision
 indexes. Search repository documentation and ADR collections for decisions that

@@ -3,6 +3,10 @@
 Sharpening is an adversarial pass by a separate agent before a phase result is
 accepted. Its purpose is faster recognition of drift, not ceremony.
 
+Use [critique](../../critique/SKILL.md) for the falsification method. This adapter
+supplies mission context, phase axes, the required status schema, independence
+and acceptance timing. Critique returns evidence; only Steward records acceptance.
+
 ## Reviewer Input
 
 Give the reviewer only the context needed to falsify the candidate:

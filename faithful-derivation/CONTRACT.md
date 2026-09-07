@@ -21,16 +21,16 @@ publication gates resolve.
 5. Build the judgment DAG.
    Completion criterion: nodes exist only where they protect quality, fidelity, reuse, verification, parallelism, publication policy, or efficiency; edges express real dependencies, not arbitrary sequence.
 
-6. Attach fidelity contracts to edges.
+6. Attach fidelity contracts to edges using the [preservation method](../information-preservation/references/dimensions.md).
    Completion criterion: every compression boundary says what survives exactly, what remains source-recoverable, what is classified, aggregated, decayed, or dropped, and why downstream judgments can still be made faithfully.
 
-7. Define support packages and structured confidence.
+7. Define support packages and structured confidence using the [support method](../claim-support/references/evidence-and-confidence.md).
    Completion criterion: every important rendered claim or action has judgment sources, source support, confidence shape, contradictions, open questions, and rendering assertiveness or an explicit omission decision.
 
 8. Define publication gates separately from generation.
    Completion criterion: candidate generation, provisional display, confident publication, downgrade, qualification, omission, and evidence-request behavior are distinguished.
 
-9. Define evals and ablations.
+9. Define evals and ablations using [evaluation-design](../evaluation-design/SKILL.md).
    Completion criterion: the spec includes final-output, judgment, edge/fidelity, retrieval, and ablation evals; ablations name dimensions whose removal should or should not hurt quality.
 
 10. Optimize only after quality is real.

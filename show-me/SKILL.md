@@ -1,53 +1,28 @@
 ---
 name: show-me
-description: Use when the user asks for a visual explanation, interactive demonstration, or throwaway prototype, or a material relationship is hard to understand in prose. Load it to choose a visual that explains an established answer or an experiment that resolves an open question.
+description: Use when the user asks for a visual explanation or interactive demonstration of an established relationship, or a material relationship is hard to understand in prose. Load it to choose the smallest visible explanation grounded in the actual source.
 ---
 
 # Show me
 
-Use a visible artifact to make the next judgment easier. First decide whether
-the answer is **known and needs explaining** or **unsettled and needs exploring**.
-That distinction determines the method and what the artifact can prove.
+Make the relationship the user needs to understand visible. Inspect the actual
+source, then read [visual forms](references/visual-forms.md) to choose a sketch,
+diagram, call tree, component tree, diff or focused HTML artifact. Match the
+representation to the question, not to an inventory of available visual tools.
 
-## Choose the branch
+Keep real names, relevant states, ownership and ordering. Preserve context when
+omitting it would change the explanation. Use actual data or clearly identified
+examples. Match an existing product's grammar when representing its interface.
+Place the visual next to the brief explanation it supports and open local
+artifacts through the available viewer. Inspect rendering for accuracy and
+legibility; do not claim an artifact was exercised when only its source exists.
 
-| Situation | Read before creating the artifact | What to deliver |
-| --- | --- | --- |
-| Logic, relationships, structure, or a change can be explained from known evidence | [Visual forms](references/visual-forms.md) | The smallest useful sketch, diagram, or focused HTML explanation |
-| State, transitions, or the logic model need to be tried | [Experiment contract](references/experiments.md) and [logic experiment](branches/logic-experiment.md) | One shareable HTML demo with visible state, free play, and guided scenarios |
-| UI structure or appearance needs comparison | [Experiment contract](references/experiments.md) and [UI experiment](branches/ui-experiment.md) | Structurally different variants on one route with direct selection and a switcher |
+An interactive explanation can present a known answer. When the answer is still
+unsettled and requires trying logic or alternative layouts, use
+[prototype](../prototype/SKILL.md) with the question, constraints and needed
+observation. Consume its learning; experiment shortcuts do not apply to source
+accuracy in an explanation. A request to explain does not authorize product
+redesign or implementation.
 
-An interactive explanation is not automatically an experiment. A prototype is
-chosen because a question remains open, not merely because HTML is convenient.
-If the distinction is unclear, inspect the supplied evidence and question before
-choosing. Carry an explicit user choice forward.
-
-## Keep the visual honest
-
-Use real domain labels and data or clearly identified examples. Show the calls,
-files, props, states, boundaries, or transitions needed to answer the question.
-Keep context when omitting it would hide ownership or order. Match an existing
-product's colors, type, spacing, and components when the artifact represents it.
-
-Place the visual beside the short explanation it supports. Skip ceremonial
-preambles and do not make the user inspect every possible view. One well-chosen
-view can be enough; use more only when they expose different material relationships.
-
-For an explanation, existing evidence supplies the answer; inspect the rendering
-for accuracy and legibility. For an experiment, preserve the question, observed
-answer, limits, and runnable artifact as the learning source. Follow its branch's
-scratch-data and capture rules. A promising result does not establish production
-readiness or authorize implementation.
-
-Open a local HTML artifact with the viewer supported by the current host and
-return a usable path. Do not pretend the artifact was rendered or exercised when
-only its source was written. Prototype shortcuts apply only to experiments;
-they do not weaken the source accuracy required of an explanation.
-
-## Return learning to the caller
-
-An explanation returns the visible relationship; an experiment returns its
-observed answer and limits. The calling discipline owns the subsequent product
-or engineering decision. Producing an artifact does not initiate redesign,
-implementation, or a review workflow. When interface craft is already in scope,
-carry its moment, state and visual constraints into the artifact.
+Deliver the smallest sufficient visual and the inference it supports. Keep
+uncertainty visible when the source cannot establish the relationship.

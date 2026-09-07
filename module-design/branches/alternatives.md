@@ -1,7 +1,7 @@
 # Design alternatives
 
 Use when the user wants alternative interfaces for a chosen problem. Your first
-idea is unlikely to be the best. Apply [module design](../references/module-design.md)
+idea is unlikely to be the best. Apply [module design](../references/design.md)
 and classify dependencies using [dependency seams](../references/dependency-seams.md).
 
 ## 1. Frame the problem
