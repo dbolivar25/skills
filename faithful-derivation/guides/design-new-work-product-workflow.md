@@ -2,16 +2,13 @@
 
 Use this guide for a new workflow, a major redesign, or a product idea that needs a derivation spec before implementation.
 
-Required references:
+Read references at the decision points below, before completing the governed
+work. Reuse already-loaded references. When delegating into isolated context,
+include the relevant guide and reference content; a pointer in the parent’s
+context does not supply it to a worker.
 
-- [`../reference/raw-state-and-semantics.md`](../reference/raw-state-and-semantics.md)
-- [`../reference/compression-and-dimensions.md`](../reference/compression-and-dimensions.md)
-- [`../reference/judgment-dags-and-edges.md`](../reference/judgment-dags-and-edges.md)
-- [`../reference/evidence-support-and-confidence.md`](../reference/evidence-support-and-confidence.md)
-- [`../reference/publication-and-rendering.md`](../reference/publication-and-rendering.md)
-- [`../reference/evals-and-ablations.md`](../reference/evals-and-ablations.md)
-- [`../reference/durable-state-and-promotion.md`](../reference/durable-state-and-promotion.md)
-- [`../templates/derivation-spec.md`](../templates/derivation-spec.md)
+Use the complete [derivation spec](../templates/derivation-spec.md) as the artifact
+contract; read it before drafting so its required coverage remains visible.
 
 ## Step 1: Work Product Contract
 
@@ -64,6 +61,8 @@ Completion criterion: every obligation has at least one judgment, and every high
 
 ## Step 4: Judgment Inputs
 
+Before this decision, read [`raw-state-and-semantics`](../reference/raw-state-and-semantics.md).
+
 Discover inputs from the judgment, not from a master schema.
 
 For each major judgment, ask:
@@ -86,6 +85,8 @@ Completion criterion: every high-risk judgment names raw signals, counter-signal
 
 ## Step 5: Dimension Discovery
 
+Before this decision, read [`compression-and-dimensions`](../reference/compression-and-dimensions.md).
+
 Name a dimension only when it can change a judgment.
 
 For each discovered dimension, define:
@@ -107,6 +108,8 @@ For each discovered dimension, define:
 Completion criterion: dimensions are not copied from a generic list. Each dimension exists because missing, compressing, aggregating, or misrepresenting it could change the work product.
 
 ## Step 6: Judgment DAG
+
+Before this decision, read [`judgment-dags-and-edges`](../reference/judgment-dags-and-edges.md).
 
 Build a DAG around judgment dependencies.
 
@@ -146,6 +149,8 @@ Completion criterion: node boundaries protect faithfulness, evaluation, reuse, p
 
 ## Step 8: Edge Contracts
 
+Before this decision, read [`durable-state-and-promotion`](../reference/durable-state-and-promotion.md).
+
 For every edge, record:
 
 - edge type
@@ -165,6 +170,8 @@ For every edge, record:
 Completion criterion: after every transformation, downstream nodes can still make every required judgment. If not, the compression is invalid or premature.
 
 ## Step 9: Evidence, Support, And Confidence
+
+Before this decision, read [`evidence-support-and-confidence`](../reference/evidence-support-and-confidence.md).
 
 Define evidence relative to the question.
 
@@ -189,6 +196,8 @@ Completion criterion: important rendered claims and actions are grounded in judg
 
 ## Step 10: Publication And Rendering
 
+Before this decision, read [`publication-and-rendering`](../reference/publication-and-rendering.md).
+
 Separate candidate generation from publication.
 
 Answer:
@@ -203,6 +212,8 @@ Answer:
 Completion criterion: publication gates have inputs, pass conditions, fail behavior, user-visible behavior, and logging or eval hooks.
 
 ## Step 11: Evals And Ablations
+
+Before this decision, read [`evals-and-ablations`](../reference/evals-and-ablations.md).
 
 Define evals at multiple levels:
 

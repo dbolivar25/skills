@@ -71,16 +71,13 @@ routing policy.
 | [`designing-human-interfaces`](designing-human-interfaces/SKILL.md) | Model | Generic interaction and visual craft: the user's moment, floor, facets, states, motion, and perceived performance. |
 | [`augment-design`](augment-design/SKILL.md) | Model | Augment identity, voice, privacy, evidence treatment, tokens, assets, branch floors, and rendered QA across branded surfaces. |
 | [`humanize`](humanize/SKILL.md) | Model | Truth-preserving repair of synthetic prose while protecting the intended human voice. |
-| [`simplified-technical-english`](simplified-technical-english/SKILL.md) | Model | Controlled English for reliable parsing by agents, systems, translation paths, and non-native readers. |
 | [`show-me`](show-me/SKILL.md) | Model | The smallest useful diagram, code-shape sketch, or focused HTML artifact when prose hides a material relationship. |
 | [`writing-for-agents`](writing-for-agents/SKILL.md) | Model | Invocation contracts, context pointers, information hierarchy, and completion criteria in documents that direct agents. |
 | [`augment-workflows`](augment-workflows/SKILL.md) | Model | Live-doc-driven workflow design, operation authority, and observed outcomes. |
 | [`faithful-derivation`](faithful-derivation/SKILL.md) | Model | Evidential fidelity from operational state through judgments, support, confidence, publication gates, and evals. |
-| [`herdr`](herdr/SKILL.md) | Model | Explicitly targeted Herdr inspection or control with session, workspace, mutation, and landing authority anchored first. |
 
-`humanize` and `simplified-technical-english` are alternatives, not parent and
-branch. The first protects voice; the second deliberately constrains language
-when unambiguous parsing matters more than voice.
+`humanize` protects human voice. `writing-for-agents` owns documents that direct
+agents, including precise conditions and invocation boundaries.
 
 ## Composition map
 
@@ -115,7 +112,7 @@ chain. It does not replace the leaf skill's domain judgment.
 | Diagnose | `diagnosing-bugs` | A verified cause does not authorize a fix. |
 | Judge | `code-review`, `engineering-restraint`, `domain-modeling`, `codebase-design` | Judgment does not itself authorize mutation or publication. |
 | Design | `improve-codebase-architecture`, `tech-spec`, interface and workflow design skills | A design artifact is not implementation evidence. |
-| Mutate | `tdd`, `simplify`, `write-custom-lint`, workflow or Herdr operations | Mutation requires authority from the surrounding task and remains inside its scope. |
+| Mutate | `tdd`, `simplify`, `write-custom-lint`, workflow operations | Mutation requires authority from the surrounding task and remains inside its scope. |
 | Communicate | `reviewability`, `show-me`, language skills | Drafting an artifact does not publish it or supply the underlying verdict. |
 | Accept and land | The owning task, or `steward` when continuity warrants it | Local checks, review, delivery, and observed landing are separate receipts. |
 
@@ -157,3 +154,8 @@ The validator proves package structure, invocation-contract shape, case schema,
 referential integrity, and coverage. The cases remain reviewed expectations;
 deterministic validation does not prove that a particular model will route every
 prompt correctly.
+
+## Maintenance evidence
+
+The [repository refactor report](docs/intent-audit/results.md) records retained
+methods, owner-directed retirements, targeted corrections, and verification.

@@ -55,7 +55,7 @@ Send them the file, or open it for them. They'll click through the walkthroughs 
 
 ### 5. Capture the answer and the prototype
 
-Once the prototype has answered its question, capture the answer, then capture the prototype the way the [SKILL](SKILL.md) describes. The logic-specific mapping: the validated reducer / machine / function set lifts into the real module (the decision, absorbed); the HTML shell rides along to the throwaway branch that keeps the prototype as a primary source — and being one self-contained file, it stays trivially re-runnable there.
+Once the prototype has answered its question, capture the answer, then capture the prototype the way the [SKILL](SKILL.md) describes. When implementation is authorized and normal checks pass, the supported reducer / machine / function set can move into the real module. Otherwise deliver the learning and artifact. Preserve the HTML shell in the agreed artifact location or throwaway branch as a primary source; its self-contained form keeps it trivially re-runnable.
 
 ## Anti-patterns
 
@@ -64,4 +64,4 @@ Once the prototype has answered its question, capture the answer, then capture t
 - **Don't generalise.** No "what if we wanted to support X later." The prototype answers one question.
 - **Don't blur the logic and the page together.** If the pure module references the DOM, `document`, or button handlers, it's no longer liftable. Keep the page as a thin shell over a pure module.
 - **Don't reach for a framework, bundler, or server.** One file the recipient double-clicks; a React app or a dev server defeats "shareable".
-- **Don't ship the HTML shell into production.** The page is optimised for being clicked through by hand. The logic module behind it is the bit worth keeping.
+- **Don't ship the HTML shell into production.** The page is optimised for being clicked through by hand. The pure logic may be worth reusing, but remains production-unverified until it passes normal implementation checks under the authorized task.

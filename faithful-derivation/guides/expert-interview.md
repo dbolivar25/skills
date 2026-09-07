@@ -2,14 +2,10 @@
 
 Use this guide when the domain expert knows what good looks like but the workflow shape is not yet clear.
 
-Required references:
-
-- [`../reference/raw-state-and-semantics.md`](../reference/raw-state-and-semantics.md)
-- [`../reference/compression-and-dimensions.md`](../reference/compression-and-dimensions.md)
-- [`../reference/evidence-support-and-confidence.md`](../reference/evidence-support-and-confidence.md)
-- [`../reference/publication-and-rendering.md`](../reference/publication-and-rendering.md)
-- [`../reference/evals-and-ablations.md`](../reference/evals-and-ablations.md)
-- [`../templates/derivation-spec.md`](../templates/derivation-spec.md)
+Read references at the decision points below, before completing the governed
+work. Reuse already-loaded references. When delegating into isolated context,
+include the relevant guide and reference content; a pointer in the parent’s
+context does not supply it to a worker.
 
 ## Roles
 
@@ -50,6 +46,8 @@ Work product:
 
 Raw state:
 
+Before this decision, read [`raw-state-and-semantics`](../reference/raw-state-and-semantics.md).
+
 - What would a skilled human look for in the raw emails, meetings, CRM, documents, tasks, product usage, or messages?
 - What old context matters?
 - What old context should be ignored?
@@ -57,6 +55,8 @@ Raw state:
 - What wording, tone, silence, or context changes the answer?
 
 Judgment and evidence:
+
+Before this decision, read [`compression-and-dimensions`](../reference/compression-and-dimensions.md), [`evidence-support-and-confidence`](../reference/evidence-support-and-confidence.md).
 
 - What should the model avoid saying unless directly supported?
 - What would count as strong evidence?
@@ -71,6 +71,8 @@ Freshness and decay:
 - What future event invalidates the claim or action?
 
 Trust and rendering:
+
+Before this decision, read [`publication-and-rendering`](../reference/publication-and-rendering.md).
 
 - What would make a user trust it?
 - What would make a user dismiss it?
@@ -88,7 +90,17 @@ False positives:
 
 ## Translation Step
 
-After each interview round, translate answers into:
+Before translating answers or supplied context, read the references governing
+the resulting decisions even when their question-bank sections were skipped:
+[raw state](../reference/raw-state-and-semantics.md),
+[dimensions and fidelity](../reference/compression-and-dimensions.md),
+[support and confidence](../reference/evidence-support-and-confidence.md), and
+[publication and rendering](../reference/publication-and-rendering.md).
+
+Before this decision, read [`evals-and-ablations`](../reference/evals-and-ablations.md).
+
+Read the [derivation spec](../templates/derivation-spec.md) before translating the
+first round. After each interview round, translate answers into:
 
 - candidate work product contract
 - output obligations

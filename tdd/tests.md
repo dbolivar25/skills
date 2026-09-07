@@ -42,23 +42,29 @@ Red flags:
 - Asserting on call counts/order
 - Test breaks when refactoring without behavior change
 - Test name describes HOW not WHAT
-- Verifying through external means instead of interface
+- Observing a seam that does not own the behavior being claimed
 
 ```typescript
-// BAD: Bypasses interface to verify
+// INSUFFICIENT for a retrievability claim: only proves a stored row exists
 test("createUser saves to database", async () => {
   await createUser({ name: "Alice" });
   const row = await db.query("SELECT * FROM users WHERE name = ?", ["Alice"]);
   expect(row).toBeDefined();
 });
 
-// GOOD: Verifies through interface
+// GOOD for a retrievability claim: exercises the public read interface
 test("createUser makes user retrievable", async () => {
   const user = await createUser({ name: "Alice" });
   const retrieved = await getUser(user.id);
   expect(retrieved.name).toBe("Alice");
 });
 ```
+
+A write-only repository’s contract may be durable storage. For that claim, query
+the real database independently after the write; a read through the same in-memory
+cache would not prove persistence. Choose the observation at the interface that
+owns the claimed behavior, under coding-standards. The examples above concern
+retrievability, not a prohibition on database observation.
 
 ## Tautological Tests
 

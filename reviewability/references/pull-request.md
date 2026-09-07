@@ -43,7 +43,8 @@ Use the core review map with:
 - unresolved risks and design questions as review focus.
 
 Do not compose the description until every material branch region is accounted
-for in the map.
+for in the map. The map is working material: complete investigation does not
+require printing every field or giving every region its own heading.
 
 ## Choose the description shape
 
@@ -54,6 +55,25 @@ evidence, review focus, and non-goals. These are a menu, not a template.
 
 A focused fix may need only purpose, mechanism, and validation. A broad
 behavioral change may need an implementation map and explicit review focus.
+
+### Match evidence to the claim
+
+Describe the final aggregate base-to-head behavior, as a reviewer of the eventual
+squash commit would see it. Earlier attempts and temporary compatibility paths
+are relevant only when they explain a surviving tradeoff.
+
+- A small fix can say: "Empty search results now clear the previous selection.
+  The selection resets when results change; the existing empty-result regression
+  passes." Use this form only with the corresponding observed evidence.
+- For a visual change, show labeled before/after captures under comparable
+  viewport and state. A diagram or small code sketch can explain a relationship
+  when screenshots cannot. If a capture is missing, state the gap.
+- For a performance claim, give a compact before/after table with the measured
+  metric, workload, environment, and relevant spread or sample count. Do not
+  substitute a complexity argument for an observed benchmark.
+
+Keep meaningful validation and uncertainty even in a short description. Omit
+commands or implementation trivia that do not help the reviewer judge it.
 
 ## Render and re-audit
 

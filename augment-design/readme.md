@@ -59,7 +59,7 @@ Matter SQ throughout, a geometric-humanist grotesque, weights 300 to 800.
 |---|---|---|
 | Display | 72 / 64 / 48px | -2.5 to -2px |
 | Body | 15 to 20px | none |
-| Label | 12 to 13px, often all-caps | +0.04 to 0.08em |
+| Label | 12 to 13px, sentence case | +0.04 to 0.08em |
 
 Labels label things: column headers, field labels, object types. Use `.aug-nums`
 for numbers that compare down a column, and `.aug-measure` to hold long-form text

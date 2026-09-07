@@ -92,17 +92,8 @@ cases:
     expect:
       primary: humanize
       also_load: []
-      do_not_load: [simplified-technical-english]
+      do_not_load: []
     why: Voice restoration is the protected outcome; controlled language would deliberately flatten the quality the user wants preserved.
-
-  - id: controlled-agent-instruction
-    kind: positive
-    prompt: Rewrite this tool instruction in Simplified Technical English so another agent cannot misparse its conditions.
-    expect:
-      primary: simplified-technical-english
-      also_load: []
-      do_not_load: [humanize]
-    why: Reliable parsing and explicit STE are the trigger; human voice is not the objective.
 
   - id: ordinary-summary
     kind: negative
@@ -110,7 +101,7 @@ cases:
     expect:
       primary:
       also_load: []
-      do_not_load: [humanize, simplified-technical-english]
+      do_not_load: [humanize, writing-for-agents]
     why: Ordinary summarization needs neither voice repair nor a controlled-language standard.
 
   - id: ideas-from-blank
@@ -245,17 +236,8 @@ cases:
     expect:
       primary:
       also_load: []
-      do_not_load: [steward, herdr, grilling]
-    why: A small bounded edit needs neither durable mission machinery, explicit Herdr control, nor an owner interview.
-
-  - id: explicit-herdr-control
-    kind: positive
-    prompt: Use Herdr to inspect the active agent in this workspace, then stop before mutation.
-    expect:
-      primary: herdr
-      also_load: []
-      do_not_load: [steward]
-    why: Herdr has an explicit-only trigger and owns target anchoring for its own session; durable mission governance was not requested.
+      do_not_load: [steward, grilling]
+    why: A small bounded edit needs neither durable mission machinery or an owner interview.
 
   - id: repository-lint-policy
     kind: collision
@@ -271,6 +253,24 @@ cases:
     prompt: Rewrite this model-facing tool description so its invocation boundary is precise and downstream agents parse every condition consistently.
     expect:
       primary: writing-for-agents
-      also_load: [simplified-technical-english]
+      also_load: []
       do_not_load: [humanize]
-    why: Agent-document architecture owns invocation, controlled English supports unambiguous parsing, and human voice is not the requested quality.
+    why: Agent-document architecture owns invocation and precise conditions; human voice is not the requested quality.
+
+  - id: decision-standing
+    kind: collision
+    prompt: Before you block my already-authorized reversible change over your quality preference, establish who owns that decision and resolve the facts you can check.
+    expect:
+      primary: decision-rights
+      also_load: []
+      do_not_load: [grilling, steward]
+    why: The agent is considering overriding owner judgment; decision standing must be settled before a challenge becomes a gate.
+
+  - id: routine-owner-choice
+    kind: negative
+    prompt: Use the blue option we already selected and update this local mockup.
+    expect:
+      primary:
+      also_load: []
+      do_not_load: [decision-rights, grilling]
+    why: An accepted routine choice does not need another authority dispute or interview.

@@ -180,7 +180,7 @@ Completion criterion: the output follows the outline below and is implementation
 2. Start a grilling interview.
    - Use `../grilling/` for the interview.
    - When the user wants ADRs, glossary/domain language, or durable design artifacts during discovery, use its docs branch with `../domain-modeling/`.
-   - Ask one question at a time and provide the recommended answer with each question.
+   - Follow grilling’s dependency-frontier rounds: ask independent questions together, defer questions whose answers depend on that round, and provide recommendations where grounded.
    - If a question can be answered by exploring the codebase, inspect the codebase instead of asking.
    - Completion criterion: the interview has enough context for Path A: problem, users/callers, constraints, affected systems, desired behavior, boundaries, likely APIs, invariants, risks, and acceptance tests.
 3. Convert to the spec.

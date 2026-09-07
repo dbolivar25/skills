@@ -17,8 +17,10 @@ dependencies without module patching or method spies.
 
 ## Seams — where tests go
 
-A **seam** is the public boundary where behavior can be observed without reaching
-into implementation details. Tests live at seams. When the interface itself is
+A **seam** is the interface owning the behavior being claimed. It may be the
+module’s public boundary or an internal component’s own contract; keep internal
+seams private to that implementation. Tests observe that contract without
+coupling to incidental implementation details. When the interface itself is
 unsettled, use `../codebase-design/SKILL.md` to decide where the seam belongs
 before starting the loop.
 

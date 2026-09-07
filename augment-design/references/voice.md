@@ -38,8 +38,8 @@ on. An unsent draft is a draft, and saying so once is enough.
 ## The prose loop
 
 Run this over every string before delivery. It is Augment's local voice floor.
-Invoke **humanize** in strict mode for a full prose pass and **simplify** when the
-artifact also needs structural editing.
+Invoke **humanize** in strict mode for a full prose pass, including structural
+editing that preserves the intended meaning and Augment voice.
 
 Cut:
 

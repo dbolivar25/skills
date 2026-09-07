@@ -3,6 +3,10 @@
 Load this reference whenever the review target is a GitHub pull request or the
 user asks to post, approve, request changes, reply, or resolve there.
 
+For complete live PR state, review-thread pagination, or CI drilldown, use
+[github-evidence](../../github-evidence/SKILL.md). It owns evidence acquisition;
+code-review still owns the verdict and this branch’s action boundaries.
+
 ## Pin live state
 
 Read the current repository and pull request rather than trusting a local branch,

@@ -2,22 +2,19 @@
 
 Use this guide to audit a proposed, designed, implemented, or deployed workflow against faithful derivation.
 
-Required references:
-
-- [`../reference/raw-state-and-semantics.md`](../reference/raw-state-and-semantics.md)
-- [`../reference/compression-and-dimensions.md`](../reference/compression-and-dimensions.md)
-- [`../reference/judgment-dags-and-edges.md`](../reference/judgment-dags-and-edges.md)
-- [`../reference/evidence-support-and-confidence.md`](../reference/evidence-support-and-confidence.md)
-- [`../reference/publication-and-rendering.md`](../reference/publication-and-rendering.md)
-- [`../reference/evals-and-ablations.md`](../reference/evals-and-ablations.md)
-- [`../reference/anti-patterns.md`](../reference/anti-patterns.md)
-- [`../templates/review-report.md`](../templates/review-report.md)
+Read references at the decision points below, before completing the governed
+work. Reuse already-loaded references. When delegating into isolated context,
+include the relevant guide and reference content; a pointer in the parent’s
+context does not supply it to a worker.
 
 ## Review Stance
 
 Judge the workflow by what the visible work product must get right, not by how plausible the pipeline looks.
 
 Start from actual workflow behavior, code, docs, prompts, graph definitions, schema, or runtime examples when available. If the workflow is only conceptual, review the spec as a hypothesis and mark missing evidence as risk.
+
+Read the [review report](../templates/review-report.md) before the audit to retain
+its full coverage obligations.
 
 ## Audit Pass
 
@@ -31,27 +28,35 @@ Start from actual workflow behavior, code, docs, prompts, graph definitions, sch
    Completion criterion: every obligation is mapped to an existing node, prompt, tool, rule, model responsibility, or explicit gap.
 
 4. Inspect raw-state coverage.
+   Read [`raw-state-and-semantics`](../reference/raw-state-and-semantics.md) before judging coverage.
    Completion criterion: the review names the raw sources actually inspected, missing raw sources, scope rules, retrieval handles, permissions, windows, prior state, and stale-source risks.
 
 5. Inspect compression boundaries.
+   Read [`compression-and-dimensions`](../reference/compression-and-dimensions.md) before judging coverage.
    Completion criterion: every summarization, extraction, classification, aggregation, cache, state write, or context handoff says what survives and what may be lost.
 
 6. Inspect the DAG.
+   Read [`judgment-dags-and-edges`](../reference/judgment-dags-and-edges.md) before judging coverage.
    Completion criterion: nodes and edges express real judgment dependencies; speculative generation, verification, invalidation, scope, fidelity, and policy gates are not collapsed into one linear chain.
 
 7. Inspect support packages.
+   Read [`evidence-support-and-confidence`](../reference/evidence-support-and-confidence.md) before judging coverage.
    Completion criterion: rendered claims and actions can be traced to judgment sources, source support, confidence, contradictions, open questions, and rendering policy.
 
 8. Inspect confidence and rendering.
    Completion criterion: confidence is structured enough to change language or omission behavior; scalar confidence or model confidence alone is treated as a gap.
 
 9. Inspect publication gates.
+   Read [`publication-and-rendering`](../reference/publication-and-rendering.md) before judging coverage.
    Completion criterion: the workflow distinguishes generating a candidate from showing, sending, recommending, persisting, or acting on it.
 
 10. Inspect evals.
+   Read [`evals-and-ablations`](../reference/evals-and-ablations.md) before judging coverage.
     Completion criterion: final-output, judgment, edge/fidelity, retrieval, and ablation evals exist or are listed as gaps.
 
 ## Findings To Prioritize
+
+Before this decision, read [`anti-patterns`](../reference/anti-patterns.md).
 
 Lead with issues that can produce an unfaithful work product:
 

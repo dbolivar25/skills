@@ -4,7 +4,7 @@
 require "pathname"
 require "yaml"
 
-ROOT = Pathname.new(__dir__).parent.expand_path
+ROOT = Pathname.new(ARGV.fetch(0, Pathname.new(__dir__).parent.to_s)).expand_path
 CASE_FILE = ROOT.join("tests/invocation-cases.yml")
 ALLOWED_KEYS = %w[
   name
@@ -24,6 +24,23 @@ LINK_PATTERN = /\[[^\]]*\]\(([^)]+)\)/
 CASE_KINDS = %w[positive negative collision].freeze
 CASE_KEYS = %w[id kind prompt expect why].freeze
 EXPECTATION_KEYS = %w[primary also_load do_not_load].freeze
+
+# Fenced examples describe target projects, not links owned by this package.
+def prose(text)
+  fence = nil
+  text.lines.filter_map do |line|
+    if fence
+      fence = nil if line.match?(/\A {0,3}#{Regexp.escape(fence[0])}{#{fence.length},}\s*$/)
+      next
+    end
+    opening = line.match(/\A {0,3}(`{3,}|~{3,})/)
+    if opening
+      fence = opening[1]
+      next
+    end
+    line
+  end.join
+end
 
 errors = []
 skill_files = ROOT.glob("*/SKILL.md").sort
@@ -82,13 +99,36 @@ skill_files.each do |skill_file|
     errors << "#{directory}: disable-model-invocation must be true or false"
   end
 
-  text.scan(LINK_PATTERN).flatten.each do |target|
-    target = target.strip
-    next if target.empty? || target.start_with?("#") || target.match?(/\A[a-z][a-z0-9+.-]*:/i)
+  metadata_file = skill_file.dirname.join("agents/openai.yaml")
+  if metadata_file.exist?
+    begin
+      metadata = YAML.safe_load(metadata_file.read, permitted_classes: [], aliases: false)
+      policy = metadata.is_a?(Hash) ? metadata["policy"] : nil
+      implicit = policy.is_a?(Hash) ? policy["allow_implicit_invocation"] : nil
+      errors << "#{directory}: agents/openai.yaml must be a mapping" unless metadata.is_a?(Hash)
+      errors << "#{directory}: policy must be a mapping" if !policy.nil? && !policy.is_a?(Hash)
+      if !implicit.nil? && implicit != true && implicit != false
+        errors << "#{directory}: allow_implicit_invocation must be true or false"
+      end
+      if disabled == true && implicit != false
+        errors << "#{directory}: explicit-only skill needs Codex allow_implicit_invocation: false"
+      end
+    rescue Psych::SyntaxError => e
+      errors << "#{directory}: invalid agents/openai.yaml: #{e.message.lines.first.strip}"
+    end
+  elsif disabled == true
+    errors << "#{directory}: explicit-only skill needs agents/openai.yaml"
+  end
 
-    relative = target.delete_prefix("<").delete_suffix(">").split("#", 2).first
-    path = skill_file.dirname.join(relative).cleanpath
-    errors << "#{directory}: missing linked file #{target}" unless path.exist?
+  skill_file.dirname.glob("**/*.md").each do |document|
+    prose(document.read).scan(LINK_PATTERN).flatten.each do |target|
+      target = target.strip
+      next if target.empty? || target.start_with?("#") || target.match?(/\A[a-z][a-z0-9+.-]*:/i)
+
+      relative = target.delete_prefix("<").delete_suffix(">").split("#", 2).first
+      path = document.dirname.join(relative).cleanpath
+      errors << "#{document.relative_path_from(ROOT)}: missing linked file #{target}" unless path.exist?
+    end
   end
 end
 
