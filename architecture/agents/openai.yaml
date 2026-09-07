@@ -1,0 +1,5 @@
+interface:
+  display_name: "Architecture"
+  short_description: "Scan ownership moves or specify typed end-to-end changes"
+policy:
+  allow_implicit_invocation: false

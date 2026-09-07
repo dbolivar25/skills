@@ -25,7 +25,7 @@ The same commit deliberately changed grilling from exactly one question per turn
 
 ## A concrete accidental-complexity candidate
 
-The caller at [tech-spec/SKILL.md](../../tech-spec/SKILL.md) delegates the interview to [grilling/SKILL.md](../../grilling/SKILL.md), then restates an older interaction rule that conflicts with it. The history explains the mismatch: the method changed, while the caller's duplicate instruction survived.
+The caller at `tech-spec/SKILL.md` at the baseline commit delegates the interview to [grilling/SKILL.md](../../grilling/SKILL.md), then restates an older interaction rule that conflicts with it. The history explains the mismatch: the method changed, while the caller's duplicate instruction survived.
 
 The intended work to preserve is dependency-aware discovery that yields enough context for a spec. A candidate repair would make the caller specify the needed discovery result while the named method supplies question sequencing. That is a proposal to investigate, not an applied change. A contrasting task should include both independent questions and a downstream question; it must preserve batching of the former and deferral of the latter.
 

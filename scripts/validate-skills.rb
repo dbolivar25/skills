@@ -23,7 +23,7 @@ NAME_PATTERN = /\A[a-z0-9]+(?:-[a-z0-9]+)*\z/
 LINK_PATTERN = /\[[^\]]*\]\(([^)]+)\)/
 CASE_KINDS = %w[positive negative collision].freeze
 CASE_KEYS = %w[id kind prompt expect why].freeze
-EXPECTATION_KEYS = %w[primary also_load do_not_load].freeze
+EXPECTATION_KEYS = %w[primary also_load do_not_load read do_not_read].freeze
 
 # Fenced examples describe target projects, not links owned by this package.
 def prose(text)
@@ -196,6 +196,21 @@ else
       unexpected = expectation.keys.map(&:to_s) - EXPECTATION_KEYS
       errors << "#{location} expect has unsupported keys: #{unexpected.join(', ')}" unless unexpected.empty?
 
+      required_paths = expectation.fetch("read", [])
+      excluded_paths = expectation.fetch("do_not_read", [])
+      if !required_paths.is_a?(Array) || !excluded_paths.is_a?(Array)
+        errors << "#{location} read and do_not_read must be arrays"
+        next
+      end
+      (required_paths + excluded_paths).each do |target|
+        unless target.is_a?(String) && skill_names.include?(target.split("/").first) && ROOT.join(target).cleanpath.to_s.start_with?("#{ROOT}/") && ROOT.join(target).file?
+          errors << "#{location} references missing or non-skill method #{target}"
+        end
+      end
+      unless (required_paths & excluded_paths).empty?
+        errors << "#{location} both requires and excludes the same method"
+      end
+
       primary = expectation["primary"]
       also_load = expectation["also_load"]
       do_not_load = expectation["do_not_load"]
@@ -221,7 +236,7 @@ else
         errors << "#{location} negative case must name at least one excluded neighbor" if do_not_load.empty?
       when "collision"
         errors << "#{location} collision case needs one primary skill" unless primary.is_a?(String)
-        errors << "#{location} collision case must distinguish at least one neighbor" if also_load.empty? && do_not_load.empty?
+        errors << "#{location} collision case must distinguish at least one neighbor" if also_load.empty? && do_not_load.empty? && excluded_paths.empty?
       end
 
       case_mentions.concat(references)

@@ -1,125 +1,45 @@
 ---
 name: show-me
-description: Use when the user asks for a visual explanation or interactive demonstration, or when a material relationship is harder to understand in prose. Load it to choose the smallest useful diagram, code-shape sketch, or focused HTML artifact.
+description: Use when the user asks for a visual explanation, interactive demonstration, or throwaway prototype, or a material relationship is hard to understand in prose. Load it to choose a visual that explains an established answer or an experiment that resolves an open question.
 ---
 
-Help the user understand the current topic of conversation visually. Skip the preamble and keep prose brief. Pick the smallest view that makes the key point clear.
+# Show me
 
-- Show logic or an algorithm as pseudocode:
+Use a visible artifact to make the next judgment easier. First decide whether
+the answer is **known and needs explaining** or **unsettled and needs exploring**.
+That distinction determines the method and what the artifact can prove.
 
-```text
-on(save)
-  if content is unchanged
-    return cached result
-  write new content
-  return fresh result
-```
+## Choose the branch
 
-- Show runtime control flow as a call tree:
+| Situation | Read before creating the artifact | What to deliver |
+| --- | --- | --- |
+| Logic, relationships, structure, or a change can be explained from known evidence | [Visual forms](references/visual-forms.md) | The smallest useful sketch, diagram, or focused HTML explanation |
+| State, transitions, or the logic model need to be tried | [Experiment contract](references/experiments.md) and [logic experiment](branches/logic-experiment.md) | One shareable HTML demo with visible state, free play, and guided scenarios |
+| UI structure or appearance needs comparison | [Experiment contract](references/experiments.md) and [UI experiment](branches/ui-experiment.md) | Structurally different variants on one route with direct selection and a switcher |
 
-```text
-submitForm
-  createSession
-    persistPrompt
-    launchAgent
-  navigateToSession
-```
+An interactive explanation is not automatically an experiment. A prototype is
+chosen because a question remains open, not merely because HTML is convenient.
+If the distinction is unclear, inspect the supplied evidence and question before
+choosing. Carry an explicit user choice forward.
 
-- Show UI structure as a component tree, including state and module boundaries that matter:
+## Keep the visual honest
 
-```tsx
-<SessionPage> (apps/example/src/routes/session.tsx)
-  useSessionEvents()
-  <SessionToolbar>
-    <RunSkillButton> (packages/ui)
-```
+Use real domain labels and data or clearly identified examples. Show the calls,
+files, props, states, boundaries, or transitions needed to answer the question.
+Keep context when omitting it would hide ownership or order. Match an existing
+product's colors, type, spacing, and components when the artifact represents it.
 
-- Show file responsibility or a broad refactor as a shallow file tree:
+Place the visual beside the short explanation it supports. Skip ceremonial
+preambles and do not make the user inspect every possible view. One well-chosen
+view can be enough; use more only when they expose different material relationships.
 
-```text
-src/
-|-- commands/       # parses user actions
-|-- sessions/       # owns session state
-`-- transport/      # sends API requests
-```
+For an explanation, existing evidence supplies the answer; inspect the rendering
+for accuracy and legibility. For an experiment, preserve the question, observed
+answer, limits, and runnable artifact as the learning source. Follow its branch's
+scratch-data and capture rules. A promising result does not establish production
+readiness or authorize implementation.
 
-- Show component interaction, control flow, or data flow with Mermaid:
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant UI
-    participant Daemon
-    User->>UI: choose command
-    UI->>Daemon: send expanded prompt
-    Daemon-->>UI: stream result
-```
-
-- Use `diff` when the point is what changes and the surrounding shape already exists. Match the diff shape to the topic.
-
-For a component change:
-
-```diff
- <SessionPage>
-   useSessionEvents()
-   <SessionToolbar>
-+    <RunSkillButton />
-   <SessionTimeline>
-+    <SkillResultCard />
-```
-
-For a file-layout change:
-
-```diff
- src/
- |-- commands/
-+|   `-- show-me.ts       # expands the slash command
- |-- sessions/
--`-- transport.ts
-+`-- transport/
-+    |-- client.ts
-+    `-- stream.ts
-```
-
-For a call-tree or call-stack change:
-
-```diff
- submitForm
-   createSession
-     persistPrompt
-+    expandSkillMention
-     launchAgent
--  navigateToSession
-+  navigateToSession
-+    subscribeToEvents
-```
-
-For a state or control-flow change:
-
-```diff
- on(save)
--  write content
-+  if content is unchanged
-+    return cached result
-+  write new content
-+  invalidate cache
-```
-
-- Show the whole block when most of it is new, when omitted context would hide ownership or order, or when the user needs a copyable target shape:
-
-```ts
-function expandSkill(command: string): string {
-  const skillName = command.slice(1)
-  return `use the ${skillName} skill`
-}
-```
-
-- For a visual UI, layout, state comparison, or concept too dense for Mermaid, write one focused HTML file — a diagram, an infographic, or a short slide deck, whichever fits the point. Match the product's colors, type, spacing, and components; use real labels and data; support desktop and mobile. Then open it for the user:
-
-```
-Bash(open path/to/show-me-{description}.html)
-```
-
-- Place each visual next to the short text it supports. Keep only the calls, files, props, states, and boundaries needed to answer the user's current question.
-
-You may use one of these, you may use several, it is unlikely you will use all of them. Use your judgement and don't overwhelm the user.
+Open a local HTML artifact with the viewer supported by the current host and
+return a usable path. Do not pretend the artifact was rendered or exercised when
+only its source was written. Prototype shortcuts apply only to experiments;
+they do not weaken the source accuracy required of an explanation.

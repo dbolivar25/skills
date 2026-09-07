@@ -2,10 +2,8 @@
 
 Use this guide when a derivation spec needs to become a product workflow, code change, MCP workflow, prompt graph, evaluation harness, or implementation ticket set.
 
-Read references at the decision points below, before completing the governed
-work. Reuse already-loaded references. When delegating into isolated context,
-include the relevant guide and reference content; a pointer in the parent’s
-context does not supply it to a worker.
+Apply the shared [derivation contract](../CONTRACT.md). This guide owns the
+task-specific method below; read its references before their governed decisions.
 
 ## Contract
 

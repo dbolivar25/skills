@@ -59,6 +59,28 @@ class ValidateSkillsTest < Minitest::Test
     assert run_validator.first
   end
 
+  def test_branch_collision_requires_distinct_existing_methods
+    corpus = YAML.safe_load(File.read(File.join(@root, "tests/invocation-cases.yml")))
+    corpus["cases"][1]["expect"]["do_not_load"] = %w[sample support]
+    expectation = corpus["cases"][2]["expect"]
+    expectation["also_load"] = []
+    expectation["read"] = ["sample/references/guide.md"]
+    expectation["do_not_read"] = ["sample/references/other.md"]
+    write("tests/invocation-cases.yml", corpus.to_yaml)
+    success, output = run_validator
+    refute success
+    assert_includes output, "references missing or non-skill method sample/references/other.md"
+
+    write("sample/references/other.md", "# Other method\n")
+    assert run_validator.first
+
+    expectation["do_not_read"] = expectation["read"].dup
+    write("tests/invocation-cases.yml", corpus.to_yaml)
+    success, output = run_validator
+    refute success
+    assert_includes output, "both requires and excludes the same method"
+  end
+
   def test_malformed_host_metadata_is_reported
     FileUtils.mkdir_p(File.join(@root, "sample/agents"))
     write("sample/agents/openai.yaml", "policy: [\n")

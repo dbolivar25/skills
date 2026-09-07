@@ -1,69 +1,67 @@
-# Repository refactor results
+# Consolidated skill suite
 
-Scope: only this skills repository. Baseline `abd276763cd80ceed29c29d1f4331e4173709744`,
-branch `daniel/skill-suite-intent-audit`. The owner excluded external installations,
-pet skills, built-in packages, and managed integrations. None were changed during
-this fresh refactor. Earlier discarded work remains parked on its separate branch.
+The repository now has **20 skill entry points**, from the original 29: seven
+entry points were consolidated into shared owners, and Herdr plus STE were retired
+by owner instruction. The work is local to `daniel/skill-suite-intent-audit`.
 
-## Dispositions
+## Architecture changes
 
-| Skills | Result and preserved purpose |
+| Owner | Consolidation and writing change |
 | --- | --- |
-| Herdr; Simplified Technical English | Removed by owner instruction; catalog/cases updated. No replacement package added. |
-| writing-for-agents | Kept trigger, structure, demand/legwork, examples, context pointers, leading words, no-op test, and scripts/judgment boundary. Corrected host-specific selection mechanics and unsupported universal claims about negation and stable labels. |
-| improve-codebase-architecture; tech-spec | Kept distinct explicit workflows and full methods. Added Codex explicit-invocation metadata. Tech spec now follows grilling's dependency-frontier rounds. |
-| tdd; codebase-design | Kept workflow and architecture judgments. Persistence evidence follows the owning interface; old tests retire only with equivalent behavior coverage; method length alone does not justify helpers. |
-| simplify | Kept authorized finishing scope, two-way vocabulary, comment rules, and code structure. Shorter names and merged shapes must preserve real meaning and ownership. |
-| code-review; reviewability | Acquisition points to github-evidence while verdict stays with review. Full internal investigation remains required; visible PR structure follows reviewer need, with final aggregate, visual, and benchmark examples. |
-| faithful-derivation | Kept all completion criteria, main method, glossary, references, templates, and discriminating examples. Required reading now sits before its governed decisions; optional interview questions cannot bypass translation prerequisites. |
-| augment-design | Prose callers route to humanize. Label foundation, specimen, and `.aug-label` utility follow existing sentence-case law. Assets and token values remain unchanged. |
-| prototype | Kept both complete methods and artifacts. Main and branch handoffs preserve learning without implying production authority or proof. |
-| augment-workflows; coding-standards; decision-rights; designing-human-interfaces; diagnosing-bugs; domain-modeling; engineering-restraint; github-evidence; grafana-evidence; grilling; humanize; show-me; steward; write-custom-lint | Retained unchanged after source review. No source-supported need to rewrite their distinct methods. Generic UI guidance already defers to actual product precedent, so another precedence rule was unnecessary. |
-| creative-ideation; creative-shaping | Byte-identical, as directed. |
+| [software-engineering](../../software-engineering/SKILL.md) | Standards, module design, TDD and simplify now share one owner. Testing evidence has one authoritative reference; TDD refactoring and ordinary finishing use one method. Branches retain language scope and selection boundaries. |
+| [architecture](../../architecture/SKILL.md) | Scan and typed spec share an explicit-only entry. Scan keeps full evidence coverage; spec uses one contract/flow/file/test coverage map instead of repeated inventories. No scan-first requirement or automatic progression. |
+| [review](../../review/SKILL.md) | Code judgment and review artifacts share one reconstruction method. Verdict, artifact rendering and live actions remain distinct; non-code review guides retain their scope. |
+| [show-me](../../show-me/SKILL.md) | Explanation and prototyping share artifact selection. Known-answer visual forms and open-question logic/UI experiments remain complete branches. |
+| [steward](../../steward/SKILL.md) | Immediate decision rights and durable coordination share ownership. The immediate branch does not create runtime state, reviewers, or mission obligations. |
 
-Eleven packages received targeted corrections, sixteen were retained unchanged,
-and two were retired. Every surviving description is byte-identical to baseline.
-[Inventory](inventory.json) records each disposition and original main hash.
+[Writing-for-agents](../../writing-for-agents/SKILL.md) is rewritten around the
+author's decisions: behavioral effect, reachability, hierarchy, clarity/demand,
+and authoritative ownership. Its pedagogical distinctions and examples survive.
+[Faithful derivation](../../faithful-derivation/SKILL.md) now separates entry
+posture/routing, the shared derivation contract, task guides, explanations, and
+recording templates.
 
-## Observed verification
+Retained roots remain where their selection or platform ownership is useful:
+causal diagnosis, necessity/cost judgment, domain modeling, evidence acquisition,
+interviewing, interface craft, brand/platform discipline, human voice, creative
+methods and mechanical enforcement. Their active callers now use the new owners.
+The creative pair is unchanged. No compatibility stub preserves the retired
+selection layout.
 
-- `ruby scripts/validate-skills.rb`: 27 skills and 30 invocation cases pass.
-  This validates corpus structure and references, not model routing accuracy.
-- `ruby tests/validate-skills_test.rb`: 3 tests, 12 assertions pass. Fixtures catch
-  broken nested references, ignore fenced target-project examples, reject absent
-  or malformed explicit-host policy, and preserve unrelated metadata.
-- `git diff --check`: passes.
-- [Preservation checks](preservation-checks.json): surviving descriptions, creative
-  pair, all derivation completion criteria, unchanged derivation method/reference/
-  template bodies, authoring section structure, and brand assets/token values.
-- Chromium rendered the [label specimen](evidence/labels.png); both labels had
-  computed `text-transform: none`. Visual inspection confirmed readable sentence
-  case without clipping. The related utility declaration uses the same casing.
-- Independent shared-diff review found two caller gaps, both corrected: interview
-  translation reading could be skipped and prototype branches implied promotion.
-  Bounded re-review returned ADHERES, HIGH confidence.
+See [ownership-map.md](ownership-map.md) for original-function destinations and
+[engineering-map.md](engineering-map.md) for the detailed engineering coverage.
+README provides the new invocation names and branch choices.
 
-## Fresh execution probes
+## Verification
 
-A separate agent read current instructions without the audit or diff and produced
-actual task decisions for these scenarios:
+- Structural validator: **20 skills, 37 routing cases** pass. Cases distinguish
+  required and excluded methods within a merged owner, not just package names.
+- Validator regression fixtures: **4 tests, 19 assertions** pass, including nested
+  links, explicit-host policy, and contradictory or missing branch expectations.
+- `git diff --check` passes.
+- Independent source review compared all five consolidated owners, authoring,
+  derivation, supporting references and callers with `abd2767`. Two description
+  trigger regressions were found and repaired. Re-review returned ADHERES and
+  independently reran the 20-skill/37-case validator.
+- [Seven paired task probes](probes/comparison.md) used separate fresh agents for
+  original and current sources. Both preserved the consequential decisions and
+  constraints; current routing kept immediate standing, known explanation,
+  non-code artifacts and spec planning in their proper branches.
+- [Preservation receipts](preservation-checks.json) confirm byte-identical creative
+  packages, Steward runtime/tests/contracts, derivation explanations/templates/
+  glossary, and Augment assets/token values. All package footprints fit the
+  existing 128,000-byte Amp limit; no publication was performed.
+- The earlier sentence-case label correction remains, with its
+  [rendered specimen](evidence/labels.png) and computed `text-transform: none`.
 
-| Scenario | Observed result |
-| --- | --- |
-| Write-only durable insertion | Kept an independent real-connection database observation; distinguished committed persistence from unavailable read API and untested crash durability. |
-| Unique cancellation regression | Retained old evidence until equivalent cancellation coverage exists at the owning seam. |
-| Observed versus saved disk content | Preserved distinct names and ownership despite matching fields. |
-| Small stale-selection fix | Produced two concise sentences stating final behavior and the stipulated focused regression. |
-| Speculative email with revoked quote and exact date | Separated candidate generation from permissions-gated publication; invalidated revoked support; preserved exact commitment and provenance through payloads. |
-| Prototype-only state-machine demo | Delivered learning and runnable artifact; did not treat the result as implementation authority. |
+These are source, structural, and qualitative task-response checks. The paired
+probes are single runs, not statistical evidence of model improvement. Unchanged
+runtime code was not revalidated as a new implementation. No live product,
+installed catalog reload, deployment, or publication is claimed.
 
-These are single fresh responses to stipulated scenarios, not repeated statistical
-measurements, a with/without comparison, live product tests, or proof of every
-invocation expectation. They support preservation of the changed distinctions;
-no general model-performance improvement is claimed.
+## Delivery
 
-## Delivery boundary
-
-Changes are local to this branch. No push, merge, publication, or installed-skill
-reload is part of this delivery. Local source verification is not evidence that a
-running host has refreshed its skill catalog.
+Only this repository changed. External installations, built-in packages,
+plugin-managed packages and app-managed integrations are outside this delivery.
+Nothing was pushed or merged. Local source completion is separate from installing
+or publishing the consolidated catalog.

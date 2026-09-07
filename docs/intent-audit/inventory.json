@@ -5,97 +5,113 @@
       "name": "augment-design",
       "path": "augment-design/SKILL.md",
       "sha256": "a0e0eb5b59dc8be6a74e1e92326b17038d7dff70e705847f5814ba50c8df76a8",
-      "status": "targeted correction; method retained"
+      "status": "targeted correction; method retained",
+      "current_owner": "augment-design"
     },
     {
       "name": "augment-workflows",
       "path": "augment-workflows/SKILL.md",
       "sha256": "dae6c0a528e16287ee1dbe09512fc51f33473711e14c08aac8a265dd0e5b635d",
-      "status": "retained unchanged after source audit"
+      "status": "retained unchanged after source audit",
+      "current_owner": "augment-workflows"
     },
     {
       "name": "code-review",
       "path": "code-review/SKILL.md",
       "sha256": "ac96b7ecb9b49ac97b58d779d072794cd346dfeed9291d0f6bf8ba483a1aa72c",
-      "status": "targeted correction; method retained"
+      "status": "consolidated into review",
+      "current_owner": "review"
     },
     {
       "name": "codebase-design",
       "path": "codebase-design/SKILL.md",
       "sha256": "617ae6cf7788c8ab06f57e1682e4e96f788e77d64e3b666d74ba54611a397b60",
-      "status": "targeted correction; method retained"
+      "status": "consolidated into software-engineering",
+      "current_owner": "software-engineering"
     },
     {
       "name": "coding-standards",
       "path": "coding-standards/SKILL.md",
       "sha256": "1ff67b1eea1b51923f6c8a74e57ffc77e626325fab55bd6b4b4819ab11441007",
-      "status": "retained unchanged after source audit"
+      "status": "consolidated into software-engineering",
+      "current_owner": "software-engineering"
     },
     {
       "name": "creative-ideation",
       "path": "creative-ideation/SKILL.md",
       "sha256": "e1c03d5f1a18dd00721112b5badf9656540d504da82b4c7ebbefc083f4d479b7",
-      "status": "retained unchanged after source audit"
+      "status": "retained unchanged after source audit",
+      "current_owner": "creative-ideation"
     },
     {
       "name": "creative-shaping",
       "path": "creative-shaping/SKILL.md",
       "sha256": "4a912f901e681e77f802a501e4783f374f37fda5f2c28b80d1ebb8bce73668c8",
-      "status": "retained unchanged after source audit"
+      "status": "retained unchanged after source audit",
+      "current_owner": "creative-shaping"
     },
     {
       "name": "decision-rights",
       "path": "decision-rights/SKILL.md",
       "sha256": "d12cb599879178b965c439b3c3d4c5f94e71814031f75e1ee0141a4cf8dbd1aa",
-      "status": "retained unchanged after source audit"
+      "status": "consolidated into steward",
+      "current_owner": "steward"
     },
     {
       "name": "designing-human-interfaces",
       "path": "designing-human-interfaces/SKILL.md",
       "sha256": "ff01ac535bb4d853080d18fc93ec274d3133438e91f3be752bc4ddfd3fc0d22e",
-      "status": "retained unchanged after source audit"
+      "status": "retained unchanged after source audit",
+      "current_owner": "designing-human-interfaces"
     },
     {
       "name": "diagnosing-bugs",
       "path": "diagnosing-bugs/SKILL.md",
       "sha256": "f7cb1914071223e79124c29655d1d836e8ea5854bb6762153718d644d990d225",
-      "status": "retained unchanged after source audit"
+      "status": "retained unchanged after source audit",
+      "current_owner": "diagnosing-bugs"
     },
     {
       "name": "domain-modeling",
       "path": "domain-modeling/SKILL.md",
       "sha256": "05e2048c3539329f1156c292feea344b8d5d46eb6dca2975b1c1b8882d32b3b1",
-      "status": "retained unchanged after source audit"
+      "status": "retained unchanged after source audit",
+      "current_owner": "domain-modeling"
     },
     {
       "name": "engineering-restraint",
       "path": "engineering-restraint/SKILL.md",
       "sha256": "dd7879e5d710070b06bbdbce0e93fb46fadf1865d31f7411665ae104360418cf",
-      "status": "retained unchanged after source audit"
+      "status": "retained unchanged after source audit",
+      "current_owner": "engineering-restraint"
     },
     {
       "name": "faithful-derivation",
       "path": "faithful-derivation/SKILL.md",
       "sha256": "f190230df746a5a6729e82fb7617396f9398020c1eff441807634153c7909ff9",
-      "status": "targeted correction; method retained"
+      "status": "restructured and rewritten; essential methods retained",
+      "current_owner": "faithful-derivation"
     },
     {
       "name": "github-evidence",
       "path": "github-evidence/SKILL.md",
       "sha256": "c44af4707d0df3cd4f457fc5b804bc8c56a863ace5b571e75233aa4859c18c3a",
-      "status": "retained unchanged after source audit"
+      "status": "retained unchanged after source audit",
+      "current_owner": "github-evidence"
     },
     {
       "name": "grafana-evidence",
       "path": "grafana-evidence/SKILL.md",
       "sha256": "3929a4ebc846b865a51c3a8717e70d3d67425f5703f8e3ace7e0b271c90c3e9c",
-      "status": "retained unchanged after source audit"
+      "status": "retained unchanged after source audit",
+      "current_owner": "grafana-evidence"
     },
     {
       "name": "grilling",
       "path": "grilling/SKILL.md",
       "sha256": "aceb9dacb0805858dbb3b4d50d14f2a4323752859836f1030a20cfc04de060e6",
-      "status": "retained unchanged after source audit"
+      "status": "retained unchanged after source audit",
+      "current_owner": "grilling"
     },
     {
       "name": "herdr",
@@ -107,31 +123,36 @@
       "name": "humanize",
       "path": "humanize/SKILL.md",
       "sha256": "16f2a43fb89f6f7aff4edb712e3f7718f20d6055ba0f73cbbcc8c01da32a8a05",
-      "status": "retained unchanged after source audit"
+      "status": "retained unchanged after source audit",
+      "current_owner": "humanize"
     },
     {
       "name": "improve-codebase-architecture",
       "path": "improve-codebase-architecture/SKILL.md",
       "sha256": "088afd733c912cab2273a2b01c204eb9b578d590b9ee1b0cab67256ea340435e",
-      "status": "targeted correction; method retained"
+      "status": "consolidated into architecture",
+      "current_owner": "architecture"
     },
     {
       "name": "prototype",
       "path": "prototype/SKILL.md",
       "sha256": "eba198c21c1e1b402cec166b86cda199ffc65d502bdd4232845b54bb3f5ad36a",
-      "status": "targeted correction; method retained"
+      "status": "consolidated into show-me",
+      "current_owner": "show-me"
     },
     {
       "name": "reviewability",
       "path": "reviewability/SKILL.md",
       "sha256": "590b07ecb629a91d77407325b762b111fff98621f93c1a164b7325576d0bccd9",
-      "status": "targeted correction; method retained"
+      "status": "consolidated into review",
+      "current_owner": "review"
     },
     {
       "name": "show-me",
       "path": "show-me/SKILL.md",
       "sha256": "322aa9ef823cb9560fde2d837708ea16190e9a08eea5e9cff94648b168035bca",
-      "status": "retained unchanged after source audit"
+      "status": "restructured and rewritten; essential methods retained",
+      "current_owner": "show-me"
     },
     {
       "name": "simplified-technical-english",
@@ -143,37 +164,43 @@
       "name": "simplify",
       "path": "simplify/SKILL.md",
       "sha256": "cea25971e90186af117905874c3a980c9bf790ec946c737e552c1e1e997fa11b",
-      "status": "targeted correction; method retained"
+      "status": "consolidated into software-engineering",
+      "current_owner": "software-engineering"
     },
     {
       "name": "steward",
       "path": "steward/SKILL.md",
       "sha256": "3756ccaf0e51a57466faabdb6b4e4258b2c915fd7cdacccd3027c689e0c433d3",
-      "status": "retained unchanged after source audit"
+      "status": "restructured and rewritten; essential methods retained",
+      "current_owner": "steward"
     },
     {
       "name": "tdd",
       "path": "tdd/SKILL.md",
       "sha256": "b4d95141aff38cef7fa83ced6df1c1fb467d6938042f89aa68610b584e5ec840",
-      "status": "targeted correction; method retained"
+      "status": "consolidated into software-engineering",
+      "current_owner": "software-engineering"
     },
     {
       "name": "tech-spec",
       "path": "tech-spec/SKILL.md",
       "sha256": "3381fb0e5281a256eabd484588f1de715afd405e51a1c04ef21592adebc9351f",
-      "status": "targeted correction; method retained"
+      "status": "consolidated into architecture",
+      "current_owner": "architecture"
     },
     {
       "name": "write-custom-lint",
       "path": "write-custom-lint/SKILL.md",
       "sha256": "4405fc295747f696216a07b7491833d663ad295b6194a24d3c31395816b2e00c",
-      "status": "retained unchanged after source audit"
+      "status": "retained unchanged after source audit",
+      "current_owner": "write-custom-lint"
     },
     {
       "name": "writing-for-agents",
       "path": "writing-for-agents/SKILL.md",
       "sha256": "5ca3b2df0bac749faeb396eeefc487c6c04a4c3846734afd7110afcbfbce51a3",
-      "status": "targeted correction; method retained"
+      "status": "restructured and rewritten; essential methods retained",
+      "current_owner": "writing-for-agents"
     }
   ]
 }

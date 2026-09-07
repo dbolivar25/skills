@@ -23,7 +23,10 @@ Outputs of this investigation are working explanations and evidence, not a unive
 - [Source inventory](inventory.json): baseline paths and hashes.
 - [Suite intent](suite-intent.md): per-skill purpose and essential details.
 - [Authoring intent](writing-for-agents.md) and [architecture investigation](architecture-and-discovery.md): deeper source/history maps.
-- [Accepted proposal](proposal.md): shared scope, retained methods, and verification requirements.
+- [Consolidation design](consolidation.md): current owners, branches, and preservation requirements.
+- [Ownership map](ownership-map.md): where the original functions live.
+- [Paired probes](probes/comparison.md): original and consolidated task responses.
+- [Earlier maintenance proposal](proposal.md): superseded after owner feedback.
 - [Results](results.md): final dispositions, preservation checks, and observed evidence.
 - [Restart receipt](restart.json): source branch recovery.
 

@@ -1,8 +1,32 @@
 {
-  "surviving_descriptions_unchanged": true,
-  "creative_pair_byte_identical": true,
-  "all_derivation_completion_criteria_preserved": true,
-  "derivation_method_references_templates_unchanged": true,
-  "augment_assets_and_token_values_unchanged": true,
-  "authoring_structure_preserved": true
+  "source_commit": "abd276763cd80ceed29c29d1f4331e4173709744",
+  "checks": {
+    "creative_pair_byte_identical": true,
+    "steward_runtime_tests_contracts_unchanged": true,
+    "derivation_references_templates_glossary_unchanged": true,
+    "augment_assets_and_token_values_unchanged": true,
+    "all_packages_below_amp_128000_byte_footprint": true
+  },
+  "package_footprints_bytes": {
+    "architecture": 20083,
+    "augment-design": 120546,
+    "augment-workflows": 6484,
+    "creative-ideation": 90127,
+    "creative-shaping": 52822,
+    "designing-human-interfaces": 46033,
+    "diagnosing-bugs": 12142,
+    "domain-modeling": 8729,
+    "engineering-restraint": 7622,
+    "faithful-derivation": 102520,
+    "github-evidence": 32045,
+    "grafana-evidence": 14074,
+    "grilling": 2834,
+    "humanize": 14378,
+    "review": 26050,
+    "show-me": 21979,
+    "software-engineering": 32545,
+    "steward": 125576,
+    "write-custom-lint": 10394,
+    "writing-for-agents": 11702
+  }
 }

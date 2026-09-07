@@ -1,3 +1,6 @@
+> Superseded maintenance proposal. The owner rejected this as insufficient;
+> [the consolidation design](consolidation.md) governs the completed refactor.
+
 # Refactoring proposal
 
 The shared source-intent investigation is independently accepted for planning. That acceptance does not prove a rewrite. This proposal is grounded in the originals and the owner's current instructions: remove STE and Herdr, preserve the creative split, recover essential details before changing their representation, and carry the full authorized refactor through verification.

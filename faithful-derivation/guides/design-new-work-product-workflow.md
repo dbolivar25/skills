@@ -2,10 +2,8 @@
 
 Use this guide for a new workflow, a major redesign, or a product idea that needs a derivation spec before implementation.
 
-Read references at the decision points below, before completing the governed
-work. Reuse already-loaded references. When delegating into isolated context,
-include the relevant guide and reference content; a pointer in the parent’s
-context does not supply it to a worker.
+Apply the shared [derivation contract](../CONTRACT.md). This guide owns the
+task-specific method below; read its references before their governed decisions.
 
 Use the complete [derivation spec](../templates/derivation-spec.md) as the artifact
 contract; read it before drafting so its required coverage remains visible.

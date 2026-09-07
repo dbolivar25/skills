@@ -11,7 +11,7 @@ discover them during each investigation.
 
 This skill owns evidence acquisition, not causal diagnosis, incident command, or
 merge judgment. Hand a causal question to `diagnosing-bugs` and a review verdict
-to `code-review` after the evidence packet exists.
+to the code-judgment branch of `review` after the evidence packet exists.
 
 ## Authority boundary
 
