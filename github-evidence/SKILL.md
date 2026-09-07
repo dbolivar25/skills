@@ -56,3 +56,10 @@ succeeds even if CI is red or threads are unresolved.
   zsh quoting breaks.
 - Don't sleep-poll runs or checks; `gh run watch ID` and
   `gh pr checks N --watch --fail-fast` exist; let the harness background them.
+
+## PR state and live actions
+
+Read [PR operations](references/pr-operations.md) when pinning a live review
+comparison, interpreting thread state, or performing an explicitly requested PR
+action. Callers may read that contract directly without running these helpers.
+It supplies platform semantics and receipts; the caller owns the judgment.

@@ -13,13 +13,14 @@ otherwise compare the current branch with its merge base against the upstream,
 target. Verify a fixed point resolves and its three-dot diff against `HEAD` is
 non-empty. Record the comparison and commit list once.
 
-For a PR, follow [PR operations](../references/github-pr-operations.md). Recheck
+For a PR, follow [PR operations](../../github-evidence/references/pr-operations.md). Recheck
 its live head when resuming after interruption or feedback. State the exact
 comparison and whether the task includes a requested live action.
 
 Read repository instructions, standards, neighboring code, tests, domain docs,
 and existing implementations. For TypeScript changes, apply the law in
-[software-engineering](../../software-engineering/SKILL.md). A difference from a
+[engineering standards](../../software-engineering/references/standards.md) and
+[testing evidence](../../software-engineering/references/testing-evidence.md). A difference from a
 preferred pattern is not a defect until compared with the governing contract and
 local precedent. Read unresolved threads and relevant resolved history before
 forming new findings; existing comments are claims to verify, not findings to
@@ -48,11 +49,13 @@ instead of pasting their reports. Apply a lens when the changed behavior earns i
 
 - Dependency version, lock graph, runtime image, or vendored tool:
   [dependency compatibility](../references/dependency-bump.md).
-- Material interaction or visible UI state: `designing-human-interfaces`.
+- Material interaction or visible UI state: `interface-design`.
 - Shipped behavior, reliability, or performance claims: production evidence,
   `grafana-evidence`, or `diagnosing-bugs`.
-- A requested review guide: the [artifact branch](review-artifact.md), using the
-  same grounded review map.
+
+A requested review guide is a subsequent outcome: hand the current review map
+to [reviewability](../../reviewability/SKILL.md) after the judgment. It is not
+an investigative lens and is not required for a verdict.
 
 Every lens must return evidence relevant to the pinned target. The judge retains
 the final recommendation.

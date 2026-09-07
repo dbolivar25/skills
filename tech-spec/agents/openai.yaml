@@ -1,0 +1,5 @@
+interface:
+  display_name: "Technical specification"
+  short_description: "Specify a selected software change as typed contracts and complete end-to-end flows."
+policy:
+  allow_implicit_invocation: false

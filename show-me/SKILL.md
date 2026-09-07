@@ -43,3 +43,11 @@ Open a local HTML artifact with the viewer supported by the current host and
 return a usable path. Do not pretend the artifact was rendered or exercised when
 only its source was written. Prototype shortcuts apply only to experiments;
 they do not weaken the source accuracy required of an explanation.
+
+## Return learning to the caller
+
+An explanation returns the visible relationship; an experiment returns its
+observed answer and limits. The calling discipline owns the subsequent product
+or engineering decision. Producing an artifact does not initiate redesign,
+implementation, or a review workflow. When interface craft is already in scope,
+carry its moment, state and visual constraints into the artifact.

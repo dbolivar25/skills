@@ -1,0 +1,5 @@
+interface:
+  display_name: "Architecture scan"
+  short_description: "Find and rank evidence-backed architectural ownership moves in TypeScript code."
+policy:
+  allow_implicit_invocation: false

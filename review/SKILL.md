@@ -1,52 +1,31 @@
 ---
 name: review
-description: Use when code changes need a correctness or merge judgment, or work needs a pull request description or review guide. Load it to reconstruct the real change and preserve evidence, uncertainty, and reviewer judgment; select an artifact, a code verdict, or both from the request.
+description: Use when code changes need a correctness, request-fit, or merge judgment across diffs, PRs, rereviews, or unresolved feedback. Load it to investigate the actual change, falsify candidate findings, and return one supported verdict.
 ---
 
 # Review
 
-A useful review begins with a faithful model of the work. The requested outcome
-then determines what to do with that model: **judge code** or **make work
-reviewable**. These are different branches, not different sources of truth.
+Return findings and one code judgment grounded in the actual change, its intended
+behavior, and the repository that must carry it. The work and its evidence outrank
+the author's preferred story; preserve disagreements between them.
 
-The work and its evidence outrank the author's preferred story. Preserve material
-disagreement between them. Reviewing or drafting does not authorize code edits,
-publication, approval, replies, or thread resolution; carry forward any such
-action the user has explicitly requested and keep its scope distinct.
+Read [code judgment](branches/code-judgment.md) to pin the target, investigate
+both axes, and falsify findings. It consumes the shared
+[reconstruction method](references/reconstruct-work.md); reuse a current review
+map already established in the task rather than reconstructing it twice.
 
-## Select the outcome
+The result identifies supported defects, request fit, codebase fit, checked
+validation, and remaining uncertainty. A summary alone does not provide a verdict.
+Recheck the target when its source changes; an old head cannot support a current
+merge recommendation.
 
-| Requested outcome | Read before starting | Result |
-| --- | --- | --- |
-| Correctness, request fit, merge readiness, or rereview of code | [Code judgment](branches/code-judgment.md) | Findings and one integrated judgment |
-| PR description, review guide, or another artifact for someone judging work | [Review artifact](branches/review-artifact.md) | A faithful, navigable account; no inferred verdict |
-| Both | Both branches | Reuse the same grounded model; satisfy both requested outcomes |
+Review does not itself authorize fixes or live actions. Carry forward actions the
+user already requested within their scope. Before publishing a GitHub review,
+read [PR operations](../github-evidence/references/pr-operations.md), verify the
+current head, and read back the result. Draft, comment, approval, requested changes,
+reply and thread resolution are distinct outcomes.
 
-The artifact branch also covers non-code work. Do not impose code-specific axes
-or repository operations on a document, proposal, or other evidence packet.
-Ordinary retrieval, summarization, or polishing is not review just because a
-reviewer might eventually read the result.
-
-## Reconstruct once
-
-Read [reconstructing work](references/reconstruct-work.md) before either branch.
-Build the **review map** there from the real source, requested outcome, meaningful
-regions, contracts, evidence, and uncertainty. This is working material, not a
-required visible template. Complete investigation and concise delivery coexist.
-
-For a GitHub PR, read [PR operations](references/github-pr-operations.md) to pin
-live state and interpret existing threads. Use `github-evidence` when obtaining
-complete state, discussion, or CI evidence needs its helpers. Evidence acquisition
-does not supply the verdict.
-
-## Keep the result current
-
-Every material region must remain represented or visible as unexplained scope.
-Separate intended outcomes from observations, evidence from inference, and
-settled facts from decisions still belonging to the reviewer. Recheck the real
-source before delivering; when a PR head changes, revalidate affected claims.
-
-Perform only an explicitly requested live action. The PR operations reference
-owns the distinctions among commenting, approving, requesting changes, replying,
-and resolving, plus current-head checks and live read-back. Report a successful
-action only after that read-back; a drafted artifact is not a publication receipt.
+A PR description or review guide is a separate result owned by
+[reviewability](../reviewability/SKILL.md). When the task requests both, finish the
+judgment and pass its current review map to that skill. Do not start review writing
+merely because a verdict would be useful to explain.

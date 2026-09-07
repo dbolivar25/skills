@@ -1,5 +1,5 @@
 ---
-name: designing-human-interfaces
+name: interface-design
 description: "Use when a human-facing interface is designed, implemented, critiqued, or polished. Load it to resolve the user's moment, interaction floor, visual grammar, states, motion, and perceived performance as one judgment."
 ---
 
@@ -277,3 +277,9 @@ context.
   create a stronger result.
 - **Unverified polish**: claiming improvement without checking the rendered or
   behavioral result.
+
+## Decision ownership
+
+When an objection may block, redirect, or repeatedly challenge an owner choice,
+read [decision rights](../decision-rights/SKILL.md). Use its supported
+next action and settlement in this task; reading it does not start stewardship.

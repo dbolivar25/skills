@@ -26,7 +26,7 @@ collaborators, or time:
 
 If none of these needs exists, finish the ordinary task without opening runtime
 state. If the only issue is whether an objection may block, use the immediate
-[decision-rights branch](decision-rights.md). Attach durable coordination when a
+[decision-rights method](../../decision-rights/SKILL.md). Attach durable coordination when a
 live need emerges, carrying only relevant judgment and evidence.
 
 ## Open From Intent
@@ -136,7 +136,7 @@ tool for finding a better next responsibility, not a parallel command hierarchy.
 ## Preserve Authority And Support
 
 When a live objection or unclear decision owner could block progress, apply
-[decision rights](decision-rights.md) before recording an Ask or owner Backing.
+[decision rights](../../decision-rights/SKILL.md) before recording an Ask or owner Backing.
 The immediate branch settles standing; the runtime below preserves that
 settlement and its support across the mission.
 

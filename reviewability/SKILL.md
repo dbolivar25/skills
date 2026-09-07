@@ -1,11 +1,16 @@
+---
+name: reviewability
+description: Use when work needs a pull request description, review guide, or faithful account for someone who will judge it. Load it to reconstruct the work and make its behavior, evidence, uncertainty, and remaining decisions legible.
+---
+
 # Make work reviewable
 
-Use this branch for a PR description, review guide, or other artifact that helps
+Use this skill for a PR description, review guide, or other artifact that helps
 someone judge work. It applies to non-code work too. The output is a faithful
-account, not a verdict unless the user also selected code judgment.
+account, not a verdict unless the task includes a separately supported judgment.
 
-Start with the shared [reconstruction method](../references/reconstruct-work.md).
-For a PR description, also read [the PR artifact guidance](../references/pull-request.md)
+Start with the shared [reconstruction method](../review/references/reconstruct-work.md).
+For a PR description, also read [the PR artifact guidance](references/pull-request.md)
 before starting: the final aggregate base-to-head behavior is the source of truth.
 
 ## Render for the reviewer's questions

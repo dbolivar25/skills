@@ -1,42 +1,25 @@
 ---
 name: steward
-description: Use when an objection may block or repeatedly challenge the user’s action, or intent, a governing premise, authority, coordination, or separate delivery proof must survive changing work. Load it to establish decision rights and preserve settlement, using durable state only when the task needs it.
+description: Use when owner intent, a governing premise, authority, coordination, or separate correctness, delivery, and landing proof must survive changing work. Load it to preserve Intent, State, and Record and close the work against current evidence.
 ---
 
 # Steward
 
-Keep decisions with their owners and carry settled intent into the next action.
-The scope of that need determines the method. An immediate disagreement and a
-mission spanning collaborators do not need the same machinery.
+Keep the owner's Intent authoritative as premises, collaborators, and execution
+change. Preserve why the work exists so the next action can be re-derived when a
+plan stops fitting. Completion requires the evidence the owner actually needs.
 
-## Choose the responsibility
+Read [durable stewardship](branches/durable-work.md) when the task needs this
+continuity. It owns Intent, State, Record, phase sharpening, support, reopening,
+and receipts. A bounded task without a durable need continues without runtime.
 
-| Situation | Read before acting | Boundary |
-| --- | --- | --- |
-| The agent may block, redirect, or repeatedly challenge an action over risk, quality, appropriateness, or preference | [Decision rights](branches/decision-rights.md) | Establish standing, resolve obtainable facts, challenge once, and preserve settlement. No runtime or independent-review gate. |
-| Intent, a governing premise, authority, coordination, or separate correctness/delivery/landing proof must survive changing work | [Durable stewardship](branches/durable-work.md) | Maintain Intent, State, and Record; independently sharpen phase commitments and close against real receipts. |
-| A bounded task has neither need | Continue the task | Do not create a dispute or mission to justify this skill. |
+The interface to a stewarded work item is its authoritative Intent and current
+State: what must become true, why, what governs it, what is supported now, and
+what action or evidence comes next. Runtime mechanics implement that interface;
+other skills do not need to adopt them to contribute useful work.
 
-When both apply, settle the immediate decision and carry its owner, scope, basis,
-resolution, and reopening condition into the durable mission. A reference to
-one branch does not activate the other.
-
-## Preserve the owner's decision
-
-Carry forward explicit scope, authorization, constraints, and settled choices.
-Confidence, status, and repeated argument cannot grant an objection standing.
-Resolve facts the agent can obtain; ask only for judgment or authority that the
-available evidence cannot supply. Apply each boundary only to the action it
-actually governs.
-
-A changed premise can reopen a decision. A new phrasing of the same concern
-cannot. Keep advice distinct from a veto, delegated choices distinct from owner
-choices, and local evidence distinct from delivery or observed outcomes.
-
-## Close at the right boundary
-
-The immediate branch ends in a supported next action: proceed, verify, ask,
-respect a boundary, or hand off a capability gap. The durable branch ends only
-when its current Done receipts hold in reality. Never impose the durable
-branch's runtime, collaboration, or reporting requirements on an immediate
-standing decision.
+When an objection may block or repeatedly challenge the owner's action, read
+[decision rights](../decision-rights/SKILL.md) before treating advice as a veto.
+That independent judgment returns a next action and settlement without
+invoking this workflow. Carry an existing settlement into
+Intent and State when relevant instead of arguing it again.

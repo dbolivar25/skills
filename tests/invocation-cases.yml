@@ -1,7 +1,7 @@
 version: 1
 
-# Routing expectations, not recorded model results. read/do_not_read describe
-# initial method selection; later evidence or a satisfied gate may enable another branch.
+# Routing expectations, not observed model results. References can be read without
+# invoking their owner. Selection describes initial work, not later authorized handoffs.
 cases:
   - id: ordinary-gh-read
     kind: negative
@@ -29,17 +29,17 @@ cases:
       also_load: ["github-evidence"]
       do_not_load: []
       read: ["review/branches/code-judgment.md"]
-      do_not_read: ["review/branches/review-artifact.md"]
+      do_not_read: ["reviewability/SKILL.md"]
     why: "Code review owns the verdict; GitHub evidence supplies live state; no publication artifact was requested."
 
   - id: live-pr-description
     kind: collision
     prompt: "Draft the pull request description for my current branch from the live base-to-head change."
     expect:
-      primary: review
+      primary: reviewability
       also_load: []
-      do_not_load: ["github-evidence"]
-      read: ["review/branches/review-artifact.md","review/references/pull-request.md"]
+      do_not_load: ["github-evidence","review"]
+      read: ["reviewability/SKILL.md","reviewability/references/pull-request.md"]
       do_not_read: ["review/branches/code-judgment.md"]
     why: "The requested artifact is a PR description derived from the local base-to-head change and its reviewer decision map, not a new merge verdict or a complete GitHub-state investigation."
 
@@ -48,11 +48,11 @@ cases:
     prompt: "Show me the three decisions this reviewer has to make and how the evidence feeds each one."
     expect:
       primary: show-me
-      also_load: ["review"]
-      do_not_load: []
+      also_load: []
+      do_not_load: ["review","reviewability"]
       read: ["show-me/references/visual-forms.md","review/references/reconstruct-work.md"]
       do_not_read: ["review/branches/code-judgment.md","show-me/references/experiments.md"]
-    why: "The user requested a visual explanation of a review model, not PR publication copy."
+    why: "Read the shared reconstruction directly to explain the decision model; neither verdict nor writing workflow is selected."
 
   - id: production-cause-only
     kind: collision
@@ -135,7 +135,7 @@ cases:
     kind: positive
     prompt: "Design the interaction states and responsive behavior for this unbranded settings panel."
     expect:
-      primary: designing-human-interfaces
+      primary: interface-design
       also_load: []
       do_not_load: ["augment-design","show-me"]
       do_not_read: ["show-me/references/experiments.md"]
@@ -146,7 +146,7 @@ cases:
     prompt: "Build a disposable local UI to learn whether this state transition makes sense. We will throw the code away."
     expect:
       primary: show-me
-      also_load: ["designing-human-interfaces"]
+      also_load: ["interface-design"]
       do_not_load: ["augment-design"]
       read: ["show-me/references/experiments.md","show-me/branches/logic-experiment.md"]
       do_not_read: ["show-me/branches/ui-experiment.md","show-me/references/visual-forms.md"]
@@ -156,7 +156,7 @@ cases:
     kind: collision
     prompt: "Design and implement an Augment-branded approval settings screen with complete interaction states."
     expect:
-      primary: designing-human-interfaces
+      primary: interface-design
       also_load: ["augment-design"]
       do_not_load: ["show-me"]
       do_not_read: ["show-me/references/experiments.md"]
@@ -186,31 +186,31 @@ cases:
     expect:
       primary: software-engineering
       also_load: []
-      do_not_load: ["architecture"]
+      do_not_load: ["architecture-scan","tech-spec"]
       read: ["software-engineering/references/module-design.md","software-engineering/branches/design-alternatives.md"]
-      do_not_read: ["architecture/branches/scan.md","architecture/branches/spec.md"]
+      do_not_read: ["architecture-scan/SKILL.md","tech-spec/SKILL.md"]
     why: "The task is a bounded module-design judgment under TypeScript law, not either user-invoked workflow."
 
   - id: explicit-architecture-scan
     kind: collision
-    prompt: "/architecture Scan this TypeScript feature and rank evidence-backed ownership moves. Stop before designing an interface."
+    prompt: "/architecture-scan Scan this TypeScript feature and rank evidence-backed ownership moves. Stop before designing an interface."
     expect:
-      primary: architecture
+      primary: architecture-scan
       also_load: []
-      do_not_load: []
-      read: ["architecture/branches/scan.md","software-engineering/references/standards.md"]
-      do_not_read: ["architecture/branches/spec.md"]
+      do_not_load: ["tech-spec"]
+      read: ["architecture-scan/SKILL.md","software-engineering/references/standards.md"]
+      do_not_read: ["tech-spec/SKILL.md"]
     why: "The user explicitly selected the read-only scan, whose boundary excludes the downstream specification workflow."
 
   - id: explicit-typed-spec
     kind: collision
-    prompt: "/architecture Turn the accepted ownership move into a typed call-stack architecture handoff. Do not implement it."
+    prompt: "/tech-spec Turn the accepted ownership move into a typed call-stack architecture handoff. Do not implement it."
     expect:
-      primary: architecture
+      primary: tech-spec
       also_load: []
-      do_not_load: ["domain-modeling"]
-      read: ["architecture/branches/spec.md","software-engineering/references/standards.md","software-engineering/branches/test-first.md"]
-      do_not_read: ["architecture/branches/scan.md"]
+      do_not_load: ["domain-modeling","architecture-scan"]
+      read: ["tech-spec/SKILL.md","software-engineering/references/standards.md","software-engineering/branches/test-first.md"]
+      do_not_read: ["architecture-scan/SKILL.md"]
     why: "The requested spec starts directly from accepted context. Shared engineering references support a typed design and vertical test plan; reading RGR for planning does not start implementation or a preliminary scan."
 
   - id: proposed-abstraction-gate
@@ -219,9 +219,9 @@ cases:
     expect:
       primary: engineering-restraint
       also_load: ["software-engineering"]
-      do_not_load: ["architecture"]
+      do_not_load: ["architecture-scan","tech-spec"]
       read: ["software-engineering/references/module-design.md"]
-      do_not_read: ["architecture/branches/spec.md"]
+      do_not_read: ["tech-spec/SKILL.md"]
     why: "The first judgment is whether the machinery is justified; detailed specification would be premature."
 
   - id: sharpen-domain-language
@@ -265,10 +265,10 @@ cases:
     kind: collision
     prompt: "This TypeScript repository repeatedly violates a proved mechanical policy. Turn it into a tested Biome GritQL rule using the installed version."
     expect:
-      primary: write-custom-lint
-      also_load: ["software-engineering"]
+      primary: software-engineering
+      also_load: []
       do_not_load: []
-      read: ["software-engineering/references/standards.md"]
+      read: ["software-engineering/references/standards.md","software-engineering/branches/lint-enforcement.md"]
       do_not_read: ["software-engineering/branches/finishing.md"]
     why: "The outcome is durable mechanical enforcement under repository law, not a one-time readability edit."
 
@@ -285,12 +285,12 @@ cases:
     kind: collision
     prompt: "Before you block my already-authorized reversible change over your quality preference, establish who owns that decision and resolve the facts you can check."
     expect:
-      primary: steward
+      primary: decision-rights
       also_load: []
-      do_not_load: ["grilling"]
-      read: ["steward/branches/decision-rights.md"]
+      do_not_load: ["grilling","steward"]
+      read: ["decision-rights/SKILL.md"]
       do_not_read: ["steward/branches/durable-work.md"]
-    why: "Immediate standing is a distinct branch inside Steward; it must not open durable runtime or impose mission review."
+    why: "Independent standing judgment returns a supported next action; durable stewardship is not selected."
 
   - id: routine-owner-choice
     kind: negative
@@ -324,14 +324,14 @@ cases:
     why: "Comment clarity is language-general and read-only; TypeScript law and implementation workflow are not selected."
 
   - id: non-code-review-guide
-    kind: positive
+    kind: collision
     prompt: "Prepare a review guide for this operating proposal so the finance lead can judge its assumptions and evidence."
     expect:
-      primary: review
+      primary: reviewability
       also_load: []
-      do_not_load: []
-      read: ["review/references/reconstruct-work.md","review/branches/review-artifact.md"]
-      do_not_read: ["review/branches/code-judgment.md","review/references/github-pr-operations.md"]
+      do_not_load: ["review"]
+      read: ["review/references/reconstruct-work.md","reviewability/SKILL.md"]
+      do_not_read: ["review/branches/code-judgment.md","github-evidence/references/pr-operations.md"]
     why: "A non-code artifact needs faithful reconstruction, not repository axes or GitHub operations."
 
   - id: explain-known-flow
@@ -357,22 +357,88 @@ cases:
     why: "Unsettled presentation needs structural UI variants, not a state model experiment."
 
   - id: review-and-description
-    kind: positive
+    kind: collision
     prompt: "Review this local code change for correctness, then draft its PR description from the same diff. Do not publish anything."
     expect:
       primary: review
-      also_load: []
+      also_load: ["reviewability"]
       do_not_load: []
-      read: ["review/references/reconstruct-work.md","review/branches/code-judgment.md","review/branches/review-artifact.md"]
-    why: "Both branches reuse the same evidence while delivering distinct requested outcomes."
+      read: ["review/references/reconstruct-work.md","review/branches/code-judgment.md","reviewability/SKILL.md"]
+    why: "The task requests two outcomes. Review owns the verdict; reviewability consumes the same current map for the subsequent description."
 
   - id: architecture-unclear-spec
     kind: collision
-    prompt: "/architecture Write a typed spec for this change. The repository establishes the current design, but the user-visible cancellation behavior is unresolved."
+    prompt: "/tech-spec Write a typed spec for this change. The repository establishes the current design, but the user-visible cancellation behavior is unresolved."
     expect:
-      primary: architecture
+      primary: tech-spec
+      also_load: []
+      do_not_load: ["architecture-scan"]
+      read: ["tech-spec/SKILL.md"]
+      do_not_read: ["architecture-scan/SKILL.md"]
+    why: "The spec workflow researches current facts and uses grilling for the unresolved design decision; it does not begin with a scan."
+
+  - id: shared-reconstruction-only
+    kind: negative
+    prompt: "Use the shared reconstruction method to map this proposal and its evidence; do not judge it or draft a guide."
+    expect:
+      primary:
+      also_load: []
+      do_not_load: ["review","reviewability"]
+      read: ["review/references/reconstruct-work.md"]
+      do_not_read: ["review/branches/code-judgment.md","reviewability/SKILL.md"]
+    why: "Shared knowledge is readable without either workflow."
+
+  - id: restraint-with-standing
+    kind: collision
+    prompt: "Assess whether this extra approval process earns its ownership cost. If you object to my accepted tradeoff, establish the standing of that objection."
+    expect:
+      primary: engineering-restraint
+      also_load: ["decision-rights"]
+      do_not_load: ["steward","software-engineering"]
+      read: ["decision-rights/SKILL.md"]
+      do_not_read: ["steward/branches/durable-work.md"]
+    why: "Necessity is cross-domain; decision rights supplies settlement without runtime."
+
+  - id: interface-not-software-module
+    kind: collision
+    prompt: "The loading state and focus behavior make this checkout confusing. Redesign the experience."
+    expect:
+      primary: interface-design
+      also_load: []
+      do_not_load: ["software-engineering","augment-design"]
+      read: []
+      do_not_read: []
+    why: "Human interaction selects interface craft; no module architecture or specific brand is implied."
+
+  - id: domain-before-code
+    kind: collision
+    prompt: "Help us distinguish a customer account from a user account using examples; no implementation yet."
+    expect:
+      primary: domain-modeling
+      also_load: []
+      do_not_load: ["software-engineering","architecture-scan","tech-spec"]
+      read: []
+      do_not_read: []
+    why: "Modeling meaning is independently reachable before code or specification."
+
+  - id: pr-operations-without-verdict
+    kind: negative
+    prompt: "Read the shared PR operations contract to explain which live action resolves a thread. Do not investigate or judge the code."
+    expect:
+      primary:
+      also_load: []
+      do_not_load: ["review","reviewability"]
+      read: ["github-evidence/references/pr-operations.md"]
+      do_not_read: ["review/branches/code-judgment.md"]
+    why: "Platform semantics do not invoke a code judgment."
+
+  - id: ordinary-engineering-no-lint
+    kind: positive
+    prompt: "Implement this already-specified TypeScript change using normal repository checks."
+    expect:
+      primary: software-engineering
       also_load: []
       do_not_load: []
-      read: ["architecture/branches/spec.md"]
-      do_not_read: ["architecture/branches/scan.md"]
-    why: "The spec branch researches current facts and uses grilling for the unresolved design decision; it does not begin with a scan."
+      read: ["software-engineering/references/standards.md"]
+      do_not_read: ["software-engineering/branches/lint-enforcement.md"]
+    why: "Ordinary engineering does not author a new enforcement mechanism."

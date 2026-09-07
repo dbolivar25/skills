@@ -85,3 +85,9 @@ what would change it. An answer-changing unknown requires `Defer`.
   hypothetical future.
 - **Silent scope change** — implementing a materially different result without
   returning the decision to the user.
+
+## Decision ownership
+
+When an objection may block, redirect, or repeatedly challenge an owner choice,
+read [decision rights](../decision-rights/SKILL.md). Use its supported
+next action and settlement in this task; reading it does not start stewardship.

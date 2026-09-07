@@ -1,3 +1,9 @@
+---
+name: architecture-scan
+description: Find and rank evidence-backed architectural ownership moves in TypeScript code.
+disable-model-invocation: true
+---
+
 # Architecture scan
 
 Evaluate TypeScript architecture and return one ranked shortlist of evidence-backed
@@ -20,8 +26,8 @@ it does not prove friction. Infer scope when the repo is small or one active are
 clearly dominates. If activity is scattered, widen the scan or ask one question
 that lets the user choose.
 
-Read the [eleven engineering standards](../../software-engineering/references/standards.md)
-and [module-design vocabulary](../../software-engineering/references/module-design.md).
+Read the [eleven engineering standards](../software-engineering/references/standards.md)
+and [module-design vocabulary](../software-engineering/references/module-design.md).
 Search the boundary and its ancestors through the repository root for
 `CONTEXT.md`, `CONTEXT-MAP.md`, equivalent domain-language files and decision
 indexes. Search repository documentation and ADR collections for decisions that
@@ -105,7 +111,7 @@ source-unverifiable; and no more than five remain.
 
 ## 4. Present and stop
 
-Use [the scan result contract](../references/scan-result.md). Start with boundary,
+Use [the scan result contract](references/scan-result.md). Start with boundary,
 halo, covered inventory categories, governing sources and material exclusions.
 Return ranked candidate cards with enough representative citations to establish
 the friction. Add a current/proposed ASCII sketch when flow or topology benefits.
@@ -129,7 +135,7 @@ constraints and invariants, suspected seams/adapters/boundaries/call paths, open
 questions and any context/ADR suggestions. Every claim must trace to the scan or
 be labeled an open question.
 
-Tell the user to explicitly select `architecture`'s specification branch with
+Tell the user to explicitly select `tech-spec` with
 this brief. If the task already explicitly selected specification after the
 candidate choice, carry that authorization forward; otherwise stop. Preparing
 a brief does not itself authorize writing the spec.

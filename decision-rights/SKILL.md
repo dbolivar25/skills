@@ -1,3 +1,8 @@
+---
+name: decision-rights
+description: Use when an agent may block, redirect, or repeatedly challenge an owner action over risk, quality, appropriateness, or preference. Load it to establish standing, resolve obtainable facts, and return a supported next action and settlement.
+---
+
 # Decision Rights
 
 An objection has **standing** only from a source that can govern the disputed
@@ -133,7 +138,6 @@ the same evidence set cannot trigger another round of the same dispute.
 - **Argument tax** — the user must repeatedly prosecute a decision already
   assigned to them and resolved.
 
-This branch governs whether a live objection may block. It does not open runtime
-state or require a separate reviewer. Use [durable stewardship](durable-work.md)
-when intent and settlement must survive a mission, collaborators, or external
-landing evidence. Carry the settlement forward rather than arguing it again.
+Return the supported next action and its settlement to the caller.
+It does not open runtime state, require a separate reviewer, or select durable
+coordination. The caller retains responsibility for continuing the task.

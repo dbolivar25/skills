@@ -1,95 +1,110 @@
 # Personal skill library
 
-This repository owns the personal skills below. Built-in packages, managed
-plugins, app integrations, and other installations are outside its scope.
+Choose a skill by the judgment or result the task needs. Its implementation may
+be deep; the caller should not need to learn every internal method. Shared
+references supply knowledge without starting their owner's workflow.
 
-An entry point selects a coherent kind of work. Its branches retain different
-methods and stopping boundaries; loading the owner does not start every workflow
-inside it. Descriptions are invocation contracts, not capability summaries.
+## Choose the work
 
-## Consolidated owners
-
-| Entry point | What it owns | Select the branch by the request |
+| Request | Entry point | Result |
 | --- | --- | --- |
-| [software-engineering](software-engineering/SKILL.md) | Correctness and comprehensibility in implementation | TypeScript standards; module design; selected test-first work; verified finishing or code/comment clarity |
-| [architecture](architecture/SKILL.md) | Architectural discovery and typed handoff | Explicitly request a scan or a specification. A scan does not automatically become a spec. |
-| [review](review/SKILL.md) | A grounded account of work for judgment | Code verdict, PR description/review guide, or both. Non-code artifacts do not inherit code axes. |
-| [show-me](show-me/SKILL.md) | Understanding through visible artifacts | Explain an established relationship, explore a logic model, or compare UI structures |
-| [steward](steward/SKILL.md) | Decision rights and preservation of owner intent | Settle immediate standing without runtime; use durable coordination only when intent/support/receipts must survive changing work |
+| Build or change software; judge a module's design | [software-engineering](software-engineering/SKILL.md) | Correct code, useful interfaces, appropriate tests, readable implementation; selected lint enforcement |
+| Find architectural opportunities | [architecture-scan](architecture-scan/SKILL.md) | Ranked, evidenced ownership moves; explicit selection only |
+| Specify a selected change | [tech-spec](tech-spec/SKILL.md) | Typed contracts and complete affected flows; explicit selection only |
+| Judge this code change | [review](review/SKILL.md) | Findings and one supported verdict |
+| Help someone judge this work | [reviewability](reviewability/SKILL.md) | A faithful PR description or review guide, including non-code work |
+| Sharpen what these concepts mean | [domain-modeling](domain-modeling/SKILL.md) | Tested examples, precise vocabulary, qualifying decisions |
+| Find why this fails or runs slowly | [diagnosing-bugs](diagnosing-bugs/SKILL.md) | Reproduction evidence and a tested causal explanation |
+| Decide whether this addition earns its cost | [engineering-restraint](engineering-restraint/SKILL.md) | Necessity, alternatives, ownership burden and a recommendation |
+| Grill this plan or decision | [grilling](grilling/SKILL.md) | Dependency-aware questions and settled decisions |
+| Settle whether an objection may block | [decision-rights](decision-rights/SKILL.md) | Supported next action, owner and settlement |
+| Preserve intent through changing work | [steward](steward/SKILL.md) | Durable Intent, State, Record and separate outcome receipts |
+| Design or improve a human experience | [interface-design](interface-design/SKILL.md) | Coherent interaction, composition, state, motion and rendered evidence |
+| Explain or experiment visually | [show-me](show-me/SKILL.md) | A visible explanation or a bounded experiment with captured learning |
+| Derive an AI work product faithfully | [faithful-derivation](faithful-derivation/SKILL.md) | Supported judgments and preservation across inputs, output and publication |
+| Write instructions for an agent | [writing-for-agents](writing-for-agents/SKILL.md) | Reachable, well-structured instructions that change the intended behavior |
+| Restore human voice | [humanize](humanize/SKILL.md) | Natural prose with meaning and uncertainty preserved |
+| Generate or select a creative direction | [creative-ideation](creative-ideation/SKILL.md) | A selected creative method and concrete directions |
+| Transform existing creative material | [creative-shaping](creative-shaping/SKILL.md) | The selected deep method under creative-ideation's routing |
 
-`architecture` is explicitly selected in both supported host configurations.
-The other owners may load from their observable triggers. Their internal branch
-conditions still apply: ordinary engineering does not select TDD, a review draft
-does not authorize publication, and an immediate objection does not open a mission.
+## Specialist resources
 
-The former entry points now live here:
+These are independently reachable because several kinds of work consume them.
+Their platform knowledge does not own the caller's overall judgment.
 
-| Previous names | Current entry and method |
+| Resource | Supplies |
 | --- | --- |
-| `coding-standards`, `codebase-design`, `tdd`, `simplify` | `software-engineering`: standards, design, test-first, finishing |
-| `improve-codebase-architecture`, `tech-spec` | `architecture`: scan, spec |
-| `code-review`, `reviewability` | `review`: code judgment, review artifact |
-| `prototype` | `show-me`: logic or UI experiment |
-| `decision-rights` | `steward`: immediate decision rights |
+| [github-evidence](github-evidence/SKILL.md) | Complete PR/thread/CI acquisition and PR operation semantics |
+| [grafana-evidence](grafana-evidence/SKILL.md) | Bounded telemetry with reproducible queries and coverage limits |
+| [augment-design](augment-design/SKILL.md) | Augment identity, assets, tokens, voice and surface-specific floors |
+| [augment-workflows](augment-workflows/SKILL.md) | Workflow construction and operations grounded in live Augment product contracts |
 
-These are consolidated methods, not alias packages. For example, ask
-“`$architecture` scan this area” or “`$architecture` specify this selected change”;
-ask “`$software-engineering` implement this test-first” to select RGR. Herdr and
-Simplified Technical English were retired at the owner's request.
-
-## Other independent judgments
-
-| Skill | Why it remains independently selectable |
-| --- | --- |
-| [engineering-restraint](engineering-restraint/SKILL.md) | Decide whether an addition earns its continuing cost, including non-code processes and workflows |
-| [domain-modeling](domain-modeling/SKILL.md) | Pressure-test meaning against examples/code and preserve settled vocabulary and qualifying decisions |
-| [diagnosing-bugs](diagnosing-bugs/SKILL.md) | Establish a symptom-specific signal and falsifiable cause; diagnosis does not select implementation |
-| [github-evidence](github-evidence/SKILL.md) | Acquire complete PR/thread/CI evidence where ordinary porcelain is insufficient |
-| [grafana-evidence](grafana-evidence/SKILL.md) | Acquire bounded telemetry with reproducible queries and explicit population limits |
-| [write-custom-lint](write-custom-lint/SKILL.md) | Turn a proved repository policy into precise, tested mechanical enforcement |
-| [grilling](grilling/SKILL.md) | Resolve consequential decisions in dependency-aware questioning rounds when requested |
-| [designing-human-interfaces](designing-human-interfaces/SKILL.md) | Judge interaction and visual craft around the user's actual moment |
-| [augment-design](augment-design/SKILL.md) | Apply Augment identity, composition, voice, assets, tokens, and branch-specific floors |
-| [augment-workflows](augment-workflows/SKILL.md) | Express and operate Augment workflows against live product contracts and observed effects |
-| [faithful-derivation](faithful-derivation/SKILL.md) | Preserve judgments and evidence from raw state through an AI work product and its publication gates |
-| [humanize](humanize/SKILL.md) | Restore human voice without changing meaning; strict style remains an explicit mode |
-| [writing-for-agents](writing-for-agents/SKILL.md) | Design reachability, instruction structure, judgment, demand, and verification |
-| [creative-ideation](creative-ideation/SKILL.md) | Select a creative method that yields specific directions |
-| [creative-shaping](creative-shaping/SKILL.md) | Apply the separately packaged deep method for transforming existing material |
-
-The creative split is intentional and unchanged. Platform-specific rules remain
-with their platform owners; evidence acquisition remains separate from the
-judgment that consumes it.
-
-## How the owners compose
+## How dependencies compose
 
 ```text
-architecture ──reads──> software-engineering law/design/evidence
-       scan ──owner selection──> spec ──implementation authority──> implementation
+review ────────────────┐
+                      ├─ read → reconstruction → current review map
+reviewability ────────┘               └─ live PR → GitHub operations
 
-GitHub / Grafana evidence ──> review or diagnosis
-                        └──> faithful reviewer-facing artifact
+architecture-scan ────┐
+                      ├─ read → engineering standards, module design, test evidence
+tech-spec ────────────┘
 
-show-me ──known answer──> explanation
-        └──open question──> experiment ──> learning, not production proof
+engineering-restraint ┐
+grilling / SWE / UI ──┼─ use → decision-rights → next action + settlement
+steward ─────────────┘
 
-steward ──live dispute──> standing and settlement
-        └──durable need──> Intent / State / Record and real receipts
+augment-design ─ use → interface-design for interaction and visual craft
+augment-workflows ─ use → faithful-derivation and writing-for-agents when needed
 ```
 
-Shared references have one authoritative owner. Read them without silently
-starting that owner's other workflows. Draft, local validation, independent
-review, publication, deployment, and observed outcomes remain distinct receipts.
+**Read a method:** follow its file directly and return its result to the task.
+Reading [reconstruction](review/references/reconstruct-work.md) does not start a
+code review. Using [decision-rights](decision-rights/SKILL.md)
+does not open stewardship runtime. It remains independently discoverable when
+no other discipline has loaded.
 
-## Maintenance and verification
+**Use a discipline:** apply it to a named concern while retaining responsibility
+for the overall task. Evidence acquisition does not issue a verdict; brand law
+does not decide the product's purpose.
 
-Run `ruby scripts/validate-skills.rb` for package metadata, owned Markdown links,
-and [routing expectations](tests/invocation-cases.yml), including selected and
-excluded branches within one owner. Run `ruby tests/validate-skills_test.rb` for
-the validator's focused regression fixtures. These checks do not measure model
-behavior or establish a host catalog reload.
+**Hand off a workflow:** carry a result into another selected outcome. Scan does
+not automatically start spec; review does not automatically draft a description;
+a spec does not authorize implementation. Carry forward selection already made
+by the user instead of requesting it twice.
 
-[Refactor results](docs/intent-audit/results.md) and the
-[function-to-owner map](docs/intent-audit/ownership-map.md) record the consolidation,
-source preservation, observed probes, and limits. Publication is a separate action;
-this refactor does not deploy the branch to an installed checkout or to Amp.
+[Architecture decisions and dependency diagram](docs/architecture/skill-modules.md)
+explain these interfaces and their acceptance criteria.
+
+## Migration
+
+| Previous invocation | Current home |
+| --- | --- |
+| coding-standards, codebase-design, tdd, simplify | software-engineering: standards, design, selected test-first work, finishing |
+| write-custom-lint | software-engineering: lint enforcement |
+| improve-codebase-architecture; architecture scan branch | architecture-scan |
+| architecture spec branch | tech-spec |
+| code-review | review |
+| review artifact branch | reviewability |
+| designing-human-interfaces | interface-design |
+| prototype | show-me: selected logic or UI experiment |
+| steward immediate branch | decision-rights: independently reachable judgment without durable runtime |
+
+The creative pair is unchanged. Herdr and Simplified Technical English remain
+retired at the owner's request. No alias packages remain for removed invocations.
+This repository owns this library; built-in skills, managed plugins and other
+installations are outside its scope. Cross-package references require the named
+owners to be available; publishing one package alone does not bundle dependencies.
+
+## Verification
+
+Run `ruby scripts/validate-skills.rb` for metadata, owned Markdown links and
+[routing expectations](tests/invocation-cases.yml). Run
+`ruby tests/validate-skills_test.rb` for the validator's regression fixtures.
+The cases include shared-method reads that exclude the owning workflow. They
+validate the corpus, not model routing accuracy or an installed host reload.
+
+The earlier [intent audit](docs/intent-audit/results.md) records preservation up
+to commit 544a8b1; the architecture document above supersedes its topology.
+Installation, publication, deployment and observed outcomes require separate
+receipts from repository validation.

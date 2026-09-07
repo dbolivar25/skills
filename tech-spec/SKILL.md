@@ -1,16 +1,22 @@
+---
+name: tech-spec
+description: Specify a selected software change as typed contracts and complete end-to-end flows.
+disable-model-invocation: true
+---
+
 # Typed architecture specification
 
 Deliver a **typed call-stack architecture handoff**: contracts in code and complete
-execution flows, with prose explaining why. This branch is design-only. Return
+execution flows, with prose explaining why. This skill is design-only. Return
 it inline unless the user requested a file; then save it at the requested path.
 Do not implement or ask to implement by default.
 
 ## 1. Establish the design problem
 
-Read [engineering standards](../../software-engineering/references/standards.md),
-[module design](../../software-engineering/references/module-design.md),
-[testing evidence](../../software-engineering/references/testing-evidence.md) and
-[the RGR workflow](../../software-engineering/branches/test-first.md) as planning
+Read [engineering standards](../software-engineering/references/standards.md),
+[module design](../software-engineering/references/module-design.md),
+[testing evidence](../software-engineering/references/testing-evidence.md) and
+[the RGR workflow](../software-engineering/branches/test-first.md) as planning
 reference, not implementation authority. Inspect local code/docs for vocabulary,
 module layout, domain concepts, errors, adapters, observability, runtime patterns
 and test style before introducing a pattern, dependency, schema or test strategy.
@@ -23,9 +29,9 @@ unknowns stay questions.
 When available context is sufficient, proceed directly to design. A scan is not
 a prerequisite. If essential context is missing, state why a full spec would be
 premature, inspect facts the codebase can answer, and use
-[grilling](../../grilling/SKILL.md) for unresolved decisions. Its dependency-frontier
+[grilling](../grilling/SKILL.md) for unresolved decisions. Its dependency-frontier
 rounds group independent questions and defer dependent ones. Use the interview's
-[domain-modeling](../../domain-modeling/SKILL.md) docs branch only when durable
+[domain-modeling](../domain-modeling/SKILL.md) docs branch only when durable
 language, ADRs or other design artifacts are requested.
 
 Done when problem, callers, constraints, affected systems, desired behavior,
@@ -49,7 +55,7 @@ For each alternative sketch:
 Compare caller burden, depth/leverage, locality of invariants/change, seam
 placement, parsing/projections, error/cancellation model, real-seam testability,
 operational fit and implementation complexity. The
-[divergent-interface method](../../software-engineering/branches/design-alternatives.md)
+[divergent-interface method](../software-engineering/branches/design-alternatives.md)
 is available when the user selects that exploration; preserve its distinct
 technical briefs and comparison if used.
 
@@ -128,7 +134,7 @@ claims belonging to actual database or runtime behavior.
 
 ## 5. Write and check the handoff
 
-Use [the spec shape](../references/spec-shape.md), compressing presentation for
+Use [the spec shape](references/spec-shape.md), compressing presentation for
 small changes while retaining the coverage map's obligations. Types and call
 stacks define what changes; prose explains why. Give each rule one authoritative
 home and reference it elsewhere rather than restating it in several sections.

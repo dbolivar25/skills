@@ -1,7 +1,9 @@
 # Reconstructing work
 
 Use this common method before a code judgment or a reviewer-facing artifact.
-The branch determines what the source is and what the reviewer must decide.
+The caller supplies the source and the decision the reviewer must make. Return
+a current review map with evidence and gaps; this method neither issues a verdict
+nor starts a writing workflow. Read this file directly without loading review.
 
 ## Establish the contract
 
@@ -12,11 +14,11 @@ instructions or spec, then the work's description and linked decisions, then
 other source references. If intent cannot be found, state the limitation rather
 than inventing requirements. Preserve disagreement between intent and reality.
 
-For code, the judgment branch supplies target selection, repository standards,
+For code judgment, the caller supplies target selection, repository standards,
 local precedent, and the two review axes. For a PR, pin the current base and head,
 complete base-to-head diff, file/size distribution, commit and discussion context,
-linked requirements, and the checks actually performed. Use the PR operations
-reference before acquisition; a local checkout or old description is not live
+linked requirements, and the checks actually performed. Read [PR operations](../../github-evidence/references/pr-operations.md)
+before acquiring a live PR; a local checkout or old description is not live
 head evidence. For non-code work, identify the equivalent source and prior state
 without manufacturing a repository workflow.
 

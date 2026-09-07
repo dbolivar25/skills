@@ -1,8 +1,3 @@
----
-name: write-custom-lint
-description: Use when a recurring, mechanically recognizable repository violation should become a Biome GritQL rule. Load it to prove the policy, pin installed Biome behavior, and test violations and allowed code before enforcement.
----
-
 # Write a custom Biome lint rule
 
 A custom rule turns repository policy into permanent executable feedback. It is
@@ -70,7 +65,7 @@ as an under-matching one.
 
 ## 4. Design the narrowest pattern
 
-Read [`references/gritql.md`](references/gritql.md). Start with structural code
+Read [`references/gritql.md`](../references/lint/gritql.md). Start with structural code
 snippets. Use Biome CST node names only when snippets cannot express the boundary
 precisely enough, because grammar-specific patterns carry more upgrade cost.
 
@@ -107,7 +102,7 @@ pass with the intended diagnostics and no unexplained new findings.
 
 ## 6. Add a fix only when it is provably safe
 
-Read [`references/fixes.md`](references/fixes.md) before adding a rewrite. A
+Read [`references/fixes.md`](../references/lint/fixes.md) before adding a rewrite. A
 diagnostic does not require an automatic fix.
 
 Keep Biome's default unsafe classification unless every match can be rewritten

@@ -63,3 +63,9 @@ direction.
 Completion criterion: the user confirms they can proceed from the decisions
 without relying on hidden assumptions, or the exact evidence preventing that
 state is named.
+
+## Decision ownership
+
+When an objection may block, redirect, or repeatedly challenge an owner choice,
+read [decision rights](../decision-rights/SKILL.md). Use its supported
+next action and settlement in this task; reading it does not start stewardship.

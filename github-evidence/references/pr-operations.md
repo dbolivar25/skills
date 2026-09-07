@@ -3,9 +3,11 @@
 Load this reference whenever the review target is a GitHub pull request or the
 user asks to post, approve, request changes, reply, or resolve there.
 
-For complete live PR state, review-thread pagination, or CI drilldown, use
-[github-evidence](../../github-evidence/SKILL.md). It owns evidence acquisition;
-The code-judgment branch still owns the verdict and this branch’s action boundaries.
+For complete live PR state, review-thread pagination, or CI drilldown, use the
+[PR snapshot](../scripts/pr-snapshot.ts), [threads](../scripts/pr-threads.ts), or
+[CI failures](../scripts/ci-failures.ts) helpers; read their `--help` before use.
+This reference owns platform action semantics. The caller owns its judgment
+and supplies explicit authority for any live action.
 
 ## Pin live state
 
@@ -81,4 +83,3 @@ not be anchored or verified.
 
 Completion criterion: the review action is attached to the reviewed head, matches
 the user's requested state, and is confirmed by live read-back.
-

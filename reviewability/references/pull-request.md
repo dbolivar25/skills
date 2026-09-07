@@ -2,8 +2,10 @@
 
 The artifact supports a merge decision about the **current base-to-head change**.
 Existing descriptions, commits, tickets, and explanations provide intent; they
-do not override the implemented change. Use the common reconstruction method
-and PR operations for live target, source, discussion, and validation acquisition.
+do not override the implemented change. Read the [reconstruction method](../../review/references/reconstruct-work.md)
+and, for a live PR, [PR operations](../../github-evidence/references/pr-operations.md)
+for target, source, discussion, and validation acquisition. For a local draft,
+pin the local comparison and state the lack of live PR evidence without inventing it.
 
 ## Specialize the map
 
