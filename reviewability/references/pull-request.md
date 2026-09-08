@@ -2,10 +2,10 @@
 
 The artifact supports a merge decision about the **current base-to-head change**.
 Existing descriptions, commits, tickets, and explanations provide intent; they
-do not override the implemented change. Read the [change-understanding core](../../understand-change/core.md)
+do not override the implemented change. Read the [understand-change](../../understand-change/SKILL.md)
 with supplied current source and evidence. For a local draft, use the pinned
 local comparison and retain the lack of live PR evidence. If a required source
-version is stale or absent, return an evidence need to the shell.
+version is stale or absent, return an evidence need to the caller.
 
 ## Specialize the map
 
@@ -54,4 +54,4 @@ must not appear completed.
 
 The description is ready when a reviewer can state the behavioral delta, navigate
 important responsibilities, assess evidence, and see where judgment is needed.
-Publication authority and read-back belong to the shell.
+Publication authority and read-back belong to the caller.

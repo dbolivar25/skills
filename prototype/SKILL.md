@@ -5,26 +5,34 @@ description: Use when an unresolved question about logic, state, interaction, or
 
 # Prototype an uncertainty
 
-Read the [core](core.md) before construction. Use its experiment design, then
-return actual observations to it before claiming learning.
+Build and exercise the smallest throwaway implementation that can answer the caller's
+unresolved question. Return observed learning, its limits and the runnable artifact. Use
+the [composition contract](../contracts/composition.md#operational-callers) .
 
-Start from the question the experiment must answer, the decisions it could
-change, and the observations that distinguish possible answers. If the answer
-is already established, use an explanation rather than this experimental method.
+Give [experiment design](../experiment-design/SKILL.md) the question, the decision it
+could change, current surface or model, constraints and available observations. Resolve
+missing source through reads and missing owner choices through questions. Use its
+experiment design to choose the distinguishing scenarios and necessary fidelity. A known
+answer needing explanation belongs to [show-me](../show-me/SKILL.md) .
 
-Read the [experiment contract](references/experiments.md), then select:
+Read [the experiment contract](references/experiments.md) , then the selected path:
 
 - [Logic experiment](branches/logic-experiment.md) for state, transitions and
-  model behavior. Return visible state, free play and guided scenarios.
+  model behavior. Expose visible state, free play and guided scenarios.
 - [UI experiment](branches/ui-experiment.md) for alternative structure and
-  appearance. Return comparable variants with direct selection.
+  appearance. Build comparable variants with direct selection.
 
-Carry the caller's domain, product, brand and authority constraints into the
-experiment. Do not redesign its purpose. Use scratch data and runnable artifacts;
-prototype shortcuts do not weaken permission or source-accuracy requirements.
+Carry domain, product, brand, accessibility and authority constraints into the
+experiment. Use [interface design](../interface-design/SKILL.md) when its controls or
+visual structure need judgment. For Augment surfaces, apply
+[Augment design](../augment-design/SKILL.md) and honor its surface obligations;
+throwaway fidelity does not license invented identity or source claims.
 
-Exercise the relevant scenarios and record what happened. If the artifact could
-not be run, report that limit rather than supplying an imagined observation.
-Return the question, evidence, answer or remaining uncertainty, artifact location
-and what the experiment cannot establish. The caller owns the subsequent design
-or implementation decision; promising behavior is not production proof.
+Build with scratch data and simple mechanics. Exercise the relevant scenarios, record
+what happened, and give actual observations to experiment design for interpretation. If
+an observation remains ambiguous, refine the experiment only as far as the question
+requires. A failed run produces a limitation, not imagined learning or production proof.
+
+Return the question, observed answer or remaining uncertainty, evidence, artifact
+location and what the experiment cannot establish. Preserve it as the experiment
+contract requires. The caller owns the next design or implementation decision.

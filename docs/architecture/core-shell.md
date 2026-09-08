@@ -1,4 +1,7 @@
-# Functional cores and operational shells
+# Historical paired core and shell architecture
+
+This design records `849e56d`. [Composable skills](composable-skills.md) describes
+the active architecture; the file pairing below is historical.
 
 Baseline: 95b0a27. This design replaces the extraction pass's implementation
 structure while retaining its useful invocation interfaces. The subsequent

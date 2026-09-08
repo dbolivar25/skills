@@ -1,6 +1,6 @@
 # Creative Discipline
 
-Core: external steps below are proposals or supplied evidence; the shell executes them.
+Core: external steps below are proposals or supplied evidence; the operational caller executes them.
 
 
 Practices for sustained work over weeks and months, not single-session ideation. Four traditions:

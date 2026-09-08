@@ -35,7 +35,7 @@ loop for an ordinary code-comment request.
 - **Explain what code cannot show.** Add a comment for non-obvious implementation
   or constraints, and a doc comment for complex behavior or side effects. Remove
   self-evident narration and conversational change history. For TypeScript public
-  exports, the documentation obligation in [standards](../references/standards.md)
+  exports, the documentation obligation in [standards](../../engineering-judgment/references/standards.md)
   still applies.
 
 ## Reduce the structure the reader must learn
@@ -55,7 +55,7 @@ loop for an ordinary code-comment request.
   compute it from those values instead of storing or passing another fact.
 - Consider problems the new code reveals in existing code, while keeping edits
   inside the authorized scope. Keep tests at the interface owning the behavior;
-  follow [regression preservation](../references/testing-evidence.md#preserve-evidence-when-moving-a-seam)
+  follow [regression preservation](../../verification-design/SKILL.md#preserve-evidence-when-moving-a-seam)
   before retiring tests.
 
 ## Write for the next reader

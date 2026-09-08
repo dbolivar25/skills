@@ -1,6 +1,9 @@
 # Expert Interview
 
-Use this guide when the domain expert knows what good looks like but the workflow shape is not yet clear.
+Use this guide when the domain expert knows what good looks like but the workflow
+shape is not yet clear. In core use, return the questions and translate supplied
+answers into the design. The operational caller conducts the interview, gathers
+source evidence and supplies each round's actual answers.
 
 Apply the shared [derivation contract](../CONTRACT.md). This guide owns the
 task-specific method below; read its references before their governed decisions.

@@ -1,6 +1,6 @@
 # Volume Generation
 
-Core: external steps below are proposals or supplied evidence; the shell executes them.
+Core: external steps below are proposals or supplied evidence; the operational caller executes them.
 
 
 Three traditions for producing many ideas fast:

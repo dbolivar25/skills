@@ -1,6 +1,6 @@
 # Chance and Remix
 
-Core: external steps below are proposals or supplied evidence; the shell executes them.
+Core: external steps below are proposals or supplied evidence; the operational caller executes them.
 
 
 Four traditions of surrendering authorial control to procedure:

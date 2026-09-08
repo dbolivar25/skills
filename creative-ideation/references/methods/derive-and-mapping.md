@@ -1,6 +1,6 @@
 # Dérive and Mapping
 
-Core: external steps below are proposals or supplied evidence; the shell executes them.
+Core: external steps below are proposals or supplied evidence; the operational caller executes them.
 
 
 Three traditions of *attentive movement through territory* as ideation:

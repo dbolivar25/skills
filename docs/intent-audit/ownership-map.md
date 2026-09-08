@@ -44,7 +44,7 @@ does not inherit the experiment's no-tests/no-polish shortcuts.
 | Original function | New home | Preserved behavior |
 | --- | --- | --- |
 | decision-rights | steward/branches/decision-rights.md | Six standing classes, proportionate fact/authority checks, challenge once, concrete settlement and reopening conditions, five next-action states; no runtime or independent-review requirement. |
-| steward's mission workflow | steward/branches/durable-work.md | Intent/State/Record; re-entrant understand/plan/execute; separate review of phase commitments; support alternatives; owner modeling without invented authority; receipts and reopening. |
+| steward's mission workflow | steward/SKILL.md | Intent/State/Record; re-entrant understand/plan/execute; separate review of phase commitments; support alternatives; owner modeling without invented authority; receipts and reopening. |
 | Runtime and three contracts | Existing steward/scripts, tests, references | Byte-identical. The new main selects immediate standing or durable coordination before loading its mechanics. |
 
 The broader description retains each alternative durable trigger; it does not

@@ -1,6 +1,10 @@
 # Implementation Handoff
 
-Use this guide when a derivation spec needs to become a product workflow, code change, MCP workflow, prompt graph, evaluation harness, or implementation ticket set.
+Use this guide when a derivation spec needs to become a product workflow, code
+change, MCP workflow, prompt graph, evaluation harness or implementation ticket
+set. For core use, return the proposed mapping and obligations below. The
+operational caller implements them within the task's authority and returns actual
+code, stored contracts and check receipts for assessment.
 
 Apply the shared [derivation contract](../CONTRACT.md). This guide owns the
 task-specific method below; read its references before their governed decisions.

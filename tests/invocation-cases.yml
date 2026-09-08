@@ -1,23 +1,24 @@
 version: 1
 
-# Routing expectations, not observed model results. Selection describes initial work,
-# not later authorized handoffs. also_load selects an operational shell; read can
-# select a core or passive method without invoking its owner’s shell.
+# Expected selection, not measured model behavior. These are decisive required
+# capabilities and exclusions, not exhaustive load traces. Core and workflow
+# skills both use SKILL.md; reading a passive method does not select its owner's
+# operational workflow. Effects follow the task's authority, not a skill name.
 cases:
   - id: ordinary-gh-read
     kind: negative
     prompt: "Show me the title and URL for PR 42 with gh pr view."
     expect:
-      primary:
+      primary: null
       also_load: []
-      do_not_load: ["github-evidence","review","show-me"]
+      do_not_load: ["github","review","show-me"]
     why: "Ordinary GitHub porcelain is sufficient, and lexical \"show me\" requests data rather than a visual explanation, verdict, or publication artifact."
 
   - id: complete-pr-evidence
     kind: positive
     prompt: "Get the complete live state of this PR, including unresolved review threads and the failing CI step, but do not judge whether it should merge."
     expect:
-      primary: github-evidence
+      primary: github
       also_load: []
       do_not_load: ["review"]
     why: "The request needs evidence that ordinary GitHub porcelain omits, while explicitly withholding the review verdict."
@@ -27,9 +28,9 @@ cases:
     prompt: "Review this pull request for correctness and tell me whether it is ready to merge, using current checks and unresolved threads."
     expect:
       primary: review
-      also_load: ["github-evidence"]
+      also_load: ["github"]
       do_not_load: []
-      read: ["review/core.md"]
+      read: ["review/SKILL.md"]
       do_not_read: ["reviewability/SKILL.md"]
     why: "Code review owns the verdict; GitHub evidence supplies live state; no publication artifact was requested."
 
@@ -39,10 +40,10 @@ cases:
     expect:
       primary: reviewability
       also_load: []
-      do_not_load: ["github-evidence","review"]
+      do_not_load: ["github","review"]
       read: ["reviewability/SKILL.md","reviewability/references/pull-request.md"]
-      do_not_read: ["review/core.md"]
-    why: "The requested artifact is a PR description derived from the local base-to-head change and its reviewer decision map, not a new merge verdict or a complete GitHub-state investigation."
+      do_not_read: ["review/SKILL.md"]
+    why: "The surrounding task acquires the live base-to-head source needed by reviewability. The core writes a faithful description without selecting a verdict or an unnecessary full GitHub-state investigation."
 
   - id: visualize-review-decision
     kind: collision
@@ -52,7 +53,7 @@ cases:
       also_load: ["understand-change"]
       do_not_load: ["review","reviewability"]
       read: ["show-me/references/visual-forms.md","understand-change/SKILL.md"]
-      do_not_read: ["review/core.md","prototype/references/experiments.md"]
+      do_not_read: ["review/SKILL.md","prototype/references/experiments.md"]
     why: "Read the shared reconstruction directly to explain the decision model; neither verdict nor writing workflow is selected."
 
   - id: production-cause-only
@@ -60,7 +61,7 @@ cases:
     prompt: "Diagnose why this production request is slow using current Grafana traces and logs. Find the cause, but do not change code."
     expect:
       primary: diagnosing-bugs
-      also_load: ["grafana-evidence"]
+      also_load: ["grafana"]
       do_not_load: ["software-engineering"]
       do_not_read: ["software-engineering/branches/test-first.md","software-engineering/branches/finishing.md"]
     why: "Diagnosis owns hypothesis falsification and Grafana owns telemetry acquisition; the read-only boundary excludes implementation skills."
@@ -69,7 +70,7 @@ cases:
     kind: collision
     prompt: "Quantify this service's 5xx rate and latency change from current Grafana telemetry, with reproducible queries and deeplinks. Do not diagnose the cause."
     expect:
-      primary: grafana-evidence
+      primary: grafana
       also_load: []
       do_not_load: ["diagnosing-bugs","review"]
     why: "The requested outcome is a bounded reproducible evidence packet; causal diagnosis and merge judgment are explicitly outside scope."
@@ -81,7 +82,7 @@ cases:
       primary: software-engineering
       also_load: ["diagnosing-bugs"]
       do_not_load: []
-      read: ["software-engineering/branches/test-first.md","software-engineering/references/testing-evidence.md"]
+      read: ["software-engineering/branches/test-first.md","verification-design/SKILL.md"]
       do_not_read: ["software-engineering/branches/finishing.md"]
     why: "The user explicitly chose test-driven implementation; diagnosis and TypeScript law support it, while the finishing pass waits for a verified boundary."
 
@@ -92,7 +93,7 @@ cases:
       primary: software-engineering
       also_load: []
       do_not_load: ["diagnosing-bugs"]
-      read: ["software-engineering/references/standards.md","software-engineering/branches/finishing.md"]
+      read: ["engineering-judgment/references/standards.md","software-engineering/branches/finishing.md"]
       do_not_read: ["software-engineering/branches/test-first.md"]
     why: "The request is a behavior-preserving finishing pass at an already verified boundary, not renewed diagnosis or test-driven feature work."
 
@@ -109,7 +110,7 @@ cases:
     kind: negative
     prompt: "Give me a two-sentence summary of the material above."
     expect:
-      primary:
+      primary: null
       also_load: []
       do_not_load: ["humanize","writing-for-agents"]
     why: "Ordinary summarization has neither a voice defect nor an agent-instruction design problem."
@@ -129,7 +130,7 @@ cases:
     expect:
       primary: creative-ideation
       also_load: []
-      read: ["creative-ideation/core.md","creative-ideation/references/routing.md"]
+      read: ["creative-ideation/SKILL.md","creative-ideation/references/routing.md"]
       do_not_load: []
     why: "One creative owner routes existing material; shaping methods are internal references, not another invocation."
 
@@ -189,9 +190,9 @@ cases:
       primary: module-design
       also_load: []
       do_not_load: ["architecture-scan","tech-spec"]
-      read: ["module-design/references/design.md","module-design/branches/alternatives.md","module-design/SKILL.md"]
-      do_not_read: ["architecture-scan/SKILL.md","tech-spec/SKILL.md"]
-    why: "The task is a bounded module-design judgment under TypeScript law, not either user-invoked workflow."
+      read: ["module-design/references/design.md","module-design/SKILL.md"]
+      do_not_read: ["architecture-scan/SKILL.md","tech-spec/SKILL.md","tech-spec/branches/design-alternatives.md"]
+    why: "Comparing supplied interface shapes is core design judgment. It does not require independent generation, a scan or specification."
 
   - id: explicit-architecture-scan
     kind: collision
@@ -200,7 +201,7 @@ cases:
       primary: architecture-scan
       also_load: []
       do_not_load: ["tech-spec"]
-      read: ["architecture-scan/SKILL.md","software-engineering/references/standards.md"]
+      read: ["architecture-scan/SKILL.md","engineering-judgment/references/standards.md"]
       do_not_read: ["tech-spec/SKILL.md"]
     why: "The user explicitly selected the read-only scan, whose boundary excludes the downstream specification workflow."
 
@@ -211,7 +212,7 @@ cases:
       primary: tech-spec
       also_load: []
       do_not_load: ["domain-modeling","architecture-scan"]
-      read: ["tech-spec/SKILL.md","software-engineering/references/standards.md","software-engineering/references/testing-evidence.md","tech-spec/core.md"]
+      read: ["tech-spec/SKILL.md","engineering-judgment/references/standards.md","verification-design/SKILL.md"]
       do_not_read: ["architecture-scan/SKILL.md"]
     why: "The requested spec starts directly from accepted context. Shared engineering references support a typed design and vertical test plan; the core designs the RGR plan without starting implementation or a preliminary scan."
 
@@ -222,7 +223,7 @@ cases:
       primary: engineering-restraint
       also_load: []
       do_not_load: ["architecture-scan","tech-spec"]
-      read: ["module-design/core.md","software-engineering/references/standards.md"]
+      read: ["module-design/SKILL.md","engineering-judgment/references/standards.md"]
       do_not_read: ["tech-spec/SKILL.md"]
     why: "The first judgment is whether the machinery is justified; detailed specification would be premature."
 
@@ -251,14 +252,14 @@ cases:
       primary: steward
       also_load: []
       do_not_load: ["grilling"]
-      read: ["steward/branches/durable-work.md"]
+      read: ["steward/references/runtime.md"]
     why: "The user needs durable intent, independent acceptance, and landing receipts across time; questioning alone cannot preserve that state."
 
   - id: ordinary-bounded-task
     kind: negative
     prompt: "Rename this local variable and run the existing focused test."
     expect:
-      primary:
+      primary: null
       also_load: []
       do_not_load: ["steward","grilling"]
     why: "A small bounded edit needs neither durable mission machinery nor an owner interview."
@@ -270,7 +271,7 @@ cases:
       primary: software-engineering
       also_load: []
       do_not_load: []
-      read: ["software-engineering/references/standards.md","software-engineering/branches/lint-enforcement.md"]
+      read: ["engineering-judgment/references/standards.md","software-engineering/branches/lint-enforcement.md"]
       do_not_read: ["software-engineering/branches/finishing.md"]
     why: "The outcome is durable mechanical enforcement under repository law, not a one-time readability edit."
 
@@ -291,14 +292,14 @@ cases:
       also_load: []
       do_not_load: ["grilling","steward"]
       read: ["decision-rights/SKILL.md"]
-      do_not_read: ["steward/branches/durable-work.md"]
+      do_not_read: ["steward/SKILL.md","steward/references/runtime.md"]
     why: "Independent standing judgment returns a supported next action; durable stewardship is not selected."
 
   - id: routine-owner-choice
     kind: negative
     prompt: "Use the blue option we already selected and update this local mockup."
     expect:
-      primary:
+      primary: null
       also_load: []
       do_not_load: ["steward","grilling"]
     why: "An accepted routine choice does not need another authority dispute or interview."
@@ -310,7 +311,7 @@ cases:
       primary: software-engineering
       also_load: []
       do_not_load: []
-      read: ["software-engineering/references/standards.md"]
+      read: ["engineering-judgment/references/standards.md"]
       do_not_read: ["software-engineering/branches/test-first.md"]
     why: "Engineering law applies without silently selecting RGR."
 
@@ -322,7 +323,7 @@ cases:
       also_load: []
       do_not_load: []
       read: ["software-engineering/branches/finishing.md"]
-      do_not_read: ["software-engineering/references/standards.md","software-engineering/branches/test-first.md"]
+      do_not_read: ["engineering-judgment/references/standards.md","software-engineering/branches/test-first.md"]
     why: "Comment clarity is language-general and read-only; TypeScript law and implementation workflow are not selected."
 
   - id: non-code-review-guide
@@ -333,7 +334,7 @@ cases:
       also_load: ["understand-change"]
       do_not_load: ["review"]
       read: ["understand-change/SKILL.md","reviewability/SKILL.md"]
-      do_not_read: ["review/core.md","github-evidence/references/pr-operations.md"]
+      do_not_read: ["review/SKILL.md","github/references/pr-operations.md"]
     why: "A non-code artifact needs faithful reconstruction, not repository axes or GitHub operations."
 
   - id: explain-known-flow
@@ -365,7 +366,7 @@ cases:
       primary: review
       also_load: ["reviewability"]
       do_not_load: []
-      read: ["understand-change/core.md","review/core.md","reviewability/SKILL.md"]
+      read: ["understand-change/SKILL.md","review/SKILL.md","reviewability/SKILL.md"]
     why: "The task requests two outcomes. Review owns the verdict; reviewability consumes the same current map for the subsequent description."
 
   - id: architecture-unclear-spec
@@ -377,7 +378,7 @@ cases:
       do_not_load: ["architecture-scan"]
       read: ["tech-spec/SKILL.md"]
       do_not_read: ["architecture-scan/SKILL.md"]
-    why: "The spec workflow researches current facts and uses grilling for the unresolved design decision; it does not begin with a scan."
+    why: "The spec workflow obtains current facts and resolves the owner decision, using a design interview when needed. It does not start with a scan."
 
   - id: shared-reconstruction-only
     kind: collision
@@ -387,7 +388,7 @@ cases:
       also_load: []
       do_not_load: ["review","reviewability"]
       read: ["understand-change/SKILL.md"]
-      do_not_read: ["review/core.md","reviewability/SKILL.md"]
+      do_not_read: ["review/SKILL.md","reviewability/SKILL.md"]
     why: "The independent change-understanding module supplies a map without a verdict or writing workflow."
 
   - id: restraint-with-standing
@@ -397,8 +398,8 @@ cases:
       primary: engineering-restraint
       also_load: []
       do_not_load: ["steward","software-engineering"]
-      read: ["decision-rights/core.md"]
-      do_not_read: ["steward/branches/durable-work.md"]
+      read: ["decision-rights/SKILL.md"]
+      do_not_read: ["steward/SKILL.md","steward/references/runtime.md"]
     why: "Necessity is cross-domain; decision rights supplies settlement without runtime."
 
   - id: interface-not-software-module
@@ -427,11 +428,11 @@ cases:
     kind: negative
     prompt: "Read the shared PR operations contract to explain which live action resolves a thread. Do not investigate or judge the code."
     expect:
-      primary:
+      primary: null
       also_load: []
       do_not_load: ["review","reviewability"]
-      read: ["github-evidence/references/pr-operations.md"]
-      do_not_read: ["review/core.md"]
+      read: ["github/references/pr-operations.md"]
+      do_not_read: ["review/SKILL.md"]
     why: "Platform semantics do not invoke a code judgment."
 
   - id: ordinary-engineering-no-lint
@@ -441,7 +442,7 @@ cases:
       primary: software-engineering
       also_load: []
       do_not_load: []
-      read: ["software-engineering/references/standards.md"]
+      read: ["engineering-judgment/references/standards.md"]
       do_not_read: ["software-engineering/branches/lint-enforcement.md"]
     why: "Ordinary engineering does not author a new enforcement mechanism."
 
@@ -505,11 +506,11 @@ cases:
     prompt: "Design a faithful AI readout from operational evidence, including what information must survive, claim support and quality evaluation."
     expect:
       primary: faithful-derivation
-      also_load: []
+      also_load: ["information-preservation","evaluation-design"]
       do_not_load: []
-      read: ["information-preservation/core.md","claim-support/core.md","evaluation-design/core.md"]
-      do_not_read: ["information-preservation/SKILL.md","claim-support/SKILL.md","evaluation-design/SKILL.md"]
-    why: "The work-product owner integrates the independent supporting judgments."
+      read: ["information-preservation/SKILL.md","claim-support/references/evidence-and-confidence.md","evaluation-design/SKILL.md"]
+      do_not_read: []
+    why: "Faithful derivation integrates core results through their public skill interfaces. Actual claim assessment is selected only when claims and sources exist; future policy uses the support reference."
 
   - id: review-compatibility-composition
     kind: collision
@@ -537,7 +538,7 @@ cases:
     kind: negative
     prompt: "Translate this isolated sentence into French. No downstream handoff or transformation design is involved."
     expect:
-      primary:
+      primary: null
       also_load: []
       do_not_load: ["information-preservation","claim-support"]
       read: []
@@ -548,7 +549,7 @@ cases:
     kind: negative
     prompt: "Fix this typo in the skill title."
     expect:
-      primary:
+      primary: null
       also_load: []
       do_not_load: ["evaluation-design","critique"]
       read: []
@@ -571,55 +572,55 @@ cases:
     prompt: "Steward this work and independently sharpen the reported plan against its current Intent before acceptance."
     expect:
       primary: steward
-      also_load: []
+      also_load: ["critique"]
       do_not_load: ["review"]
-      read: ["steward/references/sharpening-contract.md","critique/core.md"]
-      do_not_read: ["review/core.md"]
-    why: "The independent Steward reviewer applies the critique core to supplied phase evidence; the adapter owns dispatch and acceptance, without recursively dispatching another critic."
+      read: ["steward/references/review.md","critique/SKILL.md"]
+      do_not_read: ["review/SKILL.md"]
+    why: "Steward owns independent dispatch and acceptance; critique applies its public core method to the supplied phase criteria without dispatching another critic."
 
-  - id: supplied-claim-core
+  - id: supplied-claim-assessment
     kind: collision
-    prompt: "Apply the claim-support core to these complete supplied sources and proposed claim. Do not fetch anything."
+    prompt: "Assess this claim against the complete supplied sources. Do not fetch anything."
     expect:
       primary: claim-support
       also_load: []
       do_not_load: ["faithful-derivation"]
-      read: ["claim-support/core.md"]
-      do_not_read: ["claim-support/SKILL.md"]
-    why: "Explicit core use evaluates supplied evidence; it returns missing evidence rather than acquiring live facts."
+      read: ["claim-support/SKILL.md"]
+      do_not_read: []
+    why: "Claim support is itself a core skill. Its public entry applies the method without acquisition or effects."
 
-  - id: diagnosis-core-missing-reproduction
+  - id: causal-reasoning-missing-reproduction
     kind: collision
-    prompt: "Apply the diagnosis core: the endpoint reportedly returns 500 and curl is planned, but there is no execution output or failing test."
+    prompt: "Assess this diagnostic evidence: the endpoint reportedly returns 500 and curl is planned, but there is no execution output or failing test. Return the missing evidence without running commands."
     expect:
-      primary: diagnosing-bugs
+      primary: causal-reasoning
       also_load: []
-      do_not_load: ["software-engineering"]
-      read: ["diagnosing-bugs/core.md"]
+      do_not_load: ["diagnosing-bugs","software-engineering"]
+      read: ["causal-reasoning/SKILL.md"]
       do_not_read: ["diagnosing-bugs/operations.md"]
     why: "The core returns the missing reproduction evidence before hypotheses; a planned command is not a result."
 
-  - id: review-core-stale-receipts
+  - id: review-supplied-stale-receipts
     kind: collision
-    prompt: "Apply the review core to supplied head h2 and successful CI from h1; the required h2 integration check is pending. Do not acquire live state."
+    prompt: "Review only these supplied records: the target is head h2, successful CI covers h1 and the required h2 integration check is pending. Do not acquire live state."
     expect:
       primary: review
       also_load: []
-      do_not_load: ["github-evidence"]
-      read: ["review/core.md","github-evidence/core.md"]
-      do_not_read: ["github-evidence/SKILL.md"]
-    why: "The supplied receipts support a precise current-head evidence need; pending is not failed and old success is not current success."
+      do_not_load: ["github"]
+      read: ["review/SKILL.md"]
+      do_not_read: ["github/SKILL.md"]
+    why: "The review workflow honors the supplied-only scope, returns a precise current-head evidence gap and does not treat pending checks as failures."
 
-  - id: brand-prose-core
+  - id: brand-prose-composition
     kind: collision
     prompt: "Apply Augment voice to this supplied copy and supporting facts. Return proposed copy only; there is no render or audit receipt."
     expect:
       primary: augment-design
-      also_load: []
-      do_not_load: ["humanize"]
-      read: ["augment-design/core.md","augment-design/references/voice.md","humanize/core.md"]
-      do_not_read: ["humanize/SKILL.md","augment-design/operations.md"]
-    why: "The brand core composes the prose core with supplied constraints; proposed text cannot establish rendered compliance."
+      also_load: ["humanize"]
+      do_not_load: []
+      read: ["augment-design/SKILL.md","augment-design/references/voice.md","humanize/SKILL.md"]
+      do_not_read: ["augment-design/references/production-checks.md"]
+    why: "Brand copy composes humanize through its public core interface. A copy-only request does not start surface construction or claim rendered compliance."
 
   - id: creative-seeded-range
     kind: collision
@@ -628,9 +629,9 @@ cases:
       primary: creative-ideation
       also_load: []
       do_not_load: ["prototype"]
-      read: ["creative-ideation/core.md","creative-ideation/references/methods/volume-generation.md"]
+      read: ["creative-ideation/SKILL.md","creative-ideation/references/methods/volume-generation.md"]
       do_not_read: ["creative-ideation/references/methods/constraints.md"]
-    why: "Seeded Range needs real seeds and separate generation; the shell supplies operations and the core judges structural range."
+    why: "Seeded Range designs and assesses structural range; the operational caller supplies real seeds and independent generation observations."
 
   - id: creative-scamper-existing-base
     kind: collision
@@ -650,7 +651,7 @@ cases:
       primary: creative-ideation
       also_load: []
       do_not_load: ["humanize"]
-      read: ["creative-ideation/core.md","creative-ideation/references/routing.md"]
+      read: ["creative-ideation/SKILL.md","creative-ideation/references/routing.md"]
     why: "Return 2–3 method choices with reasons and await the owner's choice; no silent default or prose rewrite."
 
   - id: creative-high-slop
@@ -665,10 +666,111 @@ cases:
 
   - id: creative-drift-without-notes
     kind: collision
-    prompt: "Use the creative core to propose a dérive for this neighborhood. No observations or field notes are supplied."
+    prompt: "Use creative ideation to propose a dérive for this neighborhood. No observations or field notes are supplied."
     expect:
       primary: creative-ideation
       also_load: []
       do_not_load: ["prototype"]
-      read: ["creative-ideation/core.md","creative-ideation/references/methods/derive-and-mapping.md"]
+      read: ["creative-ideation/SKILL.md","creative-ideation/references/methods/derive-and-mapping.md"]
     why: "Return an activity proposal or evidence need, without fabricating a walk, observations or elapsed time."
+
+  - id: engineering-obligations
+    kind: positive
+    prompt: "Assess the correctness obligations of this supplied TypeScript parser and error contract. Return a judgment without editing code."
+    expect:
+      primary: engineering-judgment
+      also_load: []
+      do_not_load: ["software-engineering"]
+      read: ["engineering-judgment/references/standards.md"]
+    why: "Engineering judgment owns code obligations independently of implementation."
+
+  - id: verification-persistence-claim
+    kind: collision
+    prompt: "These cache-backed tests pass. Assess whether they establish that the write survives a database restart. Do not run anything."
+    expect:
+      primary: verification-design
+      also_load: []
+      do_not_load: ["software-engineering","evaluation-design"]
+      read: ["verification-design/SKILL.md"]
+    why: "Software persistence proof requires the owning storage boundary, not cache observations or an AI quality evaluation."
+
+  - id: experiment-plan-only
+    kind: collision
+    prompt: "Design the smallest experiment to distinguish two UI state models. Return a plan; do not build a prototype."
+    expect:
+      primary: experiment-design
+      also_load: []
+      do_not_load: ["prototype"]
+      read: ["experiment-design/SKILL.md"]
+    why: "Experiment design is independently invokable and returns distinguishing observations without construction."
+
+  - id: supplied-causal-probes
+    kind: collision
+    prompt: "Given this executed reproduction and two probe receipts, rank the remaining causes and propose the next discriminating probe. Do not execute it."
+    expect:
+      primary: causal-reasoning
+      also_load: []
+      do_not_load: ["diagnosing-bugs"]
+      read: ["causal-reasoning/SKILL.md"]
+    why: "Causal reasoning interprets supplied observations without taking over the operational diagnostic loop."
+
+  - id: implementation-composes-judgment
+    kind: collision
+    prompt: "Implement the selected TypeScript cancellation contract and verify its observable behavior using the repository conventions."
+    expect:
+      primary: software-engineering
+      also_load: ["engineering-judgment","verification-design"]
+      do_not_load: ["architecture-scan","tech-spec"]
+      read: ["software-engineering/SKILL.md"]
+    why: "Implementation owns acquisition, edits and checks while composing reusable engineering and verification judgments."
+
+  - id: review-shares-verification
+    kind: collision
+    prompt: "Review this TypeScript change whose green unit tests mock the persistence adapter. Assess the durability claim without editing files."
+    expect:
+      primary: review
+      also_load: ["engineering-judgment","verification-design"]
+      do_not_load: ["software-engineering"]
+      read: ["review/SKILL.md"]
+    why: "Review uses the same proof judgment as implementation without invoking an edit workflow."
+
+  - id: ad-hoc-claim-source-path
+    kind: collision
+    prompt: "Check whether the claim in this local report is supported by the linked evidence files. Read those files yourself and return the assessment."
+    expect:
+      primary: claim-support
+      also_load: []
+      do_not_load: ["faithful-derivation"]
+      read: ["claim-support/SKILL.md"]
+    why: "The surrounding task reads the files and supplies the core inputs; the user does not assemble a source packet."
+
+  - id: brand-production-obligations
+    kind: collision
+    prompt: "Implement this Augment interface using the supplied design. Finish by inspecting the rendered states and audit findings."
+    expect:
+      primary: software-engineering
+      also_load: ["interface-design","augment-design"]
+      do_not_load: ["prototype"]
+      read: ["augment-design/references/production-checks.md","augment-design/references/qa.md"]
+    why: "The implementation caller executes the brand production obligations and returns actual observations to the design cores."
+
+  - id: prototype-composes-experiment
+    kind: collision
+    prompt: "Build a small disposable state-transition experiment and tell me what the observed result establishes."
+    expect:
+      primary: prototype
+      also_load: ["experiment-design"]
+      do_not_load: []
+      read: ["prototype/references/experiments.md"]
+    why: "Prototype owns construction and execution; experiment design supplies the distinguishing experiment and interprets its observations."
+
+  - id: independent-module-alternatives
+    kind: collision
+    prompt: "Use module design to obtain three independent interface alternatives for this bounded problem. Do not write a full specification."
+    expect:
+      primary: module-design
+      also_load: []
+      do_not_load: ["tech-spec","architecture-scan"]
+      read: ["module-design/SKILL.md","tech-spec/branches/design-alternatives.md"]
+      do_not_read: ["tech-spec/SKILL.md"]
+    why: "Module design returns the named acquisition route; the surrounding operational task conducts the selected independent exploration and supplies its results for comparison."

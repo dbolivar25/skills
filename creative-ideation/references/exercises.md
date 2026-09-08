@@ -1,7 +1,7 @@
 # Time-boxed exercises
 
 Use for requested practice, not an ordinary request for ideas. Read the named
-method through [routing](routing.md). The core proposes the activity; the shell
+method through [routing](routing.md). The core proposes the activity; the caller
 facilitates it and receives actual work. Time passing is not an observed result.
 
 ## 5 minutes

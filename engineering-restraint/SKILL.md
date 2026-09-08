@@ -5,17 +5,94 @@ description: Use when a proposed feature, dependency, abstraction, service, work
 
 # Engineering restraint
 
-Read the [core](core.md) and matching proposal pattern. Gather current evidence
-of the problem, existing alternatives and continuing ownership cost. Inspect the
-actual system or process rather than reasoning from a hypothetical feature list.
+Use the [core contract](../contracts/composition.md#core-skills) .
 
-Apply the core. Resolve a Defer result's obtainable evidence before returning the
-gate decision; ask only for owner judgment or unavailable access. Reconcile a
-changed proposal against the protected outcome rather than silently substituting
-another result. An owner-confirmed tradeoff is an input, not an invitation to
-restart the same argument.
+**Inputs:** Protected outcome, proposed addition, current necessity and alternatives
+evidence, continuing commitments, constraints, authority and settled owner choices.
 
-Return Reject, Defer, Reshape or Accept with reasons, smallest sufficient move,
-ownership burden and reopen condition. For a disputed action, use decision-rights
-to settle standing and continue within the task's authority. The assessment does
-not itself implement a different design or block an owner decision by preference.
+An addition earns its complexity when present evidence justifies its value and
+continuing ownership cost. Apply this judgment before committing to an addition; protect
+the user's outcome while challenging the proposed machinery.
+
+## Operating contract
+
+- Generated code is cheap to produce, not cheap to own.
+- Prefer deletion, reuse, configuration, or a narrower sufficient change.
+- Do not use restraint to obstruct confirmed user pain, security work,
+  compliance obligations, or explicit product judgment.
+- Accept the larger shape when current evidence earns it.
+- Do not silently replace an authorized implementation with a materially
+  different one; return the decision first when scope or behavior would change.
+
+## 1. Name the protected outcome
+
+Separate what must become true from the machinery proposed to make it true.
+
+Completion criterion: the protected outcome and proposed addition are stated
+independently; the outcome is not defined as construction of the addition.
+
+## 2. Test present necessity
+
+Use supplied current-system evidence to judge whether deletion, reuse, configuration,
+documentation, or a narrower change can produce the outcome.
+
+For a dependency, abstraction, feature surface, service, agent-generated implementation,
+or process addition, read
+[`references/proposal-patterns.md`](references/proposal-patterns.md) before finishing
+this step and apply only the matching pattern.
+
+Completion criterion: relevant current-system evidence has been checked and the smallest
+sufficient move compared with the proposal.
+
+## 3. Price the ownership cost
+
+Name the material commitments the proposal adds: concepts, interfaces, data, operations,
+verification, organizational ownership, and irreversibility.
+
+Completion criterion: every material commitment and its verification or operating burden
+is visible enough to compare with the outcome.
+
+## 4. Make the gate decision
+
+Choose one:
+
+- `Reject` — the need is unproven or the ownership cost is unjustified.
+- `Defer` — answer-changing evidence is missing; name how to obtain it.
+- `Reshape` — preserve the outcome through a smaller sufficient move.
+- `Accept` — present evidence justifies the proposed shape and its safeguards.
+
+Return:
+
+```md
+Decision:
+Protected outcome:
+Evidence checked:
+Ownership cost:
+Smallest sufficient move:
+Reopen trigger:
+Next move:
+```
+
+When the user needs to explain the decision or handle pushback, read
+[`references/pushback-language.md`](references/pushback-language.md) after the gate
+decision is complete.
+
+Completion criterion: the decision follows from checked evidence, the next move stays
+within the user's authorization, and a concrete reopen trigger states what would change
+it. An answer-changing unknown requires `Defer` .
+
+## Failure modes
+
+- **Austerity theater** — treating less engineering as inherently virtuous.
+- **Build-cost fallacy** — confusing easy generation with cheap ownership.
+- **Authority laundering** — deciding from who argued rather than the evidence.
+- **Speculative generality** — paying now for capability justified only by a
+  hypothetical future.
+- **Silent scope change** — implementing a materially different result without
+  returning the decision to the user.
+
+## Decision ownership
+
+An objection that could block an owner choice needs the standing judgment in
+[decision rights](../decision-rights/SKILL.md) , using the supplied authority and
+settlement. A recommendation does not create blocking authority.

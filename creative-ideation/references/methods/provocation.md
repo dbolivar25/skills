@@ -1,6 +1,6 @@
 # Lateral Provocations
 
-Core: external steps below are proposals or supplied evidence; the shell executes them.
+Core: external steps below are proposals or supplied evidence; the operational caller executes them.
 
 
 Edward de Bono, 1967–. The PO operator and five provocation moves for breaking pattern lock-in. PO is a linguistic marker that flags a statement as a deliberate provocation, not a claim — to be taken seriously even when implausible.

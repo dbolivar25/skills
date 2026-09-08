@@ -2,7 +2,7 @@
 
 Run this branch only when the user chooses test-first behavior, Red-Green-Refactor,
 or integration tests as the implementation driver. The standards and
-[testing evidence](../references/testing-evidence.md) govern valid proof; this
+[testing evidence](../../verification-design/SKILL.md) govern valid proof; this
 branch governs the order in which it is learned.
 
 ## 1. Agree on the behavior and seam

@@ -228,7 +228,7 @@ No emoji, and no Unicode glyphs standing in for icons.
 
 | Path | What is in it |
 |---|---|
-| `SKILL.md` | Entry point: seven steps, completion criteria, branch router |
+| `SKILL.md` | Brand application, resource selection and required surface evidence |
 | `styles.css` | The one stylesheet consumers link |
 | `readme.md` | This file |
 | `references/composition.md` | Object, state, small type, spine, one home, focal point |

@@ -42,7 +42,7 @@ the interface, not by counting implementation lines.
    [dependency seams](dependency-seams.md) when deepening a cluster.
 5. **Check the test surface.** A test observes the interface owning its claim.
    If it must reach through that interface, reconsider the module shape or the
-   claim. Apply [testing evidence](../../software-engineering/references/testing-evidence.md) before declaring the
+   claim. Apply [testing evidence](../../verification-design/SKILL.md) before declaring the
    design testable.
 
 Prefer dependency inputs and returned values where they make policy testable:
@@ -61,5 +61,5 @@ function calculateDiscount(cart: Cart): Discount;
 
 A small surface reduces what callers and tests must learn; it does not eliminate
 behavioral cases. Keep essential complexity together when splitting it would
-hide its invariant. Compare alternative interfaces when supplied; the shell owns any selected
+hide its invariant. Compare alternative interfaces when supplied; the caller owns any selected
 independent exploration that produces them.

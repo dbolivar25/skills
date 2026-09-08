@@ -59,5 +59,5 @@ Infer structure from the supplied repository layout and context contents:
 
 For multiple contexts, place the proposed delta in the context supported by the
 topic and examples. Missing map contents are an evidence need; an ambiguous
-meaning boundary is an owner decision. The shell owns reads, questions and lazy
+meaning boundary is an owner decision. The caller owns reads, questions and lazy
 file creation within the authorized documentation scope.

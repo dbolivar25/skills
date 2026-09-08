@@ -1,11 +1,12 @@
 # QA
 
-Nothing ships unrendered. This is the last step of the skill, and it catches
-polish applied to a composition nobody looked at.
+Nothing ships unrendered. Use these criteria to assess the caller's rendered
+surface and audit observations. Missing observations are evidence needs; the
+operational caller obtains them before delivery.
 
 ## Render and look
 
-1. Render every page, screen, and state. Not just the first one.
+1. Require renders of every relevant page, screen and state, not only the first.
 2. Look at each at full size, and read the copy as the reader will.
 3. Look at each at thumbnail size. The first thing you see is the focal point. If
    you see texture instead of a thing, the composition is wrong, so fix that
@@ -45,15 +46,16 @@ Copy:
 
 ## Audit
 
-Load `checks/audit.js` into the rendered page, then call `augAudit()`. When the
-script is part of the page, appending `?augaudit` runs it after load. It checks
+For the audit receipt, the operational caller loads `checks/audit.js` into the
+rendered page and calls `augAudit()`. With the script in the page, appending
+`?augaudit` runs it after load. The checker observes
 what markup and computed style can prove: nested `data-aug-surface` elements,
 chromatic fill and stroke roles, off-scale radius, document body type below the
 branch floor, inconsistent marked repetition, source markup, and whether Matter
 SQ loaded.
 
-Set `data-aug-branch="document|product|marketing"` on the root element, and
-`data-aug-role` on every chromatic fill and stroke.
+The source must set `data-aug-branch="document|product|marketing"` on the root
+and `data-aug-role` on every chromatic fill and stroke.
 
 Treat findings as input to judgment. A finding you can justify is fine, so long
 as you justify it in writing. A clean run you did not examine is not a review,

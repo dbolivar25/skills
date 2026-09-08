@@ -5,53 +5,37 @@ description: Use when domain terms, invariants, boundaries, examples, ubiquitous
 
 # Domain modeling
 
-Read the [core](core.md). Load the actual glossary and context map, governing
-ADRs and code/examples that can establish the model. Bring contradictions to the
-core with both sources rather than asking the user for discoverable code facts.
+Use the [core contract](../contracts/composition.md#core-skills) .
 
-Use the core to generate precise terms, discriminating scenarios and owner
-questions. Put those questions to the owner as needed; feed answers back before
-recording a proposed interpretation as settled language.
+**Inputs:** Domain statements, existing glossary/context boundaries, supplied code
+behavior/examples, settled owner decisions, requested documentation scope.
 
-Within the task's documentation scope, capture each settled term as it
-crystallizes and persist only qualifying ADRs. For discussion-only work, return
-proposed deltas without writing files. Recheck the existing file before applying
-a delta and preserve unrelated terms and other contributors' changes.
+Actively sharpen the model rather than merely consume its vocabulary. Compare terms and
+statements with the supplied glossary and behavior. Return canonical terms, explicit
+distinctions, counterexamples and the decision needed to resolve contradictions. Missing
+code or context is an evidence need, not evidence that the user's account is wrong.
 
-## File structure
+- When a term conflicts with the glossary, identify the exact competing meanings:
+  "Your glossary defines cancellation as X; this example uses Y."
+- For vague or overloaded language, propose the smallest precise distinction:
+  "Does account mean Customer or User?" Do not demand a new term for a settled one.
+- Invent concrete edge cases to test relationships and invariants. A proposed
+  scenario tests the model; it is not a claim that the system has exhibited it.
+- When supplied code contradicts the stated model, retain both as a conflict:
+  whole-order cancellation versus a proposed partial cancellation, for example.
 
-Most repos have a single context:
+Return settled glossary deltas separately from unresolved proposals. A glossary contains
+domain meaning, not implementation details, a spec or scratch notes. Use
+[the context format](CONTEXT-FORMAT.md) for a requested glossary delta.
 
-```
-/
-├── CONTEXT.md
-├── docs/
-│   └── adr/
-│       ├── 0001-event-sourced-orders.md
-│       └── 0002-postgres-for-write-model.md
-└── src/
-```
+A decision merits an ADR only when all three hold: it is hard to reverse, surprising
+without context, and the result of a real tradeoff. Otherwise keep it out of the ADR
+stream. When qualified, use [the ADR format](ADR-FORMAT.md) to propose the decision and
+its alternatives. Return the target context with the delta. The caller resolves missing
+code or glossary evidence, asks owner questions and persists settled language within the
+documentation scope, checking current files before edits and reading back the result.
+Proposals remain distinct from recorded decisions; files are created lazily when there
+is a settled delta.
 
-If a `CONTEXT-MAP.md` exists at the root, the repo has multiple contexts. Read the map to locate each context. Infer the current topic’s context from its
-code and examples; ask the owner if the meaning boundary remains ambiguous. The
-map points to where each one lives:
-
-```
-/
-├── CONTEXT-MAP.md
-├── docs/
-│   └── adr/                          ← system-wide decisions
-├── src/
-│   ├── ordering/
-│   │   ├── CONTEXT.md
-│   │   └── docs/adr/                 ← context-specific decisions
-│   └── billing/
-│       ├── CONTEXT.md
-│       └── docs/adr/
-```
-
-Create files lazily — only when you have something to write. If no `CONTEXT.md` exists, create one when the first term is resolved. If no `docs/adr/` exists, create it when the first ADR is needed.
-
-A CONTEXT file remains a glossary only. Use its local format and create files
-lazily when there is a settled delta to record. Read back persisted changes;
-report proposed and recorded decisions distinctly.
+Finish when settled terms and qualifying decisions are coherent with supplied evidence,
+while each unresolved fork remains a concrete question with its reason.

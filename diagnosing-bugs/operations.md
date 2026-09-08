@@ -105,9 +105,9 @@ Do not proceed until you have reproduced **and** minimised.
 
 ## Phase 3 — Obtain the next diagnostic judgment
 
-Supply the [core](core.md) with the reproduction/minimization receipts. Do not
+Supply [causal reasoning](../causal-reasoning/SKILL.md) with the reproduction/minimization receipts. Do not
 skip its gate. Resolve reproduction needs in the loop above before asking for
-hypotheses. When the gate holds, obtain its 3–5 ranked falsifiable hypotheses and
+hypotheses. When the gate holds, obtain the 3–5 ranked falsifiable hypotheses and
 show them to the user before testing. Continue with the ranking while the user
 is unavailable; their context can re-rank the next probe.
 
@@ -127,7 +127,7 @@ Tool preference:
 
 ## Diagnosis handoff
 
-Feed each actual probe observation to the core. Return its causal judgment,
+Feed each actual probe observation to causal reasoning. Return its causal judgment,
 discarded hypotheses, remaining uncertainty and smallest correction direction.
 In diagnosis-only mode, stop here. Fix phases require implementation authority;
 unknown cause does not authorize a speculative fix.

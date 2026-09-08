@@ -1,6 +1,6 @@
 # Premortem and Inversion
 
-Core: external steps below are proposals or supplied evidence; the shell executes them.
+Core: external steps below are proposals or supplied evidence; the operational caller executes them.
 
 
 Two methods for failure-oriented ideation:

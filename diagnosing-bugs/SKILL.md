@@ -5,21 +5,33 @@ description: Use when broken, failing, throwing, flaky, or slow behavior needs a
 
 # Diagnose a bug
 
-Read the [core](core.md) and [diagnostic operations](operations.md). The operation
-guide preserves loop construction, minimization, redaction, instrumentation,
-performance probes and authorized fix/cleanup steps. Classify diagnosis-only
-versus fix-authorized at the outset; the guide does not grant mutation authority.
+Own the investigation from a reported symptom to a supported cause. Build a tight
+feedback loop, use actual observations to discriminate explanations, and carry an
+authorized correction through the original symptom and relevant checks. Use the
+[composition contract](../contracts/composition.md#operational-callers) .
 
-Build and run the smallest symptom-specific feedback loop. Supply actual command,
-output, repeatability and minimization receipts to the core. Fulfill reproduction
-needs before entering its hypothesis phase. Show ranked hypotheses and execute
-one discriminating probe at a time, feeding observed results back to the core.
+Read [diagnostic operations](operations.md) for loop construction, minimization,
+redaction, instrumentation, performance probes and cleanup. Establish diagnosis-only
+versus fix-authorized from the task; a caller's existing fix authority carries through
+to a bounded diagnostic assignment.
 
-When evidence or capabilities are unavailable, return the actual limitation and
-next acquisition path. Do not claim a cause from a planned experiment. In a
-read-only task, deliver the causal result and correction direction without edits.
+Apply [causal reasoning](../causal-reasoning/SKILL.md) to actual command, output,
+repeatability and minimization receipts. Fulfill its reproduction needs before entering
+the hypothesis phase. Show ranked hypotheses, run one discriminating probe at a time and
+return observations for reassessment. Source reads can help construct the loop; they
+cannot replace having run it.
 
-When a fix is authorized, use the correct regression seam, apply the change,
-rerun the original loop and relevant checks, remove instrumentation and capture
-the established cause. Use core judgment to assess those receipts. Keep any
-architectural follow-up separate from the correction just proved.
+Use [Grafana evidence](../grafana/SKILL.md) for bounded live telemetry when it
+can answer a named question. Supply its population, query scope and limits to causal
+reasoning. A deployment correlation alone does not establish a cause.
+
+Resolve obtainable evidence needs within scope. An unavailable debugger or failed
+harness limits the investigation; it does not falsify a product hypothesis. Return the
+supported cause and correction direction, or the live hypotheses, actual limitation and
+smallest next observation. Do not invent a cause from a planned experiment.
+
+When a fix is authorized, use [verification design](../verification-design/SKILL.md) to
+identify the regression seam and required implementation evidence. Apply the correction,
+rerun the original unminimized loop and relevant checks, remove instrumentation, and
+return those receipts to causal reasoning. Capture the established cause and remaining
+limits. Keep a broader architectural follow-up separate from the correction just proved.
