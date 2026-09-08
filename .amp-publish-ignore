@@ -5,3 +5,6 @@
 /.amp-publish-ignore
 /.githooks/
 /scripts/publish-amp
+
+# Skill development tests stay in GitHub; installed skills use their runtime files.
+/*/tests/
