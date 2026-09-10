@@ -17,7 +17,7 @@ To generate your own from a website URL, see [`onboarding.md`](onboarding.md).
 
 Every token is referred to by **semantic role**, not by its hex value. Type references (`type-*.md`) and SKILL.md say `accent`, not `#f7591f`.
 
-| Role | Purpose | Default (light) | Default (dark) |
+| Role | Purpose | Active (light) | Active (dark) |
 |---|---|---|---|
 | `paper` | Page background, default node fill | `#f6f1ef` (bone-100) | `#040919` (ink) |
 | `paper-2` | Diagram container bg, secondary fill | `#e9e1e1` (bone-500) | `#2b2d39` (woodsmoke) |
@@ -95,25 +95,25 @@ A self-contained palette for the terminal-window primitive (see [primitive-termi
 <style>
 @font-face {
   font-family: "Matter SQ";
-  src: url("assets/fonts/MatterSQ-Regular.woff2") format("woff2");
+  src: url("fonts/MatterSQ-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: "Matter SQ";
-  src: url("assets/fonts/MatterSQ-RegularItalic.woff2") format("woff2");
+  src: url("fonts/MatterSQ-RegularItalic.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
 }
 @font-face {
   font-family: "Matter SQ";
-  src: url("assets/fonts/MatterSQ-Medium.woff2") format("woff2");
+  src: url("fonts/MatterSQ-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
   font-family: "Matter SQ";
-  src: url("assets/fonts/MatterSQ-SemiBold.woff2") format("woff2");
+  src: url("fonts/MatterSQ-SemiBold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
 }
@@ -121,8 +121,9 @@ A self-contained palette for the terminal-window primitive (see [primitive-termi
 ```
 
 The complete official Matter SQ family is packaged under `assets/fonts/`. A
-generated standalone file must copy the weights it uses beside the HTML or embed
-the WOFF2 data; a cross-skill filesystem reference is not a shipped font. Use
+generated standalone file must copy the weights it uses into a `fonts/` directory
+beside the HTML or embed the WOFF2 data; a cross-skill filesystem reference is not
+a shipped font. Use
 `"Matter SQ", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif`
 for authored text and `ui-monospace, "SF Mono", Menlo, monospace` only for
 technical values.
@@ -145,9 +146,9 @@ Counting by script is the trap. `주문 v2.1` is two full-width syllables and fi
 
 Three rules follow from Hangul metrics:
 
-- **Sublabels stay Latin.** Ports, protocols, field types, and URLs are Latin anyway — keep `Geist Mono` there and don't translate them. Hangul in a 9px mono sublabel is unreadable and has no mono face to fall back to.
+- **Sublabels stay Latin.** Ports, protocols, field types, and URLs are Latin anyway — keep the active system mono family there and don't translate them. Hangul in a 9px mono sublabel is unreadable and has no mono face to fall back to.
 - **Floor of 12px.** Hangul goes muddy below 12px. If a Korean name doesn't fit at 12px, cut the name — don't shrink the type.
-- **Arrow labels, eyebrows, and legend text switch register.** Those slots are 7–8px Geist Mono, uppercase and tracked, which Hangul has neither a face nor legibility for. A Korean label in one of those slots becomes 12px sans at weight 500 with no tracking and no uppercase transform, and its mask rect grows to match (16px tall, width from the budget above, still rounded to a multiple of 4). Latin labels in the same diagram keep the mono treatment.
+- **Arrow labels, eyebrows, and legend text keep the authored-text register.** They remain 12px sentence-case sans, extending Matter SQ with the Korean fallback. Technical values alone use mono.
 
 **Load-bearing rule:** Mono is for *technical* content (ports, commands, URLs,
 field types). Names, page titles, labels, and callouts use Matter SQ. **Never
@@ -171,9 +172,9 @@ Counting by script is the trap. `請求項 v2.1` is three full-width characters 
 
 Three rules follow from Han metrics, mirroring the Hangul ones:
 
-- **Sublabels stay Latin.** Ports, protocols, field types, and URLs are Latin anyway — keep `Geist Mono` there and don't translate them. Han in a 9px mono sublabel is unreadable and has no mono face to fall back to. A sublabel that is prose rather than a value may be Chinese, but it then switches register by the third rule below.
+- **Sublabels stay Latin.** Ports, protocols, field types, and URLs are Latin anyway — keep the active system mono family there and don't translate them. Han in a 9px mono sublabel is unreadable and has no mono face to fall back to. A sublabel that is prose rather than a value may be Chinese, but it then uses the authored-text register below.
 - **Floor of 12px.** Han packs more strokes than Hangul into the same em box, so the 12px floor binds at least as hard here. If a Chinese name doesn't fit at 12px, cut the name — don't shrink the type.
-- **Arrow labels, eyebrows, and legend text switch register.** Those slots are 7–8px Geist Mono, uppercase and tracked, which Han has neither a face nor legibility for. A Chinese label in one of those slots becomes 12px sans at weight 500 with no tracking and no uppercase transform, and its mask rect grows to match (16px tall, width from the budget above, still rounded to a multiple of 4). Latin labels in the same diagram keep the mono treatment.
+- **Arrow labels, eyebrows, and legend text keep the authored-text register.** They remain 12px sentence-case sans, extending Matter SQ with the Chinese fallback. Technical values alone use mono.
 
 Simplified Chinese takes the same three rules with the Simplified stack (`'Noto Sans SC'`, `'PingFang SC'`, `'Microsoft YaHei'`). That face does not ship in the link, so Simplified labels still resolve through whatever the viewer has locally.
 
@@ -223,7 +224,9 @@ Four options:
 - **Contrast**: `ink` must hit WCAG AA on `paper`. `muted` must hit AA on `paper` for 11px+ text.
 - **One accent**: pick one color for `accent`. Two accents erases the focal signal.
 - **No rainbow palette**: if your brand ships 8 colors, pick 3 (paper, ink, accent). The rest become `muted` variants.
-- **Serif + sans + mono**: three families, not more. If brand typography is all sans, keep Instrument Serif for `title` and `callout` anyway — the contrast is load-bearing.
+- **Matter SQ + technical mono**: Matter SQ owns authored text, including titles and callouts; system mono is reserved for ports, commands, URLs, field types, and comparable technical values.
+- **Sentence case**: authored labels, tags, axes, and prose use sentence case. Do not turn them into decorative uppercase eyebrows.
+- **No emoji**: use words or approved vector icons; Unicode glyphs are not identity assets.
 - **Paper is warm-neutral, not pure white**: pure white turns the design sterile. Pick a cream, bone, or light grey with a hint of warmth.
 - **Dot pattern is optional, not default**: the 22×22 dot pattern is an opt-in "dotted paper" variant (good for long-form editorial hero diagrams). The default background is a clean `paper` fill, no pattern. When the pattern is enabled, it should sit at ~10% opacity of `ink` on `paper` — visible but quiet.
 - **Container is clean by default**: the diagram sits directly on the page paper, no secondary container background or border. A framed variant (`paper-2` bg + `rule` border + 8px radius + padding) is available as an opt-in for card-heavy layouts, but don't reach for it by default — the extra chrome fights the figure.

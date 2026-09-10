@@ -348,6 +348,16 @@ cases:
       do_not_read: ["prototype/references/experiments.md","prototype/branches/logic-experiment.md"]
     why: "Explain established evidence without imposing a prototype lifecycle."
 
+  - id: augment-architecture-diagram
+    kind: collision
+    prompt: "Create a polished standalone Augment-branded architecture diagram of these components and connections, then visually verify the rendered artifact."
+    expect:
+      primary: diagram-design
+      also_load: ["augment-design"]
+      do_not_load: ["show-me","prototype"]
+      read: ["diagram-design/SKILL.md","diagram-design/references/style-guide.md","augment-design/SKILL.md"]
+    why: "Diagram Design owns the production and rendered verification of the artifact; Augment Design supplies the brand law and assets. The request is neither a conversational explanation nor a throwaway experiment."
+
   - id: explore-ui-directions
     kind: positive
     prompt: "Prototype three structurally different layouts for this settings page so I can choose a direction."
