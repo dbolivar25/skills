@@ -8,3 +8,5 @@
 
 # Skill development tests stay in GitHub; installed skills use their runtime files.
 /*/tests/
+
+/diagram-design/
