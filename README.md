@@ -33,12 +33,13 @@ or changing its scope.
 
 ## Use a judgment or transformation
 
-These 21 core skills accept relevant context, apply their methods and return work
+These 22 core skills accept relevant context, apply their methods and return work
 the caller can use. Missing evidence produces a precise need with the conclusion
 it affects. The surrounding task or workflow obtains that evidence and continues.
 
 | Need | Skill | Result |
 | --- | --- | --- |
+| Interpret Daniel's intent and tradeoffs | [good-judgment](good-judgment/SKILL.md) | The distinction that matters and a next move grounded in the current purpose, decisions and evidence |
 | Understand what differs | [understand-change](understand-change/SKILL.md) | Behavior and responsibility map with evidence and gaps |
 | Assess code or contracts | [engineering-judgment](engineering-judgment/SKILL.md) | Applicable engineering obligations or supported weaknesses |
 | Decide what would prove behavior | [verification-design](verification-design/SKILL.md) | Observation seams, independent oracles and required implementation evidence; assessment of supplied proof |
@@ -103,7 +104,7 @@ the three design walkthroughs and reasons for the cut.
 
 ## Scope and distribution
 
-This repository owns 33 personal shared skills. Built-in skills, managed plugins
+This repository owns 35 personal shared skills. Built-in skills, managed plugins
 and other installations remain outside its scope. Cross-package references
 require their named owners to be available; publishing one package does not
 bundle its dependencies automatically.

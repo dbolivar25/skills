@@ -5,6 +5,35 @@ version: 1
 # skills both use SKILL.md; reading a passive method does not select its owner's
 # operational workflow. Effects follow the task's authority, not a skill name.
 cases:
+  - id: daniel-intent-tradeoff
+    kind: positive
+    prompt: "Given Daniel's request, later correction, and these two proposals, identify what he is protecting and recommend the next move. Explain what would make the other choice reasonable."
+    expect:
+      primary: good-judgment
+      also_load: []
+      do_not_load: ["steward"]
+      read: ["good-judgment/SKILL.md"]
+    why: "The task needs a contextual assessment of Daniel's intent and tradeoffs, without taking over ongoing coordination."
+
+  - id: settled-ordinary-edit
+    kind: negative
+    prompt: "Change the heading from Judgment to Good judgment in this Markdown file."
+    expect:
+      primary: null
+      also_load: []
+      do_not_load: ["good-judgment"]
+    why: "A routine edit with a settled direction does not need a separate assessment of Daniel's judgment."
+
+  - id: supplied-engineering-contract
+    kind: collision
+    prompt: "Assess whether this TypeScript API contract handles cancellation and partial failure correctly. Use the supplied code and requirements."
+    expect:
+      primary: engineering-judgment
+      also_load: []
+      do_not_load: ["good-judgment"]
+      read: ["engineering-judgment/SKILL.md"]
+    why: "Engineering correctness has its own assessment; the task does not require interpreting Daniel's intent or preferences."
+
   - id: ordinary-gh-read
     kind: negative
     prompt: "Show me the title and URL for PR 42 with gh pr view."
