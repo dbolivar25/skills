@@ -5,9 +5,8 @@ description: Use when an Augment or Decision Site workflow is designed, changed,
 
 # Augment Workflows
 
-Own workflow design, operations and observation against current product state. Use the
-[composition contract](../contracts/composition.md#operational-callers) . Current
-Decision Site resources own the product contracts.
+This skill owns the workflow-engineering discipline. Current Decision Site
+resources own the product.
 
 | Source | Owns |
 | --- | --- |
@@ -17,12 +16,12 @@ Decision Site resources own the product contracts.
 | Active MCP tools and receipts | Current operations, call shapes, and observed results |
 | This skill | How to frame, compose, and prove workflow work |
 
-Follow links from those roots. Do not copy their contents into this skill or reconstruct
-product contracts from memory. If live sources disagree, stop before mutation and name
-the mismatch.
+Follow links from those roots. Do not copy their contents into this skill or
+reconstruct product contracts from memory. If live sources disagree, stop
+before mutation and name the mismatch.
 
-Use only the sections the job needs. Inspection, review, and diagnosis remain read-only
-unless the user also requests a change.
+Use only the sections the job needs. Inspection, review, and diagnosis remain
+read-only unless the user also requests a change.
 
 ## 1. Frame the work
 
@@ -37,92 +36,119 @@ Before drawing nodes, name:
 - the exact operation the user requested now.
 
 Treat draft changes, validation, each lifecycle change, and execution control as
-separate authority. A graph can contain an effect without authorizing that effect to
-run.
+separate authority. A graph can contain an effect without authorizing that
+effect to run.
 
-Done means the requested change, desired result, unacceptable result, proof, and later
-authority gates are explicit.
+Done means the requested change, desired result, unacceptable result, proof,
+and later authority gates are explicit.
 
 ## 2. Ground the design in live truth
 
-Read `decisionsite://docs/workflows` and follow only the branch the job needs. Read the
-exact live page for every node type used by the graph. When the work uses MCP, inspect
-the active tool schema for every requested operation.
+Read `decisionsite://docs/workflows` and follow only the branch the job needs.
+Read the exact live page for every node type used by the graph. When the work
+uses MCP, inspect the active tool schema for every requested operation.
 
-Enter live state through `decisionsite://organizations` and follow returned canonical
-URIs. Resolve every fixed dependency—workflow, version, owner, Skill, Decision Site,
-recipient, integration, or destination—from current resources. Read the current target
-again before a concurrency-sensitive mutation.
+Before drawing a graph for a job the workspace already does, read a released
+workflow that does it. Its node parameters are a live contract exercised in
+production; a page describes one.
 
-Done means every node, operation, and fixed dependency is backed by a current product
-source or live canonical resource.
+Entitlements are live truth that no resource exposes. When a node page names one,
+exercise the gated path with a one-node probe and read the execution status. The
+node registry is global; it lists nodes this organization may not be able to run.
 
-## 3. Compose the explicit system
+Enter live state through `decisionsite://organizations` and follow returned
+canonical URIs. Resolve every fixed dependency—workflow, version, owner, Skill,
+Decision Site, recipient, integration, or destination—from current resources.
+Read the current target again before a concurrency-sensitive mutation.
 
-A graph owns sequence, branches, waits, retries, approvals, effects and failure paths. A
-node-local prompt owns its bounded task and supplied context. A workspace Skill owns
-reusable methodology. Keep routing, recipients, authority and control flow in graph
-structure and typed parameters rather than hiding them in prose.
+Done means every node, operation, and fixed dependency is backed by a current
+product source or live canonical resource.
 
-Design the smallest explicit graph whose values have concrete sources, whose effects
-have owners and whose failures have recovery or intentional terminals. Define
-Agent/Skill interfaces by trigger, responsibility, context, required result and
-missing-context behavior. Use current node/tool contracts and canonical identities;
-resolve missing semantics or dependencies before proposing a mutation.
+## 3. Design the explicit system
 
-For a visible work product derived from evidence, apply
-[faithful derivation](../faithful-derivation/SKILL.md) to its purpose, source context
-and graph. Integrate its output obligations, fidelity, support, publication policy and
-evals into the executable design. Acquire the exact evidence it needs and return
-observations for reassessment; a future policy is not an observed result. For Agent
-prompts and workspace Skills, use [writing for agents](../writing-for-agents/SKILL.md)
-with the intended behavior and current instructions. Preserve the division between graph
-control and node-local work.
+Put each concern where it can be owned cleanly:
 
-When the domain expert must settle a work-product judgment, use the derivation
-[interview guide](../faithful-derivation/guides/expert-interview.md) for the relevant
-questions. Ask and carry back actual answers; do not require the whole bank. For
-implementation, preserve the responsibilities and evidence obligations in the
-[handoff guide](../faithful-derivation/guides/implementation-handoff.md) .
+| Module | Owns |
+| --- | --- |
+| Workflow graph | Sequence, branches, waits, retries, approvals, effects, and failure paths |
+| Agent prompt | One node-local task, its supplied context, any Skill use, and the required result |
+| Workspace Skill | Reusable methodology that may vary by workspace |
 
-Done means the graph, prompts and Skills have clear responsibilities, every fixed input
-comes from current evidence, and each consequential output has its required proof or an
-explicit remaining gap.
+Build the smallest graph that owns the required behavior. Map every input to a
+concrete upstream output. Give every meaningful error a recovery path or an
+intentional terminal. Keep routing, authority, recipients, waits, retries,
+approvals, and effects in graph structure and typed parameters rather than
+prompt prose. Use AI for bounded judgment or language work, not hidden control
+flow.
+
+A parallel Agent branch that cannot reach its resource fills its schema from
+whatever context it has and completes clean. Require each branch to return the
+subject it read, and give the join a rule to discard a disagreeing branch and
+record the disagreement as output.
+
+When an Agent uses a Skill, the Skill owns the reusable method. Its name,
+trigger, responsibility, promised result, and missing-context behavior are the
+interface consumers depend on. The Agent prompt supplies the local task,
+available context, when to use the Skill, and the result this graph needs.
+Prompt length is not the target; clear ownership is.
+
+Done means every value has a source, every effect has an owner, every failure
+has a disposition, and no prompt secretly carries graph control or authority.
 
 ## 4. Change only what was authorized, then prove it
 
-For read-only work, use the current validation and resource surfaces to support the
-finding, then stop before mutation. For an authorized change, use the current docs and
-the chosen product surface to change the complete workflow document. Preserve state the
-user did not ask to change. Validate the stored draft, resolve structural findings and
-return relevant observations to the supporting judgments. Separately assess what
-validation cannot prove: useful runtime data, prompt and Skill quality, live
-credentials, recipient and destination suitability, business correctness, and effect
+For read-only work, use the current validation and resource surfaces to support
+the finding, then stop before mutation. For an authorized change, use the
+current docs and the chosen product surface to change the complete workflow
+document. Preserve state the user did not ask to change. Validate the stored
+draft, resolve structural findings, and separately judge what validation cannot
+prove: useful runtime data, prompt and Skill quality, live credentials,
+recipient and destination suitability, business correctness, and effect
 safety.
 
-Perform only the requested lifecycle or execution operation. Keep its receipt and
-canonical resource URIs when MCP supplies them. For asynchronous work, acceptance is the
-start of observation, not the end. Follow live execution, node, output, provider, and
-destination evidence until it supports the user's actual claim.
+Prove the stored document is the authored one. The create and update surfaces
+take the whole document and there is no delete, so a truncated store is
+permanent: measure the document against the emitting budget before the call, and
+after it, hash the read-back from disk against the authored file. A read-back
+routed through a model's output is transcription, not proof.
 
-Done means a read-only finding is supported, or an authorized change is visible in
-current product state and its requested outcome is observed. In either case, name the
-last observed state and exact remaining uncertainty.
+Perform only the requested lifecycle or execution operation. Keep its receipt
+and canonical resource URIs when MCP supplies them. For asynchronous work,
+acceptance is the start of observation, not the end. Follow live execution,
+node, output, provider, and destination evidence until it supports the user's
+actual claim.
+
+Where a known-good result exists, compare against one produced from the same
+trigger, on an isolated Decision Site, with the artifact under comparison
+withheld from the evidence. Identity fields reproduce across runs; unenforced
+counts do not — score those across two runs or report a range.
+
+Done means a read-only finding is supported, or an authorized change is visible
+in current product state and its requested outcome is observed. In either case,
+name the last observed state and exact remaining uncertainty.
 
 ## Composition
 
+- Load `writing-for-agents` when changing an Agent prompt or Skill body.
+- Load `faithful-derivation` when the workflow derives a visible work product
+  or decision from customer or operational evidence.
 - Use the task's domain Skill for its methodology. A domain Skill does not grant
   product access, mutation authority, or permission to produce an effect.
 
 ## Return the evidence
 
 For authoring or editing, report the purpose, graph, changed canonical resource,
-external effects, live dependencies, validation result, operations performed, observed
-outcome, and unresolved risk.
+external effects, live dependencies, validation result, operations performed,
+observed outcome, and unresolved risk.
 
-For review or diagnosis, lead with the first condition that can make the graph fail,
-no-op, contact the wrong person, produce the wrong result, or hide a failure. Name the
-responsible node or field and the live evidence supporting the finding.
+For review or diagnosis, lead with the first condition that can make the graph
+fail, no-op, contact the wrong person, produce the wrong result, or hide a
+failure. Name the responsible node or field and the live evidence supporting
+the finding.
+
+Before reporting either, test the claim against each failure boundary below and
+say which evidence rules it out. A boundary read once at load does not fire at
+the moment the claim is made.
 
 ## Failure boundaries
 
