@@ -69,7 +69,7 @@ fidelity_gate:
 
 policy_gate:
 
-- downstream output cannot be shown unless permission, confidence, relevance, freshness, privacy, or other policy passes
+- the affected display, persistence, send or action cannot proceed until its required permission, confidence, relevance, freshness, privacy or other policy passes
 
 ## Speculative Execution
 

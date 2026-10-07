@@ -29,8 +29,10 @@ do not replace current-system evidence.
 
 ### Dependency
 
-Ask what makes the current stack incapable or prohibitively expensive. Assess current evidence about its
-configuration, platform features, and narrower guarantees first; obtain missing comparisons when accessible and keep remaining gaps precise. Price updates,
+Ask what concrete capability or continuing cost makes the dependency worthwhile.
+Assess the current stack's configuration, platform features, and narrower guarantees;
+compare them with the proposed dependency rather than requiring literal impossibility.
+Obtain missing comparisons when accessible and keep remaining gaps precise. Price updates,
 security, transitive code, runtime behavior, failure, and diagnosis.
 
 ### Abstraction
@@ -87,19 +89,18 @@ mechanism, and state what evidence would reopen the decision.
 ### Direct recommendation
 
 ```md
-I agree with the outcome, but the current evidence proves <present need>, not
-<larger design>. I recommend <smallest sufficient move> because <specific
-ownership cost>. We should reopen <larger design> if <concrete signal> becomes
-true.
+I recommend <smallest sufficient move> to achieve <protected outcome>.
+<Current evidence> supports it; <larger design> adds <specific ownership cost>
+for <guarantee whose need remains unproved>. We should reopen that choice if
+<concrete signal> becomes true.
 ```
 
 ### Agent or junior-produced evidence
 
 ```md
-The research changes the facts we should consider, but it does not decide the
-system tradeoff by itself. I verified <facts> against <local sources>. They
-support <decision>; <missing evidence or ownership cost> keeps them from
-supporting <larger conclusion>.
+I verified <facts> against <local sources>. They support <decision>.
+<Missing evidence or ownership cost> limits the broader conclusion; the
+remaining system tradeoff is <owner choice and its consequence>.
 ```
 
 Do not discount evidence because of who found it. Separate observations,

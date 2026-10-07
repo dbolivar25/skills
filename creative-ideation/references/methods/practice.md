@@ -10,7 +10,7 @@ Practices for sustained work over weeks and months, not single-session ideation.
 ## When to use
 
 - Long-term creative project; the question is sustainability, not "give me an idea"
-- Globally blocked, not locally (Oblique Strategies for local; this for global)
+- The user wants to sustain a practice; for a local impasse with material, consider Oblique Strategies
 - Producing the same thing over and over — scratching imports new material
 - You want to convey that creative work has *conditions*
 
@@ -49,7 +49,7 @@ You need closed mode to *do* the work, but you cannot *generate* in closed mode.
 4. **Confidence** — to make a mistake without immediate self-criticism.
 5. **Humor** — Cleese is emphatic. Solemnity is the enemy.
 
-Most "I have no ideas" problems are actually "I haven't made the conditions for ideas". Make them.
+This tradition treats protected space, time, confidence, and humor as useful conditions. Investigate what is actually missing before prescribing a routine; a weak result can also need better material or a different operation.
 
 ## Cameron — morning pages and artist dates
 
@@ -74,10 +74,10 @@ Both are required. Morning pages without artist dates produces grim self-disclos
 ## Anti-slop notes
 
 - These are practices, not techniques. Don't pitch as quick fixes. Benefit accrues over weeks.
-- Don't generate fake LeWitt sentences. Use the real ones.
+- Distinguish quoted LeWitt sentences from new instructions you author. An original instruction-as-work is a valid result; do not attribute it to LeWitt.
 - Don't fake Cameron's tone if it's not yours. Use the practice without the language.
 - Avoid the "celebrity morning routine" trap. These four traditions are about specific named practices with specific mechanisms — not lists of habits.
-- Don't prescribe more than two practices at once. Pick one or two; let them take.
+- Recommend a manageable practice that fits the user's actual conditions. More routines do not establish more creativity.
 
 Sources: Tharp, *The Creative Habit* (Simon & Schuster, 2003); LeWitt, "Sentences on Conceptual Art" (*0–9* No. 5, 1969); Cleese, Video Arts lecture (1991); Cameron, *The Artist's Way* (Tarcher/Putnam, 1992).
 
@@ -85,7 +85,7 @@ Sources: Tharp, *The Creative Habit* (Simon & Schuster, 2003); LeWitt, "Sentence
 
 # Oblique Strategies
 
-Brian Eno + Peter Schmidt, 1975. A deck of ~110 gnomic cards for breaking studio deadlocks. Used on Bowie's *Berlin Trilogy*, *Music for Airports*, and dozens of other records.
+Brian Eno + Peter Schmidt, 1975. A changing series of card decks for breaking studio deadlocks. This file contains a working subset, not a complete edition; name the sampled set when that distinction matters.
 
 ## When to use
 
@@ -101,7 +101,7 @@ Brian Eno + Peter Schmidt, 1975. A deck of ~110 gnomic cards for breaking studio
 
 ## Procedure
 
-1. Pick a card by random index (not by what feels appropriate — that defeats the operation).
+1. Draw a real random index into an identified deck or the working subset below. Do not choose the convenient card and call it random.
 2. Apply it literally to the next decision in front of you. **The card is trusted even if its appropriateness is quite unclear** (Eno).
 3. Make the move it suggests.
 4. Don't over-explain. The card; what it means here; the move. Done.
@@ -166,7 +166,7 @@ Brian Eno + Peter Schmidt, 1975. A deck of ~110 gnomic cards for breaking studio
 ## Anti-slop notes
 
 - Don't generate fake "Eno-style" cards. Use the real deck.
-- Don't pad. Card → meaning here → move. Three sentences max.
+- Keep the card, its meaning here, and the resulting move clear. A short response usually suffices; a finished piece or explanation can need more when requested.
 - Don't apologize when the card lands strangely. The strangeness is the operation.
 
-Full deck and history: rtqe.net/ObliqueStrategies (Gregory Alan Taylor's archive).
+Full deck and history: [Gregory Alan Taylor's archive](https://www.rtqe.net/ObliqueStrategies/). Use an actual edition when the request calls for it; identify a subset draw honestly.

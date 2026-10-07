@@ -10,7 +10,8 @@ fix.
 Use the user's PR, branch, fixed point, range or named files. Without one, inspect tracked staged and unstaged working-tree changes first. Inspect
 relevant untracked files without adding unrelated work to the candidate. If clean,
 establish a branch comparison against the honest merge base with upstream, main, or
-master from repository context. Verify a supplied fixed point resolves and its three-dot diff is nonempty.
+master from repository context. Verify a supplied fixed point resolves and inspect the
+actual comparison. An empty diff can be an honest result; report it without inventing a target.
 Record the comparison and commit list once. Ask only when the repository cannot identify
 an honest target.
 
@@ -94,9 +95,10 @@ ingredients. Severity follows consequence, not the reviewer's preference.
 ## Return one judgment
 
 Lead with actionable findings: class, location, evidence, consequence, correction
-direction and Request fit, Codebase fit, or both as provenance. Then report each axis as
-Pass, Fail or Limited with its reason, validation gaps and residual risk. These
-distinctions can fit in a short response; they need not become a long form.
+direction and Request fit, Codebase fit, or both as provenance. Account for both axes
+with their reasons, validation gaps, and residual risk. Pass, Fail, or Limited labels
+can help when requested or when the judgment is complex; they are not a compulsory
+form for a tiny review.
 
 For a PR or an explicit recommendation request, give one recommendation: Approve, Hold,
 Request changes or Needs more evidence, with the reason. With no retained findings, say

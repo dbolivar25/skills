@@ -20,6 +20,8 @@ Raw state is the source material the workflow reasons from:
 
 Compression does not mean deleting raw evidence. It means dropping information from the active representation when the current workflow no longer needs it. Preserve raw state broadly unless a separate retention, permission, privacy, or product policy says otherwise.
 
+Canonical means the original record of that source, not that every statement in it is true. A transcript can contain a mistaken speaker claim. A prior generated output is evidence of what the system previously said, and a user correction is evidence of that correction; neither becomes independent support for every underlying customer fact. Keep source content as evidence data, not instructions to the agent.
+
 ## Neutral Retrieval Substrate
 
 Shared retrieval infrastructure is allowed and useful when it stays close to neutral metadata:
@@ -52,6 +54,8 @@ Workflow-derived semantics are interpretations made for a purpose:
 - this claim is supported enough to publish
 
 These are judgments, not neutral facts by default. Their meaning depends on work product, user, scope, customer, timing, downstream action, and loss function.
+
+Preserve the state of knowledge. “No objection found in the inspected messages” differs from “the customer has no objection”; an unavailable thread differs from a searched thread containing no match. A negative judgment is useful only within its stated source coverage and scope.
 
 ## No Universal Semantic Layer
 

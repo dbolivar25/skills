@@ -1,4 +1,4 @@
-# Expert Interview
+# Elicit domain judgment
 
 Use this guide when the domain expert knows what good looks like but the workflow
 shape is not yet clear. Ask only the unresolved questions that can change the design, using available source evidence first. Translate actual expert answers into the design; do not invent answers or treat missing expertise as model certainty. Asking or sending questions through an external channel requires the task's messaging authority.
@@ -6,32 +6,17 @@ shape is not yet clear. Ask only the unresolved questions that can change the de
 Apply the shared [derivation contract](../references/derivation/contract.md). This guide owns the
 task-specific method below; read its references before their governed decisions.
 
-## Roles
+## Use the expert's actual authority
 
-Domain Expert:
+The domain expert supplies quality, user value, failure modes and signals from the real job. The assistant turns that knowledge into testable obligations and a design. The engineer owns implementation within the task, and a reviewer assesses its evidence. These responsibilities can belong to the same person; titles do not make an unsupported answer authoritative.
 
-- owns the reality of the work product
-- defines quality, failure modes, user value, and expert signals
+Use actual outputs and source examples to make differences concrete. Ask the expert to explain a good/bad pair or the signal that would change their decision. Preserve disagreement and uncertainty rather than blending answers into one confident voice.
 
-Meta-Workflow Assistant:
-
-- asks concrete questions the expert can answer
-- extracts output obligations, judgments, dependencies, evidence needs, fidelity requirements, confidence structure, and eval ideas
-- produces a draft derivation spec
-
-Engineer:
-
-- implements the DAG, retrieval, prompts or tools, node contracts, evals, persistence strategy, and runtime behavior
-
-Reviewer:
-
-- validates whether the workflow output is faithful, useful, and shippable
-
-## Interview Rule
+## Ask about decisions, not abstractions
 
 Do not ask abstract questions like "what dimensions matter?" Ask concrete questions about excellent output, bad output, source evidence, failure, and trust. Translate answers into workflow design.
 
-## Question Bank
+## Question bank
 
 Start with only the questions needed to expose the next hidden fork. Do not turn the full bank into an interrogation if the answer is already available.
 
@@ -55,7 +40,7 @@ Before this decision, read [`raw-state-and-semantics`](../references/derivation/
 
 Judgment and evidence:
 
-Before this decision, read [`compression-and-dimensions`](../../writing/references/information-fidelity.md), [`evidence-support-and-confidence`](../../review/references/claim-support.md).
+Before this decision, read [information fidelity](../../writing/references/information-fidelity.md), [claim support](../../review/references/claim-support.md).
 
 - What should the model avoid saying unless directly supported?
 - What would count as strong evidence?
@@ -87,7 +72,7 @@ False positives:
 - Where does process delay look like hesitation?
 - Where do stakeholder views conflict?
 
-## Translation Step
+## Translate and check the result
 
 Before translating answers or supplied context, read the references governing
 the resulting decisions even when their question-bank sections were skipped:
@@ -98,8 +83,7 @@ the resulting decisions even when their question-bank sections were skipped:
 
 Before this decision, read [`evals-and-ablations`](../../evaluation/references/evals-and-ablations.md).
 
-Read the [derivation spec](../templates/derivation-spec.md) before translating the
-first round. After each interview round, translate answers into:
+Use the [derivation spec layout](../templates/derivation-spec.md) if it helps make the emerging design reviewable. After each useful round, update the affected parts of the design:
 
 - candidate work product contract
 - output obligations
@@ -114,6 +98,6 @@ first round. After each interview round, translate answers into:
 - evals and ablations
 - open questions
 
-Completion criterion: the expert reviews the translated derivation spec, not a vague brainstorm.
+Return concrete interpretations for the expert to confirm or correct, with source examples and unresolved forks. The interview is complete when the domain decisions needed for the requested stage have answers or explicit owners and evidence needs. If expert confirmation is unavailable, retain that limit; do not label the draft accepted. Do not require the expert to review unchanged fields after every small answer.
 
 Source: adapted from the corresponding contract, glossary, reference, guide or template in the personal Faithful Derivation skill.

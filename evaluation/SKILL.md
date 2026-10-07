@@ -9,7 +9,7 @@ Own a complete empirical comparison when the task asks for it. An evaluation des
 
 ## Make the decision measurable
 
-Identify the behavior and decision at issue: adopt, revise, remove, or collect more evidence. Read [evals and ablations](references/evals-and-ablations.md) for the detailed case/oracle/layer/ablation method needed. Define consequential failure limits, cost/latency concerns, and observations that would change the choice. Use existing owner constraints. Surface thresholds that require an owner decision instead of inventing numerical targets.
+Identify the behavior and decision at issue: adopt, revise, remove, or collect more evidence. Read [evals and ablations](references/evals-and-ablations.md) for the detailed case/oracle/layer/ablation method needed. Define consequential failure limits, cost/latency concerns, and observations that would change the choice. Scale the study to that decision; a focused comparison can use a small case set without claiming population-wide quality. Use existing owner constraints. Surface thresholds that require an owner decision instead of inventing numerical targets.
 
 Build representative cases covering real use, plausible false positives, boundary cases, consequential rare failures, and known regressions. Preserve source provenance, access, and decision-time boundaries. Separate development material from final judgment cases; protect holdouts from candidate and grader leakage.
 

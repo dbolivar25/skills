@@ -7,9 +7,11 @@ description: Use when work must survive interruption, coordinate agents, depend 
 
 Carry the owner's intended outcome through changes, interruptions, and delivery. Preserve the runtime as the durable authority. A bounded task without these needs can proceed without a record; attach Steward when the need appears.
 
+The Record holds the work, not every thought. Intent says what the owner wants; Work gives a real actor a responsibility; a report needs independent acceptance; Claims track premises that must stay true; Receipts establish the requested outcome. Keep these meanings distinct rather than making a second plan or status ledger.
+
 ## Open or recover
 
-For existing work, inspect the Record before continuing. For new durable work, define Aim, Why, applicable versioned Rules, Non-goals, and observable Done obligations. Include only obligations the requested outcome requires. Read `references/runtime.md` before the first event operation and open with the smallest useful responsibility using `scripts/steward.py`.
+For existing work, inspect the Record before continuing. For new durable work, define Aim, Why, applicable versioned Rules, Non-goals, and observable Done obligations. Include only obligations the requested outcome requires. Read [runtime mechanics](references/runtime.md) before the first event operation and open with the smallest useful responsibility using `scripts/steward.py`. Use the [worked example](references/worked-example.md) when an event sequence is unfamiliar; its fictional evidence demonstrates the CLI and cannot accept real work.
 
 The stewarding agent is the sole writer of the append-only Record. Use the existing CLI; do not hand-edit events or maintain a second independently updated state file. The runtime validates shape and transitions, not the truth of evidence.
 
@@ -22,6 +24,8 @@ The stewarding agent is the sole writer of the append-only Record. Use the exist
 5. Integrate accepted results into the next work, support, or receipt. Batch related observed events and their consequences. Do not record every search or tool call.
 
 Read `references/collaboration.md` for assignment, pausing, replacement, and cancellation. Read `references/review.md` when commissioning or evaluating a report; it owns phase-specific criteria and the exact response contract. Use `references/worked-example.md` when a complete event sequence would clarify recovery, changed support, or owner correction.
+
+A source-level gap is yours to investigate. An owner Ask is for a real missing decision or authority, not for an ordinary delegated choice. Existing authorization and informed settlements continue to govern their scope.
 
 ## Preserve live support and authority
 
@@ -36,5 +40,7 @@ When Intent changes, revise it and explicitly stop affected work, withdraw inval
 ## Finish from evidence
 
 Add a receipt only when its observation satisfies a current Done obligation. Keep correctness, requested delivery stage, and observed outcome distinct where the task requires them. The runtime derives completion from live receipts. Withdraw invalid receipts and reopen the needed work with new evidence identities.
+
+Inspect before claiming DONE. Met receipt obligations do not erase an open Ask or unfinished responsibility: `next` can still select review, available work, or waiting. Finish necessary work; explicitly stop obsolete unfinished work and its real actors when justified. Do not add unrequested delivery stages merely to create more receipts.
 
 Report the usable outcome, meaningful evidence, and exact unfinished obligations. A concise update is a projection of the Record; expose the ledger only when it helps the owner.

@@ -1,39 +1,11 @@
-> This is a retained, worked representation recipe. Its aesthetic values and
-> count budgets describe the example treatment; adapt them to the actual data,
-> reader, destination, and [selected skin](../skins.md). Preserve the semantic
-> encoding and source distinctions. Publication figures may use plotting tools.
-> The bundled [verification method](../verification.md) states actual helper coverage.
+# Pyramids and funnels
 
-# Pyramid / Funnel
+Use a pyramid for a qualitative hierarchy or a funnel for a population narrowing through stages. Decide whether width or area carries a number before drawing.
 
-**Best for:** hierarchy of needs, prioritization ranks, value pyramids, conversion funnels, content importance stacks.
+In a qualitative pyramid, size is schematic. Label the relationship and avoid suggesting measured shares. The apex is not automatically the most important item; the source defines the hierarchy.
 
-## Two orientations — pick one
-- **Pyramid** (point up) — narrow apex = most important / rarest / most valuable. Base is broadest / foundational.
-- **Funnel** (point down) — narrow end = conversion (smallest group). Top is widest / audience.
+In a quantitative funnel, retain stage counts, denominators, cohort definitions, and observation windows. Choose one quantitative encoding and derive geometry accordingly. Width proportional to count differs from area proportional to count. Counts may increase when the population changes or new entrants join; do not force a tapered shape to conceal that fact.
 
-Don't mix orientations on one diagram.
+A measured zero and an unknown count need different treatment. Verify geometry, cohort continuity, missing stages, and any conversion rates against the source. Inspect narrow labels and the exported shape at reading size.
 
-## Layout conventions
-- 4–6 layers. Each layer is a trapezoid built from an SVG `<polygon>` with 4 points.
-- Consistent layer height (56–72px).
-- Widths decrease linearly from base to apex (pyramid) or top to bottom (funnel). When showing real funnel data, widths must be honest (proportional to count/percentage).
-- Each layer has:
-  - **Name label** centered inside the trapezoid — Geist 12–14px 600.
-  - **Sublabel** below or beside the name — Geist Mono 9–10px.
-  - **Side annotation** (right or left) — optional. For funnels: drop-off percentage here (`−40%`).
-- Fill: subtle graded tints OR all paper-2 with hairline dividers (cleaner). Pick one.
-- Stroke: 1px hairline between layers; outer silhouette 1px muted or ink.
-- **Coral on ONE layer only**: apex of pyramid, conversion layer of funnel, or critical bottleneck.
-- Optional left-margin axis arrow + Geist Mono label (`rarer ↑`, `drop-off ↓`).
-
-## Anti-patterns
-- 7+ layers (illegible — compress or split).
-- Pyramid for non-hierarchical data (use a tree or bar chart).
-- Dishonest widths (fake equal spacing when drops are unequal).
-- Coral on the base layer (dilutes the "apex = rare" signal).
-
-## Examples
-- `../../assets/example-pyramid.html` — minimal light
-- `../../assets/example-pyramid-dark.html` — minimal dark
-- `../../assets/example-pyramid-full.html` — full editorial
+Reference layouts: [pyramid](../../assets/example-pyramid.html), [full](../../assets/example-pyramid-full.html), [dark](../../assets/example-pyramid-dark.html).

@@ -69,10 +69,10 @@ Apply S+7 to the stuck paragraph. The dislocation surfaces what the original was
 
 ## Anti-slop notes
 
-- Constrained-without-subject = exercise, not work. *La Disparition* works because the missing E *is* the subject.
+- A constraint can generate an exercise or a finished work. Inspect what it forces the piece to discover; do not assume the form alone supplies interesting material.
 - Apply strictly. Half-constrained is worse than unconstrained.
 - Don't fake "Calvino-style" surface qualities. Use the actual constraints.
-- Acrostics are not OuLiPo (centuries older). Use a real constraint or call an acrostic an acrostic.
+- Name an acrostic or other pre-existing form precisely. Older constraints can be used in this tradition; age alone does not establish an OuLiPo attribution.
 
 ---
 
@@ -105,7 +105,7 @@ Bob Eberle, 1971, building on Alex Osborn's brainstorming checklist (1953). Seve
 
 **P — Put to other uses.** Use the existing thing for a different purpose. *(Aspirin: pain reliever → stroke prevention. Blockchain: cryptocurrency → supply chain. Sweater: garment → kiln cushioning.)*
 
-**E — Eliminate.** Remove a component. **Usually the highest-leverage cell.** *(Eliminate UI: CLI/API as product. Eliminate menu: omakase, single-dish restaurant. Eliminate explanation: Eno's *Music for Airports*.)*
+**E — Eliminate.** Remove a component. Try removing what seems indispensable. *(Eliminate UI: CLI/API as product. Eliminate menu: omakase, single-dish restaurant. Eliminate explanation: Eno's *Music for Airports*.)*
 
 **R — Reverse / Rearrange.** Invert relationships, change sequence, turn inside out. *(Priceline reverses seller/buyer. Wikipedia reverses expert/amateur. *Memento* reverses time order.)*
 
@@ -113,9 +113,9 @@ Bob Eberle, 1971, building on Alex Osborn's brainstorming checklist (1953). Seve
 
 1. State the base in one precise sentence.
 2. Run all seven operators. **Don't skip cells.** The cells you don't want to run are usually where the surprise is.
-3. Read the seven. Most will be slop; one or two will be interesting; one might be surprising.
-4. Take the surprising one and elaborate.
-5. Discard the rest.
+3. Compare the seven for meaningful difference, interest and fit.
+4. Develop the strongest direction for the request; surprise can be a reason to choose it.
+5. Drop weak ideas. Preserve viable alternatives when range is part of the requested result.
 
 ## Worked example
 
@@ -129,13 +129,13 @@ Bob Eberle, 1971, building on Alex Osborn's brainstorming checklist (1953). Seve
 - E: eliminate the tracking — keep the database of paragraphs as a "this is where I cried" annotation layer
 - R: instead of you tracking the book, the book tracks you — delivers itself in chunks based on your demonstrated rhythm
 
-Strongest cells: S, P, R. Elaborate P: a site where the unit of attention is the *paragraph* across the readerly population, not the book. Discard the rest.
+For this example, choose S, P, R. Elaborate P: a site where the unit of attention is the *paragraph* across the readerly population, not the book. Drop weaker directions.
 
 ## Anti-slop notes
 
-- Most common SCAMPER slop: "Combine X with AI/ML/blockchain/AR". Reject.
-- Second most common: "make it a subscription" (business-model shift, not product variation).
+- Reject a fashionable technology label without a changed mechanism.
+- A subscription alone changes pricing. Identify the changed experience if presenting it as a product variation.
 - Surface the results the request needs. The seven operators are working scaffolding, not a compulsory final list.
-- Eliminate and Reverse produce the strongest non-slop output. Spend most of the budget there.
+- If variants keep reproducing the base, try Eliminate and Reverse. Let actual interest and fit decide where to spend effort.
 
 Source: Eberle, *Scamper: Games for Imagination Development* (DOK, 1971); Osborn, *Applied Imagination* (Scribner's, 1953).

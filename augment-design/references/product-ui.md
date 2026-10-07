@@ -12,9 +12,9 @@ obvious. They will use it again tomorrow.
 
 Two floors apply here, and both are minimums.
 
-The interface floor: every interactive element has a hit area of at least 44px, a
-focus ring, and hover, press, disabled, and loading states. Every view has
-loading, empty, error, and populated states. Keyboard reaches everything.
+The interface floor: controls are comfortable to operate with the supported input methods, have visible keyboard focus, and expose the states they can actually reach. Use 44px targets as the touch-oriented default; dense desktop controls and inline links follow their applicable platform guidance and accessibility requirements. Do not extend hit areas over neighboring controls. [Hit areas](../../interface-design/references/code-patterns.md#hit-areas) distinguishes the web minimum from the enhanced criterion.
+
+Hover needs a pointer; loading needs an async action; disabled needs a real reason. Design relevant loading, empty, error, restricted, and populated states rather than inventing every state for every element. Keyboard must reach and operate every applicable action.
 
 The AI product floor: anything the platform generates or acts on also shows
 progress while it runs, gives the reader an error they can recover from,

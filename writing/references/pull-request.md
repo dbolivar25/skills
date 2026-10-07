@@ -2,7 +2,7 @@
 
 The artifact supports a merge decision about the **current base-to-head change**.
 Existing descriptions, commits, tickets and explanations provide intent; they
-do not override the implemented change. Read [change reconstruction](change-account.md),
+do not override the implemented change. Read [the change-account method](change-account.md),
 obtain current source and actual validation, and pin the base/head comparison. For a local draft, use the pinned
 local comparison and retain the lack of live PR evidence. If a required source
 version cannot be obtained, state the exact evidence limit. Writing the description does not request a merge verdict.

@@ -1,18 +1,20 @@
-# Faithful Derivation Review Report
+# Derivation review layout
 
-Use this template for a selected complete faithful-derivation review of a workflow, plan, code path, prompt graph, generated artifact, or workflow spec. Keep design adequacy separate from observed fidelity and execution evidence.
+Use this layout when a complete derivation review benefits from explicit coverage. The [derivation contract](../references/derivation/contract.md) owns semantic obligations; these sections are prompts, not a compulsory report. Lead with the supported decision and actionable findings. Combine sections, omit inapplicable fields and keep the detailed coverage private when the reader needs a short account. Keep design adequacy separate from observed fidelity and execution evidence.
 
-## Posture
+## Assessment
 
-PASS | REVISE | REPLAN
-
-Reason:
+Supported decision and reason (optional shorthand: PASS | REVISE | REPLAN):
 
 Assessment scope and stage:
 
 Source/output versions and observations inspected:
 
 Evidence limits:
+
+## Actionable findings
+
+For each finding, identify the affected obligation, source/case, mechanism, consequence, evidence strength and smallest useful repair. Distinguish demonstrated failure, design omission and untested concern.
 
 ## Work Product
 
@@ -84,7 +86,7 @@ Missing support packages:
 Source pointer gaps:
 Contradictions not carried:
 Open questions hidden:
-Confidence shape:
+Relevant confidence weaknesses and reasons:
 Scalar-confidence risks:
 Rendering policy gaps:
 ```
@@ -104,7 +106,9 @@ Decay behavior:
 Fail behavior:
 ```
 
-## Evals
+## Quality evidence
+
+Select the layers the system contains. Keep proposed, executed and independently judged checks distinguishable.
 
 ```text
 Final-output evals:

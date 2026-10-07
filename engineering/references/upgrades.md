@@ -17,7 +17,7 @@ without selecting either implementation or a merge verdict.
 From current component, resolution, and runtime records, establish:
 
 - package, image, tool, or generated component;
-- old and new exact versions, including every intermediate release;
+- old and new exact versions and the release interval between them;
 - ecosystem and affected manifests, lockfiles, images, and generated artifacts;
 - resolved transitive graph changes;
 - supported runtime, operating system, architecture, browser, or build-platform
@@ -54,9 +54,12 @@ either traced or named as an evidence gap.
 Require primary-source evidence for the exact version interval: release notes,
 changelog, migration guide, compatibility matrix, security advisory, package metadata,
 and supported API documentation. Compare the installed or resolved version with
-those sources; an unknown version or missing intermediate release is an evidence gap.
+those sources. Cover the interval with authoritative cumulative guidance or the
+individual releases needed to reveal relevant changes; do not rely only on the target
+release's highlights. An unknown endpoint or uncovered part of the interval is an
+evidence gap.
 
-For each intermediate release, retain only behavior that intersects the repository's
+Across that interval, retain behavior that intersects the repository's
 usage or runtime envelope:
 
 - breaking and deprecated APIs;
@@ -90,7 +93,7 @@ plus runtime evidence; lack of overlap is never the sole safety claim.
 
 ## Return the compatibility assessment
 
-Return:
+Present the assessment in the order useful to the caller. This shape is optional:
 
 ```md
 ## Dependency delta
@@ -105,7 +108,7 @@ Return:
 ## Platform and transitive risk
 - <observed change, consequence, and evidence>
 
-## Lens findings
+## Compatibility findings
 - <candidate finding or "No compatibility defect found in the checked scope">
 
 ## Proof gaps

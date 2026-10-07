@@ -100,6 +100,8 @@ class Diagram:
     edges: list[Edge] = field(default_factory=list)
     fragments: list[dict[str, Any]] = field(default_factory=list)
     notes: list[str] = field(default_factory=list)
+    unparsed: list[dict[str, Any]] = field(default_factory=list)
+    source_features: list[dict[str, Any]] = field(default_factory=list)
     discarded: dict[str, int] = field(
         default_factory=lambda: {"style_directives": 0, "click_handlers": 0}
     )
@@ -772,6 +774,8 @@ def _parse_flowchart(
         if parsed is not None:
             node_id, label, shape = parsed
             diagram.add_node(node_id, label, shape, parent)
+        else:
+            diagram.unparsed.append({"line": line_number, "text": text})
 
 
 def _parse_sequence(
@@ -819,6 +823,11 @@ def _parse_sequence(
                 clean_label(label),
                 "actor" if kind == "actor" else "lifeline",
             )
+            if lowered.startswith("create "):
+                diagram.source_features.append({
+                    "line": line_number, "text": text,
+                    "reason": "participant retained; creation timing not modeled",
+                })
             continue
         fragment = re.match(r"^(alt|opt|loop|par|critical|break)\b\s*(.*)$", text, re.I)
         if fragment:
@@ -828,6 +837,8 @@ def _parse_sequence(
                 "line": line_number,
                 "depth": len(fragment_stack),
                 "regions": [],
+                "first_message": len(diagram.edges) + 1,
+                "region_boundaries": [],
             }
             diagram.fragments.append(entry)
             fragment_stack.append(entry)
@@ -835,16 +846,30 @@ def _parse_sequence(
         region = re.match(r"^(else|and|option)\b\s*(.*)$", text, re.I)
         if region and fragment_stack:
             fragment_stack[-1]["regions"].append(clean_label(region.group(2)))
+            fragment_stack[-1]["region_boundaries"].append({
+                "label": clean_label(region.group(2)),
+                "first_message": len(diagram.edges) + 1,
+                "line": line_number,
+            })
             continue
         if lowered == "end":
             if fragment_stack:
-                fragment_stack.pop()
+                entry = fragment_stack.pop()
+                entry["last_message"] = len(diagram.edges)
+                entry["end_line"] = line_number
+            else:
+                diagram.unparsed.append({"line": line_number, "text": text})
             continue
         if lowered.startswith(("activate ", "deactivate ", "+", "-")):
+            diagram.unparsed.append({"line": line_number, "text": text})
             continue
         if lowered.startswith("note "):
             _, separator, note = text.partition(":")
             diagram.notes.append(clean_label(note if separator else text[5:]))
+            diagram.source_features.append({
+                "line": line_number, "text": text,
+                "reason": "note text retained; attachment not modeled",
+            })
             continue
         message = message_re.match(text)
         if message:
@@ -871,11 +896,22 @@ def _parse_sequence(
                 else "solid",
                 arrowhead,
                 bidirectional=token.startswith("<<"),
-                undirected=arrowhead == "none",
+                undirected=False,
             )
+            if re.search(r"(?:<<--?>>|--?>>|--?>|--?\)|--?x)\s*[+-]", text):
+                diagram.source_features.append({
+                    "line": line_number, "text": text,
+                    "reason": "message retained; activation shorthand not modeled",
+                })
             continue
         if re.search(r"<<--?>>|--?>>|--?>|--?\)|--?x", text):
             _fail(f"malformed edge at line {line_number}")
+        diagram.unparsed.append({"line": line_number, "text": text})
+    for entry in fragment_stack:
+        diagram.source_features.append({
+            "line": entry["line"], "text": entry["kind"] + " " + entry["label"],
+            "reason": "fragment has no parsed closing end",
+        })
 
 
 def _state_endpoint(
@@ -958,6 +994,8 @@ def _parse_state(
         plain = re.match(r"^state\s+([\w.:-]+)$", text, re.I)
         if plain:
             diagram.add_node(plain.group(1), plain.group(1), "state", parent)
+        else:
+            diagram.unparsed.append({"line": line_number, "text": text})
 
 
 def _parse_er(
@@ -1010,12 +1048,30 @@ def _parse_er(
             continue
         if "--" in text or ".." in text:
             _fail(f"malformed edge at line {line_number}")
+        diagram.unparsed.append({"line": line_number, "text": text})
 
 
 def parse_block(block: SourceBlock) -> Diagram:
     lines = _prepared_lines(block)
     kind, direction, header_position = _kind_and_direction(lines)
     diagram = Diagram(block.index, kind, block.source_line, direction=direction)
+    # Retain an explicit loss receipt for source configuration and inline
+    # features removed before normalization. Source text stays inert.
+    raw_lines = block.text.splitlines()
+    frontmatter_end = _frontmatter_end(raw_lines)
+    for offset, raw in enumerate(raw_lines):
+        stripped = raw.strip()
+        if (offset <= frontmatter_end or stripped.startswith("%%{")
+            or (stripped and not lines[offset][1] and not stripped.startswith("%%"))):
+            diagram.source_features.append({
+                "line": block.source_line + offset, "text": raw,
+                "reason": "source configuration not modeled",
+            })
+        elif ":::" in raw or "@{" in raw:
+            diagram.source_features.append({
+                "line": block.source_line + offset, "text": raw,
+                "reason": "inline styles/expanded attributes only partly normalized",
+            })
     if kind == "flowchart":
         _parse_flowchart(diagram, lines, header_position)
     elif kind == "sequenceDiagram":
@@ -1174,14 +1230,22 @@ def digest(
                 f"{info['edges_dangling']} dangling), cycle: {info['has_cycle']}",
                 f"- shapes: {info['shapes']}",
                 f"- type candidates: {', '.join(info['type_candidates'])}",
-                f"- budget: nodes {'OVER' if info['over_node_budget'] else 'ok'} (max 9), "
-                f"edges {'OVER' if info['over_edge_budget'] else 'ok'} (max 12)",
+                f"- compact-layout density hint: nodes {'OVER' if info['over_node_budget'] else 'ok'} (example 9), "
+                f"edges {'OVER' if info['over_edge_budget'] else 'ok'} (example 12)",
             ]
         )
         if diagram.discarded["style_directives"] or diagram.discarded["click_handlers"]:
             output.append(
                 f"- discarded: {diagram.discarded['style_directives']} style directives, "
                 f"{diagram.discarded['click_handlers']} click handlers"
+            )
+        output.append(
+            f"- coverage: {len(diagram.unparsed)} unparsed statements; "
+            f"{len(diagram.source_features)} partially modeled source features (use --json)"
+        )
+        for item in diagram.unparsed[:max_rows]:
+            output.append(
+                f"  - line {item['line']}: {_escape_table(item['text'])}"
             )
         if diagram.fragments:
             fragments = ", ".join(
@@ -1214,7 +1278,7 @@ def digest(
                 f"- unconnected: {', '.join(_escape_markdown(label) for label in info['orphans'])}"
             )
         if info["collapsible_groups"]:
-            output.append("- collapsible groups (simplify here first):")
+            output.append("- candidate groups (collapse only within authorized fidelity):")
             for group in info["collapsible_groups"]:
                 output.append(
                     f"  - {_escape_markdown(group['label'])} — {group['children']} children: "
@@ -1283,6 +1347,8 @@ def to_json(path: Path, diagrams: list[Diagram], selected: list[Diagram]) -> str
                     "direction": diagram.direction,
                     "analysis": analyze(diagram),
                     "discarded": diagram.discarded,
+                    "unparsed": diagram.unparsed,
+                    "source_features": diagram.source_features,
                     "fragments": diagram.fragments,
                     "notes": diagram.notes,
                     "nodes": [asdict(node) for node in diagram.nodes],

@@ -11,7 +11,14 @@ Own a causal investigation to its strongest supported answer and the next useful
 
 Describe the expected and observed behavior, target environment, affected population, timing, frequency, and relevant changes. Preserve the original symptom and a reproducible observation receipt.
 
-When possible, produce a tight runnable reproduction with the relevant data and execution path. Read [diagnostic operations](references/operations.md) for loop/harness and instrumentation mechanics, and [causal reasoning](references/causal-reasoning.md) for reproduction adequacy or difficult causal interpretation. Minimize only while preserving the behavior that could cause the failure. Production-only, intermittent, distributed, or permission-dependent problems may require a bounded observation strategy instead. A missing local red command does not prevent useful hypotheses.
+When possible, produce a tight runnable reproduction with the relevant data and execution
+path. Read [diagnostic operations](references/operations.md) before constructing a harness,
+using temporary instrumentation, or choosing a production-only observation strategy.
+Read [causal reasoning](references/causal-reasoning.md) when reproduction adequacy,
+confounds, or competing explanations need deeper interpretation. Minimize while preserving
+the causal path. Production-only, intermittent, distributed, or permission-dependent
+problems may need bounded observations instead. A missing local red command does not
+prevent useful hypotheses.
 
 For performance, measure the actual bottleneck and pin comparable workloads, windows, units, and denominators. Use [Grafana](../grafana/SKILL.md) evidence methods for current metrics, logs, traces, or profiles.
 

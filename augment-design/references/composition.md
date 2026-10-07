@@ -3,11 +3,7 @@
 These rules apply to every Augment surface: product UI, documents, marketing.
 Branch files add a floor and a set of facets. They do not override anything here.
 
-Each rule commits to as little as it can while still forbidding something. Where
-a rule seems to permit a lot, that is intended. It should reject work nobody has
-drawn yet, instead of cataloguing mistakes someone already made. If you add a
-rule, name one composition it forbids and one it now allows that a stricter
-version would have blocked. Drop any rule that forbids nothing.
+Use the rules to choose structure before decoration. Preserve the surface's actual content and task. A rule should explain a visible consequence, not merely approve a familiar-looking template.
 
 ---
 
@@ -86,21 +82,19 @@ A branch can narrow which roles are available, and `documents.md` does.
 
 Declare the role in the markup on every chromatic fill and stroke:
 `data-aug-role="identity|signal|atmosphere|artwork"`. The attribute is where you
-answer the question, so declaring it is the point. Text color goes unaudited,
-since burgundy text is the spine doing its job.
+answer the question, so declaring it is the point. The audit does not classify text color; inspect its role and contrast directly. Burgundy text still needs to serve the composition rather than decorate every heading.
 
 ## One home
 
-Each fact appears once.
+Give each fact one primary home.
 
-A number in a card and again in a summary strip is one fact with two homes, and
-the second one makes the reader check whether it is the same number.
+A number repeated in a card and summary strip without a new reading purpose makes the reader check whether it is the same number. Prefer one clear home. Repeat only where navigation, comparison, an accessible representation, or a separate decision context needs it; keep the value and meaning consistent.
 
 What follows from that:
 
 - A closing section that restates what the page already established gives the
   whole page a second home.
-- A caption that repeats its figure's label is a second home.
+- A caption that merely repeats its figure's label adds no reading value. A caption can supply units, scope, uncertainty, or source that the figure lacks.
 - Repetition for navigation works differently. A running header, a page number,
   or a persistent nav item tells the reader where they are, and it has one home
   each time it appears.

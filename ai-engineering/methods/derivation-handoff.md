@@ -1,61 +1,35 @@
-# Implementation Handoff
+# Handoff and implement a derivation design
 
-Use this guide when a derivation spec needs to become a product workflow, code
-change, MCP workflow, prompt graph, evaluation harness or implementation ticket
-set. A handoff request returns the implementable mapping and verification obligations below. Implement only when the task authorizes implementation; then inspect actual code, stored contracts and results against the accepted design. A mapping or plan is not an execution receipt.
+Use this method when an accepted derivation design needs to become code, a stored workflow, a prompt graph, an evaluation harness or implementation tasks. A handoff request returns an implementable mapping and its verification obligations. When implementation is authorized, carry that mapping through the actual stored artifacts and consuming path. A plan is not an execution receipt.
 
-Apply the shared [derivation contract](../references/derivation/contract.md). This guide owns the
-task-specific method below; read its references before their governed decisions.
+Read the [derivation contract](../references/derivation/contract.md). The design is the semantic contract; implement it through the target system's existing models, retrieval, control flow, gates and delivery seams. Follow local conventions and ownership. Do not replace it with a universal summary object or a new framework merely to make the mapping uniform.
 
-## Contract
+## Resolve readiness at the affected boundary
 
-The derivation spec is the design contract. Implementation should not replace the spec with a generic architecture, fixed pipeline, universal semantic state, or model prompt that hides the judgments.
+Check the work product, obligations, judgments, source access, fidelity, dependencies, support, relevant gates, lifetime policy and evaluation plan. Identify the exact open decision, its owner and the work it blocks. Use reversible implementation choices within task authority; do not invent missing domain answers or reopen accepted tradeoffs without material new evidence.
 
-Follow local repository conventions, architecture, validation commands, and ownership boundaries from the target codebase.
+A partially resolved design can support independent implementation work. Keep the unresolved branch or effect gated instead of calling the whole spec ready or stalled.
 
-## Handoff Steps
+## Map the design into the real system
 
-1. Verify the spec is implementation-ready.
-   Completion criterion: work product, obligations, judgments, DAG, edge contracts, support packages, gates, confidence, evals, and open questions are present.
+Read [judgment DAGs and edges](../references/derivation/judgment-dags-and-edges.md) before mapping responsibilities. Assign each material judgment to the actual query, deterministic function, service, model request, tool, verifier, gate or manual/user step. Name its input/output and consuming boundary. A one-to-one node-to-agent mapping is unnecessary.
 
-2. Convert judgments into implementation responsibilities.
-   Read [`judgment-dags-and-edges`](../references/derivation/judgment-dags-and-edges.md) before implementation.
-   Completion criterion: each major judgment is assigned to a node, service, prompt, tool, deterministic function, retrieval query, verifier, gate, or explicit manual/user step.
+Turn material edge and intermediate contracts into the target's schemas or payloads. Preserve meaning, scope, exact fields, source handles, transformed values, uncertainty, relevant confidence weaknesses, invalidators, recomputation and allowed consumers. Distinguish a valid negative or no-match from unknown evidence and execution failure.
 
-3. Convert edge contracts into schemas or payload contracts.
-   Completion criterion: every intermediate representation names meaning, scope, exact fields, pointer fields, classified fields, aggregate fields, uncertainty, confidence, invalidators, recompute policy, allowed consumers, and promotion status.
+Keep source identity, spans or recoverable handles, permissions, timestamps, actors and object links until consumers have the fidelity they need. Check actual recovery and access rather than assuming a stored URL is sufficient. Use [information fidelity](../../writing/references/information-fidelity.md) where a representation changes or leaves context.
 
-4. Preserve raw-state access and provenance.
-   Completion criterion: source ids, source pointers, raw spans or recoverable handles, permissions, timestamps, actors, object links, and scope rules survive until downstream claims no longer need them.
+Read [publication and rendering](../references/derivation/publication-and-rendering.md) before implementing effects. Generation may run speculatively, but required support, access, scope, freshness and other gates control the affected display, send, persistence or action. Implement the defined fail behavior and recheck changed inputs. Read [claim support](../../review/references/claim-support.md) when confidence and support must change wording or omission; do not turn every confidence example into a compulsory schema.
 
-5. Implement gates separately from generation.
-   Read [`publication-and-rendering`](../references/derivation/publication-and-rendering.md) before implementation.
-   Completion criterion: candidate generation can run speculatively when useful, but display, send, persist, recommend, or act behavior is controlled by publication gates.
+Read [durable state and promotion](../references/derivation/durable-state-and-promotion.md) before choosing persistence or cross-consumer reuse. Classify persisted state by purpose and contract, then implement its invalidation, correction and maintenance path. An accepted historical result may need fresh support before reuse.
 
-6. Implement structured confidence and rendering.
-   Read [`evidence-support-and-confidence`](../../review/references/claim-support.md) before implementation.
-   Completion criterion: confidence axes can change output assertiveness, qualification, omission, escalation, or demotion.
+## Verify the integrated result
 
-7. Implement evals at the right layers.
-   Read [`evals-and-ablations`](../../evaluation/references/evals-and-ablations.md) before implementation.
-   Completion criterion: test coverage or eval harnesses cover final output, judgments, edge/fidelity, retrieval, and ablation where feasible.
+Read [evaluation](../../evaluation/references/evals-and-ablations.md) for semantic comparison or ablation work. Use relevant checks at the actual retrieval, judgment, transformation, gate and final-output boundaries. Include representative false positives, valid abstentions, source removal or stale reuse where those can change the result. Keep typed validity separate from semantic quality and publication readiness.
 
-8. Decide durable state intentionally.
-   Read [`durable-state-and-promotion`](../references/derivation/durable-state-and-promotion.md) before implementation.
-   Completion criterion: persisted semantic state is neutral substrate, workflow-specific durable state, or promoted reusable judgment state with a promotion contract.
+When handing off, provide responsibilities, concrete contracts, dependencies, known open decisions, verification cases and runnable checks at the scale the implementer needs. When implementing, inspect actual code or stored workflow against the accepted design, exercise the consuming behavior, repair meaningful failures and retain observations. Optimize only after the quality path is coherent, then compare the same workload without losing its protected obligations.
 
-9. Optimize last.
-   Completion criterion: caching, merging nodes, deterministic replacements, and incremental updates do not violate the fidelity contracts or gates.
+Warning signs include hidden judgments inside an undifferentiated prompt, one summary feeding incompatible consumers, exact values becoming prose before verification, dropped source pointers, candidate and published output sharing uncontrolled state, model confidence replacing support, and persistence without invalidators. Investigate their consequence rather than treating each shape as automatically wrong.
 
-## Implementation Smells
-
-- One prompt owns all judgments without inspectable contracts.
-- One summary object feeds every downstream node.
-- Exact values become prose before verification.
-- Source pointers are dropped before claims render.
-- Candidate output and published output are the same state.
-- Confidence is only model confidence.
-- Persistence happens because a value seems useful, not because it has a purpose and invalidation policy.
-- Tests judge only final copy quality, not retrieval, judgments, edges, or gates.
+Finish with the requested handoff or verified implementation stage, remaining decisions and exact evidence limits. Neither a completed mapping nor passing offline checks establishes deployment, publication or production acceptance.
 
 Source: adapted from the corresponding contract, glossary, reference, guide or template in the personal Faithful Derivation skill.

@@ -50,10 +50,7 @@
         <rect width="100%" height="100%" fill="#f5f5f5"/>
         <rect width="100%" height="100%" fill="url(#dots)" opacity="0.55"/>
 
-        <!-- Both axes carry the SAME 100-550 ms scale. That is the whole claim of a
-             slopegraph and the only thing that makes one slope comparable with
-             another; scripts/verify-slopegraph.py enforces it against the values
-             each line declares. -->
+        <!-- Both axes in this example use the same 100–550 ms scale. Independently compare both endpoint positions and labels with the illustrative source values. Source bindings aid traceability but do not prove the geometry. No packaged slopegraph semantic validator is present. -->
         <text transform="rotate(-90 24 230)" x="24" y="230" fill="#4f5d75" font-size="7" font-family="'Geist Mono', monospace" letter-spacing="0.14em" text-anchor="middle">P95 RESPONSE TIME, MS</text>
 
         <!-- No gridlines: every endpoint prints its own value, so a gridline would
@@ -136,8 +133,8 @@
         <p>512ms to 208ms, down 304 — the steepest slope here. It started so far above everything else that the largest absolute win still leaves it near the top. Level and change share one scale, which is what lets you read both at once.</p>
       </div>
       <div class="card">
-        <div class="card-header"><span class="card-dot ink-light"></span><h3>Auth barely moved because it had nothing to win</h3></div>
-        <p>154ms to 121ms, down 33. Nearly flat, and low on the axis — a shallow slope down here means a service that was already fast, while the same shallow slope near the top would mean a cache that did not work.</p>
+        <div class="card-header"><span class="card-dot ink-light"></span><h3>Auth has the smallest absolute decrease</h3></div>
+        <p>154ms to 121ms, down 33. Auth has the lowest p95 at both snapshots and the smallest absolute decrease. A shallow slope at a higher level would show little change from a higher starting latency; neither position establishes why the cache did or did not help.</p>
       </div>
     </div>
     <div class="footer">

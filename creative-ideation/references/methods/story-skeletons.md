@@ -80,9 +80,9 @@ Use when:
 ## Procedure
 
 ### Shaping a story you have material for
-1. Try Coats #4 spine. Can you fill in six blanks? If not, you may not have the spine yet.
-2. Apply Saunders attention. Read sentence by sentence; ask "what does this now want?" at each transition.
-3. Ask Le Guin's question: is the conflict-arc actually right for this material, or am I forcing it?
+Choose the tradition that fits the material. Coats's spine helps when a causal arc is wanted; Saunders's attentive rereading helps a draft discover its next demand; Le Guin's carrier bag can preserve a place, community, duration, or collection that a hero's conflict would flatten. These are different ways to shape a work, not a compulsory three-stage pipeline.
+
+If using Coats #4, try the six blanks and inspect the resulting causal sequence. If using Saunders, read each transition and respond to what the draft now asks. If using Le Guin, make the relationships among the collected things particular enough to carry the work. Keep the underlying political and artistic argument, rather than turning a bag into a decorative metaphor.
 
 ### Diagnosing a stalled draft
 - Coats #16: What are the stakes? If absent, surface them.

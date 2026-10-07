@@ -1,30 +1,11 @@
-> This is a retained, worked representation recipe. Its aesthetic values and
-> count budgets describe the example treatment; adapt them to the actual data,
-> reader, destination, and [selected skin](../skins.md). Preserve the semantic
-> encoding and source distinctions. Publication figures may use plotting tools.
-> The bundled [verification method](../verification.md) states actual helper coverage.
+# Trees
 
-# Tree / Hierarchy
+Use this for a hierarchy with one parent per non-root item and no cycles. Use dependency or architecture graphs for shared dependencies, cycles, or peer links. Use nested containers when containment is more important than traversal.
 
-**Best for:** org charts, dependency trees, taxonomy, file trees, decision breakdowns, skill trees. For hierarchical, ID-addressable block decomposition with per-block I/O, constraints, and implementation traceability, load [`semantic-patterns.md`](../semantic-patterns.md) § Traceable block decomposition first — it specializes this layout without changing it.
+Preserve parent-child membership, levels, and identity. Shared entities cannot become separate independent nodes merely to make a tree; repeated visual instances need an explicit reference to the same entity. Collapsed subtrees need their members and extent retained or named.
 
-## Layout conventions
-- Root at top, children fan out below (or root at left, children to right).
-- Nodes are small labeled rectangles (`rx=6`), Geist 12px 600 name + optional Geist Mono 9px sublabel. Width 120–180px, height 40–52px.
-- **Connectors are orthogonal (elbow-style), never diagonal.** Parent drops a short vertical line, then a horizontal bus connects siblings, then each child has a short vertical drop into its top edge. 1px muted stroke.
-- Leaf indicator: thinner stroke (0.8) or different fill — OR let terminal position do the work.
-- Max depth: 4 (root + 3 tiers). Max breadth per level: 5.
-- Coral on **one** node: root OR critical leaf. Not both.
-- Draw connectors before nodes.
+Orthogonal shared buses can make siblings readable when the junction clearly means one parent branching to children. Distinguish that intentional branch from an accidental crossing or merge. Order siblings by a declared meaningful rule or source order. Do not skip a known level or invent a grouping parent just to fit.
 
-## Anti-patterns
-- Tree 5+ levels deep on a single page (illegible — split).
-- Nodes of wildly varying widths — pick 2 widths max.
-- Diagonal connector lines.
-- Skipped levels (parent connected to grandchild with no middle).
-- Coral on root AND a leaf.
+Verify every parent, the root, collapsed branches, and any shared-identity exception against the source. Inspect deep labels, branch junctions, and reading order at delivery size. For stable block identity and sidecars, use the traceable-block pattern in [semantic patterns](../semantic-patterns.md).
 
-## Examples
-- `../../assets/example-tree.html` — minimal light
-- `../../assets/example-tree-dark.html` — minimal dark
-- `../../assets/example-tree-full.html` — full editorial
+Reference layouts: [tree](../../assets/example-tree.html), [full](../../assets/example-tree-full.html), [dark](../../assets/example-tree-dark.html).

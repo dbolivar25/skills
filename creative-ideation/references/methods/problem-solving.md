@@ -5,7 +5,7 @@ Aristotle's *protai archai*. Decompose a problem to assumptions you trust, then 
 ## When to use
 
 - A domain has accreted practice that may no longer be load-bearing
-- You're in an unfamiliar domain and bootstrapping understanding
+- You're building enough domain understanding to inspect its assumptions
 - You suspect the standard framing is wrong
 - Trying to reduce cost or complexity (accumulated overhead is often the main cost)
 - Teaching the domain (first-principles reconstruction surfaces what beginners actually need)
@@ -20,44 +20,45 @@ Aristotle's *protai archai*. Decompose a problem to assumptions you trust, then 
 ## Procedure
 
 1. **State the problem precisely.**
-2. **List assumptions in the conventional solution.** What does the standard approach take for granted? List 5–10, including ones that "go without saying."
+2. **List consequential assumptions in the conventional solution.** Include ones that “go without saying.” Follow the actual mechanism rather than filling a quota.
 3. **Categorize each:**
    - **Physical** — law of nature; can't be relaxed.
    - **Informational** — logical / mathematical / information-theoretic; can't be relaxed without contradiction.
+   - **Operational contract** — a required outcome, authority boundary, compatibility promise, or reliability condition. A conventional mechanism may change while this demand remains.
    - **Conventional** — could be different; matters for compatibility.
    - **Historical** — was necessary at some point; may not be now.
    - **Pedagogical** — simplification used for teaching; may not be how experts actually do it.
 4. **For each non-physical / non-informational assumption:** still load-bearing? Conventional and historical assumptions are where the gains live.
-5. **Rebuild.** Construct a candidate respecting only physical and informational constraints, plus your specific context.
+5. **Rebuild.** Preserve physical and informational constraints and the real operational contracts. Question the mechanism used to meet them. A requirement does not disappear because its current implementation is conventional.
 6. **Apply Chesterton's fence.** For each element you've removed, find the original reason it was added. If you can't find a reason, *don't conclude there isn't one* — assume you haven't looked hard enough.
 7. **Decide whether to switch.** Even when the rebuild is technically better, consider transaction cost, ecosystem compatibility, team familiarity.
 
 ## Worked example
 
-**Problem**: typical CRUD web app — login, dashboard, few CRUD entities. Conventional stack: React + Node/Express + PostgreSQL + REST API + managed platform. ~12,000 LOC, monthly hosting ~$100.
+**Illustrative problem**: a small CRUD web app with login, a dashboard, and a few entities. Its current design uses React, Node/Express, PostgreSQL, a REST boundary, and a managed platform. The question is whether each separate mechanism serves this app's actual requirements.
 
 **Assumptions**:
 - React: conventional, was historical (SPA promise ~2014), pedagogical (taught everywhere).
-- Backend separate from frontend: conventional; informational *if* multi-client, otherwise historical.
-- PostgreSQL: physical *if* concurrency/ACID required; otherwise conventional.
-- REST API between frontend and backend: was informational (network boundary), now historical for single-client apps.
-- Managed platform: conventional; was historical (datacenter complexity); pedagogical.
+- A separate backend and API are mechanisms. Multiple clients, trust boundaries, deployment ownership, or compatibility may make a distinct interface useful; client count alone does not decide.
+- Durability, transactions, and concurrent writes are operational contracts. PostgreSQL is one way to meet them, not a physical law. Verify another database against the actual workload.
+- A network boundary still needs a protocol even when there is one client. A separate REST service may be unnecessary when the server renders the application and owns its effects.
+- A managed platform is a mechanism; uptime, recovery, secret handling, maintenance effort, and deployment requirements remain real.
 
 **Context**: 100 users, ~10 MB data, no real-time, single client (web), no HA constraint.
 
 **Rebuild**:
 - Server-rendered HTML + small JS islands. (No SPA. No build pipeline. No API layer.)
-- SQLite single file. (No PG server. Backup = copy a file.)
+- SQLite may remove a database service if its concurrency and recovery behavior fit. Use its [documented backup mechanisms](https://www.sqlite.org/backup.html); a casual copy during writes does not establish a recoverable snapshot.
 - Single small VM. (No managed platform. Deploy = `rsync` + `systemctl restart`.)
 - Single Go/Python/Ruby binary.
 
-**Result**: ~1,500 LOC vs 12,000. ~$5/month vs $100. Tradeoffs: less impressive on resume, fewer contractors familiar with this style, no immediate path to 1M users.
+**Decision**: this candidate may reduce moving parts, but the example supplies no measured code-size or cost result. Compare the actual implementation, operating burden, deployment/recovery path, and team familiarity before switching. The simpler topology still needs authentication, transactions, backups, and the requested reliability.
 
 **Chesterton's fence**: the conventional choices are load-bearing for *some* applications. The rebuild is correct *only* for this app's constraints. A different app — high concurrency, multiple clients, large data — needs different choices.
 
 ## Anti-slop notes
 
-- The biggest slop is the *performance* of first-principles thinking. "I'm going to think from first principles" followed by a slightly-rearranged conventional answer is slop. Output should look measurably different.
+- Performing a first-principles label without inspecting assumptions adds little. The analysis may validate the existing design; novelty is not proof that the operation happened.
 - Don't claim first principles when you're applying common sense.
 - Avoid the engineer-hero archetype. Real first principles often reveals what the field already knows.
 - Don't recommend removing structure you don't understand. Chesterton's fence applies hard.

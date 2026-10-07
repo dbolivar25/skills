@@ -1,88 +1,34 @@
-# Review An Existing Workflow
+# Review a derivation workflow
 
-Use this guide to audit a proposed, designed, implemented, or deployed workflow against faithful derivation.
+Use this method to assess a proposed, implemented or operating evidence-derived workflow. Read the [derivation contract](../references/derivation/contract.md) for required semantic coverage. Judge the visible work product against its user job, then trace the path that produces it. A plausible graph or polished example does not establish fidelity.
 
-Apply the [derivation contract](../references/derivation/contract.md) for this selected complete method. Obtain relevant sources within the task's authority. Keep missing evidence and unresolved owner decisions visible; read the references before the decisions they govern. Design and assessment alone do not authorize implementation or publication.
+## Establish what can be reviewed
 
-## Review Stance
+Identify the product, user, use moment, quality bar, non-goals and consequential mistakes. Pin the source/output versions and stage: concept, accepted design, code, stored workflow or observed runtime. Use actual prompts, queries, graph definitions, schemas, consuming code and output examples when available. For a conceptual design, treat behavior as a hypothesis and name the missing evidence.
 
-Judge the workflow by what the visible work product must get right, not by how plausible the pipeline looks.
+Recover intent from the task and accepted design. Preserve discrepancies with the actual implementation. Obtain accessible material within task authority rather than asking its author to repeat it. A review request does not authorize implementation or publication.
 
-Start from actual workflow behavior, code, docs, prompts, graph definitions, schema, or runtime examples when available. If the workflow is only conceptual, review the spec as a hypothesis and mark missing evidence as risk.
+## Trace obligations backward
 
-Read the [review report](../templates/review-report.md) before the audit to retain
-its full coverage obligations.
+Map every material output obligation to the judgment, rule, node, prompt, tool or manual step responsible for it. Mark a missing responsibility as a gap. Follow consequential examples and counterexamples from visible claim or action back to source evidence:
 
-## Audit Pass
+1. **Source and scope.** Read [raw-state semantics](../references/derivation/raw-state-and-semantics.md) before judging evidence coverage. Inspect the sources actually available at decision time, retrieval handles, permissions, windowing, identities, prior state and stale-source risks. An unsearched source is not a negative finding.
+2. **Transformations.** Read [information fidelity](../../writing/references/information-fidelity.md) before judging summarization, extraction, classification, aggregation, caching, state writes or context handoffs. Check what each consumer needs, what survives and whether recovery is usable. Probe exact commitments, conflicting stakeholders and rare decisive signals.
+3. **Dependencies.** Read [judgment DAGs and edges](../references/derivation/judgment-dags-and-edges.md) before judging graph shape. Distinguish input requirements, optional improvements, verification, scope, invalidation, fidelity and policy edges. Check node boundaries and joint inference; neither one prompt nor many agents is a defect by itself.
+4. **Support and wording.** Read [claim support](../../review/references/claim-support.md) for consequential claims. Recover support lineages, contradictions, open questions and relevant confidence weaknesses. Check whether those differences change assertion, qualification, omission or escalation. Scalar confidence alone is a gap when it hides a needed distinction.
+5. **Publication and lifetime.** Read [publication and rendering](../references/derivation/publication-and-rendering.md). Inspect candidate generation separately from display, send, recommendation, persistence and action. Check required gates and their actual failure behavior. For durable or cross-consumer semantics, also read [promotion](../references/derivation/durable-state-and-promotion.md); verify support, invalidators, recomputation and maintenance.
+6. **Quality evidence.** Read [evaluation](../../evaluation/references/evals-and-ablations.md). Inspect final output and the relevant judgment, transformation, retrieval and gate layers. Keep missing checks visible, but do not demand layers the system does not contain. Ablations can test whether a disputed dimension or expensive component earns its cost.
 
-1. Name the work product.
-   Completion criterion: the review states the user, job, use moment, output format, quality bar, and non-goals.
+Read [anti-patterns](../references/derivation/anti-patterns.md) before deciding which findings matter. Try to disprove each candidate finding with source evidence or a counterexample. Distinguish a design omission, a demonstrated failure and an untested concern.
 
-2. Recover output obligations.
-   Completion criterion: the review lists what the output must correctly claim, recommend, rank, omit, phrase, qualify, support, and decay.
+## Prioritize and return the assessment
 
-3. Map obligations to existing judgments.
-   Completion criterion: every obligation is mapped to an existing node, prompt, tool, rule, model responsibility, or explicit gap.
+Lead with failures that could change the user-visible result: unsupported claims/actions, wrong scope or authority, stale evidence, early loss of exact commitments or stakeholder differences, missing publication gates and uncontracted semantic reuse. Then address unnecessary cost or structure when it fails to protect a meaningful boundary.
 
-4. Inspect raw-state coverage.
-   Read [`raw-state-and-semantics`](../references/derivation/raw-state-and-semantics.md) before judging coverage.
-   Completion criterion: the review names the raw sources actually inspected, missing raw sources, scope rules, retrieval handles, permissions, windows, prior state, and stale-source risks.
+For each actionable finding, give the affected obligation, source location or observed case, mechanism, consequence and smallest useful repair. State whether it is demonstrated, inferred or limited by missing evidence. Explain how findings interact when fixing one boundary would remove several symptoms.
 
-5. Inspect compression boundaries.
-   Read [`compression-and-dimensions`](../../writing/references/information-fidelity.md) before judging coverage.
-   Completion criterion: every summarization, extraction, classification, aggregation, cache, state write, or context handoff says what survives and what may be lost.
+Use the [review layout](../templates/review-report.md) when it helps navigation. Return the supported decision in ordinary language: coherent for the requested stage, needs specific revision, or needs a different derivation shape. PASS, REVISE and REPLAN may be useful shorthand when the consumer already uses them; they are not mandatory status fields or permission to act. Design adequacy, observed fidelity and runtime acceptance are separate conclusions.
 
-6. Inspect the DAG.
-   Read [`judgment-dags-and-edges`](../references/derivation/judgment-dags-and-edges.md) before judging coverage.
-   Completion criterion: nodes and edges express real judgment dependencies; speculative generation, verification, invalidation, scope, fidelity, and policy gates are not collapsed into one linear chain.
-
-7. Inspect support packages.
-   Read [`evidence-support-and-confidence`](../../review/references/claim-support.md) before judging coverage.
-   Completion criterion: rendered claims and actions can be traced to judgment sources, source support, confidence, contradictions, open questions, and rendering policy.
-
-8. Inspect confidence and rendering.
-   Completion criterion: confidence is structured enough to change language or omission behavior; scalar confidence or model confidence alone is treated as a gap.
-
-9. Inspect publication gates.
-   Read [`publication-and-rendering`](../references/derivation/publication-and-rendering.md) before judging coverage.
-   Completion criterion: the workflow distinguishes generating a candidate from showing, sending, recommending, persisting, or acting on it.
-
-10. Inspect evals.
-   Read [`evals-and-ablations`](../../evaluation/references/evals-and-ablations.md) before judging coverage.
-    Completion criterion: final-output, judgment, edge/fidelity, retrieval, and ablation evals exist or are listed as gaps.
-
-## Findings To Prioritize
-
-Before this decision, read [`anti-patterns`](../references/derivation/anti-patterns.md).
-
-Lead with issues that can produce an unfaithful work product:
-
-- unsupported claims or actions
-- missing raw state for a high-risk judgment
-- scope contamination across account, workspace, person, opportunity, or time
-- stale evidence treated as fresh
-- exact commitments, owners, dates, stakeholder views, or methodology compressed too early
-- workflow-derived semantics reused without promotion contract
-- candidate output published without evidence, freshness, permission, contradiction, relevance, or confidence gates
-- confidence collapsed into one score
-- final-output evals hiding retrieval, judgment, or edge failure
-- expensive architecture that does not protect quality, fidelity, reuse, verification, or efficiency
-
-## Output
-
-Use [`../templates/review-report.md`](../templates/review-report.md). Include:
-
-- posture: PASS, REVISE, or REPLAN
-- work product and obligations
-- judgment coverage map
-- DAG / edge assessment
-- raw-state and evidence gaps
-- support / confidence / rendering gaps
-- publication gate gaps
-- eval gaps
-- anti-patterns observed
-- recommended next design moves
-
-PASS means the derivation shape is coherent enough to implement or continue. REVISE means the work product direction is sound but specific contracts, gates, evidence, or evals need repair. REPLAN means the workflow shape is structurally wrong for the work product.
+The review is complete when every material obligation and boundary is accounted for or explicitly unresolved, consequential findings can be checked, and the reader understands what evidence supports the recommendation and what remains untested.
 
 Source: adapted from the corresponding contract, glossary, reference, guide or template in the personal Faithful Derivation skill.

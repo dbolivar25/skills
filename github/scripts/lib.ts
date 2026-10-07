@@ -1,4 +1,4 @@
-// Shared helpers for the github skill scripts. Node >= 23.6 (native TS), stdlib only.
+// Shared helpers for the github skill scripts. Native TS type stripping enabled; stdlib only.
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 

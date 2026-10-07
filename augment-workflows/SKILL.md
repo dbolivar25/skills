@@ -9,7 +9,11 @@ Own the workflow-engineering job. Current product resources and active tools own
 
 ## Frame and ground
 
-Name the trigger, useful outcome, unacceptable result, evidence, durable/external effects, owners and destinations, and the operation requested now. Keep draft editing, validation, release, lifecycle changes, and execution authority distinct. A graph containing an effect does not authorize it to run.
+Name the trigger, useful outcome, unacceptable result, evidence, durable/external effects,
+owners and destinations, and the operation requested now. Verify the intended workspace,
+organization, and staging/production surface through live state before a mutation.
+Keep draft editing, validation, release, lifecycle changes, and execution authority
+distinct. A graph containing an effect does not authorize it to run.
 
 Read the current contract for every node and operation used, relevant released examples, and current canonical dependencies. Re-read the target before a concurrency-sensitive mutation. An entitlement probe that executes a node is an operation with its own effects; use it only when that execution is authorized. Otherwise retain the precise entitlement uncertainty.
 
@@ -21,11 +25,21 @@ Put sequence, branches, waits, retries, approvals, effects, and failure disposit
 
 Map each input to an upstream source and each effect to a responsible owner. Build the smallest graph that meets the actual behavior. A branch that cannot read its intended subject may still return plausible structured output: have it identify the subject read and make the join handle disagreement explicitly.
 
-Use Writing for Agents when changing executable agent instructions. Use AI Engineering's faithful-derivation method when customer or operational evidence becomes a visible work product or decision; a small inference need does not require every derivation mechanism.
+Read [Writing for Agents](../writing-for-agents/SKILL.md) when changing executable agent
+instructions. Read [AI Engineering](../ai-engineering/SKILL.md) when customer or
+operational evidence becomes a work product or decision; select only the derivation
+methods the real inference and system boundary need.
 
 ## Change and prove the requested outcome
 
-Read-only work acquires evidence and returns the supported finding. For an authorized change, preserve unrelated state, emit the complete document within the actual output budget, and compare directly captured stored bytes or a schema-aware canonical read-back against the authored source outside model transcription. Model-reproduced text is not a round-trip receipt. Resolve validation findings and distinguish structural validity from live data, credential, destination, business, and effect correctness.
+For study or design, acquire evidence and deliver the requested finding or grounded
+design at that stage. For an authorized change, preserve unrelated state and supply the
+complete payload required by the selected operation within the actual output budget.
+Compare directly captured stored bytes or a schema-aware canonical read-back against
+the authored source outside model transcription. Account for legitimate server
+normalization without discarding meaningful order, values, or fields. Model-reproduced
+text is not a round-trip receipt. Resolve validation findings and distinguish structural
+validity from live data, credential, destination, business, and effect correctness.
 
 Use current draft replacement/correction operations where available. Perform the requested lifecycle or execution action and keep its canonical receipts. For asynchronous work, follow execution, node, provider, output, and destination observations until they support the user's actual claim. Compare known-good outputs on matched triggers with appropriate isolation when meaningful.
 

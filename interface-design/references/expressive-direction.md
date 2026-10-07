@@ -33,7 +33,7 @@ must earn its cost.
 ## Create range
 
 Explore structurally different directions, not different style adjectives.
-Vary the underlying idea across two or more of these axes:
+Choose axes that can change the underlying idea:
 
 - composition and reading order;
 - typographic voice and information density;
@@ -50,7 +50,7 @@ When directions keep collapsing into the same structure, use
 [Seeded Range](../../creative-ideation/references/methods/volume-generation.md#seeded-range)
 to obtain additional range. Keep the moment, content, floor, brand,
 and accessibility requirements invariant; use each seed to force decisions
-across at least two of the axes above. The seed creates range. Judge the batch
+on the axes that matter to this brief. The seed creates range. Judge the batch
 against the invariant brief before choosing what earns depth.
 
 ## Commit and deepen
@@ -64,7 +64,7 @@ complexity must create a visible consequence important enough to own. If the
 same idea survives with less machinery, prefer the simpler expression.
 
 Completion criterion: the chosen direction has one product-specific visual
-idea, differs structurally from the rejected default, preserves the necessary
+idea, differs meaningfully from the alternatives, preserves the necessary
 floor, and contains no effect or complexity justified only by novelty.
 
 ## Failure modes

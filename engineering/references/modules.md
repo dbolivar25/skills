@@ -26,7 +26,7 @@ Use these terms consistently when describing the design; use the project's
 
 | Term | Meaning and distinction |
 | --- | --- |
-| **Module** | Anything with an interface and an implementation: a function, class, package, or tier-spanning slice. Do not substitute component or service when discussing this scale-independent concept. |
+| **Module** | Anything with an interface and an implementation: a function, class, package, or tier-spanning slice. Component and service can describe particular modules; this term keeps the ownership question independent of scale. |
 | **Interface** | Everything a caller must know: types, invariants, ordering, errors, required configuration, and relevant performance characteristics. A signature or TypeScript `interface` alone is narrower. |
 | **Implementation** | What is inside the module. This describes substance; adapter describes a role. |
 | **Depth** | Behavior a caller or test can exercise per unit of interface it must learn. A shallow module makes callers learn nearly as much complexity as it hides. |
@@ -87,9 +87,9 @@ and [testing evidence](testing.md) for what each test can prove.
 | Dependency | Design and test strategy |
 | --- | --- |
 | **In-process**: pure computation or in-memory state, no I/O | Deepen directly; test through the resulting interface without an adapter. |
-| **Local-substitutable**: a database or filesystem with a local stand-in | Deepen when that stand-in exists. Keep the dependency seam internal; do not expose a port in the outer interface merely for tests. Exercise module behavior with the stand-in, then use the real implementation for claims the stand-in cannot establish. |
-| **Remote but owned**: your service across a network | Put logic in the deep module, with an application-owned port and injected transport adapter. Production uses HTTP, gRPC or queue transport; tests use an in-memory adapter. |
-| **True external**: a third party you do not control | Inject its behavior through an owned port; tests normally supply a controlled mock or recording fake adapter at that port. If interception is necessary, justify its fidelity and the claim it can establish. |
+| **Local-substitutable**: a database or filesystem with a local stand-in | Keep a useful dependency seam internal when callers do not need to choose it. A stand-in can exercise module behavior; actual database/filesystem evidence is still needed for claims it cannot establish. Its availability helps verification but does not decide whether the ownership move earns its cost. |
+| **Remote but owned**: your service across a network | Concentrate policy with its owner and contain transport mechanics at a real seam. An application-owned port plus HTTP, gRPC, or queue adapter can support that split; an in-memory adapter tests policy while real transport checks establish wiring and protocol behavior. |
+| **True external**: a third party you do not control | Contain provider types and mechanics at an owned boundary. Use a narrow injected capability when it clarifies policy and recovery; a controlled fake can exercise application behavior. Claims about the provider or SDK need real-boundary evidence. Justify interception by its fidelity and the claim it can establish. |
 
 A recommendation should explain the ownership and why the seam earns its cost:
 “Keep the policy in one deep module; inject an HTTP adapter in production and an

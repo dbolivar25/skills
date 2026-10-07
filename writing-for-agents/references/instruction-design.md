@@ -8,6 +8,8 @@ Recover the intended actor, user job, actual result, host, authority, current in
 
 An interface must make the trigger and nearest ambiguity boundary legible, carry the required behavior, expose precise conditional references and establish observable completion. Do not replace a real job with a collection of reports that its caller must sequence and reconcile. A design/assessment request remains a design/assessment; implementation, host distribution and publication require their own task authority.
 
+Let the selected job acquire available context, resolve conflicting evidence, write and verify the integrated result within that authority. Do not make the user supply context the agent can obtain, or add a public wrapper merely to read and write files. No fixed number of layers or per-skill workflow wrapper is required. A long body or many dependencies do not establish depth; the interface earns its place through the usable work it owns.
+
 Write for a predictable **process**, not identical outputs. The target is the **smallest
 honest instruction set**: remove accidental complexity while carrying the real judgment,
 posture, constraints, and detail the agent needs. A shorter instruction that loses the
@@ -15,7 +17,15 @@ reason for the work is a worse instruction.
 
 Make the following authoring decisions against the actual task. They are lenses for
 writing and review, not a required outline to impose on every document. For skill
-packaging, also read [skill mechanics](../SKILL-MECHANICS.md) .
+packaging, also read [skill mechanics](../SKILL-MECHANICS.md).
+
+## Work one job through the boundary
+
+For an instruction that helps write a PR description, the complete job is to recover the current change, explain its behavior and evidence to the reviewer, and verify the stored description when publication is requested. “Produce a change map” can be a useful supporting method, but it leaves the caller to write and check the account. Keep that supporting method under its owner and make the consumer reach it before factual drafting.
+
+A supplied paragraph requested for voice alone is a neighboring case: protect its claims and edit the expression without silently refreshing the code account. A request to review the PR adds a correctness judgment and different evidence. These cases expose the trigger boundary, conditional reference and completion demand more clearly than a taxonomy chosen before tracing the jobs.
+
+This is a design walkthrough, not evidence that a host will select or execute the instruction. Verify those mechanisms separately.
 
 ## 1. Decide what must change in the run
 
@@ -130,7 +140,7 @@ consumer needs it, but do not make several workflows independently own the same 
 A caller should name the required result and reliably reach the owner's instructions.
 Consolidate duplicated methods; do not merely hide copies in references.
 
-The environment is also a source of truth. A document that repeats `package.json` ,
+The environment is also a source of truth. A document that repeats `package.json`,
 configuration, directory layout, or `--help` output is a **cache**. Keep it only when
 lookup cost or an otherwise invisible convention justifies it. Preserve the reason,
 unwritten rule, or gotcha that the environment cannot explain.

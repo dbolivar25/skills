@@ -5,8 +5,7 @@ as a page instead of operated as an interface.
 
 ## Moment
 
-Someone with authority reads this once, on a screen or on paper, and decides
-whether to act. They did not ask for it, and they will not scroll back.
+The reader needs to understand the claim, its support, and the decision on a screen, slide, or printed page. Make each meaningful section understandable in context; do not rely on the reader reconstructing a prior conversation.
 
 ## Floor
 
@@ -36,8 +35,7 @@ prose, most of a document sits flat on the page. Sources, metrics, and
 properties are facts, so give them aligned label and value rows separated by
 hairline rules, or a plain labelled column.
 
-Leave out the interface furniture. Buttons, pills, tabs, and toolbars imply an
-action the reader cannot take, and a static export has no controls anyway.
+Leave out controls that a static export cannot operate. A status label or working hyperlink can still be useful; compose it as information or a real destination rather than borrowed app chrome.
 
 ## Composition
 

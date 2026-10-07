@@ -9,7 +9,7 @@ Choose one mode per figure with `data-motion-mode="none|reveal|step|loop"`.
 | Mode | Behavior | Controls / implementation | Use |
 |---|---|---|---|
 | `none` | Complete stable figure | No JavaScript | Default, print, screenshot, export, reduced-motion fallback with playback controls unavailable |
-| `reveal` | One deterministic autoplay run ending complete | CSS-only for ≤5s; otherwise use the scoped controller | Short ordered explanation; never auto-replay |
+| `reveal` | One deterministic autoplay run ending complete | Scoped controller when controls or URL capture states are used; a simple CSS reveal needs its own static override | Short ordered explanation; never auto-replay |
 | `step` | Paused semantic states | Minimal inline JS for Play, Pause, Replay, Previous, Next | Teaching, comparison, policy traces |
 | `loop` | One decorative token repeats without changing meaning | CSS-only default | Quiet flow hint; ≥3s cycle |
 
@@ -22,7 +22,7 @@ Only `loop` repeats. Queue state, typing, field values, policy outcomes, contain
 1. **Source is complete.** Every semantic node, label, connector, status, and outcome is visible in the HTML/SVG before enhancement. Only selectors below `.motion-ready` may hide or transform them.
 2. **Stable capture.** Initial `data-frame="static"`, `?motion=static`, print, no-JS, and standalone SVG export expose the complete frame and hide controls/decorative tokens. Do not capture after an arbitrary delay.
 3. **CSS owns presentation.** Use CSS transitions/keyframes for appearance and travel. Minimal inline JavaScript is allowed only to bind explicit controls, update step/state attributes, schedule deterministic steps, and update the dedicated live-status region. No fetches, markup injection, path measurement, or mutation of semantic diagram labels or values.
-4. **One clock.** Use `--motion-fast: 160ms`, `--motion-step: 480ms`, `--motion-hold: 720ms`, and `--motion-total` ≤ `8000ms`; derive delays from integer steps. No randomness, springs, or transition-event timing.
+4. **One clock.** Derive delays from integer steps and consistent CSS timing tokens. The template's 160ms transition, 480ms step, and 720ms hold are worked defaults. Choose actual pacing for the content and inspect it. No randomness or transition-event timing for semantic playback.
 5. **Explicit order.** Mark items `data-motion-item data-step="N"` for integer steps 1–8. DOM order follows narrative order. At most two items enter per step.
 6. **Stable end.** Completion exposes all items and sets `data-frame="end"`. Replay resets to step 0 first. Pause clears the pending timer and resume continues from the same step.
 7. **Scoped state.** Controls operate on their nearest `[data-motion-root]`; IDs, timers, live regions, and step state never cross figure boundaries.
@@ -32,7 +32,7 @@ Only `loop` repeats. Queue state, typing, field values, policy outcomes, contain
 
 Every primitive has text, count, symbol, pattern, or outline in addition to color.
 
-| Primitive | Mechanism | Static / reduced-motion result | Limit |
+| Primitive | Mechanism | Static / reduced-motion result | Worked treatment |
 |---|---|---|---|
 | **Path draw** | Decorative duplicate path with `pathLength="1"` and animated dash offset | Base labeled connector remains visible | ≤2 paths; one active |
 | **Staggered reveal** (stage reveal) | `data-motion-item` + opacity/translate ≤8px | All stages visible | ≤8 steps, 12 items |
@@ -90,7 +90,7 @@ When focus is within the motion root: `ArrowRight` advances, `ArrowLeft` goes ba
 
 Provide visible instructions and a scoped `role="status" aria-live="polite" aria-atomic="true"`. Keep that live region inside the motion root but outside `[data-motion-controls]`, so hiding controls for reduced/static states cannot hide announcements. Announce user actions such as “Step 3 of 5: first divergence”; do not announce every autoplay frame. Controls operate only on their nearest `[data-motion-root]`.
 
-Use [`assets/template-motion.html`](../assets/template-motion.html) rather than inventing another controller. Its inline controller is the executable implementation contract: copy that script body verbatim. The skin linter rejects modified or additional controllers, even when they carry `data-diagram-controls`. Replace diagram content and slug-prefixed IDs, but preserve the controller and its state/control attributes.
+For controlled `step` or `reveal`, use [`assets/template-motion.html`](../assets/template-motion.html). Its inline controller is the executable implementation contract: copy that script body verbatim. The bundled source check rejects modified or additional controllers, even when they carry `data-diagram-controls`. Replace diagram content and slug-prefixed IDs, but preserve the controller and its state/control attributes. Modes `none` and decorative `loop` are script-free. The exact URL and DOM state contracts below describe the canonical controller; a CSS-only variant must supply and verify an explicit static/reduced-motion treatment rather than assuming a query parameter changes its state.
 
 ## Reduced motion, color, and accessibility
 
@@ -102,9 +102,9 @@ Use [`assets/template-motion.html`](../assets/template-motion.html) rather than 
 
 ## Complexity and deterministic timing
 
-Motion does not raise the static diagram budget: ≤8 semantic steps (target 3–6), ≤12 marked items, ≤2 simultaneous reveals, ≤2 drawn paths, one flow-token loop, 160–600ms transitions, 400–1200ms holds, ≤24px translation, and 3–8s total autoplay.
+The packaged controller and source checker support one motion root, at most 8 semantic steps, at most 12 marked items, and at most 2 items assigned to a step. These are limits of this implementation, not universal quotas for a diagram. Keep the complete static source intact; if the source needs more, use a suitable static view or a separately authorized interaction implementation. The example treatment suggests few concurrent paths, short transitions and holds, small movement, and a brief one-shot run; choose timings for actual reading and reduced-motion behavior.
 
-Declare `data-step-count`; do not infer steps from transition events. Set `--motion-total` to step count × `--motion-hold` and keep it within the 8-second budget. Use one `setTimeout` chain per root, derive its hold from `--motion-hold`, clear it on Pause/Replay/page hide and immediately after rendering the final step, and never use `setInterval` for semantic playback. Pause when `document.visibilityState` becomes hidden and do not catch up later. `?motion=step&step=N` may expose an exact zero-duration frame for visual regression only when `N` is a non-negative base-10 integer from 0 through `data-step-count`; missing, fractional, negative, and over-budget values leave normal playback in place.
+Declare `data-step-count`; do not infer steps from transition events. For this controller, set `--motion-total` consistently with step count × `--motion-hold`; inspect the actual run for readable pacing. Use one `setTimeout` chain per root, derive its hold from `--motion-hold`, clear it on Pause/Replay/page hide and immediately after rendering the final step, and never use `setInterval` for semantic playback. Pause when `document.visibilityState` becomes hidden and do not catch up later. `?motion=step&step=N` may expose an exact zero-duration frame for visual regression only when `N` is a non-negative base-10 integer from 0 through `data-step-count`; missing, fractional, negative, and over-budget values leave normal playback in place.
 
 The final-state capture contract is synchronous: `?motion=static`, `<html data-motion="static">`, or mode `none` exposes every semantic item, hides controls and decorative overlays, and sets `data-frame="static"`. Wait for `document.fonts.ready` before capture. Two captures from the same URL, viewport, fonts, and device scale must be pixel-identical; random delays, generated IDs, clocks, and runtime path measurement are forbidden.
 

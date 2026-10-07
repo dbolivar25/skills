@@ -34,17 +34,13 @@
   <div class="container">
     <div class="header">
       <p class="header-eyebrow">Bubble · Diagram Design</p>
-      <h1>The biggest risk is not the slowest service</h1>
-      <p class="subtitle">Nine services by p95 latency and error rate, bubble area proportional to requests per second, both axes from zero. Reports is the slowest thing on the board and barely matters; Payments runs near-peak traffic at the highest error rate, and that is where the incident will come from.</p>
+      <h1>The most failures need not come from the slowest service</h1>
+      <p class="subtitle">Nine services by p95 latency and error rate, bubble area proportional to requests per second, both axes from zero. Reports has the highest p95 latency and the lowest traffic. Payments combines near-peak traffic with the highest error rate, producing the most failing requests per second in these illustrative figures. Customer impact and incident risk require additional context.</p>
     </div>
     <div class="diagram-container">
-      <!-- X: 0-500ms p95 over 880px, x = 80 + 1.76·ms. Y: 0-4% error rate over
-           380px, y = 420 - 95·pct. AREA encodes requests per second: r = 1.4·√v,
-           so area = π·1.96·v, exactly proportional. scripts/verify-bubble.py
-           derives all three maps from the values each bubble declares and flags
-           any bubble that disagrees with its peers. -->
+      <!-- This example maps x = 80 + 1.76 * p95 milliseconds and y = 420 - 95 * error-rate percent. Radius = 1.4 * sqrt(requests per second), so area is proportional to that quantity. Check all three mappings independently from illustrative source values, including zero and missing cases. No packaged bubble semantic validator is present. -->
       <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="bubble-full-title bubble-full-desc">
-        <title id="bubble-full-title">The biggest risk is not the slowest service</title>
+        <title id="bubble-full-title">The most failures need not come from the slowest service</title>
         <desc id="bubble-full-desc">Bubble chart of nine services by p95 latency and error rate on zero-based axes, bubble area proportional to requests per second; Payments carries near-peak traffic at the highest error rate.</desc>
         <defs>
           <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
@@ -74,10 +70,7 @@
         <line x1="80" y1="40" x2="80" y2="420" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
         <line x1="80" y1="420" x2="960" y2="420" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
 
-        <!-- Tick labels are BOUND: data-tick names the axis, data-value the number
-             the tick claims to sit at. verify-bubble.py cross-checks each against
-             the scale the bubbles themselves describe, so the printed axis and
-             the drawn positions cannot drift apart. -->
+        <!-- The data-tick and data-value attributes record the intended axis and tick value. Compare printed labels and positions against an independently calculated scale; deriving the expected scale only from drawn circles would repeat shared errors. -->
         <text data-tick="y" data-value="1" x="72" y="329" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="end">1</text>
         <text data-tick="y" data-value="2" x="72" y="234" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="end">2</text>
         <text data-tick="y" data-value="3" x="72" y="139" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="end">3</text>
@@ -129,10 +122,7 @@
         <circle cx="889.6" cy="334.5" r="10.8" fill="#f5f5f5"/>
         <circle data-name="Reports" data-x="460" data-y="0.9" data-size="60" cx="889.6" cy="334.5" r="10.8" fill="rgba(45,49,66,0.35)" stroke="#4f5d75" stroke-width="1"/>
 
-        <!-- Labels: the focal bubble plus the two poles of the area story — the
-             giant that is healthy and the sliver that is slow. Each label is
-             bound to its bubble by data-name, so verify-bubble.py can prove it
-             sits nearer its own bubble than anyone else's. -->
+        <!-- Labels attach to the focal bubble and two illustrative size extremes through data-name and visible leaders. Inspect attachment and collision at the actual reading size. Metadata alone cannot prove a label identifies the right bubble. -->
         <rect x="506" y="99" width="64" height="12" rx="2" fill="#f5f5f5"/>
         <text data-name="Payments" data-role="label" x="538" y="108" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">PAYMENTS</text>
 
@@ -156,16 +146,16 @@
     <div class="cards">
       <div class="card">
         <p class="eyebrow">FOCAL · PAYMENTS</p>
-        <div class="card-header"><span class="card-dot coral"></span><h3>Payments burns the error budget fastest</h3></div>
-        <p>2.8% of 760 requests per second — the highest error rate on the board applied to nearly the biggest volume. The accent marks the risk, not the worst number in any one column: Reports has worse latency and Gateway has more traffic, but neither multiplies out to as many failing requests.</p>
+        <div class="card-header"><span class="card-dot coral"></span><h3>Payments has the most failing requests per second</h3></div>
+        <p>2.8% of 760 requests per second is 21.28 failing requests per second, the largest product here. Reports has higher latency and Gateway has more traffic, but neither produces as many failures in these figures. Comparing error-budget consumption would also require each service's SLO and observation window.</p>
       </div>
       <div class="card">
         <div class="card-header"><span class="card-dot ink-strong"></span><h3>Gateway shows where mass should sit</h3></div>
-        <p>The largest bubble sits in the bottom-left corner — 900 requests per second at 85ms and half a percent of errors. Area is what keeps that reading honest: 900 is fifteen times Reports' 60, and the bubble carries fifteen times the ink. Radius-proportional sizing would square that into a 225-to-one blot.</p>
+        <p>The largest bubble sits in the bottom-left corner — 900 requests per second at 85ms and half a percent of errors. Area is what keeps that reading honest: 900 is fifteen times Reports' 60, and the bubble has about fifteen times the area. Radius-proportional sizing would square that into a 225-to-one blot.</p>
       </div>
       <div class="card">
-        <div class="card-header"><span class="card-dot ink-light"></span><h3>Reports is slow and it does not matter</h3></div>
-        <p>460ms p95 — the worst latency here — on 60 requests per second. The x-position raises the alarm and the tiny area answers it. Cropping the size encoding out of this chart turns Reports into the headline; that is the lie of every latency-only ranking.</p>
+        <div class="card-header"><span class="card-dot ink-light"></span><h3>Reports has the highest latency and the lowest traffic</h3></div>
+        <p>460ms p95, the highest latency here, on 60 requests per second. Its 0.9% error rate implies 0.54 failing requests per second in this example. The small bubble adds traffic context, but low volume does not establish low importance; a critical report can matter even when it is rarely requested.</p>
       </div>
     </div>
     <div class="footer">

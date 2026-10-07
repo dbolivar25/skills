@@ -1,168 +1,133 @@
 # Architecture study
 
-Investigate the requested architecture, using TypeScript contracts when applicable.
-Return one ranked shortlist of evidence-backed **ownership moves** within an explicit candidate boundary. Scan with source reads and
-search only. Do not edit, run tests, type checks, linters, formatters, builds, package
-scripts or static analysis. Do not refactor, update docs, create ADRs, estimate effort,
-design final interfaces or write a specification. Migration, compatibility, rollout and
-backfill enter only as evidenced current constraints, not plans designed here.
+Use for an investigation of how a system is organized, where ownership creates friction,
+or which architectural change would earn its cost. Return a grounded system map and, when
+the question calls for changes, one ranked set of **ownership moves**. A useful study may
+find that the current design is sound and recommend no change.
 
-Own discovery, coverage, and one integrated ranking within the requested boundary.
-This is an independently selected read-only study, not a mandatory implementation stage.
+This method owns discovery and architectural judgment. The task determines whether the
+result is a system explanation, a bounded recommendation, or a brief for an already
+requested design. Investigation does not itself authorize implementation, a repository
+cleanup, product mutation, or publication.
 
-## 1. Bound the candidates and discover their governing sources
+## Bound the question and find the governing sources
 
-Use the user's repository, directory, feature, module, file set or concern as the
-candidate boundary. Inspect immediate callers, dependencies, composition roots and tests
-outside it when they establish evidence. Record this **evidence halo**; it does not
-expand where candidates may be proposed.
+Use the user's repository, directory, feature, module, file set, or concern as the
+candidate boundary. Inspect callers, dependencies, composition roots, and tests outside
+it when they establish evidence. This **evidence halo** helps explain the boundary; it
+does not silently expand where changes may be proposed.
 
-Without useful scope, inspect repository shape and major entrypoints, then roughly the
-last 20 commit messages and changed paths. Activity prioritizes inspection; it does not
-prove friction. Infer scope when the repo is small or one active area clearly dominates.
-If activity is scattered, widen the scan or ask one question that lets the user choose.
+When scope is rough, inspect repository shape, major entrypoints, and recent changed
+paths. Activity helps choose where to look; it does not prove friction. Infer a useful
+boundary when one area clearly dominates. Ask for a scope choice only when competing
+boundaries would materially change the answer.
 
-Apply [contract judgment](contracts.md) where the inventoried source raises those
-concerns. Read the [module-design vocabulary](modules.md) before assessing
-ownership. Search the boundary and its ancestors through the repository root for
-`CONTEXT.md` , `CONTEXT-MAP.md` , equivalent domain-language files and decision indexes.
-Search repository documentation and ADR collections for decisions that name or govern
-the boundary. Inspect **every governing source found**, plus local precedent in scoped
-code, tests and the evidence halo.
+Find the domain language and decisions governing that boundary: `CONTEXT.md`,
+`CONTEXT-MAP.md`, equivalent local documentation, decision indexes, and relevant ADRs.
+Search ancestors and repository documentation as well as the named directory. Read the
+sources that govern the question and compare them with local code, tests, and precedent.
+Keep a conflict between a stated model and the implementation visible.
 
-Done when the candidate boundary and halo are explicit, activity has informed
-otherwise-unspecified scope, required references are loaded, prescribed source locations
-have been searched, every governing source has been read, and relevant precedent or its
-absence is known.
+Read [module design](modules.md) before judging ownership, depth, or seams. Read
+[contracts](contracts.md) when the inspected paths raise a concrete value, state,
+failure, effect, or soundness question.
 
-## 2. Account for the whole architectural surface
+## Trace enough of the system to support the conclusion
 
-Build a private evidence map with all five inventory categories:
+Build a private evidence map around the behaviors and distinct ownership shapes that
+can change the answer. Public/runtime entrypoints, domain and application clusters,
+external/persistence/process boundaries, effect and resource lifetimes, and tests are
+useful discovery lenses. They are not five sections to fill for every study.
 
-1. Public and runtime entrypoints.
-2. Domain and application module clusters.
-3. External, persistence and process/runtime boundaries.
-4. Side-effect and resource-lifetime owners.
-5. Tests exercising those seams.
+For each materially distinct shape, trace a representative behavior from its entrypoint
+or direct caller through relevant boundaries and effects to the caller-visible outcome.
+Inspect tests at those seams. Group paths only when they share the ownership and call-flow
+shape that matters to the question; one representative does not cover a different
+authorization rule, lifetime, or failure path.
 
-For **each category**, record its surfaces, equivalent groups, or absence or
-inapplicability with a reason. Group only surfaces sharing the same ownership and
-call-flow shape, and cite representative files. For **each distinct shape**, trace at
-least one behavior from an entrypoint or direct caller through relevant boundaries and
-side effects to its caller-visible outcome. Inspect the tests at that seam, or record
-that none were found.
+Retain representative files, call paths, outcomes, governing constraints, existing test
+evidence, and material gaps. Explain deliberate exclusions and halo excursions that
+limit the conclusion. For a broad architecture claim, establish broad coverage. For a
+named seam, go deep enough to explain that seam without turning the job into a repo audit.
 
-Each map entry carries surface/group, representative files, call path, outcome, existing
-test evidence, applicable standards and findings. Record every halo excursion and
-deliberate exclusion.
+Use source reads, searches, and existing receipts first. Run a permitted check or a
+small discriminating probe when source alone cannot settle an answer-changing claim.
+For example, a dependency-cycle analysis may establish a suspected import cycle; a
+runtime probe may reveal where a resource is actually acquired. Follow task authority,
+tool effects, and operational rules. A missing environment is an evidence gap, not a
+reason to repair unrelated code. Use [experiments](experiments.md) when a temporary
+implementation is necessary and [testing](testing.md) to interpret check fidelity.
 
-For applicable concerns, retain concrete inspected evidence (code, path, test, value,
-or runtime seam), and distinguish local cleanup from **architectural friction**. Friction is repeated burden or risk that crosses a boundary,
-leaks into callers, obscures ownership or prevents behavior from being tested at a real
-seam. An isolated smell is local cleanup.
+Distinguish **architectural friction** from local cleanup. Friction is repeated burden
+or consequential risk that crosses a boundary, leaks knowledge into callers, obscures
+ownership, or prevents behavior from being exercised at a real seam. A lone long name
+or awkward helper is not enough. Retain concrete traces, repeated policy, invalid-state
+paths, or test contortions; discard unsupported impressions.
 
-When selected by the task or current delegation rules, parallel exploration may gather
-observations in broad scans; candidate formation and ranking remain one synthesis.
+## Judge ownership and leverage
 
-Done when every category is covered, represented or explicitly absent; every distinct
-shape has a trace and test inspection; all halo/exclusion decisions are explicit; every retained contract concern has inspected evidence; and
-retained observations are concrete friction. Discard unsupported observations.
+For each evidenced friction, name who owns the invariant, policy, translation,
+orchestration, effect, resource lifetime, or runtime coordination now and who should own
+it. An ownership study need not invent that owner's final interface. A requested design
+can continue into [specification](specification.md) with the gathered evidence.
 
-## 3. Form one ranking and prune it
+Apply the **deletion test**: deleting a useful proposed module would make its hidden
+complexity reappear in callers. A pass-through relocated elsewhere fails. Explain what
+callers would no longer need to know and what new interface or machinery they would learn.
 
-Apply [module design](modules.md) to the evidence map for ownership and
-leverage judgment. Supply actual callers, governing sources and test evidence; resolve
-its source-verifiable needs through the permitted reads. This scan asks for an ownership
-move, not a final interface or independent design exploration.
+Rank candidates together by **architectural leverage**: breadth and consequence of burden
+or risk removed relative to the interface, indirection, and continuing ownership added.
+Consider callers, behaviors, runtime responsibilities, and verification. For comparable
+leverage, prefer stronger evidence, then the smaller coherent move.
 
-For each retained friction, name who owns the invariant, policy, translation,
-orchestration, effect, resource lifetime or runtime coordination **now**, and who should
-own it. Do not specify that owner's final interface.
+Merge candidates sharing one root friction or ownership move. Related contract
+improvements are gains of that candidate. Drop aesthetic changes, speculative flexibility,
+isolated cleanup, unsupported claims, and proposals contradicted by sound local precedent.
+Preserve explicit accepted tradeoffs unless material evidence changes their basis.
 
-Apply the deletion test: deleting a useful proposed module would make its hidden
-complexity reappear in callers. A pass-through merely relocated elsewhere fails.
+Use the task's output budget. Otherwise return the smallest ranked set that preserves the
+material choices, including zero when nothing earns a change. Do not cap the investigation
+or omit an important alternative merely to fit a universal candidate count.
 
-Rank all candidates in the boundary together by **architectural leverage**: breadth and
-consequence of burden or risk removed relative to the interface, indirection or
-machinery introduced. Consider affected callers, behaviors, runtime ownership and tests.
-For comparable leverage, prefer stronger evidence, then the smaller coherent ownership
-move.
+Separate recommendation strength from uncertainty:
 
-Merge candidates with the same root friction or ownership move; related standards
-improvements become gains of that candidate. Drop aesthetic changes, unsupported claims,
-speculative flexibility, isolated cleanup, implementation disguised as architecture and
-proposals contradicted by sound precedent. Keep **at most five**, including zero when
-nothing earns the change.
+- **Strong:** concrete evidence supports the friction, ownership move, and leverage.
+- **Worth exploring:** the friction is evidenced, but an exact unresolved claim can change
+  the owner or expected leverage. Name the claim and the observation needed to settle it.
 
-- **Strong:** friction, ownership move and leverage have concrete evidence.
-- **Worth exploring:** friction is evidenced but ownership or leverage depends on
-  an exact claim unavailable through source inspection.
+Resolve obtainable facts before labeling them unknown. A source-verifiable question
+does not become a speculative candidate just because it has not yet been inspected.
 
-Resolve claims available through permitted reads/searches before using “Worth
-exploring.” Do not use uncertainty as a substitute for inspection.
+## Return the requested study
 
-Done when each survivor carries friction, ownership move, leverage, existing test
-evidence, verification seam and recommendation strength; every gap is exactly
-source-unverifiable; and no more than five remain.
+Lead with the system answer or recommendation. Make the ranking universe recoverable:
+boundary, evidence halo, governing sources, inspected shapes, and material exclusions.
+Cite representative evidence. Add a current/proposed flow sketch when it makes the
+ownership difference easier to see.
 
-## 4. Present and stop
-
-Use the candidate format below. Start with boundary, halo,
-covered inventory categories, governing sources and material exclusions. Return ranked
-candidate cards with enough representative citations to establish the friction. Add a
-current/proposed ASCII sketch when flow or topology benefits. Suggest a `CONTEXT.md`
-clarification only for stable domain language; flag an ADR conflict only when concrete
-friction justifies revisiting it.
-
-When none survives, explain why signals were pruned. Do not manufacture a top
-recommendation or suggest beginning specification. Otherwise recommend the top candidate with its leverage basis. Return the ranking;
-a likely recommendation does not select specification or implementation. If the task
-already requests a selected next job, carry that authorization forward without asking
-for it again.
-
-Done when the output exposes its ranking universe, every candidate satisfies the
-contract, all claims have evidence or exact gaps, and the zero branch invents no
-recommendation.
-
-## After selection: prepare the brief
-
-When a candidate is selected for a requested follow-on design, give its title/files, problem/friction/
-evidence, current-to-proposed owner, applicable standards, **all gathered** constraints
-and invariants, suspected seams/adapters/boundaries/call paths, open questions and any
-context/ADR suggestions. Every claim must trace to the scan or be labeled an open
-question.
-
-Use [specification](specification.md) when the requested job includes that handoff.
-Preparing a brief preserves discovery and does not itself authorize a specification,
-implementation, or product mutation.
-
-Done when the brief preserves all gathered constraints, invariants and affected paths,
-exposes unknowns, and respects the selection boundary.
-
-## Candidate presentation
-
-Begin with a concise scan summary: candidate boundary, evidence halo, covered
-inventory categories, governing context/decision sources and material exclusions.
-This states the universe in which the ranking means anything.
-
-For each surviving candidate, use:
+For a candidate, these fields make a useful card; omit labels that add no information:
 
 ```md
 ### <Candidate>: <Strong | Worth exploring>
 
-- **Standards:** <applicable principle names>
-- **Files/modules:** <path:line citations>
-- **Current friction:** <caller burden, risk, duplicated policy, leakage or test friction>
-- **Evidence:** <concrete trace, repetition, invalid state path or test contortion>
-- **Ownership move:** <current owner/callers> -> <proposed owner>
-- **Expected leverage:** <burden/risk removed relative to introduced machinery>
-- **Existing test evidence:** <test path:line, or none found>
-- **Verification seam:** <public interface or real adapter that would test the move>
-- **Evidence gap:** <required for Worth exploring; exact source-unverifiable claim>
-- **Context/ADR note:** <only for a durable term, conflict or decision>
+- Current friction and evidence: <trace, repetition, leakage, or test burden; citations>
+- Ownership move: <current owner/callers> -> <proposed owner>
+- Expected leverage: <burden removed and machinery introduced>
+- Constraints: <governing contracts, invariants, and accepted tradeoffs>
+- Existing proof and verification seam: <tests/receipts and the interface that could test the move>
+- Evidence gap: <exact unresolved claim and distinguishing observation, when present>
+- Context/ADR note: <only when stable language or a decision conflict needs attention>
 ```
 
-Cite representative evidence rather than every occurrence. Conclude a nonempty
-ranking with the top recommendation and why its leverage is greatest. Ask for a choice
-only if a requested next job depends on one that cannot be inferred. For zero candidates, give the evidence-backed
-reason none survived and omit both recommendation and specification prompt.
+Recommend the leading candidate and explain its advantage. If none survives, explain
+which signals were pruned and why; do not manufacture a next refactor. A system-explanation
+request can finish with the supported map and gaps without a candidate ranking.
+
+When follow-on design is already requested, preserve the problem, evidence, current and
+proposed owner, all gathered constraints/invariants, affected paths, suspected seams, and
+open questions in its brief. Do not make the next engineer rediscover discarded context.
+Mark claims that remain hypotheses and use the specification method for the actual design.
+
+The study is complete when its consequential conclusions follow from covered behavior
+and evidence, its boundaries and gaps are clear, and it delivers the requested explanation,
+ranking, or design brief at the authorized stage.

@@ -11,6 +11,8 @@ the Record.
 A **working agent** owns one bounded work item. Its output is a proposal until
 the steward records a report and an independent review accepts it.
 
+Worker edits can already be visible in a shared filesystem. “Proposal” describes their acceptance status, not physical isolation. Give disjoint ownership, inspect the actual diff, and keep integration responsibility with the steward. Do not record acceptance merely because a summary says the change is complete.
+
 A **reviewing agent** checks one reported result against Intent and evidence. It does not
 edit that result, schedule the team, change Intent, or write the Record.
 

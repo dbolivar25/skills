@@ -112,4 +112,6 @@ When a concept appears useful across workflows, mark it candidate_reusable befor
 
 Promotion happens after evaluation, consumer review, and contract stabilization.
 
+Promotion is not permanent evidence that a value remains valid. Continue support checks at the consuming boundary, including changed access, source corrections, new contradictory evidence and scope changes. Retain historical accepted results as historical receipts; recompute, mark stale, qualify or withhold current use according to the contract. If a source disappears, a stored interpretation must not silently acquire stronger status than its lost support permits.
+
 Source: adapted from the corresponding contract, glossary, reference, guide or template in the personal Faithful Derivation skill.

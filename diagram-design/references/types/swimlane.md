@@ -1,26 +1,9 @@
-> This is a retained, worked representation recipe. Its aesthetic values and
-> count budgets describe the example treatment; adapt them to the actual data,
-> reader, destination, and [selected skin](../skins.md). Preserve the semantic
-> encoding and source distinctions. Publication figures may use plotting tools.
-> The bundled [verification method](../verification.md) states actual helper coverage.
+# Swimlanes
 
-# Swimlane
+Use this for a process in which responsibility and handoffs matter. Name what lanes represent: people, teams, systems, or roles.
 
-**Best for:** cross-functional processes, RACI-style flows, vendor handoffs, multi-team shipping workflows.
+Place work in its actual lane. Jointly performed work needs explicit shared responsibility or coordinated steps; do not choose a convenient sole owner. Arrows show sequence and handoffs. Preserve branches, retries, and parallel work. Position alone does not establish elapsed time unless a time scale is declared.
 
-## Layout conventions
-- Horizontal lanes (or vertical columns) — one per actor/team. Label each lane in the left margin (or top) with a Geist Mono eyebrow.
-- Lane dividers: 1px hairlines.
-- Process steps are rectangles placed inside the lane of the actor performing them; arrows show flow.
-- Handoffs (arrows crossing lane boundaries) are the most important edges — consider coral on the handoff that introduces the most coupling or latency.
-- Don't force equal step count per lane; a lane with one step is fine.
+Reduce crossings through layout and routing, never by reordering real steps or changing ownership. Unknown ownership stays marked. Trace an ordinary execution and relevant exceptions, checking each handoff, action owner, branch, and endpoint against the source.
 
-## Anti-patterns
-- Lanes without labels.
-- A step drawn across two lanes (pick one owner).
-- Arrows that snake back and forth — reorder steps so the flow is mostly straight.
-
-## Examples
-- `../../assets/example-swimlane.html` — minimal light
-- `../../assets/example-swimlane-dark.html` — minimal dark
-- `../../assets/example-swimlane-full.html` — full editorial
+Reference layouts: [swimlane](../../assets/example-swimlane.html), [full](../../assets/example-swimlane-full.html), [dark](../../assets/example-swimlane-dark.html).

@@ -1,13 +1,12 @@
 # Worked Examples
 
-Use these as compact application examples. Do not copy the wording blindly; keep
-the main skill's runtime shape.
+Read the case closest to the current question. These are illustrative applications, not required report outlines or proof that a proposed change has been observed.
 
 ## Critique A Static Screen
 
 Input: screenshot of a settings page that feels "pretty good but generic".
 
-Good response shape:
+Reasoning in this example:
 
 1. Moment: repeated admin workflow, low emotional drama, high scanning value.
 2. Floor: modern SaaS settings pages; user expects clear grouping, restrained
@@ -82,7 +81,7 @@ Implementation direction:
 Verification:
 
 - Test hover in dense grid and with neighboring cards.
-- Check reduced-motion behavior if the app supports it.
+- Check reduced-motion behavior and make the useful state change available without the effect.
 - Confirm text and layout do not shift.
 
 ## Decide Range Before Depth
@@ -167,15 +166,13 @@ Resolved pass:
 
 Good findings:
 
-- Nested surfaces use the same radius even though the outer surface has padding;
-  calculate the outer radius from the inner radius plus padding.
+- Close nested surfaces use the same radius despite an inset; try parallel curves, then judge the actual optical result.
 - The icon button is visually 20x20px and also only clickable at 20x20px; extend
   the hit area to at least 40x40px without overlapping adjacent controls.
 - Hover uses `transition: all`, causing unrelated properties to animate; restrict
   the transition to the properties that actually change.
 - The counter shifts width when values update; add tabular figures.
-- The hover icon appears abruptly; cross-fade opacity, scale, and blur, or use
-  Motion if the project already depends on it.
+- The hover icon appears abruptly; compare a simple cross-fade with the existing motion grammar. Use the project's animation library when it serves continuity, and retain a reduced-motion path.
 
 For narrow implementation summaries, a before/after table can make the pass easy
 to audit:

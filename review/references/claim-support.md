@@ -101,7 +101,11 @@ Should render:
 Why:
 ```
 
-The visible work product should project workflow-scoped judgments, support packages, confidence, and provenance. It should not be magic prose.
+The visible work product should reflect the supported judgment and its required
+qualification. Preserve enough provenance for its consumer to recover the basis;
+do not force every internal field into the rendered prose. These illustrative shapes
+are useful when support must travel between actors or stages. A short claim may carry
+the same distinctions in plain working notes rather than a formal object.
 
 ### Source independence
 
@@ -161,7 +165,10 @@ recommended_rendering:
   rationale:
 ```
 
-Two claims with the same scalar confidence may have different weaknesses: weak evidence, ambiguous scope, stale source, conflicting newer evidence, or uncertain interpretation. The renderer needs those differences.
+Two claims with the same scalar confidence may have different weaknesses: weak evidence,
+ambiguous scope, stale source, conflicting newer evidence, or uncertain interpretation.
+The renderer needs those differences. A model's stated confidence cannot replace source
+support, and inferred user fit does not supply action authority.
 
 ### Confidence controls language
 

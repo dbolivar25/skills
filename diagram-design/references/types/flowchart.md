@@ -1,29 +1,11 @@
-> This is a retained, worked representation recipe. Its aesthetic values and
-> count budgets describe the example treatment; adapt them to the actual data,
-> reader, destination, and [selected skin](../skins.md). Preserve the semantic
-> encoding and source distinctions. Publication figures may use plotting tools.
-> The bundled [verification method](../verification.md) states actual helper coverage.
+# Flowcharts
 
-# Flowchart
+Use this for actions, decisions, and paths through a procedure. Name the entry condition and meaningful end states.
 
-**Best for:** decision logic, algorithms, user-facing branching flows ("Should I…?"), onboarding routing, support-triage trees.
+Use boxes for actions and diamonds for decisions when conventional notation helps. Label decision branches with actual conditions or choices. A decision may have more than two outcomes; use enough space or a decision table rather than inventing binary tests. Preserve loops, retries, exceptions, and paths that terminate differently.
 
-## Layout conventions
-- Shape carries type, not color:
-  - **Oval** (`rx=20`) — start / end
-  - **Rectangle** (`rx=6`) — step / action
-  - **Diamond** — decision (≤3 exits)
-  - **Small filled ink dot** (`r=4`) — merge point where branches rejoin
-- Flow runs top→down. From a diamond, conventional exits: Yes to the right, No below — but label every outgoing arrow regardless.
-- Use coral on the happy path *or* on the single most consequential decision — never on every decision.
-- If two arrows must cross, use a small arc jump on one so the crossing is readable.
+The arrows define order. Rearranging boxes is safe only when the edge structure and reading order remain clear. Do not eliminate a crossing by changing a branch or reordering the procedure. A missing or unspecified branch is explicit, not a presumed default.
 
-## Anti-patterns
-- Using fill color to signal node type (shape does that).
-- Decision diamond with 4+ exits — refactor into nested diamonds.
-- Unlabeled decision branches.
+Trace ordinary, exceptional, and looping executions against the source. Check that each branch reaches the intended next action or end state, that guards are unambiguous, and that arrows are visible at their endpoints.
 
-## Examples
-- `../../assets/example-flowchart.html` — minimal light
-- `../../assets/example-flowchart-dark.html` — minimal dark
-- `../../assets/example-flowchart-full.html` — full editorial
+Reference layouts: [flowchart](../../assets/example-flowchart.html), [full](../../assets/example-flowchart-full.html), [dark](../../assets/example-flowchart-dark.html).

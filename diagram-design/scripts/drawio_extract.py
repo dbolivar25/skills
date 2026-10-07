@@ -13,7 +13,7 @@ Usage:
                              [--max-rows N] [--out PATH]
 
 Default output is a compact Markdown digest meant to be read into context.
-``--json`` emits the full IR instead (every node, every edge, every style).
+``--json`` emits the full normalized IR, not every original XML style or route.
 
 Exit codes: 0 ok, 2 unreadable / unsupported input.
 """
@@ -24,6 +24,7 @@ import argparse
 import base64
 import html
 import json
+import math
 import re
 import struct
 import sys
@@ -174,13 +175,13 @@ def load_mxfile(path: Path) -> str:
             _fail(f"{path.name}: PNG has no embedded draw.io diagram")
         return xml
     text = data.decode("utf-8", "replace").lstrip("﻿").strip()
-    if "<mxfile" in text or "<mxGraphModel" in text:
-        return text
     if "<svg" in text[:2000]:
         xml = _svg_embedded_xml(text)
         if not xml:
             _fail(f"{path.name}: SVG has no embedded draw.io diagram")
         return xml
+    if "<mxfile" in text or "<mxGraphModel" in text:
+        return text
     inflated = _inflate(text)
     if inflated and "<mxGraphModel" in inflated:
         return inflated
@@ -324,6 +325,8 @@ class Edge:
     id: str
     source: str | None
     target: str | None
+    source_ref: str | None = None
+    target_ref: str | None = None
     label: str = ""
     dashed: bool = False
     bidirectional: bool = False
@@ -350,9 +353,12 @@ def _num(geom: ET.Element | None, key: str) -> float:
     if geom is None:
         return 0.0
     try:
-        return float(geom.get(key, "0") or 0)
+        value = float(geom.get(key, "0") or 0)
     except ValueError:
-        return 0.0
+        _fail(f"invalid geometry: {key} must be numeric")
+    if not math.isfinite(value):
+        _fail(f"invalid geometry: {key} must be finite")
+    return value
 
 
 def parse_page(diagram: ET.Element, index: int) -> Page:
@@ -366,7 +372,10 @@ def parse_page(diagram: ET.Element, index: int) -> Page:
         if not inflated:
             return page
         _reject_unsafe_xml(inflated, f"page {index}")
-        model = ET.fromstring(inflated)
+        try:
+            model = ET.fromstring(inflated)
+        except ET.ParseError as exc:
+            _fail(f"page {index}: malformed compressed XML ({exc})")
         if model.tag != "mxGraphModel":
             found = model.find(".//mxGraphModel")
             if found is None:
@@ -401,6 +410,8 @@ def parse_page(diagram: ET.Element, index: int) -> Page:
             continue
         if not cid:
             continue
+        if cid in raw:
+            _fail(f"page {index}: duplicate cell ID {cid!r}")
         raw[cid] = {"cell": cell, "attrs": attrs, "value": value}
         order.append(cid)
 
@@ -454,16 +465,27 @@ def parse_page(diagram: ET.Element, index: int) -> Page:
 
     node_map = page.node_map
 
-    # Resolve absolute geometry + depth by walking the parent chain.
+    # Resolve from immutable relative positions. A previously resolved parent
+    # must not have its ancestors added a second time for a later descendant.
+    relative = {node.id: (node.x, node.y) for node in page.nodes}
+    resolved: dict[str, tuple[float, float, int]] = {}
     def resolve(node: Node, seen: set[str]) -> tuple[float, float, int]:
+        if node.id in resolved:
+            return resolved[node.id]
         if node.id in seen:
-            return node.x, node.y, 0
+            _fail(f"page {index}: parent cycle involving {node.id!r}")
         seen.add(node.id)
+        x, y = relative[node.id]
         parent = node_map.get(node.parent or "")
         if parent is None:
-            return node.x, node.y, 0
-        px, py, pdepth = resolve(parent, seen)
-        return node.x + px, node.y + py, pdepth + 1
+            result = (x, y, 0)
+        else:
+            px, py, pdepth = resolve(parent, seen)
+            result = (x + px, y + py, pdepth + 1)
+        if not all(math.isfinite(value) for value in result[:2]):
+            _fail(f"page {index}: absolute geometry overflow")
+        resolved[node.id] = result
+        return result
 
     for node in page.nodes:
         ax, ay, depth = resolve(node, set())
@@ -492,18 +514,21 @@ def parse_page(diagram: ET.Element, index: int) -> Page:
             label = " / ".join([p for p in ([label] + extra) if p])
         source = cell.get("source")
         target = cell.get("target")
+        start_head = style.get("startArrow", "none") not in ("none", "0", "")
+        end_head = style.get("endArrow", "classic") not in ("none", "0", "")
+        if start_head and not end_head:
+            source, target = target, source
         page.edges.append(
             Edge(
                 id=cid,
                 source=source if source in node_map else None,
                 target=target if target in node_map else None,
+                source_ref=source,
+                target_ref=target,
                 label=label,
                 dashed=style.get("dashed") == "1",
-                bidirectional=style.get("startArrow", "none")
-                not in ("none", "0", "")
-                and style.get("endArrow", "classic") not in ("none", "0"),
-                undirected=style.get("endArrow") in ("none", "0")
-                and style.get("startArrow", "none") in ("none", "0", ""),
+                bidirectional=start_head and end_head,
+                undirected=not start_head and not end_head,
                 style_name=style.get("shape", "")
                 or ("orthogonal" if style.get("edgeStyle") else ""),
                 waypoints=waypoints,
@@ -512,10 +537,18 @@ def parse_page(diagram: ET.Element, index: int) -> Page:
         )
 
     for edge in page.edges:
-        if edge.source and edge.source in node_map:
-            node_map[edge.source].out_degree += 1
-        if edge.target and edge.target in node_map:
-            node_map[edge.target].in_degree += 1
+        source = node_map.get(edge.source or "")
+        target = node_map.get(edge.target or "")
+        if edge.bidirectional or edge.undirected:
+            for endpoint in (source, target):
+                if endpoint is not None:
+                    endpoint.in_degree += 1
+                    endpoint.out_degree += 1
+        else:
+            if source is not None:
+                source.out_degree += 1
+            if target is not None:
+                target.in_degree += 1
 
     return page
 
@@ -744,8 +777,8 @@ def digest(path: Path, pages: list[Page], selected: list[Page], max_rows: int) -
         out.append(f"- shapes: {info['shapes']}")
         out.append(f"- type candidates: {', '.join(info['type_candidates'])}")
         out.append(
-            f"- budget: nodes {'OVER' if info['over_node_budget'] else 'ok'} (max 9), "
-            f"edges {'OVER' if info['over_edge_budget'] else 'ok'} (max 12)"
+            f"- compact-layout density hint: nodes {'OVER' if info['over_node_budget'] else 'ok'} (example 9), "
+            f"edges {'OVER' if info['over_edge_budget'] else 'ok'} (example 12)"
         )
         if info["hubs"]:
             hubs = ", ".join(
@@ -766,7 +799,7 @@ def digest(path: Path, pages: list[Page], selected: list[Page], max_rows: int) -
                 f"- unconnected: {', '.join(_escape_inline(label) for label in info['orphans'])}"
             )
         if info["collapsible_groups"]:
-            out.append("- collapsible groups (simplify here first):")
+            out.append("- candidate groups (collapse only within authorized fidelity):")
             for group in info["collapsible_groups"]:
                 kids = ", ".join(_escape_inline(label) for label in group["child_labels"])
                 out.append(

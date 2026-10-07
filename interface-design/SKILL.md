@@ -13,8 +13,18 @@ Own the interface as an experience: the user's moment, information, controls, st
 - Open direction: read `references/expressive-direction.md`, derive an underlying visual idea from the product and the user's moment, establish the available expressive freedom, and create meaningful structural range. Choose with reasons tied to the user's task and the product, then deepen the direction coherently.
 - Unresolved interaction: build the smallest runnable experiment that can answer the question. Use only the alternatives or controls needed for a discriminating observation.
 
-For an existing surface or a question about feel, read `references/experience-craft.md`
-for noticing, range versus depth, state, and waiting. Read `references/code-patterns.md`, `references/platform-floors.md`, and `references/worked-examples.md` for the craft or platform question at hand: hierarchy, typography, layout, optical alignment, wrapping, spacing, corners, hit areas, responsive behavior, accessibility, compositing, motion, and states. Read `references/prototypes.md` for a discriminating interaction experiment. Useful principles need contextual judgment; no universal grid, shadow, corner, or animation prescription overrides the surface's needs.
+For an existing surface or a question about feel, read [experience craft](references/experience-craft.md) before choosing the intervention. It turns reactions into observable causes and distinguishes range from depth.
+
+Select additional depth by the decision in front of you:
+
+| Decision | Read before deciding |
+| --- | --- |
+| What the platform or category already owes its users | [Platform floors](references/platform-floors.md), then current platform guidance when a detail matters |
+| How to implement a particular visual or interaction mechanic | The matching section of [code patterns](references/code-patterns.md) |
+| How to apply range, depth, or care to a similar problem | The matching [worked example](references/worked-examples.md) |
+| What a runnable comparison can actually settle | [Prototypes](references/prototypes.md) |
+
+The examples supply starting points, not a universal grid, shadow, corner, or animation law. Keep the surface's established grammar unless a departure earns its cost.
 
 ## Make the experience complete
 

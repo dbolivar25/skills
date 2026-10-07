@@ -1,28 +1,11 @@
-> This is a retained, worked representation recipe. Its aesthetic values and
-> count budgets describe the example treatment; adapt them to the actual data,
-> reader, destination, and [selected skin](../skins.md). Preserve the semantic
-> encoding and source distinctions. Publication figures may use plotting tools.
-> The bundled [verification method](../verification.md) states actual helper coverage.
+# Nested containment
 
-# Nested Containment
+Use this when the primary relationship is inside, part of, or scoped by. Containment can have siblings and branches; it is not restricted to one chain.
 
-**Best for:** hierarchy through containment — scope boundaries, CLAUDE.md cascade, trust zones, folder nesting, blast radius. Outer = broader, inner = more specific.
+Name what each boundary means: ownership, permission scope, location, or structural membership. Do not infer trust or authority from visual containment alone. A component that belongs to several overlapping scopes may need separate views or explicit annotations rather than false single-parent nesting.
 
-## Layout conventions
-- 3–5 rounded rectangles (`rx=8`), nested with consistent inset padding (24–32px horizontal, 32–36px vertical recommended).
-- Each level labeled at the top-left in Geist Mono eyebrow style (7–8px, letter-spacing 0.14em). Labels sit on a paper-colored mask rect over the ring's top border.
-- Stroke hierarchy: outer rings faint (`rgba(..,0.30–0.45)`), progressing to muted, to ink, to coral at the innermost focal.
-- Fills step up in opacity from outer to inner: `rgba(..,0.015)` → `rgba(..,0.025)` → accent-tint on the innermost.
-- Optional file-icon glyph (folded-corner rect) inside each level hints at scope content.
-- Italic Instrument Serif callouts (see `../primitive-annotation.md`) — 1–2 max.
+Preserve parent-child membership and identity. Leave enough inset space for parent labels and child boundaries. Labels should clearly belong to their own container. Show external connections only when relevant, with visible boundary crossings.
 
-## Anti-patterns
-- More than 6 levels (information disappears inward).
-- Irregular padding between levels — unaligned nesting looks accidental.
-- Content inside rings that isn't part of the hierarchy — use a sibling diagram.
-- Coral on multiple levels — hierarchy collapses.
+Check every containment relationship and sibling placement against the source. Inspect the deepest labels, shared-scope exceptions, unknown membership, and exported bounds.
 
-## Examples
-- `../../assets/example-nested.html` — minimal light
-- `../../assets/example-nested-dark.html` — minimal dark
-- `../../assets/example-nested-full.html` — full editorial
+Reference layouts: [nested](../../assets/example-nested.html), [full](../../assets/example-nested-full.html), [dark](../../assets/example-nested-dark.html).

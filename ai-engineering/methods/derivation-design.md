@@ -1,13 +1,14 @@
-# Design A New Work-Product Workflow
+# Design a work-product workflow
 
 Use this guide for a new workflow, a major redesign, or a product idea that needs a derivation spec before implementation.
 
 Apply the [derivation contract](../references/derivation/contract.md) for this selected complete method. Obtain relevant sources within the task's authority. Keep missing evidence and unresolved owner decisions visible; read the references before the decisions they govern. Design and assessment alone do not authorize implementation or publication.
 
-Use the complete [derivation spec](../templates/derivation-spec.md) as the artifact
-contract; read it before drafting so its required coverage remains visible.
+The derivation contract owns semantic coverage. Use the [derivation spec layout](../templates/derivation-spec.md) when its tables and fields help make the design reviewable. The decisions below can be developed iteratively: a source probe or counterexample may change an earlier obligation. Keep unresolved decisions explicit instead of making the layout appear complete.
 
-## Step 1: Work Product Contract
+For example, a follow-up email needs exact owner/date/action commitments and recipient-specific tone. An account strategy may need conflicting stakeholder views, older objections and a supported thesis. Discover those differences before choosing a common pipeline.
+
+## 1: Work Product Contract
 
 Start with the user-visible thing.
 
@@ -25,7 +26,7 @@ Answer:
 
 Completion criterion: the work product is not named as a generic summary or workflow stage. It is named by the job it performs for a user.
 
-## Step 2: Output Obligations
+## 2: Output Obligations
 
 Break the work product into the things it must get right:
 
@@ -40,7 +41,7 @@ Break the work product into the things it must get right:
 
 Completion criterion: each obligation is concrete enough that a reviewer can tell when the work product violates it.
 
-## Step 3: Judgments
+## 3: Judgments
 
 Convert obligations into named judgments.
 
@@ -56,7 +57,7 @@ For each judgment, record:
 
 Completion criterion: every obligation has at least one judgment, and every high-risk judgment is visible as its own judgment or explicitly folded into a joint inference node.
 
-## Step 4: Judgment Inputs
+## 4: Judgment Inputs
 
 Before this decision, read [`raw-state-and-semantics`](../references/derivation/raw-state-and-semantics.md).
 
@@ -80,9 +81,9 @@ For each major judgment, ask:
 
 Completion criterion: every high-risk judgment names raw signals, counter-signals, required fidelity, uncertainty, and false positives.
 
-## Step 5: Dimension Discovery
+## 5: Dimension Discovery
 
-Before this decision, read [`compression-and-dimensions`](../../writing/references/information-fidelity.md).
+Before this decision, read [information fidelity](../../writing/references/information-fidelity.md).
 
 Name a dimension only when it can change a judgment.
 
@@ -104,7 +105,7 @@ For each discovered dimension, define:
 
 Completion criterion: dimensions are not copied from a generic list. Each dimension exists because missing, compressing, aggregating, or misrepresenting it could change the work product.
 
-## Step 6: Judgment DAG
+## 6: Judgment DAG
 
 Before this decision, read [`judgment-dags-and-edges`](../references/derivation/judgment-dags-and-edges.md).
 
@@ -120,7 +121,7 @@ Use:
 
 Completion criterion: the graph explains which judgments must exist before others may run, which can run in parallel, which outputs fan out, and which nodes are gates rather than generation steps.
 
-## Step 7: Node Granularity
+## 7: Node Granularity
 
 Split nodes when:
 
@@ -144,11 +145,11 @@ Merge nodes when:
 
 Completion criterion: node boundaries protect faithfulness, evaluation, reuse, parallelism, policy, or efficiency; they are not justified by agent count.
 
-## Step 8: Edge Contracts
+## 8: Edge Contracts
 
 Before this decision, read [`durable-state-and-promotion`](../references/derivation/durable-state-and-promotion.md).
 
-For every edge, record:
+For every material dependency or transformation edge, record the applicable parts of its contract:
 
 - edge type
 - dimensions carried
@@ -166,9 +167,9 @@ For every edge, record:
 
 Completion criterion: after every transformation, downstream nodes can still make every required judgment. If not, the compression is invalid or premature.
 
-## Step 9: Evidence, Support, And Confidence
+## 9: Evidence, Support, And Confidence
 
-Before this decision, read [`evidence-support-and-confidence`](../../review/references/claim-support.md).
+Before this decision, read [claim support](../../review/references/claim-support.md).
 
 Define evidence relative to the question.
 
@@ -187,11 +188,11 @@ For each evidence-gathering or interpretation node, record:
 - output representation
 - downstream consumers
 
-For each rendered claim or action, define a support package.
+For each consequential rendered claim or action, retain the support package needed by its consumer. Use the shared support method rather than requiring every example confidence axis.
 
-Completion criterion: important rendered claims and actions are grounded in judgment sources, raw source support, structured confidence, contradictions, open questions, and rendering policy.
+Completion criterion: important rendered claims and actions are grounded in judgment sources, raw source support, relevant confidence weaknesses, contradictions, open questions, and rendering policy. Distinguish unknown values from observed negatives and unavailable evidence from evidence of absence.
 
-## Step 10: Publication And Rendering
+## 10: Publication And Rendering
 
 Before this decision, read [`publication-and-rendering`](../references/derivation/publication-and-rendering.md).
 
@@ -208,7 +209,7 @@ Answer:
 
 Completion criterion: publication gates have inputs, pass conditions, fail behavior, user-visible behavior, and logging or eval hooks.
 
-## Step 11: Evals And Ablations
+## 11: Evals And Ablations
 
 Before this decision, read [`evals-and-ablations`](../../evaluation/references/evals-and-ablations.md).
 
@@ -230,9 +231,9 @@ Use ablations to test dimensions:
 - remove low-frequency events
 - remove scope resolution
 
-Completion criterion: the spec says what should get worse when a necessary dimension is removed and what should not matter if a carried dimension is unnecessary.
+Completion criterion: the evaluation plan covers the actual layers and says what should get worse when a necessary dimension is removed and what should not matter if a carried dimension is unnecessary. Planned checks are not measured quality; mark absent execution evidence.
 
-## Step 12: Efficiency After Faithfulness
+## 12: Efficiency After Faithfulness
 
 Discuss efficiency only after the quality path is coherent.
 

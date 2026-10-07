@@ -1,15 +1,19 @@
 # Write a custom Biome lint rule
 
-A custom rule turns repository policy into permanent executable feedback. It is
+A custom Biome/GritQL rule turns repository policy into permanent executable feedback. It is
 worth owning only when the policy is real, the syntax can recognize it with an
 acceptable false-positive rate, and tests prove both sides of the boundary.
+
+For a new rule, work through policy, syntax coverage, integration, and fix safety below.
+For an existing rule, reuse its settled policy and harness, refreshing the parts the
+change can invalidate. A diagnostic correction need not re-propose the whole lint system.
 
 ## 1. Prove the policy
 
 Identify:
 
 - the repository-owned rule or invariant being protected;
-- concrete current violations and their consequence;
+- concrete current violations or demonstrated realistic misuse, and their consequence;
 - the preferred replacement or correction;
 - legitimate lookalikes that must remain allowed;
 - whether Biome already has a built-in rule; and
@@ -20,9 +24,9 @@ Do not import a generic preference into a repository merely because a GritQL
 pattern can detect it. Rules such as banning a framework hook, dynamic imports,
 or a language feature require current local policy and counterexamples.
 
-Completion criterion: current repository evidence establishes a repeated policy
-violation, its correction, and its allowed exceptions; otherwise stop without
-creating a plugin.
+Proceed when repository evidence or an explicit owned policy establishes the boundary,
+its consequence, correction, and allowed exceptions. If the policy is merely a generic
+preference with no present need, stop without creating a plugin.
 
 ## 2. Pin the implementation surface
 
@@ -65,7 +69,7 @@ as an under-matching one.
 
 ## 4. Design the narrowest pattern
 
-Read [`references/gritql.md`](../references/lint/gritql.md). Start with structural code
+Read [GritQL patterns](../references/lint/gritql.md). Start with structural code
 snippets. Use Biome CST node names only when snippets cannot express the boundary
 precisely enough, because grammar-specific patterns carry more upgrade cost.
 
@@ -102,7 +106,7 @@ pass with the intended diagnostics and no unexplained new findings.
 
 ## 6. Add a fix only when it is provably safe
 
-Read [`references/fixes.md`](../references/lint/fixes.md) before adding a rewrite. A
+Read [GritQL fixes](../references/lint/fixes.md) before adding a rewrite. A
 diagnostic does not require an automatic fix.
 
 Keep Biome's default unsafe classification unless every match can be rewritten

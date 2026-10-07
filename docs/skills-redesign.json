@@ -1219,7 +1219,7 @@
     "distribution": "Package and dry-run host-specific projections; check links/assets/metadata/byte limits without pushing. Preserve history and rollback. Do not install until this design is selected for implementation.",
     "decision": "Adopt only if protected behavior and required quality survive and selection/process burden falls. Split engineering design or change a boundary if observed routing failures justify it."
   },
-  "status": "Installed locally, meaningfully verified and independently accepted.",
+  "status": "First version installed locally, verified, independently accepted and committed; second-pass changes are documented separately.",
   "source_commit": "1e8ee5382016cfc770cd066024c54654196ea5cb",
   "managed": "Unchanged by current owner instruction.",
   "observed_checks": {
@@ -1272,5 +1272,7 @@
     "report_revision": 37,
     "completion_revision": 41,
     "steward_record": "/Users/danielbolivar/.codex/visualizations/2026/10/06/01a11351-2003-7123-a65b-ed712ba5abb6/skills-redesign/.steward/skills-redesign/record.jsonl"
-  }
+  },
+  "first_version_commit": "fc4b475123099e75bc3b675ce0696cc0d0e0a1e7",
+  "second_pass_account": "docs/skills-second-pass.json"
 }

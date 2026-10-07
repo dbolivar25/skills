@@ -7,16 +7,17 @@ branch governs the order in which it is learned.
 
 ## 1. Agree on the behavior and seam
 
-Read project `CONTEXT.md` when present and governing ADRs. Inspect local test
+Read project domain/context documentation and governing ADRs. Inspect local test
 patterns. Establish the public interface, test seams, and a prioritized behavior
 list, focusing effort on critical paths and complex logic. If the interface is
 unsettled, use [module design](../references/modules.md) before the loop.
 Look for opportunities to hide behavior behind a small interface.
 
-Confirm the plan with the user before coding: interface, seams and prioritized
-behaviors. Existing explicit approval satisfies this gate; do not ask again.
-
-Done when those choices are explicit and approved.
+Make the interface, seams, and prioritized behaviors explicit enough to drive the
+first cycle. Resolve source-verifiable facts yourself. Ask only for an unsettled
+choice that materially changes the result and belongs to the owner, or when an
+applicable repository instruction requires approval. The selected TDD method adds
+no separate plan-approval gate.
 
 ## 2. Fire one tracer bullet
 

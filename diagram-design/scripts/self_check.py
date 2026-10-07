@@ -190,8 +190,13 @@ def reference_error(tag: str, rel: str, value: str) -> str | None:
         ":" in stripped.split("/", 1)[0] and not lowered.startswith("data:")
     )
     if not remote:
-        if lowered.startswith("data:") and not lowered.startswith("data:image/"):
-            return f"non-image data URL on <{tag}>: {stripped[:80]}"
+        allowed_font = tag == "CSS url" and lowered.startswith((
+            "data:font/woff2;", "data:font/woff;", "data:application/font-woff;",
+        ))
+        if lowered.startswith("data:") and not (
+            lowered.startswith("data:image/") or allowed_font
+        ):
+            return f"unsupported data URL on <{tag}>: {stripped[:80]}"
         return None
     if tag == "link" and "stylesheet" in rel.casefold().split():
         if is_approved_google_fonts_stylesheet(stripped):

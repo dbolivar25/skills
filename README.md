@@ -26,6 +26,8 @@ The October 2026 redesign consolidated 36 public entries into 15. Detailed metho
 
 The cuts remove the shared composition protocol, generic assessment envelopes, compulsory global checklists and unsupported universal gates. They also remove standalone selection overhead for methods now owned by these jobs. The complete source dispositions and disclosed losses are in the [migration account](docs/skills-redesign.md) and [resource manifest](docs/skills-redesign.json).
 
+The first version is committed as `fc4b475`. The [second-pass account](docs/skills-second-pass.md) explains the substantive reference improvements and further cuts. Its [file-level evidence](docs/skills-second-pass.json) distinguishes edits, preserved material and relocations. These second-pass changes remain uncommitted.
+
 These are local installed files. Discovery, invocation permission and content loading are separate host mechanisms. A chat that began with the previous catalog may need a fresh session to discover the new names. No host refresh or measured improvement in model quality is claimed.
 
 ## Validate the library
@@ -43,10 +45,10 @@ PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s diagram-design/tests
 scripts/publish-amp --check-working-tree
 ```
 
-The validator checks metadata, owned links and entry pointers, the approved catalog/resource bindings, protected Steward hashes and invocation-case specifications. The 82 routing cases are reviewed expectations, not measured model-routing results. Runtime/helper regressions and actual rendered inspection establish their stated coverage; comparative task quality needs separate evidence.
+The validator checks metadata, owned files and Markdown heading targets, entry pointers, the approved catalog/resource bindings, protected Steward hashes and invocation-case specifications. The 82 routing cases are reviewed expectations, not measured model-routing results. Runtime/helper regressions and actual rendered inspection establish their stated coverage; comparative task quality needs separate evidence.
 
 ## Distribution
 
 The full local collection includes its cross-package methods and assets. Install the collection coherently; publishing an isolated package does not make a sibling reference available.
 
-The existing Amp filter excludes WOFF2 fonts and Diagram Design, and excludes development tests. `--check-working-tree` checks the actual local projection without commits or network access. Publication still uses an explicit committed revision and the configured Amp remote. No publication was performed during this migration. The filtered projection is not full local asset parity.
+The existing Amp filter excludes WOFF2 fonts, Diagram Design, package-local development tests and the brand audit fixtures. Root validation and documentation files remain in the projection. `--check-working-tree` checks the actual local projection without commits or network access. Publication still uses an explicit committed revision and the configured Amp remote. No publication was performed during this migration. The filtered projection is not full local asset parity.

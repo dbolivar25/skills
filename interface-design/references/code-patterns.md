@@ -1,8 +1,17 @@
 # Code Patterns
 
-Use this reference when implementation detail would otherwise bloat the main
-skill. These are handles, not mandatory recipes. Apply only where the surface
-needs the pattern.
+Read the section for the mechanic in scope. These are illustrative implementation shapes, not a component library or mandatory recipes. Values must fit the actual content, input method, local grammar, and performance budget.
+
+| Need | Section |
+| --- | --- |
+| Tune feel without blind repeated edits | [Tunable values](#tunable-values) |
+| Turn a changing input into visible behavior | [Map range](#map-range), [rubber banding](#rubber-banding), [pointer reactivity](#pointer-reactivity), or [wave drivers](#wave-drivers) |
+| Improve legibility or surface detail | [Color](#color-and-gradients), [typography](#typography-css-handles), [surface detail](#surface-detail-defaults), or [hit areas](#hit-areas) |
+| Control visibility and layering | [Masks](#masks) and [compositing](#compositing) |
+| Maintain continuity through change | [Motion](#motion), [animation examples](#animation-detail-defaults), and [transition hygiene](#transition-and-compositing-hygiene) |
+| Inspect async states and recovery | [State gallery](#state-gallery) and [optimistic UI](#optimistic-ui) |
+
+Framework snippets omit imports and host components. Use the installed project's API and existing dependencies. For Motion-specific behavior, check its [current AnimatePresence documentation](https://motion.dev/docs/react-animate-presence) and the version in the project before copying a shape.
 
 ## Tunable Values
 
@@ -49,6 +58,8 @@ Use map range when one value should drive another: scroll drives header size,
 pointer position drives tilt, utilization drives color, or drag distance drives
 offset.
 
+This helper expects finite values and a nonzero input range. When the measured range can collapse, choose its neutral output at the caller rather than dividing by zero.
+
 ```ts
 export function mapRange(
   value: number,
@@ -79,16 +90,18 @@ approaches a ceiling.
 
 ```ts
 const resistance = 150;
-const t = pull / (pull + resistance);
-const offset = mapRange(t, [0, 1], [0, 64]);
+const magnitude = Math.abs(pull);
+const offset = Math.sign(pull) * 64 * magnitude / (magnitude + resistance);
 ```
 
-Increase resistance for a stiffer feel. Tune this live when possible.
+Use a positive resistance. The signed form resists movement in either direction and remains bounded. Increase resistance for a stiffer feel; tune it live.
 
 ## Pointer Reactivity
 
 Map pointer position inside a rectangle onto rotation or depth. Use the center
 as neutral.
+
+Measure a nonzero rectangle, reset on pointer exit, and preserve keyboard behavior. This decorative effect must not be necessary to read or operate the card.
 
 ```ts
 const px = (pointerX - rect.left) / rect.width;
@@ -168,7 +181,7 @@ support is not acceptable.
 Useful handles:
 
 ```css
-.article {
+.description {
   max-width: 66ch;
   line-height: 1.5;
   text-wrap: pretty;
@@ -205,7 +218,7 @@ ending carry meaning. Use OpenType features such as slashed zero, true fractions
 small caps, case-sensitive punctuation, and disambiguation alternates only when
 they improve the content being read.
 
-Apply font smoothing once at the root when the app targets macOS rendering:
+If the established app uses macOS font smoothing, apply it once at the root and compare its rendered weight. It is an optical choice, not a substitute for the intended font:
 
 ```css
 html {
@@ -229,9 +242,7 @@ Concentric border radius:
 outerRadius = innerRadius + padding
 ```
 
-Close nested surfaces should follow the formula. If the gap between the surfaces
-is larger than about 24px, treat them as separate surfaces instead of forcing
-strict concentric math.
+For close nested surfaces, this is a useful starting relationship. Judge the optical result against the tokens, border width, and shape. With a wide gap, the surfaces can read as separate objects; exact concentric math may no longer help.
 
 ```css
 .card {
@@ -311,13 +322,13 @@ img {
 }
 ```
 
-Use pure black in light mode and pure white in dark mode. Do not use tinted
-palette neutrals for image outlines; they can read as dirt on the image edge.
+Low-opacity black on light surfaces and white on dark surfaces keep this example neutral. Compare the actual image edge before adding an outline; a tint or unnecessary ring can make the image look dirty.
 
 ## Hit Areas
 
-Aim for 44x44px interactive targets when possible, and at least 40x40px. If the
-visible element is smaller, extend the hit area with a pseudo-element.
+Use comfortable targets for the actual input method; 44×44 CSS pixels is a useful touch-oriented starting point. For web accessibility, [WCAG 2.2 AA target size](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html) uses 24×24 CSS pixels or qualifying spacing, with specific exceptions; [44×44 is the enhanced criterion](https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html). A minimum is not a quality target. Follow stricter applicable product or native-platform guidance.
+
+Prefer padding on the semantic control. A pseudo-element can extend a small visible icon when layout cannot grow:
 
 ```css
 .icon-button {
@@ -337,12 +348,13 @@ visible element is smaller, extend the hit area with a pseudo-element.
 }
 ```
 
-If extended hit areas collide, shrink them until they no longer overlap. Two
-interactive elements should not claim the same pointer area.
+Measure and exercise the actual hit area, including neighbors, clipping, focus, and touch. When extended areas collide, adjust the layout or extension without violating the applicable floor. Two controls must not claim the same pointer area.
 
 ## Masks
 
 Use masks when visibility should be controlled without painting an overlay.
+
+Keep focused controls and important text legible. A fade at a scroll edge must not silently hide keyboard focus or turn reachable content into an unreadable target.
 
 Edge fade:
 
@@ -461,8 +473,7 @@ Combine properties so motion reads physically:
 
 ## Animation Detail Defaults
 
-For enter animations, split the content into semantic chunks instead of
-animating one large container. A practical default is:
+For an expressive entrance, semantic chunks can show reading order better than a single container. This example starts with:
 
 - Title, description, controls, and supporting content animate as separate
   children.
@@ -525,7 +536,7 @@ visibility:
 </AnimatePresence>
 ```
 
-Use these values as the default for contextual icon animation:
+The icon-swap example uses these values; tune or simplify them to fit the established grammar:
 
 - Scale from `0.25` to `1`.
 - Opacity from `0` to `1`.
@@ -559,9 +570,7 @@ other defines layout.
 </div>
 ```
 
-For press feedback, start with `scale(0.96)`. Do not go below `0.95` unless the
-product moment is intentionally exaggerated. Add a static or reduced-motion
-escape hatch when press motion would be distracting.
+For press feedback, `scale(0.96)` is one starting point. A small control may need a different response; exaggerated movement needs a reason. Essential state changes must survive reduced motion. For the CSS example:
 
 ```css
 .button {
@@ -572,6 +581,11 @@ escape hatch when press motion would be distracting.
 
 .button:active {
   scale: 0.96;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button { transition: none; }
+  .button:active { scale: 1; }
 }
 ```
 
@@ -600,8 +614,7 @@ Tailwind examples:
 <button className="transition-transform duration-150 ease-out" />
 ```
 
-Use `will-change` only after observing first-frame stutter, and only for
-compositor-friendly properties:
+Use `will-change` only after observing a rendering problem and checking whether layer promotion actually helps. The [browser guidance](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/will-change) warns against speculative use. For example:
 
 ```css
 .animated-card {
@@ -609,21 +622,7 @@ compositor-friendly properties:
 }
 ```
 
-Usually useful:
-
-- `transform`.
-- `opacity`.
-- `filter`.
-- `clip-path`.
-
-Usually not useful:
-
-- `top`, `left`, `width`, `height`.
-- `background`, `border`, `color`.
-- `padding`, `margin`, layout-affecting dimensions.
-
-Every extra compositing layer costs memory. Remove `will-change` when it no
-longer solves a measured problem.
+Transform and opacity are common candidates. Filter and clip-path behavior depends on the browser and effect; inspect the actual paint and compositing result. Promotion cannot remove the layout work caused by changing dimensions. Extra layers cost memory and can change stacking behavior. Remove the hint when it no longer solves the observed problem.
 
 ## State Gallery
 
@@ -660,6 +659,8 @@ duplicating every static comp:
 ## Optimistic UI
 
 Optimistic writes:
+
+This illustrates one serialized update with no newer edit to the same cache entry. For overlapping mutations, use the application's existing reconciliation policy; a blind snapshot rollback can erase newer work. Confirm pending state remains distinguishable where the result matters.
 
 ```ts
 const previous = cache.get(key);

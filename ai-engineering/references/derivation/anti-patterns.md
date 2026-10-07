@@ -56,7 +56,7 @@ Scalar confidence cannot tell the renderer whether to assert, qualify, tentative
 
 ## Evals Only At The Final Artifact
 
-Final-output evals are necessary but insufficient. Node-level, edge-level, retrieval-level, and ablation evals are needed to locate where faithfulness was gained or lost.
+Final-output evals can reveal a failure without locating its cause. Inspect the relevant judgment, edge, retrieval and gate boundaries the system actually contains; use ablations where component value is uncertain. Do not invent an evaluation layer merely to fill the list.
 
 ## Expensive Ceremony
 

@@ -15,8 +15,9 @@ to repeat them. Make the unresolved branches explicit.
 
 Map the object as a **design tree**: each decision branches into decisions that depend
 on it. The **frontier** contains every unresolved decision whose prerequisites are
-settled. Ask the whole frontier as one numbered round; a question that depends on
-another open question belongs in a later round.
+settled. Ask a manageable numbered round from that frontier. Keep the remaining choices
+visible, but avoid burying one decisive choice under every independent question in a
+large plan. A question depending on an open answer belongs in a later round.
 
 Give each question a short title, enough context to decide, and a recommended answer
 with its reason:

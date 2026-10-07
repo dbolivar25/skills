@@ -18,13 +18,13 @@ code or context is an evidence need, not evidence that the user's account is wro
   whole-order cancellation versus a proposed partial cancellation, for example.
 
 Return settled glossary deltas separately from unresolved proposals. A glossary contains
-domain meaning, not implementation details, a spec or scratch notes. Use
-[the context format below](#context-format) for a requested glossary delta.
+domain meaning, not implementation details, a spec or scratch notes. Use the repository's
+glossary format, or [the context format below](#context-format) when no local convention exists.
 
-A decision merits an ADR only when all three hold: it is hard to reverse, surprising
-without context, and the result of a real tradeoff. Otherwise keep it out of the ADR
-stream. When qualified, use [the ADR format below](#adr-format) to propose the decision and
-its alternatives. Return the target context with the delta. Resolve missing code or glossary evidence and ask owner questions. Persist settled
+Use [the ADR guidance below](#adr-format) when a decision's basis must survive the current
+conversation. Follow repository practice and avoid an ADR for every routine choice.
+Return the target context with the delta.
+Resolve missing code or glossary evidence and ask owner questions. Persist settled
 language only within the documentation scope, checking current files before edits and
 reading back the result.
 Proposals remain distinct from recorded decisions; files are created lazily when there
@@ -59,14 +59,17 @@ _Avoid_: Client, buyer, account
 
 ### Rules
 
-- **Be opinionated.** When multiple words exist for the same concept, pick the best one and list the others under `_Avoid_`.
-- **Keep definitions tight.** One or two sentences max. Define what it IS, not what it does.
-- **Only include terms specific to this project's context.** General programming concepts (timeouts, error types, utility patterns) don't belong even if the project uses them extensively. Before adding a term, ask: is this a concept unique to this context, or a general programming concept? Only the former belongs.
+- **Choose a canonical term.** When several words name the same concept, pick the best one and list misleading alternatives under `_Avoid_`. Keep a synonym when it has a distinct legitimate meaning; glossary editing must not flatten the model.
+- **Keep definitions tight.** Start with a sentence or two stating what the concept means. Add a distinction, example, or invariant when that is needed to prevent misunderstanding. Behavior belongs here when it defines the domain concept, not merely an implementation.
+- **Include domain language for this context.** A common word such as Order can belong because its meaning and relationship to Invoice matter here. General programming concepts (timeouts, utility patterns) usually belong elsewhere; include one only when the domain gives it a specific meaning or constraint.
 - **Group terms under subheadings** when natural clusters emerge. If all terms belong to a single cohesive area, a flat list is fine.
 
 ### Single vs multi-context repos
 
-**Single context (most repos):** One `CONTEXT.md` at the repo root.
+Follow the existing repository's format and locations. When introducing a glossary,
+these are useful starting shapes, not assumptions about every repository:
+
+**Single context:** One `CONTEXT.md` at the repo root.
 
 **Multiple contexts:** A `CONTEXT-MAP.md` at the repo root lists the contexts, where they live, and how they relate to each other:
 
@@ -90,7 +93,8 @@ Infer structure from the actual repository layout and context contents:
 
 - A `CONTEXT-MAP.md` identifies multiple contexts and their locations.
 - Only a root `CONTEXT.md` indicates a single context.
-- Neither file means a root glossary can be proposed with the first settled term.
+- Neither file means first look for an equivalent glossary or domain document. A root
+  glossary can be proposed with the first settled term when no existing owner fits.
 
 For multiple contexts, place the proposed delta in the context supported by the
 topic and examples. Missing map contents are an evidence need; an ambiguous
@@ -99,9 +103,10 @@ authorized documentation scope.
 
 ## ADR format
 
-ADRs live in `docs/adr/` and use sequential numbering: `0001-slug.md`, `0002-slug.md`, etc.
+Use the repository's existing ADR location, naming, and template. Without a convention,
+`docs/adr/` and sequential names such as `0001-slug.md`, `0002-slug.md` are a useful default.
 
-Create the `docs/adr/` directory lazily: only when the first ADR is needed.
+Create a new decision directory lazily, only when a record is needed.
 
 ### Template
 
@@ -123,17 +128,21 @@ Only include these when they add genuine value. Most ADRs won't need them.
 
 ### Numbering
 
-Scan `docs/adr/` for the highest existing number and increment by one.
+When using sequential numbering, scan the chosen ADR directory for the highest existing
+number and increment by one.
 
 ### When to offer an ADR
 
-All three of these must be true:
+These three questions identify decisions that especially benefit from a durable record:
 
 1. **Hard to reverse**: the cost of changing your mind later is meaningful
 2. **Surprising without context**: a future reader will look at the code and wonder "why on earth did they do it this way?"
 3. **The result of a real trade-off**: there were genuine alternatives and you picked one for specific reasons
 
-If a decision is easy to reverse, skip it: you'll just reverse it. If it's not surprising, nobody will wonder why. If there was no real alternative, there's nothing to record beyond "we did the obvious thing."
+An easy, unsurprising choice with no real alternative usually does not earn an ADR.
+Use judgment for consequential exceptions and local practice. Record the decision's
+owner, scope, basis, and reopening condition when losing them would cause the same
+tradeoff to be argued again; a shorter note may suffice.
 
 #### What qualifies
 

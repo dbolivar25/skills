@@ -6,8 +6,7 @@ is a professional who will check.
 ## Fundamentals
 
 - Sentence case everywhere: headings, buttons, body, labels.
-- The reader is *you*. The product is *Augment* or *the platform*. Never *the
-  agent*, *the copilot*, or *the AI*. Keep marketing *we* out of product surfaces.
+- Address the reader as *you* and call the product *Augment* or *the platform*. Keep marketing *we* and unnecessary agent/model narration out of product surfaces. Use a specific technical name when it is the object the reader must configure, inspect, or distinguish.
 - Actions name the act: "Run", "Apply", "Review changes", "Revert". Use "Get
   started" only where it is literally the start.
 - Claims carry evidence: a source, a number, a record, or a consequence.
@@ -22,22 +21,15 @@ is a professional who will check.
 A generated document, brief, or report follows one extra rule, and it replaces a
 long list of banned phrases.
 
-**Copy describes what the reader can inspect, do, or decide. It does not describe
-how the artifact was produced.**
+**Lead with what the reader can inspect, do, or decide. Explain production details only when they change trust, interpretation, or the reader's next action.**
 
-The reader did not commission the run, and narrating its provenance spends their
-attention on machinery. Naming the pipeline, the model, the safeguards, or the
-reason a section exists all do that.
+“Here is what the system generated” adds little to a visible brief. “Nothing sends without your approval” adds little to an unrelated account analysis. An unsent message should be labeled as a draft; permission belongs at the action where it matters.
 
-The rule forbids "here is what the system generated", "nothing sends without your
-approval", and "confirm or correct this read". It also forbids any future
-phrasing of the same move, including plain-language versions that no denylist
-would catch. It permits the same information stated as a fact the reader can act
-on. An unsent draft is a draft, and saying so once is enough.
+Source coverage, freshness, inference, and material uncertainty can change the reader's conclusion, so preserve them where useful. A partial transcript or an inferred risk should not become a confident fact to make the copy smoother. Explain a real pending effect or approval requirement plainly when the reader must act on it. The goal is useful disclosure at its point of use, rather than a running narration of the machinery.
 
 ## The prose loop
 
-Run this over every string before delivery. It is Augment's local voice floor.
+Apply this pass to authored copy before delivery. It is Augment's local voice floor; source quotes, exact identifiers, code, and factual distinctions keep their meaning.
 Use the [prose craft](../../writing/references/prose-craft.md) and, for the
 explicit Augment voice floor here, the [strict style](../../writing/references/strict-style.md)
 methods. Edit structure when it clarifies the reader's task while preserving
@@ -68,9 +60,9 @@ Rewrite:
 Check:
 
 - One word per concept, used the same way throughout.
-- Every sentence survives deletion testing. Remove it, and something is lost.
+- Each sentence earns attention through meaning, clarity, voice, or useful rhythm. Remove repetition without losing the qualification or source the reader needs.
 - A conclusion that could end any document is not a conclusion.
-- Read it aloud. Where the rhythm runs too even, a machine wrote it.
+- Read it aloud. Revise monotony, awkwardness, and unnecessary formality when they weaken this speaker's voice. Rhythm does not establish who wrote the text.
 
 ## Illustrative voice
 

@@ -5,6 +5,7 @@ require "pathname"
 require "yaml"
 require "json"
 require "digest"
+require "uri"
 
 ROOT = Pathname.new(ARGV.fetch(0, Pathname.new(__dir__).parent.to_s)).expand_path
 CASE_FILE = ROOT.join("tests/invocation-cases.yml")
@@ -42,6 +43,44 @@ def prose(text)
     end
     line
   end.join
+end
+
+# The library uses ordinary ATX Markdown headings and explicit HTML anchors.
+# This checks their local reachability, not a full Markdown renderer.
+def anchors(text)
+  body = prose(text)
+  used = body.scan(/\b(?:id|name)=["']([^"']+)["']/).flatten
+  body.lines.each do |line|
+    heading = line.match(/\A {0,3}\#{1,6}\s+(.+?)\s*\#*\s*$/)
+    next unless heading
+
+    base = heading[1].downcase.gsub(/[^\p{Word}\- ]/, "").tr(" ", "-")
+    slug = base
+    suffix = 0
+    while used.include?(slug)
+      suffix += 1
+      slug = "#{base}-#{suffix}"
+    end
+    used << slug
+  end
+  used
+end
+
+def check_link(document, target, errors)
+  target = target.strip.delete_prefix("<").delete_suffix(">")
+  return if target.empty? || target.match?(/\A[a-z][a-z0-9+.-]*:/i)
+
+  relative, fragment = target.split("#", 2).map { |part| URI::DEFAULT_PARSER.unescape(part) }
+  path = relative.empty? ? document : document.dirname.join(relative).cleanpath
+  unless path.exist?
+    errors << "#{document.relative_path_from(ROOT)}: missing linked file #{target}"
+    return
+  end
+  return unless fragment && !fragment.empty? && path.file? && path.extname.downcase == ".md"
+
+  unless anchors(path.read).include?(fragment)
+    errors << "#{document.relative_path_from(ROOT)}: missing linked heading #{target}"
+  end
 end
 
 errors = []
@@ -121,12 +160,7 @@ skill_files.each do |skill_file|
 
   skill_file.dirname.glob("**/*.md").each do |document|
     prose(document.read).scan(LINK_PATTERN).flatten.each do |target|
-      target = target.strip
-      next if target.empty? || target.start_with?("#") || target.match?(/\A[a-z][a-z0-9+.-]*:/i)
-
-      relative = target.delete_prefix("<").delete_suffix(">").split("#", 2).first
-      path = document.dirname.join(relative).cleanpath
-      errors << "#{document.relative_path_from(ROOT)}: missing linked file #{target}" unless path.exist?
+      check_link(document, target, errors)
     end
   end
 

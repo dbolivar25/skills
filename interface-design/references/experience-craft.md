@@ -1,216 +1,49 @@
 # Experience craft
 
-Use the matching section while designing or improving the actual surface.
-Concrete implementations live in [code patterns](code-patterns.md); examples
-of range, depth, and care live in [worked examples](worked-examples.md).
+Read this when a surface needs design judgment: it works but feels weak, the next action is unclear, or structure, state, and motion do not agree. For a narrow mechanic, go directly to the matching [code pattern](code-patterns.md). For an unsettled interaction, use [prototypes](prototypes.md).
 
-## Mission
+A resolved interface serves a particular human moment. It feels credible because its structure, visual grammar, controls, states, and timing agree. Decoration cannot repair the wrong task or a broken interaction.
 
-Create resolved interfaces: surfaces whose structure, composition, visual grammar,
-motion, state, and waiting behavior all serve the same human moment.
+## Notice before prescribing
 
-Resolved does not mean decorated. It means the interface has stopped feeling false,
-arbitrary, sluggish, brittle, below-standard, or uncared-for. The work is to notice what
-is unresolved, name why it matters, and change the smallest real thing that brings the
-surface into coherence.
+Inspect the actual screen, surrounding flow, content, and runtime behavior. Name the **moment**: who is here, what they are doing, their device and state, and what matters emotionally or practically. A checkout, filing flow, playful onboarding, and dashboard can use the same component for different reasons.
 
-## Core Model
+Turn reactions into causes. “Premium” or “off” is a starting reaction. “Three equal headings compete with Save” identifies a hierarchy problem. Look for hesitation, an expectation gap, a missing object, crowding, sluggish response, a brittle transition, or a loss of trust. A screenshot can show composition; it cannot show focus recovery or request ordering. Obtain the observation the judgment needs.
 
-Hold these concepts while working:
+The **floor** is the platform and category expectation users already bring. Use local product precedent first, then [platform floors](platform-floors.md) and current examples where needed. A reference product is a comparison, not authority to copy its personality. Choose a few **facets** that describe this product in this situation: precise, fidgetable, durable, editorial, inventive, calm. They should help choose between real treatments, rather than merely praise the result.
 
-- **Moment**: the user, task, emotional context, device, and state the interface
-  must carry. The same pattern changes meaning in a dashboard, checkout, filing
-  flow, playful onboarding, or marketing page.
-- **Floor**: the platform and category standard users already carry from iOS,
-  macOS, web apps, Linear, Figma, Notion, Stripe, Raycast, shadcn, or whatever is
-  relevant. The floor is not the goal; it is the minimum credible baseline.
-- **Facets**: the 3-5 qualities this product should be perceived to have. Use
-  situational words, not generic virtues. Examples: crafted, calm, durable,
-  fidgetable, inventive, trustworthy, fast, editorial, precise.
-- **Range**: structurally different directions before commitment. Variants of
-  one control are depth, not range.
-- **Depth**: pushing a chosen direction through successive levels of quality
-  after it has earned commitment.
-- **Grammar**: the local design language of alignment, type, color, borders,
-  icons, radius, fills, shadows, materiality, and motion. A nice-looking outlier
-  still reads as a defect when it violates the grammar.
-- **Composition**: how contrast, hierarchy, proximity, balance, white space,
-  repetition, and unity guide attention across the surface. These are diagnostic
-  lenses for whether the intended object, action, and emotional shift appear in
-  the right order.
-- **Drivers**: changing values mapped onto visible properties. Scroll, pointer
-  position, gesture distance, time, state, and data should drive size, opacity,
-  color, blur, position, rotation, or depth through named ranges.
-- **Tactility**: how controls respond to touch, pointer, keyboard, and time. It
-  includes hit area, focus, hover, press feedback, interruption, and whether
-  controls feel physically reliable rather than visually present but hard to use.
-- **Care**: the extra consideration in the places most people skip: edge cases,
-  error states, support-adjacent flows, invoices, refunds, accessibility,
-  personalization, and the states no one would blame you for ignoring.
+## Choose range or depth
 
-## Working principles
+**Range** explores different structures before commitment. Removing a step, automating it, changing the primary object, or inverting the flow produces range. Different colors on the same control usually produce **depth**: refinement within an existing direction.
 
-- Inspect current renders, screenshots, mockups, prototype observations, and source
-  behavior. Obtain the material surface or state needed before prescribing polish;
-  do not substitute a generic mental picture for the actual interface.
-- Treat reactions as data, not conclusions. Replace "clean", "off", "nice", or
-  "premium" with the cause: hesitation, expectation gap, missing object,
-  emotional shift, weak hierarchy, visual cheapness, sluggishness, brittleness,
-  or broken trust.
-- Use composition vocabulary as cause language, especially when critiquing
-  AI-generated or template-like surfaces. Name the visible failure: missing focal
-  point, muddled hierarchy, crowded proximity, weak contrast, unbalanced visual
-  weight, inconsistent repetition, white space that fails to separate or focus,
-  or elements outside the same system.
-- Decide whether the work needs range or depth before polishing. If the
-  direction is not settled, explore fundamentally different approaches. If the
-  direction is settled, push the chosen surface further.
-- Let distinctiveness come from the moment, facets, and local grammar. Do not
-  substitute novelty, a stock visual style, or an ornamental checklist for a
-  product-specific idea.
-- Separate concerns. Name the question being answered, then choose the right
-  fidelity: sketch, wireframe, breakable toy, state gallery, tuning playground,
-  prototype, or production implementation.
-- Let perception beat naive math. Equal spacing, matching HSL lightness, centered
-  boxes, and straight-line motion can all be wrong to the eye.
-- Treat time and state as first-class UI. The interface includes transition,
-  interruption, async work, loading, failure, retry, cached reads, and non-happy
-  states.
-- Treat small mechanics as user-facing behavior. Radius math, optical alignment,
-  hit area, press feedback, transition properties, and first-frame stutter are
-  not trivia when they affect trust, speed, or control.
-- Prefer less, but better. When quality is thin, reduce scope and refine the
-  essential surface before adding features, ornament, or more variants.
-- Enact craft through concrete mechanics. Do not claim polish; show the alignment
-  rule, color behavior, type decision, state model, motion driver, or verification
-  that makes it real.
+When the direction is open, use [expressive direction](expressive-direction.md). When it is settled, preserve the choice and deepen the important surface. If taste remains hard to explain, make a small concrete comparison. For a question about feel, expose the relevant duration, easing, spacing, scale, or other driver in a breakable toy rather than guessing through repeated edits. [Worked examples](worked-examples.md) show these choices in context.
 
-## Workflow
+Choose the cheapest fidelity that can answer the question: sketch, wireframe, state gallery, live tuning, prototype, or real application. A hand-timed spinner cannot settle actual latency. A blank page cannot establish how a component belongs inside a dense workspace.
 
-1. **Notice the surface**
+## Make the structure and grammar agree
 
-   Observe before solving. Identify the moment, floor, and any obvious facets.
-   Name what you actually see and feel: where the eye hesitates, where an
-   expectation breaks, what is missing, what the interface assumes, what feels
-   cheap or crafted, and what feels fast, sluggish, durable, fragile, responsive,
-   or disconnected.
+Resolve the task and reading order before tuning the material. Decide what belongs on the screen, what can disappear, and what needs later disclosure. Give the intended object and next action clear visual priority.
 
-   For AI-generated or template-like surfaces, use a rendered screenshot as the
-   source of truth. Identify the visible composition failure before revising:
-   missing focal point, muddled hierarchy, crowded proximity, weak contrast,
-   unbalanced visual weight, inconsistent repetition, white space that fails to
-   separate or focus, or elements outside the same system.
+**Composition** uses contrast, hierarchy, proximity, balance, whitespace, repetition, and unity to guide attention. Diagnose a specific visible failure, then change its cause. **Grammar** is the local language of alignment, typography, color, borders, icons, radii, fills, shadows, and motion. An attractive outlier can still read as a defect when it breaks that language.
 
-   When the relevant platform or category floor is unclear, read
-   [`platform-floors.md`](platform-floors.md) before
-   naming it. Use precedent from the actual product when it is stronger than the
-   generic floor.
+Name the active edges, axes, baselines, and grouping relationships. Reduce competing invisible rules. Use optical judgment: equal spacing, mathematically centered boxes, matching color lightness, and straight travel can look wrong. The [code patterns](code-patterns.md) supply concrete examples for type, wrapping, alignment, corners, shadows, masks, and compositing. Their numbers are tunable examples; the visible relationship is the reason to use them.
 
-   Completion criterion: the next judgment is tied to an observed detail in the
-   real surface or to an explicit assumption when no surface exists.
+Prefer less scope with resolved execution when quality is thin. Do not remove a required capability to make polish easier. Reduce optional ornament or alternatives, then finish the essential experience.
 
-2. **Choose the working mode**
+## Treat time and state as design material
 
-   If the problem or product direction is open, create range: remove a step,
-   automate the task, invert the problem, borrow from another domain, or propose
-   several structurally different approaches. If a direction is already chosen,
-   go deep: zoom into the important surface, remove what is not earning its
-   place, compare against the floor and facets, and ask what the next level would
-   look like.
+**Drivers** map changing inputs to visible properties: pointer, scroll, gesture, time, state, or data drives position, size, opacity, color, rotation, or depth. Name the relationship and range. Motion should explain change, preserve continuity, or provide useful feedback. Inspect interruption, reversal, rapid repeated input, and the first frame in the actual runtime.
 
-   When the surface is genuinely open-ended and the user wants a bold,
-   experimental, editorial, memorable, or visually distinctive direction, read
-   [`expressive-direction.md`](expressive-direction.md)
-   before choosing a direction.
+**Tactility** includes usable hit areas, keyboard access, focus, hover where supported, press feedback, and recovery. A visible control that is hard to operate is unfinished. Keep reduced-motion alternatives and essential information available without the effect.
 
-   If the right application of range, depth, fidelity, or scope remains unclear,
-   read only the matching case in
-   [`worked-examples.md`](worked-examples.md) before
-   choosing the mode.
+Account for states the actual task can reach, including combinations: loading, empty, restricted, long content, errors, cached data, retry, and completion. A state gallery can reveal what static happy-path comps hide. Preserve the user's edits, place, and focus when async work fails.
 
-   If the question is about feel, build a breakable toy or live tuning
-   experiment. Its controls expose duration, easing, spacing, blur, shadow, position, scale,
-   rotation, offsets, or generative parameters through temporary controls instead
-   of guessing through repeated edits. If the mechanism is unknown, run the smallest discriminating experiment;
-   [prototypes](prototypes.md) covers the question, observation, and fidelity limits.
+Waiting is part of the interface. Use background work, prior cached state, or useful progress when appropriate. An optimistic write needs a credible success expectation and a recovery policy at the real data boundary. Do not roll back newer work with an older failure or make pending state look confirmed. A domain with consequential effects may require waiting for confirmation.
 
-   Completion criterion: the chosen mode and fidelity are named together with
-   the decision they can resolve and why a lower- or higher-fidelity move would
-   answer it worse.
+**Care** shows up in neglected parts: invoices, refunds, permissions, offline states, accessibility, support-adjacent flows, and rare but costly failures. It need not add visual delight; it should make the experience more trustworthy.
 
-3. **Resolve the skeleton**
+## Intervene and check
 
-   Establish the credible baseline before inventing. Use platform conventions,
-   category expectations, default component behavior, and common user mental
-   models as the floor. Decide what complexity belongs on the screen, what can be
-   removed, what should be automatic, and what must be disclosed later. Check
-   whether every interactive element has a usable hit area, focus behavior,
-   disabled/loading behavior, and enough room for its text or dynamic content.
+For an authorized implementation, change the cause you identified and inspect the result in context. Exercise relevant states, content extremes, input methods, and viewport sizes. For critique, connect each finding to an observation, user consequence, and direction of change. For a design proposal, make the choice concrete enough to compare and use.
 
-   Completion criterion: the interface is not solving the wrong problem, adding
-   unnecessary UI, or falling below the expected floor.
-
-4. **Resolve the grammar**
-
-   Make the surface visually coherent across composition, alignment, style,
-   color, and type. Establish the focal point and reading order first. Identify
-   the active edge, axis, baseline, spacing, and optical-alignment rules; reduce
-   competing invisible rules. Make controls, surfaces, icons, color behavior,
-   typography, and materiality read as one local system.
-
-   When implementing or diagnosing color, gradients, typography, optical
-   alignment, radii, shadows, borders, hit areas, or surface detail, read the
-   matching sections of
-   [`code-patterns.md`](code-patterns.md) before finishing
-   this step. Load only the sections the surface actually reaches.
-
-   Completion criterion: the focal point and reading order are observable; the
-   active alignment, style, color, and type rules agree; and every material
-   deviation has a named product-specific job.
-
-5. **Resolve layers and dynamics**
-
-   Treat rendering mechanics as part of the design. Inspect actual layer and paint
-   behavior before judging decoration; obtain runtime observations when consequential. Map each changing input or state onto visible
-   properties deliberately. Give motion a semantic or behavioral job, keep it
-   interruptible when users can act during it, and expose tunable values when
-   feel rather than correctness decides the result.
-
-   When implementing masks, compositing, mapped dynamics, rubber-banding,
-   pointer reactivity, waves, animation, or transition hygiene, read the matching
-   sections of [`code-patterns.md`](code-patterns.md)
-   before finishing this step. Load only the mechanics in scope.
-
-   Completion criterion: every layered or dynamic behavior in scope names its
-   driver or state, visible consequence, interruption behavior, and verification
-   method; anything not accounted for is explicitly out of scope.
-
-6. **Resolve states and waiting**
-
-   Design possible realities, not only the happy static view. Name important
-   states, events, and combinations. A simple async button can need idle,
-   submitting, success, and error. Complex surfaces often need switches or a
-   state gallery so the team can see combinations without duplicating static
-   comps.
-
-   Treat waiting as UI. Mask unavoidable work by doing it in the background or
-   giving the user something worthwhile while it happens. Use optimistic writes
-   when the UI can assume success and handle failure with rollback, toast, or
-   retry. Use optimistic reads or local cache when showing previous state avoids
-   a flash from default to server-confirmed UI. Never let failure handling steal
-   the user's place in the flow unless the domain requires it.
-
-   Completion criterion: meaningful states, failure paths, interruption, cached
-   reads, and loading behavior are accounted for or explicitly out of scope.
-
-7. **Intervene and verify**
-
-   Make the smallest change that resolves the named issue when implementation is
-   requested. Inspect the browser/platform result across relevant states and
-   viewports. For critique, ground each finding in an observation, its user impact,
-   and a direction of change. For design direction, make the moment, floor,
-   facets, range/depth choice, grammar, and intervention understandable.
-
-   Completion criterion: the result has been checked against the real surface, or
-   the unverified risk is stated plainly.
-
+Finish when the requested experience is usable and the observations support the claimed improvement. Name an untested consequential state plainly. Source code, a build, or a list of style changes cannot establish the interaction by itself.

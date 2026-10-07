@@ -39,6 +39,14 @@ check and observed result:
 
 Keep unresolved consumer requirements visible. Disclose an omission when it changes what the downstream reader can conclude, while allowing ordinary low-impact edits to finish without a mandatory loss ledger. A shorter or tidier representation is not evidence of sufficient fidelity.
 
+## A preservation example
+
+Source: “Maya can send the draft Friday if legal approves; Omar still objects to the pricing.”
+
+A representation saying “The team agreed to send Friday” loses the condition, turns capability into commitment and merges disagreement into agreement. For a follow-up action, retain Maya, the draft, the quoted date expression, the approval dependency, Omar's objection and their source span. Resolve “Friday” only with the event's actual time context. If approval is unknown, keep it unknown.
+
+An account strategy may classify the unresolved approval as a blocker while retaining Omar's separate stance and a recoverable source. A count of open tasks could omit the exact wording only if its counting rule correctly handles conditional actions and no later consumer needs more. The same source admits different valid projections; sufficient fidelity comes from the consumer contract and actual comparison, not from having a tidy schema.
+
 ## Dimensions and survival
 
 The following method and examples retain the distinction between neutral retrieval metadata and purpose-specific semantics.

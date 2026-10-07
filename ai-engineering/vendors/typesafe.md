@@ -2,7 +2,7 @@
 
 Read this reference when TypeSafe is explicitly selected, already present in the target system, or is being assessed as a concrete candidate. It does not recommend a default provider. Begin with the actual inference contract and repository seam in AI Engineering, then compare the selected vendor's current behavior, API and cost against that need.
 
-The retained TypeSafe method treats focused typed judgments as programming primitives while code owns exact rules, workflow control and effects. Its examples describe the source material's System One/Jev approach. Names, API semantics, model availability, probabilities and performance must be checked against live official docs and the installed SDK before being treated as current facts. Do not transplant cookbook thresholds into a new domain without evaluation.
+The retained TypeSafe method treats focused typed judgments as programming primitives while code owns exact rules, workflow control and effects. Its examples describe the source material's System One/Jev approach. The primary index, question semantics, state, confidence, fan-out and JavaScript SDK entry points were checked against official docs on 2026-10-06. This is a dated documentation observation, not an installed integration test. Check names, API semantics, model availability, probabilities and performance against current official docs and the installed SDK before execution. Do not transplant cookbook thresholds into a new domain without evaluation.
 
 ## Read the live docs
 
@@ -12,10 +12,7 @@ API contracts, SDK usage, models, limits, and worked examples.
 
 - Start with the [documentation index](https://docs.typesafe.ai/llms.txt) to discover
   relevant pages and cookbooks. Use targeted reads rather than loading the entire site.
-- Mintlify serves Markdown by appending `.md` to a page path, for example
-  [how to build with TypeSafe](https://docs.typesafe.ai/concepts/how-to-build-with-system-one.md).
-  Follow links from the index; convert extensionless documentation page links to
-  `.md` when useful. Resolve relative links against `https://docs.typesafe.ai`.
+- Follow current links from the index and resolve relative links against `https://docs.typesafe.ai`. Try the normal page if a Markdown view fails; a fetch format is not an API contract.
 - Before writing an integration, read the current API or chosen SDK page and the
   question guidance relevant to the design. For a new workflow, also inspect the
   closest cookbook: it often shows a better decomposition than a generic classifier.
@@ -26,12 +23,12 @@ API contracts, SDK usage, models, limits, and worked examples.
 
 | Task | Start here; follow the relevant details |
 | --- | --- |
-| Understand the programming model | [System One](https://docs.typesafe.ai/concepts/system-one.md), [building guide](https://docs.typesafe.ai/concepts/how-to-build-with-system-one.md) |
-| Explore what to build | [Use-case map](https://docs.typesafe.ai/concepts/use-case-map.md), then relevant cookbooks from the index |
-| Prepare inputs and questions | [State](https://docs.typesafe.ai/concepts/state.md), [primitives](https://docs.typesafe.ai/primitives.md), then the chosen primitive's page |
-| Decide how to handle uncertainty | [Confidence](https://docs.typesafe.ai/confidence.md) |
-| Write API code | [HTTP API](https://docs.typesafe.ai/api.md), [Python SDK](https://docs.typesafe.ai/sdk/python.md), or [JavaScript SDK](https://docs.typesafe.ai/sdk/javascript.md) |
-| Update an older integration | [Migration guide](https://docs.typesafe.ai/migrating-to-v1.md) and the installed SDK's current reference |
+| Understand the programming model | [System One](https://docs.typesafe.ai/concepts/system-one), [building guide](https://docs.typesafe.ai/concepts/how-to-build-with-system-one) |
+| Explore what to build | [Use-case map](https://docs.typesafe.ai/concepts/use-case-map), then relevant cookbooks from the index |
+| Prepare inputs and questions | [State](https://docs.typesafe.ai/concepts/state), [primitives](https://docs.typesafe.ai/primitives), then the chosen primitive's page |
+| Decide how to handle uncertainty | [Confidence](https://docs.typesafe.ai/confidence) |
+| Write API code | [HTTP API](https://docs.typesafe.ai/api), [Python SDK](https://docs.typesafe.ai/sdk/python), or [JavaScript SDK](https://docs.typesafe.ai/sdk/javascript) |
+| Update an older integration | Installed version and types, then the current [SDK index](https://docs.typesafe.ai/sdk), API reference and relevant changelog from the documentation index |
 
 ## Find the useful shape
 
@@ -45,25 +42,25 @@ including ideas that do not fit an established recipe.
 
 - **Route and fill known arguments.** A request can select a handler and its typed
   parameters. Ask useful branch-specific questions up front and consume only the
-  relevant answers. Explore [function calling](https://docs.typesafe.ai/cookbooks/function_calling.md)
-  and [speculative fan-out](https://docs.typesafe.ai/patterns/fan-out.md).
+  relevant answers. Explore [function calling](https://docs.typesafe.ai/cookbooks/function_calling)
+  and [speculative fan-out](https://docs.typesafe.ai/patterns/fan-out).
 - **Select instead of generate.** Find candidate values or source spans in code,
   use a judgment to select the intended one, then copy or normalize it. Code can
   also assemble source text into a formatted document or reading guide. Explore
-  [value extraction](https://docs.typesafe.ai/cookbooks/pre_parsed_value_extraction_cookbook.md)
-  and [structure recovery](https://docs.typesafe.ai/cookbooks/autoformat.md).
+  [value extraction](https://docs.typesafe.ai/cookbooks/pre_parsed_value_extraction_cookbook)
+  and [structure recovery](https://docs.typesafe.ai/cookbooks/autoformat).
 - **Find and judge evidence.** Retrieve candidates, compare their relevance to a
-  query, and select useful context. Explore [reranking](https://docs.typesafe.ai/cookbooks/rerank_typesafe.md)
-  and [hierarchical classification](https://docs.typesafe.ai/cookbooks/hierarchical_classification.md).
+  query, and select useful context. Explore [reranking](https://docs.typesafe.ai/cookbooks/rerank_typesafe)
+  and [hierarchical classification](https://docs.typesafe.ai/cookbooks/hierarchical_classification).
 - **Turn judgments into reusable data.** Score dimensions once, then let code or
   user controls change weights, thresholds, rankings, and views. With labeled
   outcomes, those signals can become classical ML features. Explore
-  [composite scoring](https://docs.typesafe.ai/patterns/composite-scoring.md) and
-  [feature discovery](https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery.md).
+  [composite scoring](https://docs.typesafe.ai/patterns/composite-scoring) and
+  [feature discovery](https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery).
 - **Verify and escalate.** Check specific claims or fields against their evidence;
   send uncertain or failing cases to a person or reasoning model. Explore
-  [citation checks](https://docs.typesafe.ai/cookbooks/citation_check.md) and
-  [extraction cascades](https://docs.typesafe.ai/cookbooks/sde_cascade.md).
+  [citation checks](https://docs.typesafe.ai/cookbooks/citation_check) and
+  [extraction cascades](https://docs.typesafe.ai/cookbooks/sde_cascade).
 - **Respond to changing state.** Code can retain goals and observations while fresh
   judgments guide the next bounded step. Keep inferred state distinct from observed
   facts, and check freshness before applying a result to a changed situation.
@@ -73,13 +70,13 @@ and recommend a starting point. For a concrete authorized implementation, choose
 
 ## Design the judgments
 
-The carried method distinguishes these primitives. Verify names and semantics in current official documentation and installed types before using them; choose by what the answer means:
+The dated official [question reference](https://docs.typesafe.ai/primitives) distinguishes the following primitives. Verify current names and semantics against installed types before using them; choose by what the answer means:
 
 | Need | Primitive | Important distinction |
 | --- | --- | --- |
-| One of a defined set | [Choice](https://docs.typesafe.ai/primitives/choice.md) | Picks one option; its distribution compares competing options |
-| Whether a condition holds | [Noul](https://docs.typesafe.ai/primitives/noul.md) | Probability of yes; no separate confidence; use one per label when several may apply |
-| Degree along a described dimension | [Score](https://docs.typesafe.ai/primitives/score.md) | Probability-weighted position on ordered levels; use comparable per-item Scores for graded ranking |
+| One of a defined set | [Choice](https://docs.typesafe.ai/primitives/choice) | Picks one option; its distribution compares competing options |
+| Whether a condition holds | [Noul](https://docs.typesafe.ai/primitives/noul) | Probability of yes; no separate confidence; use one per label when several may apply |
+| Degree along a described dimension | [Score](https://docs.typesafe.ai/primitives/score) | Probability-weighted position on ordered levels; use comparable per-item Scores for graded ranking |
 
 Give each question enough relevant **state** to answer: source text, identities,
 relationships, policies, and current facts. Prefer named JSON fields when context
@@ -101,16 +98,14 @@ selection, check candidate coverage: the model cannot choose an omitted value.
 
 ## Compose and verify
 
-**Ask independent questions over the same state together**, including useful
-speculative questions. They run in parallel and cannot see one another's answers.
+When the current provider supports it, **batch independent questions over the same state**, including useful speculative questions whose possible value earns their cost. They run in parallel and cannot see one another's answers.
 State each speculative premise explicitly; code consumes the applicable answers.
 A second request is warranted when an earlier answer is needed to fetch evidence,
 construct new state, or determine the next options. Extra questions still use tokens;
 measure actual request budgets, cost, and end-to-end latency.
 
 Use probabilities and confidence to guide behavior, with thresholds evaluated on
-the user's data and consequences. Choice/Score confidence summarizes distribution
-concentration, not overall workflow correctness or permission to act. A Noul near
+the user's data and consequences. The official [confidence reference](https://docs.typesafe.ai/confidence) describes Choice/Score confidence as a statistic of the answer distribution. It does not establish overall workflow correctness, empirical calibration in this domain or permission to act. A Noul near
 0.5 means similar probability for yes and no, not medium intensity. Several
 acceptable alternatives can also spread probability; low confidence need not
 invalidate a harmless preference choice. Ignore uncertainty on unused branches.
@@ -118,7 +113,7 @@ invalidate a harmless preference choice. Ignore uncertainty on unused branches.
 Keep policy explicit and judgments scoped to their evidence, meaning and consumers. Reuse within a known contract; durable semantic reuse requires the [promotion method](../references/derivation/durable-state-and-promotion.md). Weighted scores suit compensating
 preferences; an “any serious violation” rule needs separate conditions. Changing a
 weight or display filter need not rerun inference when evidence and question meanings
-are unchanged. Typed output guarantees the interface, not truth. Validate calibration and performance in the target domain; a vendor claim or typed result does not establish them.
+are unchanged. A typed answer establishes its response shape, not truth, candidate coverage, support or authorized consumer behavior. Validate calibration and performance in the target domain; a vendor claim or typed result does not establish them.
 
 Test representative cases and the resulting application behavior. For failures,
 inspect the exact state, questions, candidates, answers, composition, and observed

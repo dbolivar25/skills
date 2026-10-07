@@ -9,9 +9,11 @@ Own the requested creative work, exercise, or worthwhile directions. Establish t
 
 ## Select and perform a method
 
-Read `references/routing.md` when selecting among methods. Choose by the actual operation: expansion, combination, inversion, analogy, constraint, random stimulus, perspective change, subversion, selection, refinement, or synthesis. Read the selected file in `references/methods/` and follow its procedure rather than borrowing the name as decoration. Use `references/exercises.md` or `references/full-prompt-library.md` for a requested exercise or exact method prompt. Preserve exclusions and attribution where relevant.
+Read [routing](references/routing.md) when selecting among methods. Choose by the actual operation: expansion, combination, inversion, analogy, constraint, random stimulus, perspective change, subversion, selection, refinement, or synthesis. Read the selected method section in `references/methods/` and follow its operations rather than borrowing its name. Use [exercises](references/exercises.md) for requested practice and the [constraint library](references/full-prompt-library.md) for a starting premise. Preserve exclusions and attribution where relevant.
 
 Keep all useful method references available without loading the whole collection. The task determines whether an exercise needs one strong direction, a broad range, or iterative deepening. Use experiments or prototypes when a promising direction needs a real observation to settle it.
+
+Distinguish performing the method from planning it. Real chance needs an actual draw; a constrained text needs its constraint checked; field exploration and group practice need actual participation. An agent can facilitate those activities or use supplied observations, but cannot invent attendance, elapsed practice, interviews, or field notes as evidence.
 
 ## Make the directions specific
 

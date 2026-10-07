@@ -2,6 +2,8 @@
 
 The owner approved the 15-skill proposal and asked to leave managed skills unchanged. The implementation follows that scope.
 
+This account describes the first version, committed as `fc4b475123099e75bc3b675ce0696cc0d0e0a1e7` before the authorized full second pass. Current reference changes and further disclosed cuts are in the [second-pass account](skills-second-pass.md).
+
 ## Preservation and recovery
 
 The full pre-migration tracked tree is recoverable from Git commit `1e8ee5382016cfc770cd066024c54654196ea5cb`. A complete local snapshot, original Codex agreement, protected runtime hashes and the actual retired directories also live outside discovery at `/Users/danielbolivar/.agents/skills-archive/2026-10-06-essentials/`.
@@ -78,10 +80,10 @@ The local package check uses the current working tree, avoiding a false pass fro
 
 The routing corpus retains all 78 original scenarios, adapts their expectations to consolidated owners/methods, and adds four AI/evaluation cases. It remains a structural specification. No measured quality, optimality, catalog refresh or full gallery-render claim is made.
 
-Managed plugins, customer state and remotes were unchanged. No commit, push or publication was performed.
+Managed plugins, customer state and remotes were unchanged. The first version was subsequently committed at the owner's request. No push or publication was performed.
 
 ## Final acceptance
 
 A separate reviewer accepted the integrated local installation with ADHERES and HIGH confidence after checking every execution criterion, rerunning the relevant checks, inspecting the rendered fixtures and checking the recovery archive. All three worker results also have separate accepted reviews. The Steward runtime now derives DONE from the six current receipt obligations.
 
-The completed result is installed locally on `daniel/skills-essentials`. Changes remain uncommitted. A fresh chat may be needed for updated catalog discovery. Comparative model quality, exhaustive gallery rendering and native destination imports remain unverified.
+The completed first version is installed locally on `daniel/skills-essentials` and committed as `fc4b475`. A fresh chat may be needed for updated catalog discovery. Comparative model quality, exhaustive gallery rendering and native destination imports remain unverified.

@@ -4,7 +4,7 @@ Use when different representations of the same underlying data have distinct
 quality, access, retention, or publication states. Show what each tier contains,
 who can write it, its format, its provenance, and how data is promoted. A
 workflow with owners belongs in [process](process.md); physical deployment
-belongs in [high-level architecture](high-level.md).
+belongs in [deployment](deployment.md).
 
 No technology or named “medallion” tier guarantees quality, anonymization,
 permission, immutability, or retention. Those are claims requiring source.

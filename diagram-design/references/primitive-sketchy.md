@@ -1,6 +1,6 @@
 # Sketchy Filter (hand-drawn variant)
 
-Optional displacement filter that wobbles every stroke and edge slightly — turns any minimal variant into a hand-drawn "editorial" register without changing layout. Use when the diagram accompanies an essay rather than technical docs.
+Optional displacement filter for a hand-drawn treatment. It changes visible edges, so use it where that loss of precision fits the actual task and selected skin. It is not an automatic indication that a system is provisional or unverified.
 
 ## Grammar
 
@@ -30,6 +30,8 @@ Optional displacement filter that wobbles every stroke and edge slightly — tur
 | `scale` | 1–6 | 1 barely-there, 1.5 default, 2 visible, 4+ cartoon. |
 | `seed` | integer | Swap for a different random pattern. |
 
+Use a diagram-prefixed filter ID and update its matching reference when inlining several figures. Keep a fixed seed for reproducible export. Include the displaced paint in actual export bounds; a nominal viewBox can clip it.
+
 ## Critical rule
 Filter shapes, NOT text. Displacement-mapped text becomes illegible. Structure your SVG so text is in a sibling group outside the filtered group.
 
@@ -40,4 +42,4 @@ Filter shapes, NOT text. Displacement-mapped text becomes illegible. Structure y
 ## When not to use
 - Technical documentation (precision matters).
 - Diagrams with dense labels or tight alignments (filter reads as noise).
-- Dark variants — wobble reads as artifact on dark backgrounds. Test first.
+- Any theme where thin or displaced strokes become unclear. Inspect the actual contrast and export; dark styling is not inherently forbidden.

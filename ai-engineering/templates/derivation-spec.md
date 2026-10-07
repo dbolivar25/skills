@@ -1,6 +1,8 @@
-# Derivation Spec Template
+# Derivation spec layout
 
-Use this template for a new work-product workflow or major redesign. Fill only sections that are needed for the current stage, but do not skip a section because it is hard; mark unknowns explicitly.
+Use this layout when a new work-product workflow or major redesign benefits from a structured spec. The [derivation contract](../references/derivation/contract.md) owns semantic coverage. These sections and field lists are prompts, not a required fifteen-section artifact. Combine related sections, omit inapplicable fields and use prose or an annotated graph when clearer. Mark a missing required judgment or evidence path explicitly; difficulty does not make it inapplicable.
+
+Keep design choices, hypotheses, existing behavior and observed results distinguishable. A source list is not proof of retrieval coverage; an eval list is not proof of quality.
 
 ## 1. Work Product Contract
 
@@ -85,7 +87,7 @@ avoid:
 
 ## 4. Failure Modes
 
-Catastrophic:
+Consequential (classify against this product's actual stakes):
 
 ```text
 wrong owner/date/action:
@@ -132,6 +134,7 @@ Required prior state:
 Required scope:
 Required fidelity:
 Allowed uncertainty:
+No-match / unknown / negative / failure meaning:
 Downstream consumers:
 Can run without:
 Cannot run without:
@@ -246,13 +249,17 @@ Confidence:
 Invalidators:
 Recompute policy:
 Allowed consumers:
-Promotion status:
-  ephemeral | workflow_durable | candidate_reusable | promoted
+Durability:
+  ephemeral | persisted
+State category if persisted:
+  neutral_substrate | workflow_specific | promoted_reusable
+Semantic reuse status:
+  local | candidate_reusable | promoted | deprecated
 ```
 
 ## 10. Claim / Action Support
 
-For each rendered claim or action:
+For each consequential rendered claim or action:
 
 ```text
 Claim/action:
@@ -267,9 +274,9 @@ Should render: yes/no
 Why:
 ```
 
-## 11. Structured Confidence
+## 11. Structured confidence
 
-For each major judgment:
+Use [claim support](../../review/references/claim-support.md) for the confidence method. The axes below are illustrative. Carry only the weaknesses that can change consumer behavior, preserving their reasons:
 
 ```text
 evidence_sufficiency:
@@ -300,7 +307,9 @@ User-visible behavior:
 Logging / eval:
 ```
 
-## 13. Evals
+## 13. Evaluation
+
+Use [evaluation](../../evaluation/references/evals-and-ablations.md) for case/oracle/comparison design. Select the layers present in the system and distinguish proposed checks from executed results.
 
 ```text
 Golden examples:
@@ -315,11 +324,15 @@ Final-output evals:
 User feedback signals:
 Regression cases:
 Human review rubric:
+Case/source versions and decision-time boundary:
+Independent oracle and uncertainty:
+Baseline/candidate identity:
+Planned checks versus executed observations:
 ```
 
 ## 14. Efficiency Pass
 
-After quality is proven:
+After the quality path is coherent, identify optimizations and the observations needed to establish that they preserve quality:
 
 ```text
 Nodes to merge:

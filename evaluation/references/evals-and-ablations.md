@@ -8,6 +8,8 @@ State what the comparison will decide: adopt, revise, reject, remove a component
 
 Choose observations that could change the decision. Separate hard requirements such as access control from preferences that may trade off. Use established thresholds; surface an unresolved owner choice when its consequences require their judgment. Do not invent numeric targets to finish a form. State what the study cannot establish, such as production acceptance from an offline test or correctness outside sampled populations.
 
+Choose the smallest study that could change the decision. A few targeted counterexamples can establish a specific defect; they cannot estimate its prevalence. A broad adoption claim needs representative population coverage and relevant variation. Execution, data access and external effects remain within the surrounding task's authority.
+
 ## Build cases that can reveal a loss
 
 Start with real use and known failures, then add cases that stress the contract:
@@ -26,7 +28,7 @@ Separate development cases from judgment cases. Tune prompts, components and rub
 
 ## Establish an independent oracle
 
-For each case, name the expected behavior, source or expert basis, observation point and what an error means. Prefer an independently defined source truth or executable invariant where it answers the question. A structural validator can prove format, required fields or a deterministic boundary; it cannot prove semantic quality.
+For each case, name the expected behavior, source or expert basis, observation point and what an error means. Prefer an independently defined source truth or executable invariant where it answers the question. A structural validator can prove format, required fields or a deterministic boundary; it cannot prove semantic quality. An expected-routing fixture records the intended selection. It establishes observed invocation only when an actual host run captures what loaded and what executed.
 
 For human, expert or model judgment, write a rubric with criteria, concrete pass/fail or graded anchors, uncertainty/abstention handling and disagreement policy. Calibrate on separate examples with accepted judgments before evaluating candidates. Inspect disagreements with an expert or source evidence rather than automatically making a grader authoritative. When model graders are used, retain the grader's identity and prompt, blind candidate identities where practical, randomize comparison order and check order or style bias. A second model that shares the candidate's unsupported assumptions is not independent proof.
 
@@ -84,7 +86,7 @@ Use these examples to choose relevant observations. They are examples rather tha
 
 ### Multi-level evals
 
-Final-output evals are necessary but insufficient. They judge the visible artifact but may hide whether failure came from retrieval, judgment, compression, confidence, rendering, or publication gates.
+Final-output evals matter when the decision concerns a visible work product, but alone may be insufficient. They judge the visible artifact but may hide whether failure came from retrieval, judgment, compression, confidence, rendering, or publication gates.
 
 A faithful workflow needs observations at the relevant levels it actually contains.
 
@@ -101,6 +103,8 @@ These judge whether the visible work product is good:
 - trust rating
 - time saved
 - business outcome proxy
+
+These are outcome signals, not interchangeable oracles. User edits can reflect preference rather than error; a low dismissal rate can reward persuasive unsupported output; business outcomes may depend on unrelated changes. Use the signal's actual meaning, source-backed correctness checks and a justified attribution before claiming quality or causality.
 
 ### Judgment evals
 
@@ -157,6 +161,14 @@ Ablations discover which dimensions matter:
 - Remove scope resolution and check for customer-specific methodology leakage.
 
 An ablation should name what is removed, why it should matter, expected degradation, actual degradation, and what design change follows.
+
+### A small paired comparison
+
+Suppose a routing replacement selects a customer site from meeting evidence. Freeze the candidate and compare it with the existing router on the same inputs. Include a clear match, two plausible sites, a genuine no-match, an unavailable required source and a later human correction. Keep that later correction out of the decision-time input while letting the independent adjudicator use it.
+
+Record which site or abstention each system returns, why the oracle expects it, and what the actual consuming path does. A structurally valid site ID can still be wrong. An unavailable source must not count as a correct no-match simply because both produce an empty result. Inspect the ambiguity and correction cases directly instead of averaging all empty results into one success rate.
+
+This five-case comparison can reveal a failure mechanism and guide a repair. It cannot establish production prevalence, calibration or broad improvement. A broader adoption decision needs representative cases, protected judgment material and sufficient variation. The example specifies a study; it reports no executed results.
 
 ### Dimension library evolution
 

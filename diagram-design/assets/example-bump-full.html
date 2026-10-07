@@ -34,12 +34,12 @@
   <div class="container">
     <div class="header">
       <p class="header-eyebrow">Bump chart · Diagram Design</p>
-      <h1>The default everyone stopped choosing</h1>
+      <h1>The former leader finished last</h1>
       <p class="subtitle">Six internal packages ranked by weekly downloads, quarter by quarter. legacy-http entered the year in first place and left it in last; fetch-kit took the top rank in Q2 and never gave it back. Position is the only encoding — the vertical axis is rank, not volume.</p>
     </div>
     <div class="diagram-container">
     <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="bump-full-title bump-full-desc">
-        <title id="bump-full-title">The default everyone stopped choosing</title>
+        <title id="bump-full-title">The former leader finished last</title>
         <desc id="bump-full-desc">Bump chart ranking six internal packages by weekly downloads across four quarters; legacy-http slides from first to sixth while fetch-kit takes the top rank in the second quarter and keeps it.</desc>
         <defs>
           <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
@@ -50,10 +50,7 @@
         <rect width="100%" height="100%" fill="#f5f5f5"/>
         <rect width="100%" height="100%" fill="url(#dots)" opacity="0.55"/>
 
-        <!-- Rank is ORDINAL: every vertex sits exactly on a rank row, y = 88 + 56 x
-             (rank - 1), and every snapshot's ranks are a permutation of 1..6.
-             scripts/verify-bump.py enforces both against the ranks each series
-             declares - there is no tolerance, because rank has no fractions. -->
+        <!-- This example uses distinct ranks 1 through 6 at each snapshot, with y = 88 + 56 * (rank - 1). Independently compare declared source ranks, endpoint labels and every vertex with that mapping. Real datasets can contain ties and missing ranks; do not impose this example’s permutation on them. No packaged bump semantic validator is present. -->
         <text transform="rotate(-90 24 228)" x="24" y="228" fill="#4f5d75" font-size="7" font-family="'Geist Mono', monospace" letter-spacing="0.14em" text-anchor="middle">RANK BY WEEKLY DOWNLOADS · 1 = MOST</text>
 
         <!-- One axis rule per snapshot. No gridlines: the dots are the readable
@@ -151,8 +148,8 @@
     <div class="cards">
       <div class="card">
         <p class="eyebrow">FOCAL · LEGACY-HTTP</p>
-        <div class="card-header"><span class="card-dot coral"></span><h3>First to sixth in four quarters, and never a sudden drop</h3></div>
-        <p>One rank, then two more, then two more. No single quarter looks alarming, which is exactly how a default dies — each straight segment joins two measured ranks and says nothing about the weeks between, so the chart claims the decline happened, not when in each quarter it happened.</p>
+        <div class="card-header"><span class="card-dot coral"></span><h3>First to sixth across four quarterly snapshots</h3></div>
+        <p>One rank, then two more, then two more: 1, 2, 4, 6. Each straight segment joins two quarterly ranks and says nothing about the weeks between. The chart establishes a change in relative position; it cannot establish whether the change was sudden or whether downloads fell in absolute terms.</p>
       </div>
       <div class="card">
         <div class="card-header"><span class="card-dot ink-strong"></span><h3>fetch-kit took first place in Q2 and the line goes flat</h3></div>
@@ -160,7 +157,7 @@
       </div>
       <div class="card">
         <div class="card-header"><span class="card-dot ink-light"></span><h3>schema-gen moved one rank and that is the whole story</h3></div>
-        <p>Three flat quarters, then a single step up — inherited from legacy-http falling past it, not from growth of its own. A bump chart cannot tell those apart, which is why the footnote names the ranking key: the reader who needs magnitude follows the measure, not the picture.</p>
+        <p>Three flat quarters at rank six, then a step to rank five as legacy-http moves below it. These ranks cannot distinguish growth in schema-gen from a decline in another package. The reader who needs magnitude must inspect the download counts behind the ranking.</p>
       </div>
     </div>
     <div class="footer">

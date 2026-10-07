@@ -25,7 +25,7 @@ Composition:
 - Does every pill carry state that can change?
 - Does every line of small type say something its heading does not?
 - Does every chromatic value have a role, and does the branch allow that role?
-- Does every fact appear once?
+- Does each fact have a clear primary home, with any repetition serving navigation, comparison, accessibility, or a distinct decision?
 - Does each view have one focal point?
 
 Grammar:
@@ -40,8 +40,8 @@ Branch floor:
 
 Copy:
 
-- Run the prose loop in `references/voice.md`.
-- Does any string describe how the artifact was produced?
+- Apply the [voice pass](voice.md).
+- Does a production detail help the reader interpret evidence or take the next action? Cut irrelevant machinery, preserve useful disclosure.
 - Would the conclusion fit a different document? Then it is not a conclusion.
 
 ## Audit

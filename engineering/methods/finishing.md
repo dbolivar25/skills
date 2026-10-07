@@ -39,7 +39,9 @@ loop for an ordinary code-comment request.
 
 ## Reduce the structure the reader must learn
 
-- Lead a file with exported or significant functions; put helpers below them.
+- Use a reading order that exposes the important behavior. Leading with exported or
+  significant functions and placing helpers below often helps; follow a coherent local
+  convention when dependency order or another structure reads better.
 - Split a large file by coherent concepts, not by line count. A long method may
   expose a responsibility or proof surface; moving branches into private helpers
   alone does not reduce either.

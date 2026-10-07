@@ -1,6 +1,6 @@
 # Constraint Library
 
-Constraint-dispatch library — voice and approach inspired by [wttdotm.com/prompts.html](https://wttdotm.com/prompts.html). Adapted and expanded.
+Adapted and expanded from [wttdotm.com/prompts.html](https://wttdotm.com/prompts.html), retaining its voice and constraint approach.
 
 Pick a constraint and follow it far enough to make the requested work. The result
 may be ideas, a finished creative artifact, or an exercise. The prompts below are
@@ -8,17 +8,7 @@ creative premises; they do not authorize sending, publishing, or destructive act
 
 ## How to use
 
-The library is split by **domain affinity**:
-
-- **General** — works for any domain. Default for SPECIFICITY=NONE.
-- **Software / artifact** — when DOMAIN=ARTIFACT.
-- **Physical / object** — when DOMAIN=OBJECT.
-- **Social / collective** — when work involves other people.
-- **Lists** — domain-agnostic, more whimsical.
-
-When in doubt: pick one from General. When the user has stated a domain, pick from that domain's section. Pick by random, by mood match, or by what's nearest the user's wording. Don't enumerate all of them.
-
-Every prompt is interpreted as broadly as possible. "Does this include X?" → yes. The constraints provide direction and mild constraint; both are needed.
+Choose from the stated domain, or General when none is given. Use mood, wording or actual randomness; don't enumerate the library. Interpret generously while keeping the chosen constraint. Fiction, satire and deliberate uselessness are valid.
 
 ---
 
@@ -55,7 +45,7 @@ Make something intentionally painful to use. A password field that requires 47 c
 Make something useless. Deliberately, completely, beautifully useless. No utility. No purpose. No point. That's the point.
 
 **One million of something.**
-One million is both a lot and not that much. One million pixels is a 1MB photo. One million API calls is a Tuesday. One million of anything becomes interesting at scale.
+One million is both a lot and not that much. A million pixels, a million tiny marks, a million repeated actions: scale can change how the same unit feels. Choose a medium and make that change visible.
 
 **Make something that dies.**
 A website that loses a feature every day. A chatbot that forgets. A countdown to nothing. A garment that wears out as it's worn. An exercise in rot, killing, or letting go.
@@ -86,7 +76,7 @@ Reflect on time, difference, and similarity. Same neighborhood different decade.
 
 ---
 
-## Software / artifact (DOMAIN=ARTIFACT)
+## Software / artifact
 
 **Solve your own itch.**
 Build the tool you wished existed this week. Under 50 lines. Ship it today.
@@ -132,7 +122,7 @@ Build something where text is the only interface. No buttons, no graphics, just 
 
 ---
 
-## Physical / object (DOMAIN=OBJECT)
+## Physical / object
 
 **Do a lot of math.**
 Generative geometry, shader golf, mathematical art, computational origami. Time to re-learn what an arcsin is.
@@ -174,9 +164,3 @@ Lions, and tigers, and bears. Crab logic gates. Fish plays the stock market.
 
 **Cats.**
 Where would the internet be without them.
-
----
-
-## Attribution
-
-Constraint approach inspired by [wttdotm.com/prompts.html](https://wttdotm.com/prompts.html). Original v1 of this library was substantially adapted from there. This expanded version groups constraints by domain affinity for use with the routing logic in `SKILL.md`.

@@ -1,32 +1,11 @@
-> This is a retained, worked representation recipe. Its aesthetic values and
-> count budgets describe the example treatment; adapt them to the actual data,
-> reader, destination, and [selected skin](../skins.md). Preserve the semantic
-> encoding and source distinctions. Publication figures may use plotting tools.
-> The bundled [verification method](../verification.md) states actual helper coverage.
+# Venn and set membership
 
-# Venn / Set Overlap
+Use this for membership and intersections among a small number of sets. Equal schematic circles can explain logical relationships, provided their areas are not presented as measured counts.
 
-**Best for:** intersection of concepts/domains, shared attributes between categories, "where A meets B", ikigai-style frames (desirable × feasible × viable).
+If area represents count, circle radius must follow the square root of area, and intersections must represent the actual overlap. Arbitrary count combinations cannot always be reproduced faithfully with circles. Use a computed Euler layout, membership table, or intersection bar chart when geometry cannot support the quantitative claim.
 
-## Layout conventions
-- **Prefer 2 or 3 circles.** Avoid 4+ (unreadable — use a matrix instead).
-- Circle stroke: 1px hairline, color per-set (ink, muted, soft).
-- Circle fill: very low-opacity tint — `rgba(45,49,66,0.04)` for ink set, `rgba(79,93,117,0.05)` for muted. Tints compound naturally in overlap regions.
-- Radii: equal when sets are comparable in size; proportional when sets are meaningfully different. Don't fake equal sizes for aesthetics.
-- **Set labels** placed outside the circle, NEVER crossing the stroke. Geist 12–14px 600 for the set name, optional Geist Mono 9px sublabel.
-- **Intersection labels** placed inside the overlap region, Geist 12px 600, centered. For small overlaps, use a leader line to a label in clear space.
-- **Coral accent** on the ONE focal intersection — the "sweet spot". Either coral label stroke OR clipPath-bounded coral fill tint (`rgba(235,108,54,0.10)`).
-- Circle centers and radii divisible by 4.
+Label exclusive regions and shared intersections unambiguously. Distinguish an empty intersection from unknown membership. More sets can quickly exceed what overlapping circles communicate; choose the form that preserves the actual combinations rather than forcing a fixed set count.
 
-## Anti-patterns
-- Unlabeled regions — reader can't tell which set is which.
-- Circles that don't overlap when overlap is the point.
-- Equal-sized circles when sets are obviously different (dishonest).
-- Coral on multiple overlap regions (focal signal dies).
-- Labels sitting on top of circle strokes (illegible).
-- 4+ circles where 2–3 would do.
+Check memberships, region counts, unions, and intersections independently. Inspect tiny regions, label attachment, and any quantitative area claim at delivery size.
 
-## Examples
-- `../../assets/example-venn.html` — minimal light
-- `../../assets/example-venn-dark.html` — minimal dark
-- `../../assets/example-venn-full.html` — full editorial
+Reference layouts: [Venn](../../assets/example-venn.html), [full](../../assets/example-venn-full.html), [dark](../../assets/example-venn-dark.html).

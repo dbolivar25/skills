@@ -9,11 +9,13 @@ reading this method grants no new product, production, or publication authority.
 
 Establish diagnosis-only versus fix-authorized from the request and existing authority.
 For diagnosis-only, inspect, reproduce through permitted surfaces, and return cause,
-evidence, and correction direction. Keep target product state unchanged. Prefer ephemeral
-commands and redacted artifacts. When a proposed probe needs a repository change,
-production instrumentation, or a mutation beyond existing authority, prepare the smallest
-concrete diagnostic change and resolve that authority before executing it. Routine
-reversible local probe work follows the task's authority and current working agreement.
+evidence, and correction direction. A reproduction may have ordinary effects; understand
+them before running it and keep customer/product changes within the task's authority.
+Do not apply a product correction merely because diagnosis found one. Prefer ephemeral
+commands and redacted artifacts. Routine reversible local probes, scratch harnesses, and
+temporary local instrumentation follow the task's authority and current working agreement.
+When production instrumentation or another probe would exceed that authority, prepare the
+smallest reviewable diagnostic change and resolve the missing authority before executing it.
 
 Read relevant `CONTEXT.md`, ADRs, code/configuration, and current release/runtime evidence.
 For an operational target, verify the actual environment and identifiers before a
@@ -168,6 +170,6 @@ its ongoing ownership is useful and within scope.
 
 State the supported mechanism, decisive evidence, discarded alternatives, and remaining
 limits. When a commit/PR/report is requested, explain the cause so a later debugger can
-recover it. Ask what would have prevented the bug only as a separate follow-up: a poor
+recover it. Consider what would have prevented the bug as a separate follow-up finding: a poor
 seam, hidden coupling, or tangled ownership can inform an [architecture study](../../engineering/references/architecture.md),
 but does not silently select a larger refactor.

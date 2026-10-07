@@ -12,7 +12,7 @@ A workflow that projects a high-dimensional stream of raw state into the smalles
 
 ## Raw State
 
-Canonical source material: transcripts, recordings, emails, email threads, documents, CRM changes, tasks, Slack messages, product usage events, notes, customer artifacts, prior generated outputs, user edits, and corrections. Raw state should usually be preserved globally even when dropped from the active representation.
+The original source material: transcripts, recordings, emails, email threads, documents, CRM changes, tasks, Slack messages, product usage events, notes, customer artifacts, prior generated outputs, user edits, and corrections. Canonical source identity does not make every statement true. Prior generated output records what the system said; it is not independent proof of its underlying claims. Preserve raw state within applicable retention, permission, privacy and product policy when dropping it from active context.
 
 ## Neutral Retrieval Substrate
 
@@ -76,7 +76,7 @@ The hidden structure behind an important rendered claim or action: workflow judg
 
 ## Structured Confidence
 
-A multi-axis trust object, not a scalar. Typical axes are evidence sufficiency, source quality, scope certainty, freshness, interpretation certainty, contradiction status, model confidence, user fit, missing information, and recommended rendering assertiveness.
+The distinguishable reasons to trust or distrust a judgment. Relevant axes may include evidence sufficiency, source quality, scope certainty, freshness, interpretation certainty, contradiction status, model confidence, user fit, missing information and justified wording. Carry the axes that affect the consumer; neither a universal object nor a scalar replaces those reasons. The full method is [claim support](../../../review/references/claim-support.md).
 
 ## Rendering Policy
 

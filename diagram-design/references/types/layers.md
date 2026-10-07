@@ -1,32 +1,11 @@
-> This is a retained, worked representation recipe. Its aesthetic values and
-> count budgets describe the example treatment; adapt them to the actual data,
-> reader, destination, and [selected skin](../skins.md). Preserve the semantic
-> encoding and source distinctions. Publication figures may use plotting tools.
-> The bundled [verification method](../verification.md) states actual helper coverage.
+# Layers
 
-# Layer Stack
+Use this for ordered abstraction, responsibility, or defense layers. Use nested containers when containment is the relationship, and architecture when peer components and their connections matter.
 
-**Best for:** OSI model, CSS cascade, context hierarchy, tech stack, abstraction layers, memory hierarchy.
+Define what vertical order means. Higher abstraction, later processing, stronger control, and closer physical position are different relationships. Label interfaces or dependencies between layers when those matter. A broad band does not establish that it applies to every component beneath it.
 
-## Layout conventions
-- Horizontal bands stacked vertically. Each layer is a full-width rectangle (same x, same width). 4–6 layers total.
-- Layer height 56–72px, width typically 800–880px inside a 1000px viewBox.
-- Each row contains (left→right):
-  1. **Index tag** on the far left (`L3`, `07`, `APPLICATION`) — Geist Mono 8–9px eyebrow.
-  2. **Layer name** slightly right of center-left — Geist 14–16px 600.
-  3. **Sublabel / note** on the far right — Geist Mono 9–10px muted.
-- Border between layers: 1px hairline `rgba(45,49,66,0.12)`. Outer silhouette 1px ink or muted.
-- Fills: either alternating subtle shades (paper / paper-2) OR all paper with hairline dividers. Pick one and hold it.
-- Direction indicator on the LEFT margin (outside the stack): small up/down arrow + Geist Mono label (`abstraction ↑`, `packets ↓`).
-- Coral on **one** focal layer (stroke + subtle tint fill) — the bottleneck, the pay-rent layer, the one under discussion.
+For defense layers, identify the threat or failure mode each addresses and what remains. Several controls do not imply zero residual risk. Do not make a detection layer look preventive or a policy look technically enforced.
 
-## Anti-patterns
-- Layers that aren't actually hierarchical (use swimlane or architecture).
-- Skipped numbering (missing L4 between L3 and L5 without explanation).
-- Every layer a different color — hierarchy invisible.
-- Inconsistent layer heights without reason.
+Size for labels and optional subcomponents. Layer heights can be decorative unless they encode a disclosed quantity. Check order, interface direction, scope, and any coverage claims against the source.
 
-## Examples
-- `../../assets/example-layers.html` — minimal light
-- `../../assets/example-layers-dark.html` — minimal dark
-- `../../assets/example-layers-full.html` — full editorial
+Reference layouts: [layers](../../assets/example-layers.html), [full](../../assets/example-layers-full.html), [dark](../../assets/example-layers-dark.html).

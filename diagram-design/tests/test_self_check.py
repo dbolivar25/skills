@@ -46,6 +46,11 @@ class SourceCheckTests(unittest.TestCase):
     def test_local_fonts_fragments_and_data_images_remain_allowed(self):
         self.assertEqual([], self.verify('@font-face { src:url("fonts/MatterSQ-Regular.woff2"); } .figure { filter:url(#soften); background:url("data:image/svg+xml,%3Csvg%3E%3C/svg%3E") }'))
 
+    def test_embedded_woff_fonts_are_allowed_only_as_css_resources(self):
+        self.assertEqual([], self.verify('@font-face { src:url("data:font/woff2;base64,d09GMg==") format("woff2"); }'))
+        self.assertTrue(checker.reference_error('a', '', 'data:font/woff2;base64,d09GMg=='))
+        self.assertTrue(self.verify('@font-face { src:url("data:text/html;base64,PHNjcmlwdD4="); }'))
+
     def test_comments_and_ordinary_strings_do_not_become_remote_assets(self):
         self.assertEqual([], self.verify('/* url(https://example.com/unused.png) */ .label::after { content: "https://example.com"; }'))
 

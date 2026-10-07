@@ -1,27 +1,11 @@
-> This is a retained, worked representation recipe. Its aesthetic values and
-> count budgets describe the example treatment; adapt them to the actual data,
-> reader, destination, and [selected skin](../skins.md). Preserve the semantic
-> encoding and source distinctions. Publication figures may use plotting tools.
-> The bundled [verification method](../verification.md) states actual helper coverage.
+# State machines
 
-# State Machine
+Use this for states and allowed transitions. Distinguish a state from an action performed during a transition.
 
-**Best for:** finite state logic — order status, auth state, connection lifecycle, form wizard, job queue status.
+Preserve start and end markers, event, guard, and action where the source supplies them. Show self-loops, composite states, global timeouts, and exceptions in their actual scope. A transition count limit is not a reason to drop valid behavior. An unreachable or unspecified state may be an important finding, not disposable clutter.
 
-## Layout conventions
-- States are rounded rectangles (`rx=8`), labeled in Geist.
-- **Start**: filled ink dot (`r=6`). **End**: ringed dot (outer `r=8` outline, inner filled `r=5`).
-- Transitions: curved arrows labeled in Geist Mono as `event [guard] / action` (omit sections you don't need).
-- Self-loops curve above the state.
-- Orient along the dominant flow direction (left→right or top→down); rearrange before crossing transitions.
-- Coral on the state the reader should notice — typically the error state, or "happy completion".
+Arrow direction defines the allowed transition. Label guards clearly enough to distinguish competing paths. Unknown behavior remains explicit. Arrange for readability without changing the state graph.
 
-## Anti-patterns
-- More transitions than states × 2 → likely two state machines.
-- "From any state" transitions drawn from every state — use a single annotation (`* → Error on timeout`) instead.
-- Unlabeled transitions (the whole point is *what triggers this*).
+Walk representative event sequences and boundary conditions against the source. Check outgoing guards, retry paths, terminal states, and nested scope. Inspect labels and arrow endpoints at the delivered size.
 
-## Examples
-- `../../assets/example-state.html` — minimal light
-- `../../assets/example-state-dark.html` — minimal dark
-- `../../assets/example-state-full.html` — full editorial
+Reference layouts: [state](../../assets/example-state.html), [full](../../assets/example-state-full.html), [dark](../../assets/example-state-dark.html).

@@ -1,15 +1,16 @@
 # Design alternatives
 
-Use when the user wants alternative interfaces for a chosen problem. Your first
-idea is unlikely to be the best. Apply [module design](modules.md)
+Use when materially different interface or ownership choices remain open, or the
+user requests alternatives for a chosen problem. Preserve already-settled choices.
+Apply [module design](modules.md)
 and classify dependencies using [dependency categories](modules.md#deepening-across-dependencies).
 
 ## 1. Frame the problem
 
-Show the user the constraints every design must satisfy, the dependencies and
-their categories, and an illustrative code sketch that makes those constraints
-concrete without presenting it as the proposal. Then proceed with exploration;
-the user can consider the frame while designs are developed.
+Establish the constraints every design must satisfy and the dependencies each must
+handle. A small illustrative sketch can make the problem concrete without becoming
+the proposal. Share the frame early when it exposes an answer-changing assumption;
+ordinary design work need not pause for a separate framing round.
 
 Done when constraints and dependencies are explicit enough to compare designs
 without changing the problem between them.
@@ -31,12 +32,12 @@ independent exploration is requested or current workspace instructions require i
 the current delegation rules. Do not claim independent evidence from one actor producing
 several alternatives.
 
-Each design returns its typed interface (including invariants, ordering and
+Each design supplies its typed interface (including invariants, ordering and
 errors), caller usage, hidden implementation responsibilities, dependency and
 adapter strategy, and tradeoffs in leverage. Different names for the same shape
 are not different designs.
 
-Done when enough materially different interfaces expose those five parts to test the
+Done when enough materially different interfaces expose those responsibilities to test the
 live ownership choices. Preserve the distinct briefs and outputs when independence is
 requested, and report any unavailable independent investigation.
 

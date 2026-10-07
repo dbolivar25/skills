@@ -1,7 +1,9 @@
 # Typed specification and handoff
 
-Use for a requested implementable technical design. Own a typed call-stack architecture handoff:
-contracts in code and complete execution flows, with prose explaining why. A completed architecture study does not itself select specification; sufficient
+Use for a requested implementable technical design. Own a contract-and-flow handoff:
+precise types or schemas and complete execution flows, with prose explaining why.
+Use the target language and repository conventions; TypeScript sketches below are
+examples. A completed architecture study does not itself select specification; sufficient
 context permits direct design. Acquire
 missing facts and resolve owner choices without making the caller coordinate the
 supporting disciplines.
@@ -12,9 +14,9 @@ Acquire current code, governing docs, domain language, adapters, runtime behavio
 test conventions for the selected problem. Apply
 [contract judgment](contracts.md) ,
 [module design](modules.md) and
-[verification design](testing.md) to that evidence. Resolve their
-discoverable gaps through reads and their owner questions through the appropriate
-conversation. Recover accessible answers and ask needed owner questions. Use
+[verification design](testing.md) to that evidence. Resolve discoverable gaps through
+source inspection and permitted observations. Recover accessible answers and ask
+only needed owner questions. Use
 [grilling](../../review/references/grilling.md) only when the user asks for that
 interview; retain settled decisions and documentation scope.
 
@@ -34,11 +36,12 @@ remaining unknowns explicit. Do not invent requirements, APIs, files or call sta
 get past this gate. An interview concludes in the typed handoff below, not merely
 interview notes.
 
-## 2. Compare alternatives before recommending
+## 2. Settle the open design choices
 
-Explore materially different interface shapes, seam placement, ownership, call stacks,
-runtime topology or module boundaries. Naming variants do not count. For each
-alternative sketch:
+When material choices remain open, compare different interface shapes, seam placement,
+ownership, call stacks, runtime topology, or module boundaries. Naming variants do not
+count. An already-selected design needs its rationale and constraints checked, not a
+fresh tournament of alternatives. For each useful alternative sketch:
 
 - domain types/state model, inputs/outputs, public interfaces and expected failures;
 - seams/adapters and entrypoint-to-side-effect execution;
@@ -53,7 +56,8 @@ independent alternatives are selected, follow
 [design alternatives](design-alternatives.md) , then integrate the distinct
 briefs and their evidence into this comparison.
 
-Done when the recommendation follows comparison and its tradeoffs are explicit.
+Done when the selected shape has a grounded rationale, open choices have been resolved
+or exposed, and material tradeoffs are explicit.
 
 ## 3. Build one contract-and-flow coverage map
 
@@ -172,7 +176,7 @@ The execution section includes applicable retry, cancellation, idempotency,
 transaction, authorization, observability and runtime-hop behavior. Separate
 subsections only when they help the reader follow those paths.
 
-Prefer TypeScript pseudocode to prose where precision matters. For example, a
+Prefer the target language's type/schema sketches to prose where precision matters. For example, a
 boundary sketch makes ownership and expected failure visible:
 
 ```typescript

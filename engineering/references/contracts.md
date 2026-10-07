@@ -35,12 +35,15 @@ through policy.
 
 ## Domain values and legal states
 
-A **Domain Module** is a pure, type-centric abstract data type in the OCaml tradition. It
-centers one primary domain type or tightly related family and co-locates supporting types,
+A **Domain Module** can be a pure, type-centric abstract data type in the OCaml tradition.
+This useful shape centers one primary domain type or tightly related family and
+co-locates supporting types,
 invariants, parsers, smart constructors, combinators, predicates, legal transitions,
 domain projections, test generators, and formatting when those belong to the concept.
 It owns invariants in application code. Callers use operations rather than reimplementing
 checks or branding with casts; persistence mirrors applicable invariants with constraints.
+Preserve another sound repository shape when it owns the same responsibilities; the
+purpose is invariant ownership rather than a mandated class or module convention.
 
 Use precise operation inputs and required values, pushing optionality toward the
 boundary. Branded values or immutable value classes earn their cost when they prevent

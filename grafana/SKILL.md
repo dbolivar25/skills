@@ -13,11 +13,23 @@ Pin the question, service and environment, absolute window and timezone, relevan
 
 Inspect current capabilities and datasource types. Use existing dashboard queries as precedent, then verify variables, selectors, field spelling, units, response shape, and service identity through current metadata or a bounded sample.
 
-Read the matching method: `references/prometheus.md` for counts/rates/distributions/saturation, `references/loki.md` for logs and event populations, `references/tempo.md` for request or job traces, and `references/pyroscope.md` for profiles. Derived automated analyses may provide leads; corroborate consequential claims with underlying evidence and preserve their coverage limits.
+Read the matching method before composing or interpreting its query:
+
+- [Prometheus](references/prometheus.md) for counts, rates, distributions, or saturation.
+- [Loki](references/loki.md) for logs and event populations.
+- [Tempo](references/tempo.md) for request/job paths and trace-derived aggregates.
+- [Pyroscope](references/pyroscope.md) for resource profiles.
+
+Derived automated analyses may provide leads; corroborate consequential claims with
+underlying evidence and preserve their coverage limits.
 
 ## Acquire representative evidence
 
-Quantify the affected population before treating specimens as representative when an aggregate exists. Compare like windows, workloads, strata, units, and denominators. Resolve selector and instrumentation questions before interpreting absent events.
+Quantify the affected population before treating specimens as representative when an
+aggregate is available. Name what it counts: requests, spans, log lines, jobs, or sampled
+profiles. When only specimens are obtainable, preserve that limit and continue the
+useful investigation. Compare like windows, workloads, strata, units, and denominators.
+Resolve selector and instrumentation questions before interpreting absent events.
 
 Fetch only the specimens needed to distinguish explanations or show the mechanism. Prefer server-side filters and aggregates. Use the least-sensitive dimensions that can answer the question; redact secrets and unrelated customer content.
 

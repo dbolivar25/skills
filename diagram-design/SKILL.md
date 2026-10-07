@@ -18,7 +18,7 @@ Select by semantics, not a favored visual style:
 - Overlap, containment, and position: sets, nesting, matrix, Venn, spatial or strategic maps.
 - Import/export: preserve the source model and destination's real format obligations.
 
-Use `references/representation-selector.md` and the selected recipe under `references/types/`, including useful less-common forms. No arbitrary type cap should force a relationship into the wrong structure. For scientific or publication figures, use standard plotting tools. Small static software graphs may use Mermaid. For an import, read `references/imports.md` before changing the source model; for a brand skin, select `references/skins.md` and the actual brand's rules.
+Use `references/representation-selector.md` and the selected recipe under `references/types/`, including useful less-common forms. Resolve consequential fidelity, audience, and destination choices with `references/output-spec.md` before drawing. No arbitrary type cap should force a relationship into the wrong structure. For scientific or publication figures, use standard plotting tools. Small static software graphs may use Mermaid. For an import, read `references/imports.md` before changing the source model; for a brand skin, select `references/skins.md` and the actual brand's rules.
 
 ## Make meaning visible
 

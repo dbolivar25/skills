@@ -4,6 +4,20 @@ Use this reference when opening work or recording an event. For the operating
 method, return to [Steward](../SKILL.md); for executable commands in context,
 read the [worked example](worked-example.md).
 
+## Find the operation
+
+| Situation | Relevant section |
+| --- | --- |
+| Start or recover a mission | [Commands](#commands), [Intent](#intent), and [State](#state) |
+| Assign, pause, replace, or report real work | [Work](#work) and [collaboration](collaboration.md) |
+| Accept or request a revision | [Review](#review) and [review criteria](review.md) |
+| A premise changes or loses evidence | [Support](#support) |
+| The owner must choose | [Asks](#asks) |
+| Intent or completion evidence changes | [Intent revisions and receipts](#intent-revisions-and-receipts) |
+| The selected next step seems surprising | [Next selection](#next-selection) |
+
+Intent states the requested outcome and boundaries. Work is a responsibility; an accepted report establishes its historical completion. A Backing supplies support, a Claim tracks a premise that must remain supported, and a Receipt is an observed Done result. An Ask preserves a decision the agent cannot make. These are different objects with different lifetimes.
+
 ## Commands
 
 ```bash
@@ -94,6 +108,8 @@ The runtime validates structure and transitions, not the truth of supplied evide
 
 Done is an AND of receipt obligations. A live receipt meets each Done item with
 the same receipt type. Completion is derived, never declared.
+
+The runtime matches receipt types, not the meaning or freshness of evidence. Choose distinct types for obligations requiring distinct observations and check each observation against its current obligation. A duplicate type can satisfy several Done items structurally; it does not establish that the same evidence proves them all.
 
 ## State
 
@@ -279,3 +295,5 @@ The runtime returns the first applicable responsibility:
 7. `STOP` when nothing can advance honestly.
 
 `PRESENT` and `AWAY` change when an Ask surfaces, never who owns the judgment.
+
+Met Done obligations do not outrank an open Ask, pending review, available work, or active/paused actor. Reconcile remaining responsibilities rather than assuming receipt presence alone makes `next` return DONE. The priority suggests the next responsibility; it does not forbid independent ready work.

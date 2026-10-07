@@ -45,9 +45,13 @@ Rendering policy should depend on:
 
 This is how the workflow avoids unsupported fluency.
 
+The wording must match what was established. “Procurement has not assigned an owner” needs evidence about actual ownership. If the available sources merely fail to identify one, say “We have not confirmed procurement ownership” when that coverage gap matters. Tentative wording cannot turn a missing source into evidence for a speculative claim. Keep confirmed negatives, unknowns and search limits distinct.
+
 ## Generation And Publication Are Different
 
 A workflow may produce a candidate output before every check is complete. It should not publish, recommend, send, persist, or confidently present the output until required gates pass.
+
+Private storage of a candidate and promotion into authoritative reusable state are different effects. The gate contract decides which state write is permitted and what label, access, retention and invalidation that candidate needs. Do not forbid useful staging merely because final publication needs stronger support.
 
 Common publication gates:
 

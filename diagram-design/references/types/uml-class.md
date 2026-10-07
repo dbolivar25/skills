@@ -1,71 +1,13 @@
-> This is a retained, worked representation recipe. Its aesthetic values and
-> count budgets describe the example treatment; adapt them to the actual data,
-> reader, destination, and [selected skin](../skins.md). Preserve the semantic
-> encoding and source distinctions. Publication figures may use plotting tools.
-> The bundled [verification method](../verification.md) states actual helper coverage.
+# UML class diagrams
 
-# UML Class Diagram
+Use this for classes or interfaces, their attributes and operations, and their relationships. Use [ER](er.md) for domain entities, [database schema](db-schema.md) for physical tables, and [deployment](deployment.md) for runtime placement.
 
-**Best for:** the static structure of an object model — classes, what they own, what they inherit, and what they merely depend on. The distinguishing content is the **operations compartment** and the **typed relationship vocabulary** (the arrowheads carry meaning). ER cannot express either — use this type only when operations or the inheritance/composition vocabulary are the point of the diagram, and `er.md` when the story is entities and cardinality.
+Preserve class identity, visibility, types, signatures, and stereotypes when supplied. Compartments can omit implementation detail only within an explicit scope. Unknown types or visibility are not guessed from naming conventions.
 
-**Other UML diagrams — route elsewhere.** UML is a family; only the class diagram gets its own grammar here:
+Follow the intended notation consistently. Generalization points toward the more general classifier with a hollow triangle. Realization uses a dashed relation with that triangle. Association, dependency, aggregation, and composition express different claims. A diamond sits at the owning whole end; composition implies a stronger ownership/lifecycle relation and must not be inferred merely from a database cascade. Association navigability and multiplicity are separate facts; absence of an arrow does not prove two-way navigation.
 
-| UML diagram | Use instead |
-|---|---|
-| Sequence | [sequence.md](sequence.md) |
-| State machine | [state.md](state.md) |
-| Component | [architecture.md](architecture.md) |
-| Deployment | [architecture.md](architecture.md) |
-| Activity | [swimlane.md](swimlane.md) or [flowchart.md](flowchart.md) |
-| Conceptual / domain ER | [er.md](er.md) |
+Include a legend for unfamiliar notation, but do not display unused relationship types just to fill a legend. Route relationships to the correct class or compartment, preserving endpoint symbols and labels.
 
-## Layout conventions
+Check declarations, relationship kinds, endpoint orientation, multiplicities, and ownership against the source model or code. Inspect long signatures, diamond and triangle placement, and exports at actual reading size. Consult official UML material when formal semantics determine the result.
 
-- Each class is a **single box** (`rx=6`), divided by full-width hairlines into up to three compartments. Compartment heights follow content — never pad to a uniform height.
-  1. **Name** — class name in Geist sans, 12px, weight 600, **centered**. An interface carries a Geist Mono 8px `«interface»` stereotype line above the name. An abstract class sets the name in *italic*.
-  2. **Attributes** — one line each, Geist Mono 9px, left-aligned: `+ name: Type`. Visibility markers: `+` public, `-` private, `#` protected.
-  3. **Operations** — one line each, Geist Mono 9px, left-aligned: `+ method(arg): Return`.
-  Omit a compartment entirely when a class has no members in it (an interface with no attributes skips that compartment).
-- Attribute/operation lines are a single combined string, not the two-column field/type layout ER uses — that visual distinction keeps the two types from reading the same.
-- Coral (accent) is reserved for the class being implemented or extended (the focal type) — accent-tint fill, accent stroke. Its inbound inheritance/realization edges count as **one** additional accent element (treated as a group), for 2 accent elements total per diagram.
-
-## Relationship vocabulary
-
-Define every marker used in `<defs>` and show all six in the legend, even the ones not used in the diagram body — the legend is this type's complete grammar reference.
-
-| Relationship | Line | Ending (at the target/owner end) |
-|---|---|---|
-| Inheritance (`extends`) | solid | large **hollow triangle** — `paper` fill, `ink` stroke |
-| Realization (`implements`) | dashed `5,4` | same hollow triangle |
-| Composition (owns, cascades) | solid | **filled diamond** at the OWNER end, `ink` fill |
-| Aggregation (has, independent) | solid | **hollow diamond** at the OWNER end |
-| Association | solid | plain open arrowhead, multiplicity at BOTH ends |
-| Dependency (uses) | dashed `4,3` | plain open arrowhead |
-
-Multiplicities (`1`, `0..*`, `1..*`) sit in Geist Mono 8px, 10–12px off the box edge, on an opaque mask over the line — same convention as ER cardinality labels.
-
-## Connector rules
-
-All six [connector craft](../primitives.md) connector rules apply in full — orthogonal rounded elbows (`r=8`), no diagonals, bridge/hop for unavoidable crossings, fanned attach points ≥12px apart when several relationships share an edge, masked labels with the 6–10px gap, connectors drawn before boxes. Prefer laying classes out so relationships resolve to straight lines or single-elbow routes; a class diagram with every edge bridging is over budget — split by package instead.
-
-## Complexity budget
-
-Max 7 classes, max 8 relationships, max 5 members per compartment (overflow becomes a Geist Mono `…` line), max 2 accent elements. Over budget → split by package.
-
-Seven is the ceiling rather than the target. Three compartments per box makes a class diagram dense fast, so treat 4–5 classes as the normal size; the shipped example uses all seven only because it doubles as the legend for the full relationship vocabulary.
-
-## Anti-patterns
-
-- Getters and setters listed as operations — they're noise; show behavior that matters.
-- Every attribute and method dumped in — a class diagram is an argument, not a header file.
-- Composition and aggregation used interchangeably — the filled diamond means the part dies with the whole. Say so, or use the hollow diamond.
-- Association arrows with no multiplicity.
-- Drawing a class diagram when there's no inheritance and no operations — that's ER.
-- Stereotype guillemets on everything, not just the interfaces/abstracts that need them.
-- Boxes padded to equal height.
-
-## Examples
-
-- `../../assets/example-uml-class.html` — minimal light
-- `../../assets/example-uml-class-dark.html` — minimal dark
-- `../../assets/example-uml-class-full.html` — full editorial
+Reference layouts: [UML class](../../assets/example-uml-class.html), [full](../../assets/example-uml-class-full.html), [dark](../../assets/example-uml-class-dark.html).

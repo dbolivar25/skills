@@ -1,11 +1,11 @@
 # Leverage Points
 
-Donella Meadows, 1997/1999. 12 places to intervene in a system, in increasing order of effectiveness. Most policy interventions happen at the bottom of the list (parameters); the actually transformative ones happen at the top (paradigms) — and are the most resisted.
+Donella Meadows, 1997/1999. Twelve places to intervene in a system, ordered as a lens on increasing potential leverage. Her [original essay](https://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/) explicitly treats the list as provisional, with exceptions. It broadens the search; it does not guarantee that a higher-ranked intervention works better in this system.
 
 ## When to use
 
 - Civic / org / institutional change
-- Diagnosing why interventions fail (almost always at lower level than problem)
+- Investigating why an intervention affects a symptom while its feedback or incentives persist
 - Strategic critique of policy proposals
 - "Where in this system should I push?"
 
@@ -13,11 +13,11 @@ Donella Meadows, 1997/1999. 12 places to intervene in a system, in increasing or
 
 - Single-creator creative work (framework needs multi-actor systems with feedback loops)
 - Short-term tactical decisions
-- Team of <5 (use simpler tools)
+- A problem with no meaningful stocks, flows, feedback, rules, or shared goals to inspect
 
 ## The 12 levels (least → most powerful)
 
-**12. Constants, parameters, numbers** — subsidies, taxes, standards, prices. Most policy fights happen here. Rarely change behavior.
+**12. Constants, parameters, numbers** — subsidies, taxes, standards, prices. Often limited when the underlying structure persists; a parameter near a threshold can still change behavior greatly.
 
 **11. Sizes of buffers** — stabilizing stocks relative to flows. Big buffer = stable but inflexible.
 
@@ -29,7 +29,7 @@ Donella Meadows, 1997/1999. 12 places to intervene in a system, in increasing or
 
 **7. Gain around positive feedback loops** — *Reducing* gain on a positive loop is more leveraged than strengthening the negative loop counter-acting it. Progressive tax weakens "success-to-the-successful" loops directly.
 
-**6. Information flows** — who has access to what. Adding a feedback loop where one didn't exist. (Toxic Release Inventory: pure disclosure dropped emissions 40%.)
+**6. Information flows** — who has access to what. Adding a feedback loop where one did not exist. Meadows uses public pollution disclosure as an example; do not infer a universal effect size or a sole cause from that illustration.
 
 **5. Rules** — incentives, punishments, constraints. Constitutions, laws, terms of service. *"If you want to understand the deepest malfunctions of systems, pay attention to the rules, and to who has power over them."*
 
@@ -45,7 +45,7 @@ Donella Meadows, 1997/1999. 12 places to intervene in a system, in increasing or
 
 1. **Map the system.** Stocks, flows, feedback loops, rules, goals, paradigm.
 2. **Locate the problem at a level.** A symptom at level 12 (rising costs) often originates at level 5 (rules permit cost externalization), level 3 (short-term return goal), or level 2 (paradigm assumes infinite resource).
-3. **List candidate interventions at 3+ levels.** Be honest about which you can act on.
+3. **Compare plausible intervention levels.** Include a different level when it reveals a real alternative; do not fill a level quota. Be honest about who can act.
 4. **Order by leverage and feasibility.** The most leveraged intervention is rarely the most feasible.
 5. **Note direction risk.** A high-leverage intervention pushed wrong is worse than a low-leverage one pushed right. *"Time after time I've ... discovered that there's already a lot of attention to that point. Everyone is trying very hard to push it IN THE WRONG DIRECTION."*
 
@@ -59,7 +59,7 @@ Donella Meadows, 1997/1999. 12 places to intervene in a system, in increasing or
 - Level 3 (goal): "ship features fast."
 - Level 2 (paradigm): "engineering output is linearly proportional to hours worked."
 
-Recommendation: combine level-8 (mandatory monthly burnout-explicit 1:1s — feasible) + level-3 (explicit goal change to "build sustainable engineering org" — slow but high-leverage). Skip level 12.
+Possible interventions: a trustworthy workload-feedback channel at level 6/8, changes to incentives at level 5, and an explicit sustainable-work goal at level 3. Assess privacy, actual decision power, and whether managers act on the feedback. The example does not establish that a mandatory meeting works or that benefits can be ignored.
 
 ## Anti-slop notes
 
@@ -101,7 +101,7 @@ A pattern *language* is a network of patterns at different scales, with explicit
 
 ## Selected patterns from Alexander's 253
 
-For texture. Real use means buying or borrowing the book.
+These examples teach the pattern form. For an exact named pattern, consult the source's context, related patterns, and caveats rather than treating this abbreviated wording as the full pattern.
 
 - **8. Mosaic of Subcultures** — a region needs distinct subcultures with their own ecology, separated by zones of disuse, not homogenized.
 - **53. Main Gateways** — mark every entrance with a substantial visible threshold.

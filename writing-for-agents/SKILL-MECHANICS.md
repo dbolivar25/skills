@@ -2,15 +2,11 @@
 
 Read this reference when packaging [agent instructions](SKILL.md) as a skill, selecting invocation metadata or distributing the package. It covers interfaces, host mechanics and reachability. The detailed authoring method is [instruction design](references/instruction-design.md).
 
-## Give the interface a useful responsibility
+## Package the job the instruction owns
 
-Work from real jobs users delegate and the reusable capabilities those jobs need. Walk a complete job through the proposed interface. The interface names the purpose, essential inputs, usable result and relevant limits; its implementation owns the judgments and ordinary coordination required to finish that job. A long body or many dependencies do not establish depth.
+Use [instruction design](references/instruction-design.md) when deciding responsibility, trigger, demand, information hierarchy or completion. Packaging exposes that job to its intended host; it cannot repair a shallow job or supply new task authority.
 
-Keep coupled concepts, rules, examples and caveats together when separating them would make callers rebuild their relationship. Put narrower supporting methods in plain references reached by concrete conditions. Add a public skill when another user or job independently needs its distinct result and that selection boundary earns its cost. No fixed number of layers or per-skill workflow wrapper is required.
-
-A skill can acquire available context, reason, write and verify within the surrounding task's authority. A requested plan or review does not become implementation or publication. Do not make the user supply context the agent can obtain, and do not add a generic wrapper solely to read or write files. The selected job owns conflicting evidence, missing inputs and integrated completion.
-
-For direct use, `SKILL.md` is the normal interface. A supporting method may have a direct file pointer when the caller needs that method without selecting the owner's whole job. The pointer names the condition, the decision it governs and its contribution. It must load before that decision when its content is required. A dependency list is not a compulsory pipeline.
+For direct use, `SKILL.md` is the normal interface. A caller can point to a supporting method without selecting the owner's whole job when it names the condition, governed decision and contribution. Required material must load before that decision. A dependency list is not a compulsory pipeline, and reading an explicit-only package does not authorize invoking its workflow.
 
 ## Choose invocation deliberately
 
@@ -25,7 +21,7 @@ Choose autonomous selection when the agent must recognize the job itself. Choose
 Host switches differ. Use the supported mechanism for the target host and preserve unrelated metadata:
 
 - Hosts that support `disable-model-invocation` can use `disable-model-invocation: true` for explicit-only skills. Do not assume this switch controls Codex.
-- In Codex, `agents/openai.yaml` supports `policy.allow_implicit_invocation: false`. The installed official skill-creator reference documents that false prevents default content injection while explicit `$skill-name` invocation remains available. Its default is true.
+- In Codex, `agents/openai.yaml` supports `policy.allow_implicit_invocation: false`. The target host's installed `skill-creator/references/openai_yaml.md` documents that false prevents default content injection while explicit `$skill-name` invocation remains available. Its default is true.
 
 For example, when the task actually selects an explicit-only Codex package:
 
@@ -34,7 +30,7 @@ policy:
   allow_implicit_invocation: false
 ```
 
-Codex's `agents/openai.yaml` also carries machine-facing interface metadata and declared MCP tool dependencies. The installed official reference specifies quoted string values, UI display fields and a `default_prompt` that explicitly mentions `$skill-name`. Verify current field support in that reference rather than copying configuration from a different host or inventing unsupported frontmatter. Changing a description does not silently change invocation authority.
+Codex's `agents/openai.yaml` also carries machine-facing interface metadata and declared MCP tool dependencies. The installed official reference specifies quoted string values, UI display fields and a `default_prompt` that explicitly mentions `$skill-name`. Locate and read that official reference in the current environment when changing metadata; the 2026-10-06 installed version confirms these fields. Verify future field support there rather than copying configuration from a different host or inventing unsupported frontmatter. Changing a description does not silently change invocation authority.
 
 Keep these mechanisms separate:
 
