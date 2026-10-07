@@ -10,31 +10,83 @@
     return style.display !== "none" && style.visibility !== "hidden" && Number(style.opacity) !== 0;
   }
 
-  function rgb(color) {
+  // Fast path for computed sRGB; modern CSS colors use the browser's own
+  // parser and sRGB rasterization rather than a second color implementation.
+  let colorContext;
+  function rgba(color) {
+    if (!color || color === "none" || color === "transparent") return { r: 0, g: 0, b: 0, a: 0 };
     const match = color.match(/^rgba?\((\d+(?:\.\d+)?)[ ,]+(\d+(?:\.\d+)?)[ ,]+(\d+(?:\.\d+)?)(?:[ /,]+(\d*(?:\.\d+)?))?\)$/);
-    if (!match) return null;
-    return {
-      r: Number(match[1]),
-      g: Number(match[2]),
-      b: Number(match[3]),
+    if (match) return {
+      r: Number(match[1]), g: Number(match[2]), b: Number(match[3]),
       a: match[4] === undefined || match[4] === "" ? 1 : Number(match[4]),
     };
+    if (!global.CSS?.supports("color", color) || !document.createElement) return null;
+    colorContext ??= document.createElement("canvas").getContext("2d", { willReadFrequently: true });
+    if (!colorContext) return null;
+    colorContext.clearRect(0, 0, 1, 1);
+    colorContext.fillStyle = color;
+    colorContext.fillRect(0, 0, 1, 1);
+    const [r, g, b, alpha] = colorContext.getImageData(0, 0, 1, 1).data;
+    return { r, g, b, a: alpha / 255 };
   }
 
   function chromatic(color) {
-    const value = rgb(color);
-    if (!value || value.a < 0.1) return false;
+    const value = rgba(color);
+    if (!value) return null; // Unsupported paint is a coverage finding, never neutral.
+    if (value.a < 0.1) return false;
     const max = Math.max(value.r, value.g, value.b);
     const min = Math.min(value.r, value.g, value.b);
     return max > 0 && (max - min) / max >= 0.18;
   }
 
-  function hasChromaticPaint(element, style) {
-    if (chromatic(style.backgroundColor)) return true;
-    return ["Top", "Right", "Bottom", "Left"].some((side) => {
-      const width = Number.parseFloat(style[`border${side}Width`]);
-      return width > 0 && chromatic(style[`border${side}Color`]);
-    });
+  function inspectPaint(element, style, add, context = "element") {
+    const colors = [["background", style.backgroundColor]];
+    for (const side of ["Top", "Right", "Bottom", "Left"]) {
+      if (Number.parseFloat(style[`border${side}Width`]) > 0
+          && !["none", "hidden"].includes(style[`border${side}Style`])) {
+        colors.push([`border-${side.toLowerCase()}`, style[`border${side}Color`]]);
+      }
+    }
+    if (context === "element" && element.namespaceURI === "http://www.w3.org/2000/svg") {
+      // Computed values include presentation attributes and inherited CSS.
+      if (Number.parseFloat(style.fillOpacity ?? "1") > 0) colors.push(["SVG fill", style.fill]);
+      if (Number.parseFloat(style.strokeWidth) > 0 && Number.parseFloat(style.strokeOpacity ?? "1") > 0) {
+        colors.push(["SVG stroke", style.stroke]);
+      }
+    }
+    let hasChromatic = false;
+    for (const [property, color] of colors) {
+      if (!color) continue;
+      const result = chromatic(color === "currentcolor" ? style.color : color);
+      if (result === null) add("paint-coverage", element, `${context} ${property} cannot be classified: ${color}. Inspect the render.`);
+      if (result === true) hasChromatic = true;
+    }
+    if (style.backgroundImage && style.backgroundImage !== "none") {
+      add("paint-coverage", element, `${context} background-image (including gradient stops) is not classified. Inspect the render.`);
+    }
+    if (hasChromatic && !element.dataset.augRole) {
+      add("chromatic-role", element, `${context} chromatic solid fill or stroke has no data-aug-role.`);
+    }
+  }
+
+  function primaryFamily(style) {
+    return (style.fontFamily || "").split(",")[0].trim().replace(/^["']|["']$/g, "").toLowerCase();
+  }
+
+  function inspectType(element, style, add) {
+    const ownsText = [...(element.childNodes || [])].some((node) => node.nodeType === 3 && node.textContent.trim());
+    if (!ownsText) return;
+    const family = primaryFamily(style);
+    const mono = new Set(["ui-monospace", "sf mono", "menlo", "monospace"]);
+    if (family !== "matter sq" && !mono.has(family)) {
+      add("typeface-applied", element, `Text's primary computed font is ${style.fontFamily || "unavailable"}; expected Matter SQ or the technical mono token.`);
+    }
+    if (family === "matter sq" && document.fonts?.check) {
+      const spec = `${style.fontStyle || "normal"} ${style.fontWeight || "400"} ${style.fontSize || "16px"} "Matter SQ"`;
+      if (!document.fonts.check(spec, element.textContent || "")) {
+        add("typeface", element, `Matter SQ is not ready for ${spec}. Inspect after fonts finish loading.`);
+      }
+    }
   }
 
   function offScaleRadius(element, style) {
@@ -91,8 +143,13 @@
       if (role && !VALID_ROLES.has(role)) {
         add("chromatic-role", element, `Unknown data-aug-role "${role}".`);
       }
-      if (hasChromaticPaint(element, style) && !role) {
-        add("chromatic-role", element, "Chromatic fill or stroke has no data-aug-role.");
+      inspectPaint(element, style, add);
+      inspectType(element, style, add);
+      for (const pseudo of ["::before", "::after"]) {
+        const pseudoStyle = global.getComputedStyle(element, pseudo);
+        if (!pseudoStyle || ["none", "normal", undefined].includes(pseudoStyle.content)
+            || pseudoStyle.display === "none" || pseudoStyle.visibility === "hidden" || Number(pseudoStyle.opacity) === 0) continue;
+        inspectPaint(element, pseudoStyle, add, pseudo);
       }
       if (branch === "document" && role && role !== "identity") {
         documentRoles.add(role);
@@ -128,11 +185,18 @@
       }
     }
 
-    if (document.fonts?.check && !document.fonts.check('16px "Matter SQ"')) {
-      add("typeface", root, "Matter SQ is not loaded in the rendered page.");
+    if (document.fonts?.check) {
+      const faces = typeof document.fonts[Symbol.iterator] === "function" ? [...document.fonts] : null;
+      if (faces && !faces.some((face) => face.family.replace(/^["']|["']$/g, "").toLowerCase() === "matter sq" && face.status === "loaded")) {
+        add("typeface", root, "No loaded Matter SQ font face was observed. fonts.check alone does not prove a face exists.");
+      } else if (!document.fonts.check('16px "Matter SQ"')) {
+        add("typeface", root, "Matter SQ is not loaded in the rendered page.");
+      }
+    } else {
+      add("typeface-coverage", root, "Font loading API unavailable; inspect the rendered typography.");
     }
 
-    const label = findings.length === 0 ? "Augment audit: clean" : `Augment audit: ${findings.length} finding(s)`;
+    const label = findings.length === 0 ? "Augment audit: no findings in covered checks" : `Augment audit: ${findings.length} finding(s)`;
     console.group(label);
     if (findings.length > 0) console.table(findings);
     console.groupEnd();

@@ -2,7 +2,7 @@
 
 Turn a `.drawio` file into an editorial-quality diagram at the format, size, and detail level the destination needs.
 
-**This is a redraw, not a conversion.** You read the source for its *content* — components, relationships, grouping, direction — and then draw a new diagram in this skill's design system. Nothing about the source's geometry, palette, or shape vocabulary carries over. A converter that preserved draw.io's layout would just be draw.io output with different fonts.
+These steps describe a semantic redraw when restyling or summarizing is requested. For faithful conversion or an editable native hand-off, preserve source geometry, styling that carries meaning, and the source format as needed; use the extractor to check coverage. Read [imports](imports.md) and [export](export.md) for that route.
 
 ## Trigger
 
@@ -38,7 +38,7 @@ Before drawing, fix format, size, detail level, and audience per [`output-spec.m
 
 > *"18 nodes in 3 groups. Where's this going — slide, blog post, or hand-off? And should I keep every component or compress to the request path?"*
 
-The digest's `budget:` line tells you whether the ask is even possible: a source over the node budget cannot go to `slide-16x9` at `faithful` without splitting. Say so at this step rather than after drawing.
+The digest's `budget:` line warns about density in the worked layout. Preserve a faithful source using overview/detail, meaningful grouping, or a suitable renderer when a single slide would be unreadable.
 
 ## Step 3 — Pick the target type
 
@@ -46,38 +46,38 @@ The source's shape vocabulary is a hint, not an instruction. draw.io users reach
 
 | Digest signal | Likely type | Reference |
 |---|---|---|
-| `lifeline` shapes, tall vertical bars | Sequence | [type-sequence.md](type-sequence.md) |
-| `table` / `er` shapes, rows of fields | ER / data model | [type-er.md](type-er.md) |
-| ≥2 aligned `swimlane` containers (`type candidates: swimlane`) | Swimlane | [type-swimlane.md](type-swimlane.md) |
-| `rhombus` present, single entry point, labeled yes/no edges | Flowchart | [type-flowchart.md](type-flowchart.md) |
-| Mostly `ellipse`, self-loops, `has_cycle: True` | State machine | [type-state.md](type-state.md) |
-| `icon:aws` / `icon:azure` / `icon:gcp` / `icon:kubernetes` families | Architecture | [type-architecture.md](type-architecture.md) |
-| Nested containers, depth ≥2, few edges | Nested | [type-nested.md](type-nested.md) |
-| One entry point, no cycle, fan-out only | Tree or Org chart | [type-tree.md](type-tree.md), [type-org-chart.md](type-org-chart.md) |
-| Boxes stacked vertically, edges only between neighbours | Layer stack | [type-layers.md](type-layers.md) |
-| Dated labels on a single axis | Timeline or Gantt | [type-timeline.md](type-timeline.md), [type-gantt.md](type-gantt.md) |
-| Anything else with edges | Architecture | [type-architecture.md](type-architecture.md) |
+| `lifeline` shapes, tall vertical bars | Sequence | [types/sequence.md](types/sequence.md) |
+| `table` / `er` shapes, rows of fields | ER / data model | [types/er.md](types/er.md) |
+| ≥2 aligned `swimlane` containers (`type candidates: swimlane`) | Swimlane | [types/swimlane.md](types/swimlane.md) |
+| `rhombus` present, single entry point, labeled yes/no edges | Flowchart | [types/flowchart.md](types/flowchart.md) |
+| Mostly `ellipse`, self-loops, `has_cycle: True` | State machine | [types/state.md](types/state.md) |
+| `icon:aws` / `icon:azure` / `icon:gcp` / `icon:kubernetes` families | Architecture | [types/architecture.md](types/architecture.md) |
+| Nested containers, depth ≥2, few edges | Nested | [types/nested.md](types/nested.md) |
+| One entry point, no cycle, fan-out only | Tree or Org chart | [types/tree.md](types/tree.md), [types/org-chart.md](types/org-chart.md) |
+| Boxes stacked vertically, edges only between neighbours | Layer stack | [types/layers.md](types/layers.md) |
+| Dated labels on a single axis | Timeline or Gantt | [types/timeline.md](types/timeline.md), [types/gantt.md](types/gantt.md) |
+| Anything else with edges | Architecture | [types/architecture.md](types/architecture.md) |
 
 The digest's `type candidates` field ranks these mechanically. Override it when the content disagrees — a "flowchart" whose diamonds all ask *"which service?"* is an architecture diagram someone drew with the wrong shapes. Tell the user when you override, in one line.
 
-**Load the chosen `type-*.md` before drawing.** Its layout conventions win over anything the source did.
+**Load the chosen recipe under `types/` before drawing.** Use its layout conventions when restyling; preserve source geometry when exact reproduction is the requested job.
 
 ## Step 4 — Build the semantic model
 
 Work from the digest, not from coordinates. In order:
 
 1. **Name the story.** One sentence: *"A request enters through the gateway, gets authenticated, and lands in Postgres."* Everything that doesn't serve that sentence is a degrade-ladder candidate.
-2. **Apply the detail level.** Walk [`output-spec.md` §3](output-spec.md) degrade ladder until you're under the node ceiling. The digest's *collapsible groups* section is step 3 of that ladder, pre-computed.
+2. **Apply the detail level.** For an authorized summary, use [`output-spec.md` §3](output-spec.md) to choose meaningful reductions. The digest's *collapsible groups* section is step 3 of that ladder, pre-computed.
 3. **Pick 1–2 focal nodes.** The digest's `hubs` ranking (highest degree) is the usual answer, but the focal node is the one the *reader* should look at first — sometimes that's the entry point or the new component, not the busiest one. These get `accent`; everything else does not.
 4. **Rewrite every label** at the audience level ([`output-spec.md` §4](output-spec.md)). draw.io labels are written by the author for the author: `svc-auth-prod-v2` becomes `Auth Service`. Preserve proper nouns, expand acronyms once.
-5. **Prune edges.** Source graphs carry edges that layout already implies. If A sits above B in a stack and everything flows down, the arrow is noise. Keep edges that carry a label, cross a zone boundary, or run against the dominant direction.
+5. **Preserve relationships.** Do not infer an edge from layout alone or remove a source edge merely because boxes align. Summaries may collapse redundant relationships only when the retained representation preserves their meaning; record the change.
 
 ## Step 5 — Redraw
 
-Fresh layout on the 4px grid, per the type reference and SKILL.md §6–§7. Explicitly:
+Make a readable layout using the selected recipe and [connector craft](primitives.md). Numerical grid values are example treatments, not universal rules. Explicitly:
 
-- **Discard source coordinates.** draw.io positions are hand-dragged and land on odd pixels. Lay out from scratch: dominant flow left→right (or top→bottom), zones aligned, even gaps.
-- **Discard source colors.** Map them to semantic roles instead:
+- **For a restyle, replace source coordinates.** draw.io positions are hand-dragged and land on odd pixels. Lay out from scratch: dominant flow left→right (or top→bottom), zones aligned, even gaps.
+- **For a restyle, translate source colors.** Map them to semantic roles instead:
 
 | draw.io default fill | Typical meaning | Maps to |
 |---|---|---|
@@ -89,7 +89,7 @@ Fresh layout on the 4px grid, per the type reference and SKILL.md §6–§7. Exp
 | `#f5f5f5` / grey | infrastructure / background | Store/State, or a zone container |
 | no fill | unstyled | Backend/API |
 
-  Source color is a *signal about role*, not a color to keep. Six fill colors in the source do not become six fills in the output — the palette is one accent plus the ink ramp (SKILL.md §5).
+  Source color is a *signal about role*, not a color to keep. Six fill colors in the source do not become six fills in the output — the palette is one accent plus the ink ramp ([skin roles](skins.md)).
 
 - **Map shapes to treatments**, not to lookalikes:
 
@@ -104,21 +104,21 @@ Fresh layout on the 4px grid, per the type reference and SKILL.md §6–§7. Exp
 | `image` (custom PNG/vendor logo) | Nearest icon, or a labeled box. Never re-embed the source image. |
 | `text` (floating label) | Drop, or fold into a zone label |
 
-- **Reroute every connector.** Source waypoints are dead weight — the digest reports a waypoint count so you know how tangled the original was, not so you can reproduce it. Rounded orthogonal elbows, fanned attach points, no overlaps: SKILL.md §6 rules 1–5, no exceptions for imported content.
+- **Reroute every connector.** Source waypoints are dead weight — the digest reports a waypoint count so you know how tangled the original was, not so you can reproduce it. Rounded orthogonal elbows, fanned attach points, no overlaps: [connector craft](primitives.md) rules 1–5, while preserving source semantics and the selected renderer's actual conventions.
 - **Set the `viewBox` from the size preset**, then lay out inside it — don't draw first and crop after.
 
 ## Step 6 — Deliver
 
-1. Write the `.html`.
-2. Run the SKILL.md §9 taste gate **and** the [`output-spec.md` §6](output-spec.md) checklist.
-3. Produce `svg` / `png` if the format dial asked for them — via [`export.md`](export.md), from the HTML.
+1. Write the requested source/delivery format; HTML is useful when its context or interaction is needed.
+2. Run the [render verification](verification.md) taste gate **and** the [`output-spec.md` §6](output-spec.md) checklist.
+3. Produce `svg` / `png` if the format dial asked for them — through the native source tool or [`export.md`](export.md).
 4. Report the fidelity ledger ([`output-spec.md` §5](output-spec.md)). Every import gets one; the user knows the source and will notice what's gone.
 
 ---
 
 ## Worked example
 
-[`assets/example-import-drawio.html`](../assets/example-import-drawio.html) is the output of this procedure run on `scripts/fixtures/sample-architecture.drawio` (12 nodes, 8 edges, 2 container groups) at `format=html`, `size=doc-inline`, `detail=balanced`, `audience=mixed`.
+[`assets/example-import-drawio.html`](../assets/example-import-drawio.html) is the output of this procedure run on the historical import fixture (not bundled) (12 nodes, 8 edges, 2 container groups) at `format=html`, `size=doc-inline`, `detail=balanced`, `audience=mixed`.
 
 What the run decided, and why:
 
@@ -168,4 +168,4 @@ Default is page 0. When the file has several pages:
 | Re-embedding vendor logos from the source | Breaks the self-contained rule and the monochrome icon system |
 | Silently dropping components | The user knows the source. Always ship the fidelity ledger. |
 | Inventing components to fill a layout | An import is bounded by its source. Gaps get asked about, not filled. |
-| Preserving draw.io diagonal connectors | Orthogonal elbows are mandatory (SKILL.md §6 rule 1) regardless of origin |
+| Preserving draw.io diagonal connectors | Orthogonal elbows are mandatory ([connector craft](primitives.md) rule 1) regardless of origin |

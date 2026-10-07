@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 // One-shot PR state: metadata, mergeability, checks, files, reviews, comments, thread counts.
-// Replaces hand-assembled `gh pr view --json` field sets and multi-call composites.
+// One command; collection cursors are exhausted independently.
 import { parseArgs } from "node:util";
 import { gh, ghJson, resolvePr, resolveRepo, run, truncate } from "./lib.ts";
+import { prNodes, prReviews, prComments } from "./pr-data.ts";
 
 const USAGE = `usage: pr-snapshot.ts [pr] [-R owner/repo] [--full] [--json]
 
-Everything about a PR in one call. Omit [pr] to use the current branch's PR.
+PR state in one command; independently paginates files, reviews, comments, and threads. Omit [pr] to use the current branch's PR.
   --full   don't truncate body/comment text
   --json   structured output, shape:
            { number, title, state, isDraft, author{login}, url, createdAt,
@@ -16,11 +17,12 @@ Everything about a PR in one call. Omit [pr] to use the current branch's PR.
              comments: [{author{login}, createdAt, body}],
              checks: [{name, state, bucket}],
              threads: {open, total, capped},
+             coverage: {complete, files, reviews, issueComments, threads},
              reviewsLatest: {<login>: <state>} }`;
 
 const FIELDS =
   "number,title,state,isDraft,author,url,createdAt,baseRefName,headRefName,headRefOid," +
-  "mergeable,mergeStateStatus,reviewDecision,additions,deletions,changedFiles,files,reviews,comments,body";
+  "mergeable,mergeStateStatus,reviewDecision,additions,deletions,changedFiles,body";
 
 interface Pr {
   number: number;
@@ -50,32 +52,9 @@ interface Check {
   bucket: string;
 }
 
-const THREADS_QUERY = `
-query($owner: String!, $repo: String!, $number: Int!) {
-  repository(owner: $owner, name: $repo) {
-    pullRequest(number: $number) {
-      reviewThreads(first: 100) { pageInfo { hasNextPage } nodes { isResolved } }
-    }
-  }
-}`;
-
 async function fetchThreadStats(repo: string, pr: number) {
-  const [owner, name] = repo.split("/");
-  const data = JSON.parse(
-    await gh([
-      "api", "graphql",
-      "-f", `query=${THREADS_QUERY}`,
-      // -f (raw string) for owner/repo: -F would coerce all-digit names like "2048" to Int
-      "-f", `owner=${owner}`, "-f", `repo=${name}`, "-F", `number=${pr}`,
-    ]),
-  );
-  const conn = data.data.repository.pullRequest.reviewThreads;
-  const nodes: { isResolved: boolean }[] = conn.nodes;
-  return {
-    open: nodes.filter((n) => !n.isResolved).length,
-    total: nodes.length,
-    capped: conn.pageInfo.hasNextPage as boolean,
-  };
+  const nodes = await prNodes<{ isResolved: boolean }>(repo, pr, "reviewThreads", "isResolved");
+  return { open: nodes.filter((n) => !n.isResolved).length, total: nodes.length, capped: false };
 }
 
 run(async () => {
@@ -92,8 +71,8 @@ run(async () => {
   const n = await resolvePr(positionals[0], v.repo);
   const repo = await resolveRepo(v.repo);
 
-  const [pr, checksRaw, threads] = await Promise.all([
-    ghJson<Pr>(["pr", "view", String(n), "-R", repo, "--json", FIELDS]),
+  const [metadata, checksRaw, threads, files, reviews, comments] = await Promise.all([
+    ghJson<Omit<Pr, "files" | "reviews" | "comments">>(["pr", "view", String(n), "-R", repo, "--json", FIELDS]),
     // exits 1 = failing checks, 8 = pending; both still emit valid JSON.
     // "no checks reported" is benign; any other checks error is real and must surface.
     gh(["pr", "checks", String(n), "-R", repo, "--json", "name,state,bucket"], { okCodes: [1, 8] }).catch(
@@ -103,8 +82,18 @@ run(async () => {
       },
     ),
     fetchThreadStats(repo, n),
+    prNodes<Pr["files"][number]>(repo, n, "files", "path additions deletions"),
+    prReviews(repo, n),
+    prComments(repo, n),
   ]);
   const checks: Check[] = JSON.parse(checksRaw || "[]");
+  // Detect API caps or a changing file population instead of declaring partial evidence complete.
+  if (files.length !== metadata.changedFiles) {
+    throw new Error(`File coverage ${files.length}/${metadata.changedFiles}; snapshot is incomplete or changed during retrieval`);
+  }
+  const pr: Pr = { ...metadata, files, reviews, comments };
+  const coverage = { complete: true, files: files.length, reviews: reviews.length,
+    issueComments: comments.length, threads: threads.total };
 
   // latest submitted review per author
   const latestReview = new Map<string, string>();
@@ -119,6 +108,7 @@ run(async () => {
           ...pr,
           checks,
           threads,
+          coverage,
           reviewsLatest: Object.fromEntries(latestReview),
         },
         null,

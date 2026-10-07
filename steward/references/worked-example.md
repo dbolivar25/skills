@@ -212,7 +212,7 @@ python3 "$steward_cli" advance "$steward_demo_work" --events-json '[
 Next: ASK: A-TARGET (OWNER)
 ```
 
-Use the [owner-decision method](../SKILL.md#bring-decisions-to-their-owners) to
+Use the [owner-decision method](../SKILL.md#preserve-live-support-and-authority) to
 prepare the real question. After the owner answers, record `ask.answered` with
 their evidence. If their answer governs future work, also record an `OWNER`
 Backing and a Claim. Revise Intent and affected work together if its meaning has
@@ -220,3 +220,18 @@ changed. Until then, this demonstration correctly remains at `ASK`.
 
 The temporary record stays at `$steward_demo_work` for inspection. It contains
 only this fictional demonstration, not evidence of completed product work.
+
+## Owner correction and late reports
+
+If the owner changes the requested outcome or environment, the steward revises
+Intent and explicitly stops affected unfinished work, withdraws invalid support
+and receipts, and adds justified replacements in the same event batch. Preserve
+unaffected completed work as history. `intent.revised` alone does not determine
+which observations became invalid. A new receipt identity is needed for a new
+observation.
+
+Physically interrupt an actual actor whose assignment lost support. Before
+recording a returned result, inspect current lifecycle and actor identity. A late
+report from the stopped `W-SAVE` actor cannot be appended as `work.reported`,
+and a report from a superseded actor cannot be accepted for a reassigned item.
+Use its useful evidence only after reconciling it with the current responsibility.

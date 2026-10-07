@@ -1,10 +1,10 @@
-# Draw.io import output spec — format × size × detail × audience
+# Import output spec: format, size, fidelity, audience
 
 Four dials decide what an imported diagram becomes. Set them **before** redrawing — they change the deliverable, layout, type ramp, node count, and wording, so retrofitting them afterwards means redrawing.
 
 | Dial | Question it answers | Default |
 |---|---|---|
-| **Format** | Where does this file land? | `html` |
+| **Format** | Where does this file land? | Destination-appropriate source; `html` for a web artifact |
 | **Size** | How big is the canvas, and how far away is the reader? | `doc-inline` |
 | **Detail level** | Reproduce every element, or compress it? | `balanced` |
 | **Audience** | How technical should the wording be? | `mixed` |
@@ -17,12 +17,12 @@ Infer choices that are clear from the request (for example, "for my deck" implie
 
 | Format | Deliverable | Keeps | Drops |
 |---|---|---|---|
-| `html` | self-contained `.html` (default) | header, diagram, summary cards, footer, live fonts | nothing |
+| `html` | self-contained `.html` | selected wrapper, diagram, context, live fonts | source-tool editability unless also supplied |
 | `svg` | `.svg` next to the source | the `<svg>` node, vector text | editorial wrapper; fonts substitute in offline tools |
 | `png` | `.png` at `device_scale_factor` | pixels exactly as the browser renders them | vector editability |
 | `html+png` | both | — | — |
 
-Always generate the HTML first — `svg` and `png` are produced *from* it via [`export.md`](export.md). Never hand-author an SVG file directly; the HTML is the source of truth and the only artifact the taste gate (SKILL.md §9) is written against.
+Use the source/delivery format that fits the job. Native SVG, Mermaid, diagram-tool, and plotting outputs can be produced directly. HTML is useful when wrapper context or interaction matters. Read [export](export.md) for destination fidelity and inspect the actual deliverable.
 
 Pick by destination:
 
@@ -39,15 +39,15 @@ Pick by destination:
 
 ## 2. Size
 
-The preset sets the SVG `viewBox`. Every value below is divisible by 4, so the grid rule in SKILL.md §7 still holds.
+The preset suggests source coordinates and a type ramp. Actual raster dimensions follow rendered CSS bounds and capture scale, not the viewBox alone. These are useful starting sizes, not a universal grid or format law.
 
-| Preset | viewBox | Aspect | PNG @2 | Type ramp | Use |
+| Preset | viewBox | Aspect | PNG @2 if CSS frame matches | Type ramp | Use |
 |---|---|---|---|---|---|
 | `doc-inline` (default) | `0 0 960 600` | 8:5 | 1920×1200 | standard | Body-width diagram in a post or README |
 | `doc-wide` | `0 0 1280 720` | 16:9 | 2560×1440 | standard | Full-width docs, wiki pages |
 | `slide-16x9` | `0 0 1280 720` | 16:9 | 2560×1440 | presentation | Deck slide, projected |
 | `slide-4x3` | `0 0 1024 768` | 4:3 | 2048×1536 | presentation | Legacy deck templates |
-| `social-og` | `0 0 1200 632` | ~1.9:1 | 2400×1264 | presentation | Link preview card |
+| `social-og` | `0 0 1200 630` | ~1.9:1 | 2400×1260 | presentation | Link preview card |
 | `social-square` | `0 0 1080 1080` | 1:1 | 2160×2160 | presentation | Feed post, carousel |
 | `print-a4-landscape` | `0 0 1120 792` | ~1.41:1 | @3 → 3360×2376 | print | A4 landscape, ~10mm margins at 96dpi |
 | `print-letter-landscape` | `0 0 1056 816` | ~1.29:1 | @3 → 3168×2448 | print | US Letter landscape |
@@ -55,7 +55,7 @@ The preset sets the SVG `viewBox`. Every value below is divisible by 4, so the g
 
 ### Deriving `fit`
 
-Round the content bounding box **up** to the next multiple of 4, then add the fixed chrome: 40px outer margin on every side, plus 60px at the bottom for the legend strip. Never let the content touch the viewBox edge.
+Measure content bounds and add space for the selected labels, legend, and destination safe area. A 40px margin plus 60px legend strip is a worked starting recipe, not mandatory chrome. Include strokes and meaningful overflow.
 
 ### Type ramp per size class
 
@@ -63,11 +63,11 @@ Node names shrink relative to the canvas as it grows — resist that. Scale the 
 
 | Role | standard | presentation | print |
 |---|---|---|---|
-| Title (Instrument Serif) | 28 | 40 | 32 |
-| Node name (Geist 600) | 12 | 16 | 12 |
-| Sublabel (Geist Mono) | 9 | 12 | 9 |
-| Arrow label (Geist Mono) | 8 | 12 | 8 |
-| Eyebrow / tag (Geist Mono) | 8 | 8 | 8 |
+| Title (selected skin) | 28 | 40 | 32 |
+| Node name (selected skin) | 12 | 16 | 12 |
+| Technical sublabel (selected mono) | 9 | 12 | 9 |
+| Arrow label (selected skin) | 8 | 12 | 8 |
+| Label / tag (selected skin) | 8 | 8 | 8 |
 | Node box min height | 48 | 64 | 48 |
 | Min gap between nodes | 24 | 40 | 24 |
 
@@ -75,7 +75,7 @@ Presentation ramp implies fewer nodes — 16px names in 64px boxes eat the canva
 
 ### Safe areas
 
-- **All presets:** 40px outer margin; legend strip is the bottom 60px and nothing else lives there.
+- **Worked web presets:** start with a 40px outer margin and a 60px legend strip when the diagram has a legend. Use the destination safe area and actual content needs.
 - **`social-og`:** keep the outer 64px clear on every side — link-card crops are unpredictable across platforms.
 - **`slide-*`:** keep the bottom 80px clear if the deck template has a footer bar; ask if unsure.
 
@@ -91,25 +91,25 @@ How much of the source survives. This is a *count* dial — it governs how many 
 | `balanced` (default) | ≤12 | ≤16 | technical sublabel on ≤4 nodes | Components that carry the story; leaf clusters collapse to one node each. |
 | `simplified` (簡略) | ≤7 | ≤9 | none | Capabilities and their sequence. Infrastructure disappears. |
 
-`balanced` and `simplified` sit inside the standard complexity budget (SKILL.md §7). **`faithful` deliberately exceeds it** — that's the trade, and it comes with conditions:
+These node counts are readability guidance for the worked layout. A faithful import must preserve source meaning, using zoning, a scalable renderer, or overview/detail when needed:
 
-1. **Zoning is mandatory.** Above 9 nodes, every node belongs to a labeled zone (2–4 zones, hairline-bordered, `paper-2` fill, mono uppercase zone label at top-left). An unzoned 20-node diagram is a wiring diagram, not a schematic.
-2. **Connector rules don't relax.** SKILL.md §6 rules 1–5 still apply at 24 nodes. If you can't route it without overlaps, you're over the real ceiling — split.
-3. **Above 24 nodes, split.** Produce an overview (zones as nodes, `balanced` grammar) plus one detail diagram per zone. Name them `<base>-overview.html`, `<base>-<zone>.html`. Never ship a 40-node single canvas.
-4. **Accent stays at 2.** More nodes never buys more focal elements.
+1. **Use meaningful zoning when it helps.** For a larger model, group by actual responsibility or scope. The worked treatment uses hairline frames, `paper-2` fill, and a mono zone label. Do not invent membership to satisfy a layout count.
+2. **Keep connections traceable.** Use [connector craft](primitives.md) to preserve endpoints, direction, and meaningful labels. When the view is too dense, use overview/detail or a more capable renderer.
+3. **When density is unreadable, split.** Produce an overview (zones as nodes, `balanced` grammar) plus one detail diagram per zone. Name them `<base>-overview.html`, `<base>-<zone>.html`. A larger full model may remain a companion artifact when the source needs it.
+4. **Emphasis serves the question.** More nodes do not automatically need more competing emphasis.
 
 ### Degrade ladder
 
-When the source has more than the level allows, cut in this order and stop as soon as you're under budget. Never cut ad hoc.
+For an authorized summary, consider reductions in this order, preserving the relationships the reader needs. Faithful reproduction does not discard source elements to satisfy an example budget.
 
-1. **Decorative cells** — sticky notes, free-floating text, title blocks, watermarks, the source's own legend. (Notes worth keeping become annotation callouts — max 2, see [primitive-annotation.md](primitive-annotation.md).)
+1. **Decorative cells** — sticky notes, free-floating text, title blocks, watermarks, the source's own legend. (Preserve notes that change interpretation as [annotation callouts](primitive-annotation.md) or accompanying source context.)
 2. **Exact duplicates** — N identical workers/replicas/shards become one node labeled `Worker ×N`.
 3. **Leaf clusters** — a container whose children are all leaves collapses to the container: `Core Services` replaces its three boxes. The extractor lists these under *collapsible groups*.
 4. **Degree-1 sinks that don't change the story** — a monitoring hook, a log bucket, an archive tier.
 5. **Cross-cutting infrastructure** — logging, metrics, secrets, CI. At `simplified` these go without asking; at `balanced` keep at most one, and only if the diagram is about it.
 6. **Still over?** Split into overview + detail. Splitting beats shrinking.
 
-Anything cut in steps 2–6 goes in the fidelity ledger (§5). Step 1 doesn't need reporting.
+Anything cut in steps 2–6 goes in the fidelity ledger (§5). Report a removed note or legend whenever it could change interpretation.
 
 ---
 
@@ -138,16 +138,16 @@ Two rules that hold at every audience level:
 
 ### Non-Latin labels
 
-Geist has no CJK coverage. When labels contain Japanese, Chinese, or Korean text, extend the family on those `<text>` elements — don't swap the whole skin:
+Matter SQ has no CJK coverage; check the selected skin's actual family. When labels contain Japanese, Chinese, or Korean text, extend the family on those `<text>` elements — don't swap the whole skin:
 
 ```svg
-<text font-family="'Geist', 'Hiragino Sans', 'Noto Sans JP', 'Yu Gothic', sans-serif">認証サービス</text>
-<text font-family="'Geist', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">인증 서비스</text>
-<text font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">认证服务</text>
-<text font-family="'Geist', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif">認證服務</text>
+<text font-family="'Matter SQ', 'Hiragino Sans', 'Noto Sans JP', 'Yu Gothic', sans-serif">認証サービス</text>
+<text font-family="'Matter SQ', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">인증 서비스</text>
+<text font-family="'Matter SQ', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">认证服务</text>
+<text font-family="'Matter SQ', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif">認證服務</text>
 ```
 
-The Hiragino/Yu Gothic stack carries no Hangul glyphs, so Korean labels need the Korean stack — don't reuse the Japanese one. Noto Sans KR ships in the skin's font link, so it leads that stack and the local families follow it; the register, floor, and title rules Korean needs beyond the font live in [`style-guide.md`](style-guide.md#korean-labels). Japanese fonts also cover only a subset of the Chinese character set and render Simplified forms with Japanese glyph variants, so Chinese labels need a Chinese stack; Simplified and Traditional are separate stacks for the same reason. Noto Sans TC now ships in the link too, so it leads the Traditional stack and the local families follow; the register, floor, and title rules Traditional Chinese needs beyond the font live in [`style-guide.md`](style-guide.md#traditional-chinese-labels). For mono sublabels use `'Geist Mono', 'Noto Sans Mono CJK JP', monospace` (Japanese), `'Geist Mono', 'Noto Sans Mono CJK KR', monospace` (Korean), or `'Geist Mono', 'Noto Sans Mono CJK SC', monospace` / `'Geist Mono', 'Noto Sans Mono CJK TC', monospace` (Chinese). Budget **1em per full-width CJK glyph**, not a small percentage over the average Latin glyph; `verify-treemap.py` uses that conservative contract for Unicode wide/full-width characters and treats combining marks as non-advancing. Prefer 12px names over 8px sublabels for CJK; Hangul and Han go muddy below 12px, so treat 12px as the floor rather than 10px. Actual width still varies by fallback font, so run the relevant geometry verifier after translating labels.
+The Hiragino/Yu Gothic stack carries no Hangul glyphs, so Korean labels need the Korean stack — don't reuse the Japanese one. If Noto Sans KR is actually loaded, it can lead that stack with local families following; the register, floor, and title rules Korean needs beyond the font live in [`style-guide.md`](style-guide.md#korean-labels). Japanese fonts also cover only a subset of the Chinese character set and render Simplified forms with Japanese glyph variants, so Chinese labels need a Chinese stack; Simplified and Traditional are separate stacks for the same reason. If Noto Sans TC is actually loaded, it can lead the Traditional stack with local families following; the register, floor, and title rules Traditional Chinese needs beyond the font live in [`style-guide.md`](style-guide.md#traditional-chinese-labels). For mono sublabels use `ui-monospace, 'Noto Sans Mono CJK JP', monospace` (Japanese), `ui-monospace, 'Noto Sans Mono CJK KR', monospace` (Korean), or `ui-monospace, 'Noto Sans Mono CJK SC', monospace` / `ui-monospace, 'Noto Sans Mono CJK TC', monospace` (Chinese). Budget **1em per full-width CJK glyph**, not a small percentage over the average Latin glyph; a conservative measurement includes Unicode wide/full-width characters while treating combining marks as non-advancing. Prefer 12px names over 8px sublabels for CJK; Hangul and Han go muddy below 12px, so treat 12px as the floor rather than 10px. Actual width still varies by fallback font, so inspect actual rendered geometry after translating labels.
 
 ---
 
@@ -169,16 +169,16 @@ The reader of the diagram can't see what's missing. The person who asked for it 
 
 ## 6. Checklist
 
-Run alongside the SKILL.md §9 taste gate.
+Run alongside the [render verification](verification.md) taste gate.
 
 - [ ] All four dials set — explicitly requested, inferred from the destination, or defaulted and stated?
-- [ ] `viewBox` matches the size preset exactly, values divisible by 4?
+- [ ] Source coordinate frame, rendered bounds, and requested destination dimensions verified?
 - [ ] Type ramp matches the size class — not the standard ramp on a slide?
-- [ ] 40px outer margin honoured (64px for `social-og`)?
-- [ ] Node count inside the detail level's ceiling?
-- [ ] `faithful` above 9 nodes → zoned, and split above 24?
+- [ ] Actual destination safe areas and needed label/legend margins honoured?
+- [ ] Detail readable at the intended size without losing required source meaning?
+- [ ] Larger faithful models use meaningful grouping, a scalable renderer, or overview/detail where useful?
 - [ ] Node names, sublabels, and edge labels all at the same audience level?
 - [ ] CJK labels given a font fallback?
 - [ ] Fidelity ledger reported for anything cut?
 - [ ] Diagram `<svg>` has `role="img"`, resolving `aria-labelledby`, a non-empty first-child `<title>`, a non-empty `<desc>`, and per-diagram/variant prefixed IDs?
-- [ ] Requested non-HTML formats produced via [`export.md`](export.md), not hand-authored?
+- [ ] Requested format produced through an appropriate native/plotting or [export](export.md) method and inspected?

@@ -1,6 +1,6 @@
 # Style Guide
 
-**The single source of truth for colors, typography, and tokens.** Every diagram draws from this — not from hex values inlined in other reference files. If you want to change the visual skin of Diagram Design, change this file.
+**The Augment skin for colors, typography, and tokens.** Use it for Augment work or when explicitly selected. Other clients and unbranded work select their own [skin](skins.md). Type-recipe hex values are examples, not replacement brand values.
 
 The active skin maps Diagram Design's semantic roles to the Augment design system:
 warm bone paper, cool ink and neutrals, burgundy emphasis on light surfaces, and
@@ -15,7 +15,7 @@ To generate your own from a website URL, see [`onboarding.md`](onboarding.md).
 
 ### Semantic roles
 
-Every token is referred to by **semantic role**, not by its hex value. Type references (`type-*.md`) and SKILL.md say `accent`, not `#f7591f`.
+Every token is referred to by **semantic role**, not by its hex value. Representation recipes and the entry point say `accent`, not `#f7591f`.
 
 | Role | Purpose | Active (light) | Active (dark) |
 |---|---|---|---|
@@ -37,7 +37,7 @@ Every token is referred to by **semantic role**, not by its hex value. Type refe
 > Augment's usual identity/artwork-only use of mark pink. Arrows, rules, and
 > links remain cool neutrals under Augment's color-role law.
 
-> **Note:** The pre-baked example HTML files in `assets/` were built under an earlier skin. Regenerating them against the current `style-guide.md` is a v5.1 task. New diagrams the skill produces will use the tokens above.
+> **Note:** The pre-baked example HTML files in `assets/` were built under an earlier skin. They remain layout/encoding references. Newly produced Augment diagrams use the selected current tokens and require their own rendered inspection.
 
 ### Inversion rule (light → dark)
 
@@ -140,7 +140,7 @@ Package Noto Sans KR when a diagram contains Hangul; otherwise the local familie
 provide the fallback. Page titles use the same sans stack as labels so mixed
 Matter SQ and Hangul remain in one register.
 
-**Width budget.** Measure per character, not per script: **every Unicode wide or full-width character costs 1em, every other character costs its face's Latin advance** (0.60em sans, 0.62em mono), and nonspacing/enclosing marks cost nothing. Sum over the string and multiply by the font size for the text width, then add padding and round the box up to the next multiple of 4. `verify-treemap.py` enforces exactly this text width for treemap cell labels; the padding and rounding are authoring convention, and no other type carries an automatic check, so on those the budget is yours to hold.
+**Width budget.** Measure per character, not per script: **every Unicode wide or full-width character costs 1em, every other character costs its face's Latin advance** (0.60em sans, 0.62em mono), and nonspacing/enclosing marks cost nothing. Sum over the string and multiply by the font size for the text width, then add padding and round the box up to the next multiple of 4. This is a conservative authoring budget rather than a bundled automatic width check. Measure the actual selected fonts and rendered labels; preserve source values if a label needs a legend or companion table.
 
 Counting by script is the trap. `주문 v2.1` is two full-width syllables and five narrow characters; a formula that tallies Hangul, Latin letters, and spaces silently drops `2`, `.`, and `1` and sizes the box for four of its seven characters. Every rendered character costs something — measure per character, never per script.
 
@@ -190,7 +190,7 @@ Simplified Chinese takes the same three rules with the Simplified stack (`'Noto 
 | `radius-sm` | `4` | Small tags |
 | `radius-md` | `6` | Node boxes |
 | `radius-lg` | `8` | Containers, rings |
-| `grid` | `4` | Every coord, size, and gap is divisible by 4 (hard rule) |
+| `grid` | `4` | Layout spacing starts from the brand's 4px rhythm; data coordinates and optical adjustments preserve their meaning |
 
 ---
 

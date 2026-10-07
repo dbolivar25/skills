@@ -88,4 +88,32 @@ class ValidateSkillsTest < Minitest::Test
     refute success
     assert_includes output, "invalid agents/openai.yaml"
   end
+
+  def test_description_does_not_require_a_house_formula
+    write("sample/SKILL.md", "---\nname: sample\ndescription: >-\n  Design a bounded experiment when its result can resolve the user's question.\n---\n")
+    assert run_validator.first
+  end
+
+  def test_inline_instruction_pointer_is_checked
+    write("sample/SKILL.md", "---\nname: sample\ndescription: Select a method for the requested job.\n---\nRead `references/absent.md` when needed.\n")
+    success, output = run_validator
+    refute success
+    assert_includes output, "missing instruction pointer references/absent.md"
+  end
+
+  def test_nested_entry_point_is_rejected
+    write("sample/references/SKILL.md", "# Retired entry\n")
+    success, output = run_validator
+    refute success
+    assert_includes output, "nested skill entry point"
+  end
+
+  def test_case_cannot_exclude_the_selected_entry_point
+    corpus = YAML.safe_load(File.read(File.join(@root, "tests/invocation-cases.yml")))
+    corpus["cases"][0]["expect"]["do_not_read"] = ["sample/SKILL.md"]
+    write("tests/invocation-cases.yml", corpus.to_yaml)
+    success, output = run_validator
+    refute success
+    assert_includes output, "excludes a selected skill entry point"
+  end
 end

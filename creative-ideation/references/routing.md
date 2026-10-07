@@ -8,15 +8,16 @@ research, product), and specificity (none, domain, project, concrete problem).
 
 1. Honor an explicitly named method. If its prerequisites are absent, return the
    missing input; do not silently substitute or pretend to apply it.
-2. A request for a method recommendation returns 2–3 candidates with one-line
-   reasons and an owner choice, not generated ideas.
+2. For a method recommendation, give a small useful set with reasons. Recommend
+   the best fit; generate work as well when the request includes it.
 3. Weird/strange/surprising/less-obvious mood selects Lateral Provocations or
-   Pataphysics. High-slop terrain (AI/startup ideas, habit trackers, productivity,
-   wellness, fitness, food or travel apps) selects those methods and rejects five
-   obvious candidates. Keep the actual domain constraints.
+   Pataphysics. On familiar AI/startup, productivity, wellness, fitness, food or travel terrain,
+   use those methods when they help break convergence. Keep the actual domain
+   constraints; a concrete conventional idea can still be the right answer.
 4. Otherwise use phase, then domain. A method's prerequisites and exclusions
-   still apply. If two paths remain genuinely ambiguous, return one question
-   that distinguishes them. Choose by the user's phrasing, not exotic appeal.
+   still apply. If a material ambiguity remains, ask a discriminating question while pursuing
+   useful work; otherwise choose by the user's phrasing and state the assumption.
+   Fit outranks exotic appeal.
 
 ## Route and method index
 
@@ -66,12 +67,12 @@ Principles/Compression. Fit and prerequisites outrank mood.
 
 ## Exceptions and stacks
 
-One method normally. Two require a named reason and an explicit sequence or
+Usually one method suffices. Combine methods for an actual sequence or
 separate jobs: domain framing plus provocation (e.g. JTBD + Lateral for weird
 product ideas); generation then selection (Crazy 8s → premortem); exploration then
 synthesis (Dérive → Affinity); principle then mechanism (TRIZ → Biomimicry).
 Conflicting domain/mood signals can justify such a pair; do not stack automatically
-when one method already fits. Never stack three to mask poor selection.
+when one method already fits. Do not stack methods to mask poor selection.
 
 Essay can pair Defamiliarization with Compression; songwriting Oblique with
 Chance; algorithms Pólya with First Principles; organizations Meadows with

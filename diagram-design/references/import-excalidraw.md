@@ -2,7 +2,7 @@
 
 Turn an Excalidraw board into an editorial-quality diagram at the format, size, and detail level the destination needs.
 
-**This is a redraw, not a render or conversion.** An Excalidraw scene supplies content — shapes, connections, bound labels, frames, groups — plus hand-dragged sketch coordinates. Discard the sketch geometry, the rough hand-drawn styling, and the source palette; create a fresh layout in this skill's design system. A converter that kept the whiteboard's wobbly boxes would just be Excalidraw output with different fonts.
+These steps describe a semantic redraw when restyling or summarizing is requested. For faithful conversion or an editable native hand-off, preserve source geometry, styling that carries meaning, and the source format as needed; use the extractor to check coverage. Read [imports](imports.md) and [export](export.md) for that route.
 
 ## Trigger
 
@@ -32,7 +32,7 @@ If the extractor exits 2, report its message verbatim and stop. Do not open the 
 
 ## Step 2 — Set the four dials
 
-Set `--format`, `--size`, `--detail`, and `--audience` from [`output-spec.md`](output-spec.md) before drawing. Infer what the destination makes obvious, and ask once if a choice changes the result materially. The digest's `budget:` line determines whether the requested combination fits.
+Set `--format`, `--size`, `--detail`, and `--audience` from [`output-spec.md`](output-spec.md) before drawing. Infer what the destination makes obvious, and ask once if a choice changes the result materially. The digest's `budget:` line suggests whether the example layout will fit; it does not authorize losing required source meaning.
 
 Command-level flags are `--format`, `--size`, `--detail`, `--audience`, optional `--type`, `--variant`, and `--output`. An Excalidraw file holds a single scene, so there is no page or diagram selector.
 
@@ -42,18 +42,18 @@ Whiteboard shape vocabulary is thin — people sketch rectangles because rectang
 
 | Digest signal | Likely type | Reference |
 |---|---|---|
-| `rhombus` present, labeled yes/no edges | Flowchart | [type-flowchart.md](type-flowchart.md) |
-| Service/store topology, no decisions | Architecture | [type-architecture.md](type-architecture.md) |
-| Mostly `ellipse`, self-loops, `has_cycle: True` | State machine | [type-state.md](type-state.md) |
-| Frames or groups with few cross-edges | Nested | [type-nested.md](type-nested.md) |
-| One entry point, no cycle, fan-out only | Tree or Org chart | [type-tree.md](type-tree.md), [type-org-chart.md](type-org-chart.md) |
-| Boxes stacked with edges only between neighbours | Layer stack | [type-layers.md](type-layers.md) |
-| Dated labels on one axis | Timeline | [type-timeline.md](type-timeline.md) |
-| Anything else with edges | Architecture | [type-architecture.md](type-architecture.md) |
+| `rhombus` present, labeled yes/no edges | Flowchart | [types/flowchart.md](types/flowchart.md) |
+| Service/store topology, no decisions | Architecture | [types/architecture.md](types/architecture.md) |
+| Mostly `ellipse`, self-loops, `has_cycle: True` | State machine | [types/state.md](types/state.md) |
+| Frames or groups with few cross-edges | Nested | [types/nested.md](types/nested.md) |
+| One entry point, no cycle, fan-out only | Tree or Org chart | [types/tree.md](types/tree.md), [types/org-chart.md](types/org-chart.md) |
+| Boxes stacked with edges only between neighbours | Layer stack | [types/layers.md](types/layers.md) |
+| Dated labels on one axis | Timeline | [types/timeline.md](types/timeline.md) |
+| Anything else with edges | Architecture | [types/architecture.md](types/architecture.md) |
 
 The digest's `type candidates` field ranks these mechanically. Override it when the content disagrees, and state the override in one line.
 
-**Load the chosen `type-*.md` before drawing.** Its layout conventions win over anything the board did.
+**Load the chosen recipe under `types/` before drawing.** Its layout conventions win over anything the board did.
 
 ## Step 4 — Build the semantic model
 
@@ -67,25 +67,25 @@ Work from the digest, not from sketch coordinates. In order:
 
 ## Step 5 — Redraw
 
-- Start from a blank `viewBox` selected by the size preset. Sketch coordinates are hand-dragged and land on odd pixels; lay out from scratch on the 4px grid.
-- Discard source colors. An Excalidraw palette fill is a *signal about role*, not a color to keep — map it to the semantic treatments in SKILL.md §5, one accent plus the ink ramp.
+- Start from a blank `viewBox` selected by the size preset. Sketch coordinates are hand-dragged and land on odd pixels; lay out for the intended reader and destination when restyling.
+- Discard source colors. An Excalidraw palette fill is a *signal about role*, not a color to keep — map it to the semantic treatments in [skin roles](skins.md), one accent plus the ink ramp.
 - Do not imitate the hand-drawn stroke. The sketchy look is Excalidraw's skin; this redraw replaces it. (If the user explicitly wants a hand-drawn feel, that is [primitive-sketchy.md](primitive-sketchy.md), applied to a clean layout — not a reproduction of the source wobble.)
 - Map shapes to treatments, not to lookalikes: a diamond stays a decision only in a flowchart; a rectangle labeled like a store gets the Store/State treatment; frames become zone frames; an `image` element becomes the nearest monochrome icon or a labeled box — never re-embed the source image.
-- Reroute every connection with the SKILL.md §6 connector rules. Arrow waypoints in the source tell you how tangled the sketch was, not how to route.
+- Reroute every connection with the [connector craft](primitives.md) connector rules. Arrow waypoints in the source tell you how tangled the sketch was, not how to route.
 - Do not add a component merely to fill space. Imports remain bounded by source meaning.
 
 ## Step 6 — Deliver
 
-1. Write the self-contained HTML.
-2. Run the SKILL.md §9 taste gate and [`output-spec.md` §6](output-spec.md) checklist.
-3. Export SVG/PNG only when requested, following [`export.md`](export.md).
+1. Produce the requested source or delivery format. Use self-contained HTML when a web wrapper is useful.
+2. Run the [render verification](verification.md) taste gate and [`output-spec.md` §6](output-spec.md) checklist.
+3. Produce requested exports using [`export.md`](export.md), and inspect the actual files.
 4. Report the fidelity ledger: source count, drawn count, and every merge, collapse, or drop — the extractor's `discarded:` line (freedraw strokes, image payloads, links, embeds, unknown elements) is the starting inventory.
 
 ---
 
 ## Worked example
 
-[`assets/example-import-excalidraw.html`](../assets/example-import-excalidraw.html) redraws `scripts/fixtures/sample-whiteboard.excalidraw` (10 IR nodes, 6 edges, 2 frames) at `format=html`, `size=doc-inline`, `detail=balanced`, `audience=mixed`.
+[`assets/example-import-excalidraw.html`](../assets/example-import-excalidraw.html) redraws the historical import fixture (not bundled) (10 IR nodes, 6 edges, 2 frames) at `format=html`, `size=doc-inline`, `detail=balanced`, `audience=mixed`.
 
 | Source | Output | Reason |
 |---|---|---|

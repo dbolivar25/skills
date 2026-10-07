@@ -2,7 +2,9 @@
 
 Constraint-dispatch library — voice and approach inspired by [wttdotm.com/prompts.html](https://wttdotm.com/prompts.html). Adapted and expanded.
 
-Constraint plus direction is creativity. Pick a constraint, generate 3 ideas that satisfy it, ship one.
+Pick a constraint and follow it far enough to make the requested work. The result
+may be ideas, a finished creative artifact, or an exercise. The prompts below are
+creative premises; they do not authorize sending, publishing, or destructive acts.
 
 ## How to use
 

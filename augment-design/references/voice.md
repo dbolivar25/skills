@@ -38,10 +38,10 @@ on. An unsent draft is a draft, and saying so once is enough.
 ## The prose loop
 
 Run this over every string before delivery. It is Augment's local voice floor.
-Apply the [humanize](../../humanize/SKILL.md) to the supplied copy in strict
-mode, with Augment voice as the governing constraint. Its proposed prose pass
-includes structural editing that preserves intended meaning. The caller owns
-source acquisition, file edits and delivery.
+Use the [prose craft](../../writing/references/prose-craft.md) and, for the
+explicit Augment voice floor here, the [strict style](../../writing/references/strict-style.md)
+methods. Edit structure when it clarifies the reader's task while preserving
+meaning, supported facts, and certainty.
 
 Cut:
 

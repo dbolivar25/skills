@@ -1,152 +1,146 @@
-# Export to PNG / SVG
+# Export SVG, PNG, or the requested page
 
-Convert a generated diagram HTML file into a portable `.svg` and/or `.png` next to it. **Manual only — never run unprompted.**
+Use when export, rasterization, conversion, or a portable file is requested, or
+when the requested deliverable already includes it. Preserve the selected
+source model. Native plotting/diagram tools can export directly; HTML is not a
+mandatory intermediate for an SVG, Mermaid graph, or publication figure.
 
-## Trigger
+Infer whether the requested artifact is the diagram, a complete page, or a
+named figure. Diagram-only is a useful default for a figure destined for a
+slide or document. If the user asks for the surrounding header, cards, or page,
+include them using a page screenshot, PDF, or the native document export. Do not
+silently drop wrappers the request includes.
 
-Load this file when:
+## Select the actual figure
 
-- The user invokes `/diagram-design:export-diagram <html-file>` (the plugin's slash command — defined in `commands/export-diagram.md` at the repo root).
-- The user asks in natural language to export, save, rasterize, convert, or download a diagram in `.svg` or `.png` form. Typical phrasings:
-  - "export this as PNG"
-  - "save as SVG"
-  - "give me a PNG of that diagram"
-  - "rasterize it"
-  - "convert to png and svg"
+Read the source and identify the requested diagram by its title, accessible
+name, or explicit selector. The first SVG may be an icon or a mark. When a file
+has several substantive figures and the request does not identify one, inspect
+the visible candidates and resolve that material ambiguity before writing the
+wrong export. The gallery is a selection aid, not a single diagram to export.
 
-The slash command is a thin wrapper that delegates here — both paths run the same procedure below.
+For motion output, use the complete static frame (`?motion=static` for the
+packaged controller), wait for `document.fonts.ready`, and observe
+`data-frame="static"`. A named step export may use the supported exact step
+state when requested. Never capture an arbitrary delay as a settled frame.
 
-## Scope
+## Standalone SVG
 
-Both formats are **diagram-only** — just the `<svg>` node. Editorial wrappers (header, summary cards, footer in `-full` variants) are intentionally dropped: the export deliverable is the diagram itself, suitable for Figma, slides, social cards, or blog images.
+1. Preserve the selected complete SVG node, including nested SVGs, definitions,
+   IDs, masks, markers, gradients, and its `title`/`desc` and accessible naming.
+   Use an XML/HTML parser or a read-only DOM extraction; a regex ending at the
+   first `</svg>` is unsafe for nested SVG.
+2. Add `xmlns="http://www.w3.org/2000/svg"` if absent. Keep the authored viewBox;
+   if absent, obtain actual dimensions and intended bounds rather than inventing
+   a crop. Prefix IDs when several exported figures will be inlined together,
+   updating every matching fragment and accessible-name reference.
+3. Include the CSS the figure depends on. Presentation attributes alone do not
+   capture HTML-inherited fonts/colors, class rules, CSS variables, or external
+   stylesheets. Resolve inherited values or copy a scoped stylesheet and required
+   definitions. Verify the standalone render against the source.
+4. Preserve the **actual selected font**. There are no default Geist/Instrument
+   Serif Google Font imports. Augment uses the packaged Matter SQ faces in the
+   [Augment skin](style-guide.md#font-sources). Embed used WOFF2 data when that
+   delivery is permitted and supported, or package the exact fonts beside the
+   SVG and rebase relative URLs. For a selected remote font, copy only that
+   source's exact family/weights, and disclose its network dependency. XML-escape
+   ampersands in URLs, or put CSS in a valid CDATA section.
+5. For strict destination consumers, inspect supported paint and effects. Some
+   Office SVG importers reject `rgba()` or `transparent` presentation attributes.
+   A solid rgba attribute can be expressed as `fill="#rrggbb"` plus
+   `fill-opacity="alpha"` (or stroke equivalents). **Multiply** existing paint
+   opacity by the color alpha; overwriting or adding duplicate opacity attributes
+   changes the result. `transparent` can become `none` when it expresses no
+   paint. This simple transform does not handle every CSS color, gradient,
+   filter, blend mode, or embedded HTML; use a suitable parser/converter and
+   verify the destination rather than promising universal SVG 1.1 equivalence.
+6. Write well-formed UTF-8 XML to the requested path, otherwise beside the source
+   as `<basename>.svg`. Parse the saved XML and inspect it in its intended viewer.
 
-The SVG-only export keeps the source `<title>` and `<desc>` with the diagram. Their per-diagram and per-variant prefixed IDs are what make multiple exported SVGs safe to inline in the same page without one figure resolving to another figure's accessible name.
+A loaded font in the browser does not imply the destination will use it. Figma,
+Illustrator, slides, offline viewers, and SVG-as-image contexts may ignore
+embedded/remote fonts or `foreignObject`. For exact pixels, use PNG; for editable
+text, provide the fonts/source or a disclosed substitution. Use text outlines
+only when the requested delivery calls for them and verify the outlined result.
 
-If the user explicitly asks for "a screenshot of the whole page including the cards", that's a different request — fall back to a normal full-page screenshot via the user's OS or browser.
+## PNG
 
-## SVG export procedure
+For HTML, render the original source so CSS and fonts have their real context.
+Use the current host's supported browser/computer-use and capture APIs when it
+provides them. Follow their documentation for viewport, pixel ratio, and clipping;
+do not launch another browser-control stack to bypass host requirements. Native
+plotting/diagram export is preferable when that is the artifact's source.
 
-1. Read the source HTML file.
-2. Extract the **first** `<svg ...>...</svg>` block. Use a multiline regex anchored on `<svg` and `</svg>`. Most generated diagrams have only one SVG; if there are multiple, the first is the diagram (gallery files are an exception — see *Edge cases*).
-3. Make it standalone:
-   - Ensure the opening tag has `xmlns="http://www.w3.org/2000/svg"`. Add it if missing.
-   - Ensure a `viewBox` is present. The skill's templates always include one; warn the user if absent rather than guessing.
-   - Preserve `role="img"`, `aria-labelledby`, and the first-child `<title>` / `<desc>` exactly as authored.
-   - Inject Google Fonts `@import` so the SVG renders with correct typography in a browser. **XML-escape the `&` separators as `&amp;`** — a standalone `.svg` is parsed as strict XML, where a bare `&` starts an entity reference and makes the whole file fail to parse. (Don't copy the raw URL from the HTML `<link href>`; that ampersand form is only valid in HTML.)
-     ```svg
-     <defs>
-       <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Sans+KR:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Serif+TC:wght@400&amp;display=swap');</style>
-     </defs>
-     ```
-     If the SVG already contains a `<defs>` block, **merge** the `<style>` into it (don't add a second `<defs>`).
-4. Normalize colors for strict SVG 1.1 consumers. This design system's tokens are authored as `rgba(...)` (see `style-guide.md`) and render correctly wherever colors are read as CSS — browsers, Figma, Illustrator. PowerPoint's SVG importer does not: it treats `rgba(...)` and `transparent` as unrecognized and paints them **opaque black**, turning a barely-there tint into a solid block that swallows the label inside it. The transform is lossless (every replacement renders identically to the original in a browser), so apply it to the SVG string extracted in step 2, before writing the file:
+Select the actual figure, settle fonts and the complete static state, measure
+its **rendered bounding box in CSS pixels**, then capture that box. A responsive
+SVG's CSS width can differ from its viewBox width. Avoid clipping strokes,
+shadows, or overflowing labels; if overflow is meaningful, include its bounds
+or repair the source before capture.
 
-   ```python
-   import re
+A transparency request needs inspection of the actual PNG. Omitting the browser
+page background does not remove a paper rectangle painted inside the SVG. Keep
+an intentional paper background unless the requested transparent export requires
+removing that paint through an appropriate source/export option.
 
-   svg = re.sub(
-       r'(fill|stroke)="rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d*\.?\d+)\s*\)"',
-       lambda m: '{0}="#{1:02x}{2:02x}{3:02x}" {0}-opacity="{4}"'.format(
-           m.group(1), int(m.group(2)), int(m.group(3)), int(m.group(4)), m.group(5)
-       ),
-       svg,
-   )
-   svg = re.sub(r'(fill|stroke)="transparent"', r'\1="none"', svg)
-   ```
-
-   The `\s*` around each channel tolerates a spaced `rgba(45, 49, 66, 0.03)` as well as the compact `rgba(45,49,66,0.03)` the templates normally use; `\d*\.?\d+` accepts an alpha value with or without a leading zero (both `0.03` and `.03` appear in shipped tokens). Matching is scoped to the `fill="..."` / `stroke="..."` presentation attribute, not the bare `rgba(` string, so nothing else is touched — the shipped templates and examples only ever express color through these two attributes on SVG elements, never a `style="..."` attribute or a `<style>` block. (A brand's onboarded palette in `style-guide.md` could in principle add a third notation such as `hsl()`; none exists in any shipped token today, so this pass doesn't handle it — extend the regex if one is ever introduced.)
-5. Prepend `<?xml version="1.0" encoding="UTF-8"?>\n` so the file is well-formed XML.
-6. Write to `<basename>.svg` next to the source (e.g. `example-architecture.html` → `example-architecture.svg`). Honour an explicit output path if the user provides one.
-
-### Caveat to surface to the user
-
-Tools that don't fetch remote fonts at import time (offline Illustrator, some Figma import paths, older SVG viewers) will substitute typography. The SVG renders correctly in any modern browser. For pixel-perfect portability, recommend the PNG export.
-
-## PNG export procedure
-
-Render **the original HTML** (not the extracted SVG) and screenshot only the `<svg>` element's bounding box. This keeps font loading reliable (already wired in the source HTML) while satisfying the "diagram only" rule. The PNG always has a **transparent background** (`omit_background=True`) so it can be placed on any slide or doc colour without a white halo. For motion-enabled HTML, append `?motion=static`, await `document.fonts.ready`, and assert the motion root has `data-frame="static"` before capture; never export at an arbitrary wall-clock delay.
-
-### Detection
-
-Before running anything, verify Playwright is installed:
-
-```
-python -c "import playwright" 2>NUL || python -c "import playwright"
-```
-
-If the import fails, surface this exact instruction to the user and stop:
-
-> Playwright isn't installed. To enable PNG export, run:
-> ```
-> pip install playwright
-> playwright install chromium
-> ```
-> Then ask me to export again.
-
-Don't auto-install. The user asked for one feature, not a system change.
-
-### Rasterize
-
-Write the snippet below to a temp file and run it with `python <tmp.py> <src.html> <out.png>`:
+When the execution host permits a Playwright rendering utility, this is a
+bounded recipe (adapt source/selector/output to the actual request):
 
 ```python
+from pathlib import Path
+from math import isfinite
 from playwright.sync_api import sync_playwright
-import sys, pathlib
+import sys
 
-src, out = sys.argv[1], sys.argv[2]
-scale = int(sys.argv[3]) if len(sys.argv) > 3 else 2
-
-with sync_playwright() as p:
-    browser = p.chromium.launch()
-    page = browser.new_page(device_scale_factor=scale)
-    page.goto(f"file://{pathlib.Path(src).resolve()}")
-    page.wait_for_load_state("networkidle")
-    page.locator("svg").first.screenshot(path=out, omit_background=True)
+source, output = sys.argv[1], sys.argv[2]
+scale = float(sys.argv[3]) if len(sys.argv) > 3 else 2.0
+if not isfinite(scale) or scale <= 0:
+    raise ValueError('Scale must be finite and positive')
+with sync_playwright() as renderer:
+    browser = renderer.chromium.launch()
+    page = browser.new_page(viewport={"width": 1440, "height": 1000},
+                            device_scale_factor=scale)
+    page.goto(Path(source).resolve().as_uri() + '?motion=static')
+    page.evaluate('() => document.fonts.ready')
+    figure = page.locator('svg[role="img"]').first  # Replace if several figures exist.
+    box = figure.bounding_box()
+    if not box or box['width'] <= 0 or box['height'] <= 0:
+        raise ValueError('Figure has no rendered dimensions')
+    print({'css_width': box['width'], 'css_height': box['height'], 'scale': scale})
+    # For the packaged motion method, also assert its data-frame is static.
+    figure.screenshot(path=output, omit_background=True)
     browser.close()
 ```
 
-Default `device_scale_factor=2` for crisp output. Accept `1` for compact assets or `3` for print/retina hero use, passed as a third CLI arg.
+Use an already available runtime/tool. If it is unavailable, preserve the source
+and name the exact export blocker; do not claim a file was verified or require
+an unrelated install for a native host export. A successful screenshot still
+needs its actual dimensions and render checked.
 
-### Output naming
+## Size and fractional scale
 
-`example-architecture.html` → `example-architecture.png`, written next to the source. Honour explicit user-provided paths.
+For a browser element capture, pixel dimensions follow **rendered CSS bounds ×
+device scale**, subject to capture rounding. They do not automatically follow
+viewBox × scale. The viewBox defines internal coordinates; CSS controls layout.
+For example, a `viewBox="0 0 1000 500"` SVG rendered at 640×320 CSS pixels yields
+approximately 1280×640 at scale 2, not 2000×1000.
 
-## Sizing the export
+For target width `W`, compute the required **effective pixel scale** as
+`W / rendered_css_width`. Fractional values must remain floats: 640 CSS pixels
+at effective scale 1.25 is 800 pixels. A device-scale setting and a capture
+API's extra clip scale may multiply: on a 2× host, CDP clip scale 1.25 produces
+effective scale 2.5. Follow the actual capture API, account for each multiplier,
+and verify both actual PNG dimensions after capture. If height's required scale differs,
+the target aspect ratio is incompatible with that rendered figure; adjust the
+source layout or an explicitly requested crop/pad rather than silently distorting
+it. Exact 1200×630 output should use that actual frame, not a rounded 1200×632
+“grid” preset.
 
-The PNG's pixel dimensions are the SVG's `viewBox` × `device_scale_factor`. So the size decision was already made when the diagram was drawn — see [`output-spec.md` §2](output-spec.md) for the presets. Export only picks the multiplier.
+Scale 2 is a useful screen default; 1 can be compact; print needs actual physical
+size and resolution. Very large or small scales deserve a layout/readability
+check, not a universal prohibition. A print image's pixels alone do not establish
+physical inches, DPI metadata, or legibility at print size.
 
-| Destination | Scale | Result from a 1280×720 `viewBox` |
-|---|---|---|
-| Docs, README, wiki | 2 | 2560×1440 |
-| Slide deck (projected) | 2 | 2560×1440 |
-| Print / PDF handout | 3 | 3840×2160 |
-| Inline thumbnail, email | 1 | 1280×720 |
-
-### Hitting an exact pixel size
-
-When the user needs specific dimensions (an OG card at exactly 1200×630, a slide image at 1920×1080), compute the scale factor instead of guessing — Playwright accepts fractional values:
-
-```
-scale = target_width / viewBox_width
-```
-
-A 960-wide `viewBox` at a 1200px target is `scale=1.25`. Two rules:
-
-- **Never scale below 1** to hit a small target — that soft-focuses the type. Redraw at a smaller preset instead.
-- **Never scale past 4** — beyond that you're upscaling a layout that was designed for a smaller canvas; redraw at `slide-16x9` or a print preset.
-
-If the target aspect ratio doesn't match the `viewBox` aspect ratio, say so and offer to redraw at the matching preset. Padding or cropping a finished diagram to fit a frame is not an export operation — it breaks the 40px safe margin.
-
-## Edge cases
-
-- **Source is `assets/index.html`** (the gallery, multiple SVGs in one file): refuse the export and ask the user which specific diagram file they meant. Don't guess.
-- **No `<svg>` block found**: the source isn't a diagram file. Tell the user; don't write anything.
-- **Surrounding HTML matters to the user**: they want cards/header in the image. Tell them this skill exports diagrams only, and recommend a browser-based full-page screenshot (or a separate PDF print).
-- **Source is missing fonts at runtime**: Playwright will substitute, the screenshot will look off. Check that the source HTML has the `<link href="...fonts.googleapis.com...">` tag in `<head>`. If absent, the file isn't from a current template — fix the source rather than working around it in export.
-
-## What this command never does
-
-- Modifies the source HTML.
-- Adds export buttons or `<script>` tags. Static diagrams remain script-free; an already motion-enabled source may retain the scoped controller from [`animation.md`](animation.md), but export never injects another controller.
-- Auto-emits `.svg` or `.png` alongside HTML generation. Manual on every call.
-- Embeds an HTML wrapper (cards, headers) into the SVG via `foreignObject`. Too fragile across renderers.
+Keep requested output paths and source files intact. Report the usable file,
+actual dimensions, relevant font/transparency/destination limitations, and any
+meaningful source-to-export loss. Export controls or scripts need not be added
+to the source merely to produce the file.

@@ -6,7 +6,7 @@ Emit a machine-readable `.registry.json` sidecar of a Traceable block decomposit
 
 Load this file when:
 
-- The user invokes `/diagram-design:export-diagram <html-file> --registry` (alone or combined with `--svg-only`/`--png-only`/`--scale`/`--output`).
+- The user requests registry export, alone or alongside SVG/PNG.
 - The user asks in natural language for the block metadata, ID list, registry, or traceability data behind a Traceable block decomposition diagram (see [`semantic-patterns.md` § 8](semantic-patterns.md)) as structured data rather than a picture.
 
 This reference governs `--registry` only. SVG/PNG rasterization is a separate procedure — see [`export.md`](export.md). The two can run in the same command invocation but share no logic; treat this as independent, not an extension of that one.
@@ -57,21 +57,21 @@ No other keys, and no generation timestamp: the registry is meant to be regenera
 1. Read the source HTML file.
 2. Find every element carrying a `data-block-id` attribute. Nodes without it aren't part of the pattern — skip them silently, including in a diagram that mixes pattern and non-pattern Tree nodes.
 3. For each matched node, read `data-block-id`, `data-block-parent`, `data-block-name`, `data-block-input`, `data-block-output`, `data-block-constraint`, `data-block-assumption`, `data-block-impl` — whichever are present. Map `data-block-name` to the JSON key `name`; map the rest by dropping the `data-block-` prefix.
-4. Preserve attribute values verbatim — no trimming beyond surrounding whitespace, no case changes, no re-formatting of the `impl` path.
+4. Preserve attribute values verbatim — no trimming of decoded attribute-value whitespace, no case changes, no re-formatting of the `impl` path.
 5. Assemble the `blocks` array in document order, as defined under *JSON schema* above.
 6. Write to `<basename>.registry.json` next to the source (e.g. `example-tree-block-decomposition.html` → `example-tree-block-decomposition.registry.json`). Honour an explicit `--output` path if the user provided one to the parent export command.
 
 ## Edge cases
 
 - **No `data-block-id` attributes anywhere in the source**: refuse and tell the user; don't write an empty `{"blocks": []}` file. This is very likely `--registry` requested on a diagram that doesn't use the pattern at all — say so.
-- **Duplicate `data-block-id` values**: emit every matching entry in document order; don't deduplicate or pick one. A duplicate ID is a correctness problem for `scripts/verify-block-registry.py` to catch, not for export to silently resolve.
-- **`data-block-parent` pointing at an ID absent from the file, or a parent cycle**: emit the data exactly as authored, including the broken or cyclic reference. Same reasoning as duplicates — export mirrors the source; `scripts/verify-block-registry.py` is the structural check, and running it is a separate, explicit step, not implied by `--registry` itself.
+- **Duplicate `data-block-id` values**: emit every matching entry in document order; don't deduplicate or pick one. A duplicate ID is a correctness problem for the separate [registry checks](verification.md#bundled-source-diagnostic) to catch, not for export to silently resolve.
+- **`data-block-parent` pointing at an ID absent from the file, or a parent cycle**: emit the data exactly as authored, including the broken or cyclic reference. Same reasoning as duplicates — export mirrors the source; the separate [registry checks](verification.md#bundled-source-diagnostic) is the structural check, and running it is a separate, explicit step, not implied by `--registry` itself.
 - **Source is `assets/index.html`** (the gallery): refuse, same as the SVG/PNG path — ask which specific diagram file.
 - **`--registry` combined with `--svg-only` or `--png-only`**: independent outputs — produce the registry JSON in addition to whichever raster/vector format was requested. `--registry` has no interaction with `--scale`; it produces no image.
 
 ## What this never does
 
-- Validates ID uniqueness, parent resolution, or cycles. That's `scripts/verify-block-registry.py` — run it as its own step, not implied by export.
+- Validates ID uniqueness, parent resolution, or cycles. That's the separate [registry checks](verification.md#bundled-source-diagnostic) — run it as its own step, not implied by export.
 - Correlates a block's metadata against its drawn position or connector geometry. Out of scope for the registry entirely, not just deferred — the JSON is a metadata projection, not a geometry audit.
 - Writes a generation timestamp, tool version, or any field not literally sourced from a `data-block-*` attribute.
 - Modifies the source HTML.

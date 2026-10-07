@@ -1,181 +1,32 @@
 ---
 name: grafana
-description: Use when a diagnosis, review, incident question, or production claim needs current Grafana telemetry. Load it to acquire bounded metrics, logs, traces, or profiles with reproducible query receipts and explicit coverage limits; it supplies evidence, not the diagnosis or verdict.
+description: Use when an investigation or production claim needs current Grafana metrics, logs, traces, or profiles. Acquire bounded, reproducible observations with population context, comparable windows, and explicit instrumentation limits.
 ---
 
 # Grafana
 
-Use the [composition contract](../contracts/composition.md#operational-callers) . Use
-Grafana as a read-only evidence substrate. Current tools, datasources, dashboards,
-labels, attributes, deployments, and instrumentation are live state; discover them
-during each investigation.
+Own the telemetry evidence needed for the actual question. Use observation operations; a separate administrative request supplies authority for mutations. Current tools, datasources, dashboards, labels, attributes, deployments, and instrumentation must be discovered rather than remembered.
 
-This skill owns evidence acquisition, not causal diagnosis, incident command, or merge
-judgment. Hand a causal question to `diagnosing-bugs` and a review verdict to `review`
-after the evidence packet exists.
+## Ground the query
 
-## Authority boundary
+Pin the question, service and environment, absolute window and timezone, relevant population, and comparison baseline. Translate relative times into explicit timestamps. Expand scope only when observed dependencies justify it.
 
-Use only currently callable operations whose effect is observation:
+Inspect current capabilities and datasource types. Use existing dashboard queries as precedent, then verify variables, selectors, field spelling, units, response shape, and service identity through current metadata or a bounded sample.
 
-- dashboard, panel-query, datasource, alert, incident, and analysis reads;
-- Prometheus and Loki metadata or queries;
-- Tempo documentation, metadata, metrics, search, and trace reads;
-- Pyroscope metadata and profile reads;
-- existing automated-analysis and investigation reads; and
-- deeplink generation.
+Read the matching method: `references/prometheus.md` for counts/rates/distributions/saturation, `references/loki.md` for logs and event populations, `references/tempo.md` for request or job traces, and `references/pyroscope.md` for profiles. Derived automated analyses may provide leads; corroborate consequential claims with underlying evidence and preserve their coverage limits.
 
-Grafana may expose create, update, patch, delete, resolve, annotate, incident, alerting,
-OnCall, or administrative operations. Invocation of this skill grants none of those
-actions. A separate administrative request must establish its own authority and
-workflow.
+## Acquire representative evidence
 
-## 1. Lock the evidence question
+Quantify the affected population before treating specimens as representative when an aggregate exists. Compare like windows, workloads, strata, units, and denominators. Resolve selector and instrumentation questions before interpreting absent events.
 
-Pin:
+Fetch only the specimens needed to distinguish explanations or show the mechanism. Prefer server-side filters and aggregates. Use the least-sensitive dimensions that can answer the question; redact secrets and unrelated customer content.
 
-- the observation or decision the evidence must support;
-- service, environment, route, job, component, or relationship in scope;
-- absolute start and end timestamps plus timezone;
-- comparison window or expected baseline when change matters; and
-- the least-sensitive dimensions needed.
+Use a second relevant signal when instrumentation can miss the event under investigation. Preserve material failed and empty queries. Temporal coincidence with a deployment is a hypothesis until current release and causal evidence supports more.
 
-Translate relative times such as “this morning” or “after deploy” into explicit
-timestamps. Expand scope only when architecture or the first result establishes a real
-dependency.
+## Return evidence with its limits
 
-Completion criterion: every prospective query can be tied to one question, scope, and
-explicit window.
+Retain reproducible receipts for material observations: datasource, exact query or redacted arguments, absolute window, concise result, and coverage. Use native deeplink generation when available.
 
-## 2. Discover the live query surface
+Distinguish observed facts, supported inferences, hypotheses, and unknowns in language appropriate to the result. A specimen is not a rate, and no matching events under a query is not proof of no errors.
 
-Inspect the currently callable Grafana tools and their schemas. Then:
-
-1. discover the available datasources and their types;
-2. when a relevant dashboard exists, read its panel queries as candidate query
-   precedent and resolve current variables and datasource references;
-3. discover current metric names and metadata, log labels, trace attributes, or
-   profile types for the selected signal; and
-4. run the smallest metadata or sample read that proves service identity, field
-   spelling, units, and response shape.
-
-A dashboard query is precedent, not authority: verify that it still measures the
-question and that its variables resolve in the requested window. Do not rely on
-remembered UIDs, labels, casing, buckets, attributes, or response envelopes.
-
-Completion criterion: the datasource, fields, service identity, units, and query
-mechanism are current facts or explicit unknowns.
-
-## 3. Choose the signal
-
-Load only the branch that matches the evidence question:
-
-| Need | Branch |
-| --- | --- |
-| Counts, rates, distributions, saturation, or time-series change | [`references/prometheus.md`](references/prometheus.md) |
-| Log volume, structured event distribution, or representative events | [`references/loki.md`](references/loki.md) |
-| Request or job causality, span populations, or a representative trace | [`references/tempo.md`](references/tempo.md) |
-| CPU, allocation, mutex, goroutine, or another profiling shape | [`references/pyroscope.md`](references/pyroscope.md) |
-
-Existing Sift-style error-pattern and slow-request results may seed a hypothesis or
-reveal a dimension worth querying. Treat them as derived leads: corroborate material
-claims with the underlying aggregate or specimen evidence and report the automation's
-coverage. Helpers that start a named investigation are writes to Grafana state and
-require separate user authority; they are outside this read-only path.
-
-Completion criterion: each selected signal can distinguish at least two live
-explanations or quantify the question directly.
-
-## 4. Establish the population
-
-Execute bounded aggregate queries for the population's magnitude, distribution, affected
-surface and time shape before treating logs or traces as representative. Use a
-comparison window when the question concerns change. Resolve selector and unit questions
-through metadata or sample reads rather than guessing labels.
-
-If an expected population is absent, validate the selector and check another relevant
-signal before interpreting the absence. If only specimens are available, state what
-those examples cannot establish; do not turn them into a rate.
-
-Completion criterion: the evidence packet quantifies the population or names the exact
-missing aggregate and the limits of the remaining specimens.
-
-## 5. Isolate the change
-
-Compare one material dimension at a time: window, environment, service, route, status,
-version, instance or dependency. Preserve denominators when comparing rates. Confirm
-units and aggregation semantics before combining series.
-
-Acquire current release evidence before treating a deployment boundary as causal
-context. Temporal coincidence is a hypothesis, not proof of deployment or cause.
-
-Completion criterion: the changed population and baseline are comparable, or the
-mismatch is explicit.
-
-## 6. Retrieve representative evidence safely
-
-After aggregation, fetch only the few logs, traces, or profiles needed to explain the
-pattern or falsify an alternative. Prefer server-side filtering and aggregation. Query
-customer, email, payload, URL, SQL, headers, or request-body attributes only when the
-scoped question cannot be answered without them.
-
-Never paste broad raw results. Redact secrets, tokens, personal data, query parameters,
-and customer content. Preserve only the fields that carry the signal, and do not turn
-discovered operational identifiers into durable skill documentation.
-
-Completion criterion: each specimen is representative of a measured population or
-explicitly labeled an anecdote, and the packet contains the least-sensitive evidence
-capable of supporting the observation.
-
-## 7. Triangulate and grade support
-
-Metrics, logs, traces and profiles observe different failure surfaces. Acquire a second
-relevant signal when instrumentation can fail before an event is emitted or completed.
-Resolve gaps with bounded queries tied to the original question; preserve failures that
-limit interpretation.
-
-Grade each material statement:
-
-- **Observed:** directly present in the recorded query result and scope.
-- **Supported inference:** multiple observations fit the statement and material
-  alternatives were checked.
-- **Hypothesis:** plausible and testable, but the packet does not settle it.
-- **Unknown:** the needed signal is unavailable or outside current coverage.
-
-Causal falsification belongs to diagnosing-bugs. Keep the supported observation separate
-from a diagnosis, incident action or merge recommendation.
-
-Completion criterion: each statement has a grade, source and visible alternative or
-coverage limit.
-
-## 8. Return an evidence packet
-
-Return:
-
-```md
-Question, scope, and absolute window:
-Live telemetry surface:
-Population and comparison:
-Representative evidence:
-Observed findings:
-Supported inferences and live hypotheses:
-Blind spots and alternative explanations:
-Query receipts:
-Smallest next evidence:
-```
-
-For each material query, include datasource, tool/query family, exact query or redacted
-arguments, absolute window, concise result and coverage note. Generate supported Grafana
-deeplinks through the actual capability when available. Retain failed or empty queries
-that materially constrain interpretation.
-
-Say “Grafana recorded no matching events under this query and window,” rather than “the
-service had no errors.” Name affected users, severity, release state, cause or health
-only when evidence establishes that exact claim. An unavailable metadata fact,
-aggregate, comparator or corroborating signal remains an exact need tied to the
-conclusion it prevents.
-
-Finish when another investigator can reproduce material observations, distinguish
-evidence from inference and see what Grafana could not observe. Return to the caller
-with those limits; read-only evidence work does not authorize incident or administrative
-actions.
+Finish when the useful observation can be reproduced and its population and blind spots are clear. Integrate it into Debugging or Review when the task also asks for a causal answer or verdict; acquiring evidence should not strand the investigation.

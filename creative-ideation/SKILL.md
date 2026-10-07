@@ -1,65 +1,26 @@
 ---
 name: creative-ideation
-title: Creative Ideation
-description: "Use when generating, expanding, selecting, subverting, refining, or synthesizing ideas, escaping a creative block, or running an exercise. Load it to choose a named method and produce specific, surprising, usable directions from new or existing material."
-version: 4.0.0
-author: SHL0MS
-license: MIT
-platforms: [linux, macos, windows]
-metadata:
-  hermes:
-    tags: [Creative, Ideation, Brainstorming, Methods, Inspiration]
-    category: creative
-    requires_toolsets: []
+description: Use when work needs ideas, meaningful alternatives, or a creative exercise. Select a method that fits the material and apply its actual operations. Preserve artistic freedom and strangeness; judge practicality where the requested outcome requires it.
 ---
 
-# Creative ideation
+# Creative Ideation
 
-Use the [core contract](../contracts/composition.md#core-skills) .
+Own the requested creative work, exercise, or worthwhile directions. Establish the creative question, material, constraints, desired range, and what makes the result interesting for this task. Begin useful work with available material; resolve routine ambiguity without turning every session into an interview.
 
-**Inputs:** Purpose, supplied brief/material, phase, domain, constraints, previous
-attempts or selected direction, evidence and requested output or exercise.
+## Select and perform a method
 
-Use [routing](references/routing.md) before generating, then read the selected method's
-complete named section and [quality law](references/anti-slop.md) . Grouped files
-contain distinct methods, not a mandatory stack. Preserve their procedures, examples,
-exclusions and attribution. Method recipes describe work: apply thought operations to
-supplied material; return research, interviews, physical practice, random sampling and
-execution steps as needs or proposed activities for the caller. Never enact those
-operations or invent their results.
+Read `references/routing.md` when selecting among methods. Choose by the actual operation: expansion, combination, inversion, analogy, constraint, random stimulus, perspective change, subversion, selection, refinement, or synthesis. Read the selected file in `references/methods/` and follow its procedure rather than borrowing the name as decoration. Use `references/exercises.md` or `references/full-prompt-library.md` for a requested exercise or exact method prompt. Preserve exclusions and attribution where relevant.
 
-Return one of: method-specific work; a concrete exercise proposal; 2–3 method
-recommendations with reasons when requested; one clarifying owner question; or an exact
-evidence need with why it changes the result. Preserve useful partial work. Use
-[exercises](references/exercises.md) for requested practice and
-[constraints](references/full-prompt-library.md) for constraint dispatch.
+Keep all useful method references available without loading the whole collection. The task determines whether an exercise needs one strong direction, a broad range, or iterative deepening. Use experiments or prototypes when a promising direction needs a real observation to settle it.
 
-## Apply the discipline
+## Make the directions specific
 
-Use one method unless routing establishes an explicit pair. Name the method and
-originator; attribution carries its discipline. Apply the quality law's rejection,
-specificity and surprise tests without substituting technology names for mechanisms.
-Never fabricate support: distinguish real references from fictional particulars.
+Use concrete materials, images, mechanisms, language, behaviors, and situations. Make alternatives differ in an underlying idea, not just wording or color. Surprise can help; it is not a universal quota. Avoid generic startup concepts when the material offers richer possibilities.
 
-Every idea set names the method, gives each idea its concrete mechanism and honest
-failure mode, tradeoff or audience, and marks at least one non-obvious direction as
-grounded: pursuable now with a real first step. On high-slop terrain, also name the
-obvious ideas refused. For imaginary methods, finish the imaginary operation without
-retracting it; give its separately labeled grounded derivative when returning an idea
-set. A pure fictional artifact is not an implementation claim.
+Protect humor, beauty, fiction, strangeness, and expressive excess when they belong to the brief. Purely artistic work does not require a grounded business derivative or a retraction into practicality. For practical work, identify the real consequence, feasibility question, and smallest useful next move without flattening the creative premise.
 
-For a method recommendation, return 2–3 choices with reasons and the owner's selection
-as the next decision; do not silently apply one. For guided practice, return the
-activity and assess only observations the caller actually supplies. Real random draws,
-interviews, walks and elapsed practice need actual receipts.
+## Select and deepen
 
-Use the method's natural output: contradiction analysis, constrained text, card →
-meaning here → next move, taxonomy, or another specified result. Constraint dispatch
-returns the named constraint and source, then pitches with 2–3 concrete sentences each,
-effort estimate and medium/materials. Never impose that template on every method.
-Routing narration is optional; per-idea depth is not.
+Judge against the actual brief and the reasons a direction matters. Combine ideas only when the synthesis improves them; do not average away their character. Show enough substance that the owner can understand, compare, or use the result.
 
-Do not default to a bare five-item brainstorm, stack methods to compensate for a poor
-choice, or generate finished work when only direction was requested. After a selection,
-return the next making step within the supplied task rather than more alternatives.
-Judge the proposed work against the quality law before returning it.
+Finish with the requested creative work, method-specific result, directions, or observed experiment. Include selection reasons and an unresolved creative choice only when useful to the task. No novelty score, proper-noun quota, or compulsory output count establishes quality.

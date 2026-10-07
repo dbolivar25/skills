@@ -1,8 +1,5 @@
 # Premortem and Inversion
 
-Core: external steps below are proposals or supplied evidence; the operational caller executes them.
-
-
 Two methods for failure-oriented ideation:
 - **Premortem** — Gary Klein, *HBR* September 2007. Imagine the project has already failed catastrophically; work backwards to causes.
 - **Inversion** — Charlie Munger via Carl Jacobi: *"Tell me where I'm going to die so I'll never go there."* Solve problems by figuring out how to fail and avoiding that.

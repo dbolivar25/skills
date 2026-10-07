@@ -4,9 +4,9 @@ Before accepting a reported result, give it to a separate agent to look for
 evidence that it is wrong, insufficient, or inconsistent with Intent. Review
 should reveal what needs to change before other work relies on the result.
 
-Use [critique](../../critique/SKILL.md) for the falsification method. These instructions
-define the work context, review criteria, response format, and acceptance boundary.
-Critique returns an assessment; the stewarding agent records acceptance.
+Use [Review](../../review/SKILL.md) for the general falsification method. These instructions
+define the work context, phase-specific criteria, exact response format, and acceptance boundary.
+The reviewer returns an assessment; the stewarding agent records acceptance.
 
 ## Give the reviewer context
 

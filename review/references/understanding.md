@@ -1,0 +1,69 @@
+# Semantic reconstruction
+
+Acquire the consumer question, actual/prior source versions, intended behavior,
+meaningful changed regions, source context, and validation receipts. Add review criteria
+only when a judgment is requested.
+
+Build a grounded model of an existing change, proposal, or work product before judging
+it or explaining it to another person. Recover the source and the question or decision the map must support. Return a current change map with evidence and gaps;
+the map itself is neither a verdict nor a request to begin writing. A current map may already exist; recheck changed sources and fill its gaps rather than repeating sound
+investigation.
+
+## Establish the contract
+
+Identify the requested understanding, the consumer and their perspective, the actual
+work, and the authoritative source for claims. When a review decision is in scope, also
+name its acceptance criteria and the consequence of getting it wrong. A standalone
+explanation need not invent an approval decision. Recover the intended behavior from the
+user's instructions or spec, then the work's description and linked decisions, then
+other source references. If intent cannot be found, state the limitation rather than
+inventing requirements. Preserve disagreement between intent and reality.
+
+For code judgment, pin the target, governing contracts, local precedent, and review axes. For a PR, identify base/head, changed regions, commit/discussion
+context and validation receipts. Missing or stale source state returns a scoped evidence
+need. For non-code work, use its equivalent source and prior state without inventing a
+repository workflow.
+
+## Account for the whole material change
+
+Account for actual source coverage to establish:
+
+- the intended outcome and semantic delta from the prior state;
+- behavior deliberately unchanged and adjacent work deliberately excluded;
+- every meaningful region of responsibility and how the regions work together;
+- contracts, invariants, constraints, and surviving tradeoffs;
+- evidence for consequential claims, with its provenance and limits;
+- uncertainty, unexplained scope, and decisions the evidence cannot settle.
+
+Organize by meaning to the consumer. Files, commits, and document sections are
+navigation aids, not automatic responsibility boundaries. Distinguish tests, generated
+output, configuration, migrations, documentation, and mechanical work when their
+different roles affect the decision. When consequences depend on an absent caller, state
+transition or source outside the inspected excerpt, obtain it or name the exact evidence need and
+affected conclusion.
+
+Completion: every material region has an understood role or is explicitly unexplained.
+Every validation claim is supported by an actual receipt or marked unverified. No claim
+of a passed check, observed behavior, or satisfied requirement rests on author prose
+alone.
+
+## Hold a change map
+
+Keep the applicable elements together in working context:
+
+| Element | Question it preserves |
+| --- | --- |
+| Decision and source of truth | What must be understood or judged, and against what reality? |
+| Outcome, non-goals, semantic delta | What should change, what will not, and what actually differs? |
+| Regions and relationships | Where are responsibilities, and how do they produce the outcome? |
+| Contracts and invariants | What must remain true? |
+| Evidence and uncertainty | What is supported, inferred, missing, or unresolved? |
+| Review focus | Where can the reviewer's judgment change the result? |
+
+Omit inapplicable fields; keep an absence visible when the absence matters. Explain
+claims through mechanism and consequence. Saying a change is robust, simple, or safe
+does not establish the mechanism that makes it so.
+
+The map is ready when its consumer can understand and navigate the work, distinguish
+support from assertion, and locate the remaining judgment. The artifact need not print
+this map, and a verdict must do more than summarize it.

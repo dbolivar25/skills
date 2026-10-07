@@ -1,8 +1,5 @@
 # Creative Discipline
 
-Core: external steps below are proposals or supplied evidence; the operational caller executes them.
-
-
 Practices for sustained work over weeks and months, not single-session ideation. Four traditions:
 
 - **Twyla Tharp** — *The Creative Habit* (2003). The box, scratching, the spine.

@@ -135,7 +135,7 @@ Strongest cells: S, P, R. Elaborate P: a site where the unit of attention is the
 
 - Most common SCAMPER slop: "Combine X with AI/ML/blockchain/AR". Reject.
 - Second most common: "make it a subscription" (business-model shift, not product variation).
-- Surface 1–3 results to the user, not 7. The seven are internal scaffolding.
+- Surface the results the request needs. The seven operators are working scaffolding, not a compulsory final list.
 - Eliminate and Reverse produce the strongest non-slop output. Spend most of the budget there.
 
 Source: Eberle, *Scamper: Games for Imagination Development* (DOK, 1971); Osborn, *Applied Imagination* (Scribner's, 1953).

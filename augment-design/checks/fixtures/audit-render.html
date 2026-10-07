@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Augment audit coverage fixture</title>
+<link rel="stylesheet" href="../../tokens/fonts.css">
+<style>
+:root { font-family: 'Matter SQ', sans-serif; color:#292929; background:#f8f8f6; }
+* { box-sizing:border-box; }
+body { max-width:920px; margin:0 auto; padding:32px 24px; }
+h1 { margin:0 0 8px; font-size:28px; font-weight:500; }
+p { margin:0 0 20px; line-height:1.5; }
+button { font:inherit; padding:10px 16px; margin:0 8px 16px 0; border:1px solid #bbb; border-radius:8px; background:white; cursor:pointer; }
+.samples { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:24px 0; }
+.sample { padding:16px; min-height:110px; border:1px solid #bbb; border-radius:8px; background:white; }
+.swatch { width:64px; height:24px; background:oklch(60% 0.2 20); }
+.pseudo::before { content:''; display:block; width:64px; height:24px; margin-bottom:12px; background:#cf0147; }
+.gradient { height:24px; width:100%; background:linear-gradient(90deg,#cf0147,#ef705b); }
+.wrong-font { font-family:Arial,sans-serif; }
+svg { display:block; width:min(100%,640px); height:auto; border:1px solid #bbb; border-radius:8px; background:white; }
+pre { white-space:pre-wrap; font:13px/1.5 ui-monospace,monospace; background:#eee; padding:16px; border-radius:8px; }
+.small { font-size:14px; color:#555; }
+@media (max-width:620px) { .samples { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<h1>Augment audit coverage fixture</h1>
+<p>This diagnostic deliberately starts with unmarked paint and an incorrect text font. The controls apply explicit fixture corrections and repeat the same audit.</p>
+<button id="audit">Run audit</button><button id="correct">Apply fixture corrections</button>
+<main data-aug-branch="product">
+<div class="samples">
+<div class="sample"><div id="oklch" class="swatch"></div><p>Modern CSS color</p></div>
+<div id="pseudo" class="sample pseudo"><p>Generated solid paint</p></div>
+<div class="sample"><div id="gradient" class="gradient"></div><p>Gradient coverage limit</p></div>
+</div>
+<svg id="responsive-figure" viewBox="0 0 1000 500" role="img" aria-labelledby="figure-title figure-desc">
+<title id="figure-title">Responsive source frame</title><desc id="figure-desc">A rectangle and connector deliberately use unmarked chromatic SVG fill and stroke. CSS limits the figure to 640 pixels wide, independently of its 1000 unit source frame.</desc>
+<rect id="solid-fill" x="64" y="120" width="280" height="240" rx="8" fill="#cf0147"/>
+<path id="solid-stroke" d="M 384 240 H 850" stroke="#cf0147" stroke-width="8" fill="none"/>
+<text x="384" y="320" font-size="28">1000 × 500 source frame</text>
+<path d="M 0 0 H 1000" stroke="#cf0147" stroke-opacity="0" fill="none"/>
+</svg>
+<p id="font-sample" class="wrong-font">This line begins in Arial even though Matter SQ is loaded.</p>
+<p class="small" id="bounds"></p>
+</main>
+<pre id="result" aria-live="polite">Run the audit to inspect covered conditions.</pre>
+<script src="../audit.js"></script>
+<script>
+const result=document.getElementById('result');
+function dimensions() { const b=document.getElementById('responsive-figure').getBoundingClientRect(); document.getElementById('bounds').textContent=`Rendered CSS bounds: ${b.width} × ${b.height} px. At effective pixel scale 1.25 the measured frame targets ${Math.round(b.width*1.25)} × ${Math.round(b.height*1.25)} pixels. Verify the capture API's device and clip multipliers.`; }
+document.getElementById('audit').addEventListener('click',async()=>{ await document.fonts.ready; dimensions(); const findings=window.augAudit(); result.textContent=JSON.stringify({count:findings.length,rules:findings.map(f=>f.rule),findings},null,2); });
+document.getElementById('correct').addEventListener('click',()=>{ for(const id of ['oklch','pseudo','solid-fill','solid-stroke']) document.getElementById(id).dataset.augRole='signal'; document.getElementById('gradient').style.backgroundImage='none'; document.getElementById('gradient').style.backgroundColor='#ddd'; document.getElementById('font-sample').classList.remove('wrong-font'); result.textContent='Fixture corrections applied. Run the audit again.'; });
+window.addEventListener('resize',dimensions); dimensions();
+</script>
+</body></html>

@@ -1,66 +1,24 @@
 ---
 name: augment-design
-description: Use when an Augment-branded surface is created, implemented, reviewed, or polished, brand copy is edited, or another skill needs Augment assets or design law. Load it to keep identity, voice, evidence, privacy, tokens, and branch floors coherent; positioning stays with the app.
+description: Use for Augment-branded interfaces, copy, documents, decks, diagrams, or assets. Apply the authoritative identity, voice, tokens, evidence and privacy constraints, and the relevant surface guidance while preserving the product's own positioning.
 ---
 
-# Augment design
+# Augment Design
 
-Apply Augment's identity and surface standards to the user's moment. Return a brand
-resource, proposed design/copy, or assessment tied to actual evidence. Use the
-[core contract](../contracts/composition.md#core-skills) .
+Own the reusable Augment identity and brand constraints. Read `readme.md` for values, `references/composition.md` for their surface application, and use the supplied `tokens/` and `assets/`. Do not redraw a logo, substitute an approximately similar font, or reconstruct tokens from memory.
 
-Work from the surface's purpose, existing content, requested scope, permission
-constraints and any supplied source, renders or audit receipts. If the request
-identifies no surface, copy or resource, return that missing question before loading the
-whole design system. Positioning remains with the application.
+## Apply the appropriate material
 
-## Select the requested result
+- Identity and assets: use the current logo variants, fonts, color roles, and placement guidance for the actual background and scale.
+- Voice and copy: read `references/voice.md`; preserve supported facts and the intended reader's understanding. Respect privacy and evidence constraints. The application owns its positioning and customer promises.
+- Product UI, marketing, presentation, or document: read `references/product-ui.md`, `references/marketing.md`, or `references/documents.md` for that surface and apply its real constraints. Use the appropriate artifact format and native editor rather than forcing every surface into HTML.
 
-For a resource request, return the relevant official assets, token values or law. Read
-the packaged [foundations](readme.md) and matching token/asset files; source identity
-comes from those files, not memory. A resource request needs no build.
+Preserve meaning before applying a skin. Coordinate with Interface Design for product interaction and Diagram Design for explanatory structure when those jobs are present. Brand guidance alone does not establish usability, factual truth, or publication authority.
 
-For copy-only work, apply [voice](references/voice.md) and
-[humanize](../humanize/SKILL.md) in strict mode to the supplied prose and facts. Return
-proposed copy or the requested prose findings with meaning and uncertainty preserved.
-Stop there: this result needs neither interface design nor a surface render or audit.
-Missing factual support remains a source need, not a reason to invent more specific
-copy.
+## Inspect the rendered result
 
-## Design or assess a surface
+Verify actual typography, marks, colors, contrast, hierarchy, wrapping, and spacing in the intended output and relevant states. Check exported or rendered files, not only source token names.
 
-For a surface, name the person looking, what they want to do and what happens next. Read
-[composition](references/composition.md) , then the relevant branch:
-[documents](references/documents.md) , [product UI](references/product-ui.md) or
-[marketing](references/marketing.md) . Keep each surface's floor and facets distinct;
-two applicable branches mean two surfaces with their own obligations.
+Read `references/qa.md` and `references/production-checks.md` for relevant output checks. Use `checks/audit.js` as a bounded diagnostic aid. It establishes only the paint and font conditions it actually inspects; it cannot certify unobserved SVG, gradients, pseudo-elements, effects, or applied typography. Resolve a material discrepancy through rendered inspection or an appropriate check.
 
-Use the foundations and existing token values for the proposed composition. Require
-official SVG identity, Matter SQ, sentence case, no emoji or exclamation points, and
-approved customer-name visibility. Missing assets, tokens or typeface evidence are
-explicit needs; do not invent replacements or customer permission.
-
-Apply [interface design](../interface-design/SKILL.md) to composition and interaction
-with the brand constraints and supplied renders. Apply [voice](references/voice.md) and
-[humanize](../humanize/SKILL.md) in strict mode to every authored string, preserving
-facts and meaning. A proposed rewrite is not an observed file update.
-
-## Return a design the caller can carry through
-
-For a surface design or implementation assessment, read the
-[production checks](references/production-checks.md) and [QA criteria](references/qa.md)
-. Include their relevant obligations in the result. The operational caller owns asset
-copying, building, rendering and audit execution, then supplies the actual observations
-for assessment. These checks remain required when another workflow composes this skill;
-the caller does not need a second brand invocation to reach them.
-
-Return the requested resources or proposed brand application with reasons tied to the
-actual content. For assessment, identify findings against the branch floor, composition,
-voice and supplied receipts. Every material audit finding needs a correction or a
-written reason it is acceptable. A clean automated audit cannot establish focal point,
-hierarchy or prose quality.
-
-Nothing ships unrendered. For a finished surface, without renders of the relevant pages
-and states, return the missing observations and limit the claim to the proposed design
-or supplied source. The caller must obtain and inspect those renders before delivery; a
-favorable design judgment does not itself authorize publication.
+Finish with a coherent Augment surface, supported copy, usable assets, and visible remaining brand or evidence gaps. Preserve the user's requested delivery stage.

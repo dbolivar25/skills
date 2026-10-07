@@ -1,6 +1,6 @@
 # Branch: documents
 
-Reports, account briefs, business cases, memos, anything exported to PDF or read
+Reports, account briefs, business cases, memos, and presentations; anything exported to PDF or read
 as a page instead of operated as an interface.
 
 ## Moment
@@ -52,6 +52,16 @@ spacing separate sections where boxes would not.
 - 12pt minimum body text in print, 16px minimum on screen.
 - Long-form text inside the measure tokens, 44 to 72ch.
 - A source, date, or record for every number the reader could question.
-- Mark source elements with `data-aug-source` so rendered review can verify that
-  the document carries source structure.
+- In HTML, mark source elements with `data-aug-source` for the source-structure
+  diagnostic. In native documents, slides, or LaTeX, use that format's citations,
+  source notes, and metadata. The marker alone does not verify claim support.
 - Every page rendered and read at full size before delivery.
+
+## Format and export
+
+Use the requested native format and the host's normal editor or document tools.
+Standalone LaTeX uses the native LaTeX editor and compiler. Map the actual brand
+font, colors, and spacing into the selected format; CSS is a token source, not a
+requirement to rebuild a document as HTML. Inspect the PDF, slide, print, or other
+rendered deliverable for font substitution, wrapping, and page or slide breaks.
+For slides, check the smallest labels at the intended presentation scale.

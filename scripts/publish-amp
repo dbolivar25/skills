@@ -2,13 +2,19 @@
 set -euo pipefail
 
 usage() {
-  echo "usage: scripts/publish-amp [--dry-run] [revision]" >&2
+  echo "usage: scripts/publish-amp [--dry-run] [revision] | --check-working-tree" >&2
 }
 
 dry_run=false
+check_working_tree=false
 if [[ "${1:-}" == "--dry-run" ]]; then
   dry_run=true
   shift
+fi
+if [[ "${1:-}" == "--check-working-tree" ]]; then
+  check_working_tree=true
+  shift
+  if (( $# != 0 )); then usage; exit 2; fi
 fi
 
 if (( $# > 1 )); then
@@ -20,18 +26,15 @@ source_root="$(git rev-parse --show-toplevel)"
 source_revision="${1:-HEAD}"
 ignore_file="$source_root/.amp-publish-ignore"
 
-if ! source_commit="$(git -C "$source_root" rev-parse --verify "${source_revision}^{commit}")"; then
-  echo "Cannot resolve source revision: $source_revision" >&2
-  exit 1
+if [[ "$check_working_tree" == false ]]; then
+  if ! source_commit="$(git -C "$source_root" rev-parse --verify "${source_revision}^{commit}")"; then
+    echo "Cannot resolve source revision: $source_revision" >&2
+    exit 1
+  fi
 fi
 
 if [[ ! -f "$ignore_file" ]]; then
   echo "Missing Amp publication filter: $ignore_file" >&2
-  exit 1
-fi
-
-if ! amp_url="$(git -C "$source_root" remote get-url amp)"; then
-  echo "Missing git remote: amp" >&2
   exit 1
 fi
 
@@ -47,7 +50,25 @@ trap cleanup EXIT
 
 mkdir -p "$source_tree" "$projection_tree"
 
-git -C "$source_root" archive "$source_commit" | tar -xf - -C "$source_tree"
+if [[ "$check_working_tree" == true ]]; then
+  # Include current non-ignored additions and omit tracked deletions. No commit,
+  # clone, credentials, or remote connection is needed to check the real edits.
+  python3 - "$source_root" "$source_tree" <<'PY'
+from pathlib import Path
+import shutil, subprocess, sys
+source, target = map(Path, sys.argv[1:])
+paths = subprocess.check_output(["git", "-C", str(source), "ls-files", "--cached", "--others", "--exclude-standard", "-z"])
+for name in set(paths.decode().split("\0")) - {""}:
+    original = source / name
+    if not original.is_file() and not original.is_symlink():
+        continue
+    destination = target / name
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(original, destination, follow_symlinks=False)
+PY
+else
+  git -C "$source_root" archive "$source_commit" | tar -xf - -C "$source_tree"
+fi
 
 rsync \
   --archive \
@@ -75,9 +96,22 @@ while IFS= read -r -d '' skill_directory; do
     echo "Amp package footprint exceeds 128000 bytes: ${skill_directory##*/} ($package_size bytes)" >&2
     size_failure=true
   fi
+  if [[ "$check_working_tree" == true ]]; then
+    echo "${skill_directory##*/}: $package_size bytes"
+  fi
 done < <(find "$projection_tree" -mindepth 1 -maxdepth 1 -type d -print0)
 
 if [[ "$size_failure" == true ]]; then
+  exit 1
+fi
+
+if [[ "$check_working_tree" == true ]]; then
+  echo "Working-tree Amp projection passes local file-type and package-size checks; nothing published."
+  exit 0
+fi
+
+if ! amp_url="$(git -C "$source_root" remote get-url amp)"; then
+  echo "Missing git remote: amp" >&2
   exit 1
 fi
 

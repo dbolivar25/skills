@@ -2,7 +2,7 @@
 
 Turn Mermaid source into an editorial-quality diagram at the format, size, and detail level the destination needs.
 
-**This is a redraw, not a render or conversion.** Mermaid supplies content and declared direction, not coordinates. Discard its computed renderer layout, theme, classes, and shape styling; create a fresh layout in this skill's design system.
+These steps describe a semantic redraw when restyling or summarizing is requested. For faithful conversion or an editable native hand-off, preserve source geometry, styling that carries meaning, and the source format as needed; use the extractor to check coverage. Read [imports](imports.md) and [export](export.md) for that route.
 
 ## Trigger
 
@@ -31,7 +31,7 @@ If the extractor exits 2, report its message verbatim and stop. Do not render th
 
 ## Step 2 — Set the four dials
 
-Set `--format`, `--size`, `--detail`, and `--audience` from [`output-spec.md`](output-spec.md) before drawing. Infer what the destination makes obvious, and ask once if a choice changes the result materially. The digest's `budget:` line determines whether the requested combination fits.
+Set `--format`, `--size`, `--detail`, and `--audience` from [`output-spec.md`](output-spec.md) before drawing. Infer what the destination makes obvious, and ask once if a choice changes the result materially. The digest's `budget:` line suggests whether the example layout will fit; it does not authorize losing required source meaning.
 
 Command-level flags are `--format`, `--size`, `--detail`, `--audience`, optional `--type`, `--diagram`, `--variant`, and `--output`.
 
@@ -41,14 +41,14 @@ Grammar is a strong content signal, but not an order to mimic Mermaid's renderer
 
 | Mermaid grammar / digest signal | Likely type | Reference |
 |---|---|---|
-| `flowchart`, decision rhombus, labeled branches | Flowchart | [type-flowchart.md](type-flowchart.md) |
-| `flowchart` with service/container topology and no decisions | Architecture | [type-architecture.md](type-architecture.md) |
-| `sequenceDiagram` | Sequence | [type-sequence.md](type-sequence.md) |
-| `stateDiagram-v2` | State machine | [type-state.md](type-state.md) |
-| `erDiagram` | ER / data model | [type-er.md](type-er.md) |
-| Nested subgraphs, depth ≥2, few edges | Nested | [type-nested.md](type-nested.md) |
+| `flowchart`, decision rhombus, labeled branches | Flowchart | [types/flowchart.md](types/flowchart.md) |
+| `flowchart` with service/container topology and no decisions | Architecture | [types/architecture.md](types/architecture.md) |
+| `sequenceDiagram` | Sequence | [types/sequence.md](types/sequence.md) |
+| `stateDiagram-v2` | State machine | [types/state.md](types/state.md) |
+| `erDiagram` | ER / data model | [types/er.md](types/er.md) |
+| Nested subgraphs, depth ≥2, few edges | Nested | [types/nested.md](types/nested.md) |
 
-Load the selected `type-*.md`. Override the grammar only when the content disagrees, and state the override in one line.
+Load the selected recipe under `types/`. Override the grammar only when the content disagrees, and state the override in one line.
 
 ## Step 4 — Build the semantic model
 
@@ -61,24 +61,24 @@ Load the selected `type-*.md`. Override the grammar only when the content disagr
 
 ## Step 5 — Redraw
 
-- Start from a blank `viewBox` selected by the size preset. Mermaid positions do not exist in the source, and a renderer's positions must not be recreated.
+- For a restyled SVG, start from a frame suited to the destination. Mermaid source has no coordinates; retaining a native Mermaid renderer is valid when it answers the requested job.
 - Use semantic treatments from the chosen type. A Mermaid cylinder becomes Store/State; a rhombus stays a decision only in a flowchart; subgraphs become zones or collapsible groups.
 - Ignore init themes, `style`, `classDef`, `class`, inline `:::class` attachments, and `linkStyle`. One accent plus the ink ramp replaces the source theme. A leading `---` frontmatter block is title/config, so it is skipped with the same reasoning.
-- Reroute all connections with the SKILL.md §6 connector rules. Mermaid edge length markers are ranking hints, not content.
+- Reroute all connections with the [connector craft](primitives.md) connector rules. Mermaid edge length markers are ranking hints, not content.
 - Do not add a component merely to fill space. Imports remain bounded by source meaning.
 
 ## Step 6 — Deliver
 
-1. Write the self-contained HTML.
-2. Run the SKILL.md §9 taste gate and [`output-spec.md` §6](output-spec.md) checklist.
-3. Export SVG/PNG only when requested, following [`export.md`](export.md).
+1. Produce the requested source or delivery format. Use self-contained HTML when a web wrapper is useful.
+2. Run the [render verification](verification.md) taste gate and [`output-spec.md` §6](output-spec.md) checklist.
+3. Produce requested exports using [`export.md`](export.md), and inspect the actual files.
 4. Report the fidelity ledger: source count, drawn count, and every merge, collapse, or drop.
 
 ---
 
 ## Worked example
 
-[`assets/example-import-mermaid.html`](../assets/example-import-mermaid.html) redraws `scripts/fixtures/sample-flowchart.mmd` at `format=html`, `size=doc-inline`, `detail=balanced`, `audience=mixed`.
+[`assets/example-import-mermaid.html`](../assets/example-import-mermaid.html) redraws the historical import fixture (not bundled) at `format=html`, `size=doc-inline`, `detail=balanced`, `audience=mixed`.
 
 | Source | Output | Reason |
 |---|---|---|

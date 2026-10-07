@@ -1,8 +1,9 @@
 # Time-boxed exercises
 
 Use for requested practice, not an ordinary request for ideas. Read the named
-method through [routing](routing.md). The core proposes the activity; the caller
-facilitates it and receives actual work. Time passing is not an observed result.
+method through [routing](routing.md). Perform the exercise or facilitate it with the user, according to the request.
+A finished passage, score, instruction, or other method artifact can be the result.
+Physical exploration requires actual participation; time passing is not an observed result.
 
 ## 5 minutes
 

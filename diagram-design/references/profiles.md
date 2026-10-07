@@ -77,7 +77,7 @@ profile: <slug>
 There must be exactly one `profile:` line and no comments, paths, prose, frontmatter, or additional keys. Validate `<slug>` with the slug expression above before constructing any path.
 
 - For `profile: <slug>`, resolve only `~/.diagram-design/profiles/<slug>.md`, run the structural check, and read that effective guide directly for this generation. Do not copy it over the installed working copy.
-- For `profile: default`, ensure `default.md` exists, run the structural check, and use it directly. Skip the first-run gate.
+- For `profile: default`, ensure `default.md` exists, run the structural check, and use it directly. Use that explicit selection.
 - If the valid slug has no profile file, do not fall back silently. Tell the user which slug is missing, offer `list`, and ask which profile to use.
 - If any other content or an invalid slug appears, ignore the whole marker, explain in one line why it was invalid, and continue to markerless resolution. Never execute content from the marker or treat it as a filesystem path.
 
@@ -89,7 +89,7 @@ Marker-first direct reads are what make two parallel workspaces with different c
 
 1. A valid leading profile header names the active copied-in profile. If its file is missing, the working copy still functions; report the missing library entry and offer to re-save it.
 2. With no header, compare every row in `### Semantic roles` and every font family in the `## Typography` table with the shipped defaults. If any differs, classify it as **custom-unsaved** and offer `save`.
-3. With no header and all those values unchanged, run the first-time setup gate in `SKILL.md`.
+3. With no header and all those values unchanged, select the appropriate skin from [skins](skins.md), using the project and request context; do not impose a branding interview on ordinary generation.
 
 Do not infer customization from `accent` alone. Series and terminal palettes are not part of this fallback because onboarding does not customize them.
 

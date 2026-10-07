@@ -1,0 +1,1276 @@
+{
+  "catalog": [
+    {
+      "name": "steward",
+      "job": "Durable coordination, changing support, independent acceptance, receipt-based completion",
+      "why_separate": "A real state machine and durable work authority. Explicitly protected by Daniel.",
+      "methods": [
+        "runtime event/CLI contract",
+        "actor reconciliation and cancellation",
+        "phase-specific review",
+        "worked examples",
+        "default rules"
+      ],
+      "protected": true
+    },
+    {
+      "name": "engineering",
+      "job": "Verified code changes, architecture investigations, implementable designs, dependency assessment",
+      "why_separate": "One owner can finish these closely related software jobs from repository context. Flat branch selection preserves read-only design.",
+      "methods": [
+        "contracts and TypeScript",
+        "module depth and seams",
+        "testing/proof",
+        "architecture study",
+        "typed specification",
+        "upgrades",
+        "domain vocabulary",
+        "restraint/proposal patterns",
+        "selected TDD and lint enforcement",
+        "logic experiments"
+      ]
+    },
+    {
+      "name": "review",
+      "job": "Independent assessment of code, plans, understanding, designs, or work reports",
+      "why_separate": "A distinct request and role, especially Steward acceptance; code-only review would lose a protected capability.",
+      "methods": [
+        "semantic reconstruction",
+        "claim support and contradictions",
+        "candidate-finding disproof",
+        "PR/rereview",
+        "Steward phase-review adapter"
+      ]
+    },
+    {
+      "name": "debugging",
+      "job": "Causal investigation and verified correction when requested",
+      "why_separate": "Owns hypothesis/probe iteration to an answer, rather than returning a causal assessment for the same agent to operationalize.",
+      "methods": [
+        "symptom receipts",
+        "reproduction adequacy",
+        "production-only investigation",
+        "discriminating probes",
+        "performance comparison",
+        "causal support and limits"
+      ]
+    },
+    {
+      "name": "interface-design",
+      "job": "Usable interfaces and question-driven interaction prototypes",
+      "why_separate": "Product experience and visual/interaction craft need their own job and verification.",
+      "methods": [
+        "layout/type/optical craft",
+        "state and accessibility",
+        "motion/interruption",
+        "perceived performance",
+        "range when direction is open",
+        "prototype fidelity and observations"
+      ]
+    },
+    {
+      "name": "augment-design",
+      "job": "Augment identity, voice, assets, and surface constraints",
+      "why_separate": "Private authoritative brand knowledge applies beyond product UI.",
+      "methods": [
+        "logos/fonts/tokens",
+        "evidence and privacy",
+        "brand voice",
+        "surface branches",
+        "bounded audit scripts"
+      ]
+    },
+    {
+      "name": "github",
+      "job": "Complete current GitHub facts and authorized operation receipts",
+      "why_separate": "Real helpers and platform gaps cannot be replaced by generic review instructions.",
+      "methods": [
+        "snapshot",
+        "thread and nested comment pagination",
+        "CI saved logs",
+        "PR operations/currentness",
+        "CLI gotchas"
+      ]
+    },
+    {
+      "name": "grafana",
+      "job": "Reproducible bounded live telemetry",
+      "why_separate": "Live query/discovery mechanics and population semantics are an independent acquisition capability.",
+      "methods": [
+        "Prometheus",
+        "Loki",
+        "Tempo",
+        "Pyroscope",
+        "comparators and query receipts"
+      ]
+    },
+    {
+      "name": "augment-workflows",
+      "job": "Live Augment graph authoring, operation, review, and diagnosis",
+      "why_separate": "Product lifecycle authority, canonical resources, graph contracts, and outcome observations.",
+      "methods": [
+        "live product entry roots",
+        "explicit graph/control/effects",
+        "branch subject agreement",
+        "stored-document readback",
+        "lifecycle and runtime proof"
+      ]
+    },
+    {
+      "name": "ai-engineering",
+      "job": "Bounded AI inference and faithful derived work products",
+      "why_separate": "Crosses semantic quality, source fidelity, typed consumer behavior, and publication/delivery boundaries.",
+      "methods": [
+        "inference contracts and abstention",
+        "faithful derivation graph/support",
+        "raw-state semantics",
+        "durable reuse/promotion",
+        "publication/rendering",
+        "conditional spec/handoff",
+        "TypeSafe only when selected"
+      ]
+    },
+    {
+      "name": "evaluation",
+      "job": "Decision-bearing empirical quality/component comparisons",
+      "why_separate": "A complete independent job, applicable to router quality and instruction usefulness as well as implementation.",
+      "methods": [
+        "representative cases",
+        "independent oracles/calibration",
+        "holdouts and leakage",
+        "layer-specific failure localization",
+        "ablation/repeats/uncertainty",
+        "executed results vs plan"
+      ]
+    },
+    {
+      "name": "writing",
+      "job": "Faithful drafting, editing, reviewer-facing explanations, and voice",
+      "why_separate": "Owns authorship and reader comprehension; supplied text editing differs from new claims.",
+      "methods": [
+        "human prose craft",
+        "protected source/meaning",
+        "semantic change account",
+        "PR description",
+        "compression fidelity",
+        "real voice examples"
+      ]
+    },
+    {
+      "name": "writing-for-agents",
+      "job": "Executable agent instructions and dependable packaging",
+      "why_separate": "Demands, triggers, context reachability, and behavioral tests differ from prose voice.",
+      "methods": [
+        "instruction hierarchy",
+        "invocation/host metadata",
+        "complete-job interfaces",
+        "packaging/distribution",
+        "preservation and behavioral evaluation"
+      ]
+    },
+    {
+      "name": "creative-ideation",
+      "job": "Specific ideas, alternatives, creative exercises, selection and deepening",
+      "why_separate": "The 22 actual methods teach useful operations and protect creative breadth.",
+      "methods": [
+        "all 22 lazy method references",
+        "method procedures/exclusions/attribution",
+        "artistic freedom",
+        "practical judgment when brief requires"
+      ]
+    },
+    {
+      "name": "diagram-design",
+      "job": "Standalone, imported, exportable, or source-sensitive visual artifacts",
+      "why_separate": "Specialist semantics, formats, recipes, and export fidelity add value beyond managed inline visualization.",
+      "methods": [
+        "semantic representation selector",
+        "useful representation recipes without arbitrary cap",
+        "access/source uncertainty",
+        "import/export",
+        "render inspection",
+        "brand skins"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "source": "architecture-scan",
+      "destinations": [
+        "engineering"
+      ],
+      "decision": "Consolidate entry; retain complete ranked architecture-study method and zero-result branch."
+    },
+    {
+      "source": "augment-design",
+      "destinations": [
+        "augment-design"
+      ],
+      "decision": "Keep; simplify entry, retain authoritative assets/branches, repair paint audit."
+    },
+    {
+      "source": "augment-workflows",
+      "destinations": [
+        "augment-workflows"
+      ],
+      "decision": "Keep; repair entitlement-probe authority and obsolete permanent-store claim."
+    },
+    {
+      "source": "causal-reasoning",
+      "destinations": [
+        "debugging"
+      ],
+      "decision": "Consolidate entry; retain reproduction adequacy, falsifiable alternatives, and support limits."
+    },
+    {
+      "source": "claim-support",
+      "destinations": [
+        "review",
+        "ai-engineering",
+        "writing",
+        "evaluation"
+      ],
+      "decision": "Retire generic entry; retain support/contradiction/freshness/scope method with review as general assessment owner."
+    },
+    {
+      "source": "creative-ideation",
+      "destinations": [
+        "creative-ideation"
+      ],
+      "decision": "Keep all 22 methods; remove universal novelty/count/proper-noun mandates and fictional-work grounding."
+    },
+    {
+      "source": "critique",
+      "destinations": [
+        "review"
+      ],
+      "decision": "Consolidate entry; retain non-code falsification and coverage."
+    },
+    {
+      "source": "decision-rights",
+      "destinations": [
+        "AGENTS",
+        "steward"
+      ],
+      "decision": "Retire entry; always-applicable owner authority and settlement rules belong in AGENTS, actual changing authority in Steward."
+    },
+    {
+      "source": "dependency-compatibility",
+      "destinations": [
+        "engineering",
+        "review"
+      ],
+      "decision": "Consolidate entry; full upgrade method owned by engineering and directly readable by review."
+    },
+    {
+      "source": "diagnosing-bugs",
+      "destinations": [
+        "debugging"
+      ],
+      "decision": "Consolidate entry and causal method into one end-to-end diagnostic job."
+    },
+    {
+      "source": "diagram-design",
+      "destinations": [
+        "diagram-design"
+      ],
+      "decision": "Keep specialist artifact toolkit; no representation quota. Archive NatStat product-specific kits after extracting reusable semantics."
+    },
+    {
+      "source": "domain-modeling",
+      "destinations": [
+        "engineering"
+      ],
+      "decision": "Consolidate entry; retain terms, examples, invariants, context/ADR formats where useful."
+    },
+    {
+      "source": "engineering-judgment",
+      "destinations": [
+        "engineering",
+        "review"
+      ],
+      "decision": "Consolidate entry; preserve boundary correctness and effect ownership, remove universal all-standard accounting."
+    },
+    {
+      "source": "engineering-restraint",
+      "destinations": [
+        "engineering",
+        "review",
+        "AGENTS"
+      ],
+      "decision": "Retire entry; preserve ownership-burden question and proposal methods, cut four-status universal gate."
+    },
+    {
+      "source": "evaluation-design",
+      "destinations": [
+        "evaluation"
+      ],
+      "decision": "Expand from supplied-only plan to requested complete evaluation job; planning-only requests stay plans."
+    },
+    {
+      "source": "experiment-design",
+      "destinations": [
+        "engineering",
+        "debugging",
+        "interface-design",
+        "evaluation"
+      ],
+      "decision": "Retire generic entry; preserve discriminating experiment design according to the actual question."
+    },
+    {
+      "source": "faithful-derivation",
+      "destinations": [
+        "ai-engineering"
+      ],
+      "decision": "Consolidate entry; retain domain glossary, contracts, graph/edge/raw-state/promotion/publication knowledge, templates and handoffs conditionally."
+    },
+    {
+      "source": "github",
+      "destinations": [
+        "github"
+      ],
+      "decision": "Keep platform helpers; repair pagination and structured coverage reporting before claiming completeness."
+    },
+    {
+      "source": "good-judgment",
+      "destinations": [
+        "AGENTS",
+        "steward"
+      ],
+      "decision": "Retire interpretive essay entry; preserve Daniel's direct preferences and decisive examples, current settlements and scope evidence."
+    },
+    {
+      "source": "grafana",
+      "destinations": [
+        "grafana"
+      ],
+      "decision": "Keep query mechanics and signal branches; simplify compulsory packet outline."
+    },
+    {
+      "source": "grilling",
+      "destinations": [
+        "engineering",
+        "review",
+        "creative-ideation"
+      ],
+      "decision": "Retire separate entry; preserve explicit requested dependency-aware questioning and resolved decisions."
+    },
+    {
+      "source": "humanize",
+      "destinations": [
+        "writing"
+      ],
+      "decision": "Consolidate entry; retain conservative voice and meaning preservation, remove uncalibrated scoring."
+    },
+    {
+      "source": "information-preservation",
+      "destinations": [
+        "writing",
+        "ai-engineering",
+        "steward",
+        "writing-for-agents"
+      ],
+      "decision": "Retire generic entry; preserve downstream-consumer loss judgment, recoverability, exact/protected distinctions, and disclosure."
+    },
+    {
+      "source": "interface-design",
+      "destinations": [
+        "interface-design"
+      ],
+      "decision": "Keep real UI craft and intended-context verification; add question-driven prototype method."
+    },
+    {
+      "source": "module-design",
+      "destinations": [
+        "engineering",
+        "review"
+      ],
+      "decision": "Consolidate entry; retain deep interfaces, caller knowledge, seam/dependency and deletion methods."
+    },
+    {
+      "source": "prototype",
+      "destinations": [
+        "engineering",
+        "debugging",
+        "interface-design"
+      ],
+      "decision": "Retire entry; preserve runnable question/observed-learning/fidelity method, remove no-tests and mandatory variant rules."
+    },
+    {
+      "source": "review",
+      "destinations": [
+        "review"
+      ],
+      "decision": "Keep; broaden explicit plan/understanding/Steward review path, retain falsified findings and rereview."
+    },
+    {
+      "source": "reviewability",
+      "destinations": [
+        "writing"
+      ],
+      "decision": "Consolidate entry; preserve current aggregate delta, reviewer comprehension and validation truth."
+    },
+    {
+      "source": "show-me",
+      "destinations": [
+        "managed visualize",
+        "diagram-design"
+      ],
+      "decision": "Retire wrapper; ordinary inline explanations use managed visualize directly, specialist artifact/fidelity work uses diagram-design."
+    },
+    {
+      "source": "software-engineering",
+      "destinations": [
+        "engineering"
+      ],
+      "decision": "Consolidate entry; preserve implementation/finish obligations and selected test-first/lint methods."
+    },
+    {
+      "source": "steward",
+      "destinations": [
+        "steward"
+      ],
+      "decision": "Protected: preserve runtime, CLI, event schema, support algebra, separate actors, receipts, fixtures, rules and tests. Rewrite explanation only."
+    },
+    {
+      "source": "tech-spec",
+      "destinations": [
+        "engineering"
+      ],
+      "decision": "Consolidate entry; retain complete typed design/handoff and alternatives method; no automatic TDD or implementation."
+    },
+    {
+      "source": "typesafe-ai",
+      "destinations": [
+        "ai-engineering"
+      ],
+      "decision": "Retire vendor-promotional entry; retain TypeSafe method/license as selected-vendor reference and use live primary docs."
+    },
+    {
+      "source": "understand-change",
+      "destinations": [
+        "review",
+        "writing",
+        "engineering"
+      ],
+      "decision": "Retire generic entry; preserve semantic reconstruction and observed/intended behavior distinction in consuming jobs."
+    },
+    {
+      "source": "verification-design",
+      "destinations": [
+        "engineering",
+        "review"
+      ],
+      "decision": "Consolidate entry; retain independent oracle, seam, actual implementation, substitute limits and unique regressions."
+    },
+    {
+      "source": "writing-for-agents",
+      "destinations": [
+        "writing-for-agents"
+      ],
+      "decision": "Keep; remove shared core/operational-caller protocol, preserve instruction mechanics and packaging proof."
+    }
+  ],
+  "cuts": [
+    {
+      "cut": "The shared core/operational-caller composition protocol and generic status envelopes",
+      "retain": "The actual method, factual gaps, meaningful uncertainty, and ordinary authority boundaries. Steward's actual runtime event/review contracts remain exact.",
+      "loss": "Supplied-only conceptual assessment interfaces become less directly selectable; read-only judgment remains an available job."
+    },
+    {
+      "cut": "21 fewer public selection boundaries",
+      "retain": "15 complete-job interfaces plus selectively read private methods. Architecture/spec are flat engineering jobs; evaluation remains independent.",
+      "loss": "26 old public skill names disappear, five new names are introduced, and ten names remain. Their retained jobs must be discoverable through natural prompts. Branch instructions cannot enforce the old architecture/spec per-skill metadata policy; actual host routing must be tested."
+    },
+    {
+      "cut": "Global engineering checklist, public-JSDoc accounting, universal failure-algebra mandate and categorical mocking/spy bans",
+      "retain": "Precise values, expected failures, owned effects, TypeScript soundness, independent oracles and actual-boundary evidence where applicable.",
+      "loss": "These are substantive relaxed prescriptions, not mere repackaging. Broad consistency law is traded for task/repository-grounded judgment."
+    },
+    {
+      "cut": "Fixed hypothesis counts and local-red/minimization prerequisites",
+      "retain": "Strong symptom signal, reproduction adequacy, falsifiable alternatives and discriminating observations.",
+      "loss": "A universal laboratory-shaped process no longer gates production-only diagnosis."
+    },
+    {
+      "cut": "Automatic spec TDD, prototype no-tests rule, and mandatory three radical UI variants",
+      "retain": "Selected vertical-slice TDD, necessary tests, meaningful range for open taste, and cheapest credible question-driven prototype.",
+      "loss": "A fixed process/variant count no longer guarantees breadth or discipline; observed evidence must establish adequacy."
+    },
+    {
+      "cut": "Uncalibrated prose score, detector thresholds, universal novelty/proper-noun quotas, and mandatory grounded derivatives for fiction",
+      "retain": "Actual voice examples, conservative meaning protection, concrete artistic method and specificity.",
+      "loss": "Numeric ceremony and forced practicality disappear; no claim that all odd language is AI language."
+    },
+    {
+      "cut": "Universal diagram grid/shadow/corner law and NatStat-only product kits",
+      "retain": "All useful semantic forms and import/export methods; brand-specific laws apply only to that brand. Unknown remains distinct from denied/false/zero.",
+      "loss": "Product-specific NatStat aesthetics/context archived outside active references after reusable semantics are extracted."
+    },
+    {
+      "cut": "Historical maintenance ledgers and old audit narratives from the active learning path",
+      "retain": "Recoverable repository history, indispensable lessons and examples, old Steward record intelligibility.",
+      "loss": "Agents will no longer receive the full history of how each instruction was written unless that history matters to the task."
+    },
+    {
+      "cut": "TypeSafe as a default standalone AI proposition",
+      "retain": "Vendor knowledge and license, live docs when selected, typed inference and calibrated probability principles independent of vendor.",
+      "loss": "Automatic vendor promotion/discovery is removed; the vendor is chosen for the actual job."
+    }
+  ],
+  "planned_resource_bindings": [
+    {
+      "target": "steward/references/runtime.md",
+      "sources": [
+        "steward/references/runtime.md"
+      ],
+      "rewrite": "Preserve exact schema, support algebra and CLI; reorder only for operation discovery."
+    },
+    {
+      "target": "steward/references/collaboration.md",
+      "sources": [
+        "steward/references/collaboration.md"
+      ],
+      "rewrite": "Keep real actor reconciliation and physical cancellation; remove overlapping loop narrative."
+    },
+    {
+      "target": "steward/references/review.md",
+      "sources": [
+        "steward/references/review.md"
+      ],
+      "rewrite": "Keep independent actor, all phase criteria and exact output."
+    },
+    {
+      "target": "steward/references/worked-example.md",
+      "sources": [
+        "steward/references/worked-example.md"
+      ],
+      "rewrite": "Teach current operator loop, owner correction and live support with explicit late/reassigned result examples."
+    },
+    {
+      "target": "steward/scripts/steward.py",
+      "sources": [
+        "steward/scripts/steward.py"
+      ],
+      "rewrite": "None; preserve CLI."
+    },
+    {
+      "target": "engineering/references/contracts.md",
+      "sources": [
+        "engineering-judgment/SKILL.md",
+        "engineering-judgment/references/standards.md"
+      ],
+      "rewrite": "Preserve concrete correctness; remove universal all-standard accounting and categorical prescriptions named in cut list."
+    },
+    {
+      "target": "engineering/references/modules.md",
+      "sources": [
+        "module-design/SKILL.md",
+        "module-design/references/design.md",
+        "module-design/references/dependency-seams.md"
+      ],
+      "rewrite": "Keep full interface/caller-depth/seam methods; remove core envelope."
+    },
+    {
+      "target": "engineering/references/testing.md",
+      "sources": [
+        "verification-design/SKILL.md"
+      ],
+      "rewrite": "Keep independent oracles and fidelity; remove core envelope and categorical substitute bans."
+    },
+    {
+      "target": "engineering/references/upgrades.md",
+      "sources": [
+        "dependency-compatibility/SKILL.md"
+      ],
+      "rewrite": "Keep exact version/usage/runtime method; remove supplied-only envelope."
+    },
+    {
+      "target": "engineering/references/architecture.md",
+      "sources": [
+        "architecture-scan/SKILL.md",
+        "architecture-scan/references/scan-result.md"
+      ],
+      "rewrite": "Keep full study/ranking/zero-result behavior, independently selected by requested outcome."
+    },
+    {
+      "target": "engineering/references/specification.md",
+      "sources": [
+        "tech-spec/SKILL.md",
+        "tech-spec/references/spec-shape.md"
+      ],
+      "rewrite": "Keep typed flows and handoff; remove automatic RGR/implementation."
+    },
+    {
+      "target": "engineering/references/design-alternatives.md",
+      "sources": [
+        "tech-spec/branches/design-alternatives.md"
+      ],
+      "rewrite": "Keep materially different design comparison; no automatic multi-agent expansion."
+    },
+    {
+      "target": "engineering/references/domain.md",
+      "sources": [
+        "domain-modeling/SKILL.md",
+        "domain-modeling/CONTEXT-FORMAT.md",
+        "domain-modeling/ADR-FORMAT.md"
+      ],
+      "rewrite": "Keep vocabulary/invariant/example/context methods."
+    },
+    {
+      "target": "engineering/references/proposal-patterns.md",
+      "sources": [
+        "engineering-restraint/references/proposal-patterns.md",
+        "engineering-restraint/references/pushback-language.md"
+      ],
+      "rewrite": "Preserve smallest sufficient move and lifetime ownership; remove gate/output ritual."
+    },
+    {
+      "target": "engineering/references/experiments.md",
+      "sources": [
+        "experiment-design/SKILL.md",
+        "prototype/SKILL.md"
+      ],
+      "rewrite": "Keep logic/runtime question, distinguishing observations, comparable inputs, fidelity and actual interpretation; remove universal UI/no-tests rules."
+    },
+    {
+      "target": "engineering/methods/test-first.md",
+      "sources": [
+        "software-engineering/branches/test-first.md"
+      ],
+      "rewrite": "Preserve when selected; adapt only reference locations."
+    },
+    {
+      "target": "engineering/methods/lint-enforcement.md",
+      "sources": [
+        "software-engineering/branches/lint-enforcement.md",
+        "software-engineering/references/lint/gritql.md",
+        "software-engineering/references/lint/fixes.md"
+      ],
+      "rewrite": "Keep actual installed-tool/fixtures/rewrite proof; adapt references."
+    },
+    {
+      "target": "review/references/claim-support.md",
+      "sources": [
+        "claim-support/SKILL.md",
+        "claim-support/references/evidence-and-confidence.md"
+      ],
+      "rewrite": "Preserve support/contradictions/freshness; remove generic entry and core envelope."
+    },
+    {
+      "target": "review/references/grilling.md",
+      "sources": [
+        "grilling/SKILL.md"
+      ],
+      "rewrite": "Preserve explicit requested interview rounds/dependencies/resolved language; no automatic interrogation."
+    },
+    {
+      "target": "debugging/references/operations.md",
+      "sources": [
+        "diagnosing-bugs/operations.md",
+        "diagnosing-bugs/scripts/hitl-loop.template.sh"
+      ],
+      "rewrite": "Keep harness/instrumentation/minimization and cleanup; loosen impossible universal local-red gate."
+    },
+    {
+      "target": "debugging/references/causal-reasoning.md",
+      "sources": [
+        "causal-reasoning/SKILL.md"
+      ],
+      "rewrite": "Keep reproduction adequacy, hypotheses, discrimination and causal uncertainty; remove envelope."
+    },
+    {
+      "target": "interface-design/references/code-patterns.md",
+      "sources": [
+        "interface-design/references/code-patterns.md"
+      ],
+      "rewrite": "Keep craft; remove universal prototype/variant prescriptions if present."
+    },
+    {
+      "target": "interface-design/references/platform-floors.md",
+      "sources": [
+        "interface-design/references/platform-floors.md"
+      ],
+      "rewrite": "Keep craft; remove universal prototype/variant prescriptions if present."
+    },
+    {
+      "target": "interface-design/references/worked-examples.md",
+      "sources": [
+        "interface-design/references/worked-examples.md"
+      ],
+      "rewrite": "Keep craft; remove universal prototype/variant prescriptions if present."
+    },
+    {
+      "target": "interface-design/references/expressive-direction.md",
+      "sources": [
+        "interface-design/references/expressive-direction.md"
+      ],
+      "rewrite": "Keep craft; remove universal prototype/variant prescriptions if present."
+    },
+    {
+      "target": "interface-design/references/prototypes.md",
+      "sources": [
+        "prototype/SKILL.md",
+        "experiment-design/SKILL.md"
+      ],
+      "rewrite": "Keep interaction/taste probe and observed learning; no mandatory 3 variants or no-tests law."
+    },
+    {
+      "target": "augment-design/readme.md",
+      "sources": [
+        "augment-design/readme.md"
+      ],
+      "rewrite": "Keep authoritative brand values."
+    },
+    {
+      "target": "augment-design/references/composition.md",
+      "sources": [
+        "augment-design/references/composition.md"
+      ],
+      "rewrite": "Preserve relevant brand floor; remove all-HTML artifact assumption and clarify bounded audit coverage."
+    },
+    {
+      "target": "augment-design/references/voice.md",
+      "sources": [
+        "augment-design/references/voice.md"
+      ],
+      "rewrite": "Preserve relevant brand floor; remove all-HTML artifact assumption and clarify bounded audit coverage."
+    },
+    {
+      "target": "augment-design/references/product-ui.md",
+      "sources": [
+        "augment-design/references/product-ui.md"
+      ],
+      "rewrite": "Preserve relevant brand floor; remove all-HTML artifact assumption and clarify bounded audit coverage."
+    },
+    {
+      "target": "augment-design/references/marketing.md",
+      "sources": [
+        "augment-design/references/marketing.md"
+      ],
+      "rewrite": "Preserve relevant brand floor; remove all-HTML artifact assumption and clarify bounded audit coverage."
+    },
+    {
+      "target": "augment-design/references/documents.md",
+      "sources": [
+        "augment-design/references/documents.md"
+      ],
+      "rewrite": "Preserve relevant brand floor; remove all-HTML artifact assumption and clarify bounded audit coverage."
+    },
+    {
+      "target": "augment-design/references/qa.md",
+      "sources": [
+        "augment-design/references/qa.md"
+      ],
+      "rewrite": "Preserve relevant brand floor; remove all-HTML artifact assumption and clarify bounded audit coverage."
+    },
+    {
+      "target": "augment-design/references/production-checks.md",
+      "sources": [
+        "augment-design/references/production-checks.md"
+      ],
+      "rewrite": "Preserve relevant brand floor; remove all-HTML artifact assumption and clarify bounded audit coverage."
+    },
+    {
+      "target": "augment-design/checks/audit.js",
+      "sources": [
+        "augment-design/checks/audit.js"
+      ],
+      "rewrite": "Repair actual paint/font coverage; preserve tests/assets separately."
+    },
+    {
+      "target": "github/scripts/pr-snapshot.ts",
+      "sources": [
+        "github/scripts/pr-snapshot.ts"
+      ],
+      "rewrite": "Keep operational helper; repair and disclose coverage on every capped path."
+    },
+    {
+      "target": "github/scripts/pr-threads.ts",
+      "sources": [
+        "github/scripts/pr-threads.ts"
+      ],
+      "rewrite": "Keep operational helper; repair and disclose coverage on every capped path."
+    },
+    {
+      "target": "github/scripts/ci-failures.ts",
+      "sources": [
+        "github/scripts/ci-failures.ts"
+      ],
+      "rewrite": "Keep operational helper; repair and disclose coverage on every capped path."
+    },
+    {
+      "target": "github/references/pr-operations.md",
+      "sources": [
+        "github/references/pr-operations.md"
+      ],
+      "rewrite": "Preserve currentness, action and readback semantics."
+    },
+    {
+      "target": "github/references/cli-gotchas.md",
+      "sources": [
+        "github/SKILL.md"
+      ],
+      "rewrite": "Move useful exact CLI/platform gotchas behind condition."
+    },
+    {
+      "target": "grafana/references/prometheus.md",
+      "sources": [
+        "grafana/references/prometheus.md"
+      ],
+      "rewrite": "Preserve actual discovery/query/coverage mechanics."
+    },
+    {
+      "target": "grafana/references/loki.md",
+      "sources": [
+        "grafana/references/loki.md"
+      ],
+      "rewrite": "Preserve actual discovery/query/coverage mechanics."
+    },
+    {
+      "target": "grafana/references/tempo.md",
+      "sources": [
+        "grafana/references/tempo.md"
+      ],
+      "rewrite": "Preserve actual discovery/query/coverage mechanics."
+    },
+    {
+      "target": "grafana/references/pyroscope.md",
+      "sources": [
+        "grafana/references/pyroscope.md"
+      ],
+      "rewrite": "Preserve actual discovery/query/coverage mechanics."
+    },
+    {
+      "target": "ai-engineering/references/derivation/raw-state-and-semantics.md",
+      "sources": [
+        "faithful-derivation/reference/raw-state-and-semantics.md"
+      ],
+      "rewrite": "Preserve full domain distinctions and examples, conditionally reached."
+    },
+    {
+      "target": "ai-engineering/references/derivation/judgment-dags-and-edges.md",
+      "sources": [
+        "faithful-derivation/reference/judgment-dags-and-edges.md"
+      ],
+      "rewrite": "Preserve full domain distinctions and examples, conditionally reached."
+    },
+    {
+      "target": "ai-engineering/references/derivation/anti-patterns.md",
+      "sources": [
+        "faithful-derivation/reference/anti-patterns.md"
+      ],
+      "rewrite": "Preserve full domain distinctions and examples, conditionally reached."
+    },
+    {
+      "target": "ai-engineering/references/derivation/durable-state-and-promotion.md",
+      "sources": [
+        "faithful-derivation/reference/durable-state-and-promotion.md"
+      ],
+      "rewrite": "Preserve full domain distinctions and examples, conditionally reached."
+    },
+    {
+      "target": "ai-engineering/references/derivation/publication-and-rendering.md",
+      "sources": [
+        "faithful-derivation/reference/publication-and-rendering.md"
+      ],
+      "rewrite": "Preserve full domain distinctions and examples, conditionally reached."
+    },
+    {
+      "target": "ai-engineering/methods/derivation-design.md",
+      "sources": [
+        "faithful-derivation/guides/design-new-work-product-workflow.md"
+      ],
+      "rewrite": "Preserve complete selected method; update pointers."
+    },
+    {
+      "target": "ai-engineering/methods/derivation-review.md",
+      "sources": [
+        "faithful-derivation/guides/review-existing-workflow.md"
+      ],
+      "rewrite": "Preserve complete selected method; update pointers."
+    },
+    {
+      "target": "ai-engineering/methods/derivation-handoff.md",
+      "sources": [
+        "faithful-derivation/guides/implementation-handoff.md"
+      ],
+      "rewrite": "Preserve complete selected method; update pointers."
+    },
+    {
+      "target": "ai-engineering/templates/derivation-spec.md",
+      "sources": [
+        "faithful-derivation/templates/derivation-spec.md"
+      ],
+      "rewrite": "Retain conditional complete artifact, no universal use."
+    },
+    {
+      "target": "ai-engineering/vendors/typesafe.md",
+      "sources": [
+        "typesafe-ai/SKILL.md",
+        "typesafe-ai/LICENSE"
+      ],
+      "rewrite": "Remove standalone promotion; retain selected-vendor method and attribution/license."
+    },
+    {
+      "target": "evaluation/references/evals-and-ablations.md",
+      "sources": [
+        "evaluation-design/references/evals-and-ablations.md"
+      ],
+      "rewrite": "Keep full cases/oracles/layers/ablation method and examples."
+    },
+    {
+      "target": "writing/references/pull-request.md",
+      "sources": [
+        "reviewability/references/pull-request.md"
+      ],
+      "rewrite": "Keep reader comprehension and accurate current proof; no compulsory long template."
+    },
+    {
+      "target": "writing/references/change-account.md",
+      "sources": [
+        "understand-change/SKILL.md",
+        "reviewability/SKILL.md"
+      ],
+      "rewrite": "Keep semantic aggregate delta and source/evidence discrepancy methods without standalone envelopes."
+    },
+    {
+      "target": "writing/references/prose-craft.md",
+      "sources": [
+        "humanize/SKILL.md",
+        "humanize/references/patterns.md",
+        "humanize/LICENSE"
+      ],
+      "rewrite": "Keep conservative voice and actual patterns; remove uncalibrated score and blanket application."
+    },
+    {
+      "target": "writing/references/strict-style.md",
+      "sources": [
+        "humanize/references/strict-style.md"
+      ],
+      "rewrite": "Keep explicitly selected house constraints; no implicit detector thresholds."
+    },
+    {
+      "target": "writing/references/information-fidelity.md",
+      "sources": [
+        "information-preservation/SKILL.md",
+        "information-preservation/references/dimensions.md"
+      ],
+      "rewrite": "Keep consumer judgments, required fidelity and recoverability; remove universal loss ledger."
+    },
+    {
+      "target": "writing-for-agents/SKILL-MECHANICS.md",
+      "sources": [
+        "writing-for-agents/SKILL-MECHANICS.md"
+      ],
+      "rewrite": "Preserve real host/distribution/invocation mechanics; remove core/operational-caller composition protocol."
+    },
+    {
+      "target": "creative-ideation/references/routing.md",
+      "sources": [
+        "creative-ideation/references/routing.md"
+      ],
+      "rewrite": "Keep all 22named methods and complete procedure pointers; remove universal novelty quotas/forced grounding."
+    },
+    {
+      "target": "creative-ideation/references/exercises.md",
+      "sources": [
+        "creative-ideation/references/exercises.md"
+      ],
+      "rewrite": "Keep all 22named methods and complete procedure pointers; remove universal novelty quotas/forced grounding."
+    },
+    {
+      "target": "creative-ideation/references/full-prompt-library.md",
+      "sources": [
+        "creative-ideation/references/full-prompt-library.md"
+      ],
+      "rewrite": "Keep all 22named methods and complete procedure pointers; remove universal novelty quotas/forced grounding."
+    },
+    {
+      "target": "creative-ideation/references/methods/",
+      "sources": [
+        "creative-ideation/references/methods/"
+      ],
+      "rewrite": "Preserve grouped method files in full, attribution and exclusions."
+    },
+    {
+      "target": "diagram-design/references/representation-selector.md",
+      "sources": [
+        "diagram-design/SKILL.md"
+      ],
+      "rewrite": "Keep semantic selector; narrow trigger away from ordinary managed inline explanations."
+    },
+    {
+      "target": "diagram-design/references/types/",
+      "sources": [
+        "diagram-design/references/"
+      ],
+      "rewrite": "Keep useful type recipes; archive NatStat-specific kits only after reusable semantic extraction."
+    },
+    {
+      "target": "diagram-design/references/imports.md",
+      "sources": [
+        "diagram-design/references/import-drawio.md",
+        "diagram-design/references/import-mermaid.md",
+        "diagram-design/references/import-excalidraw.md"
+      ],
+      "rewrite": "Select existing Draw.io/Mermaid/Excalidraw import methods and preserve source model."
+    },
+    {
+      "target": "diagram-design/references/skins.md",
+      "sources": [
+        "diagram-design/references/onboarding.md",
+        "diagram-design/references/profiles.md",
+        "diagram-design/references/style-guide.md"
+      ],
+      "rewrite": "Keep real brand-specific skins; remove universal aesthetic law."
+    },
+    {
+      "target": "diagram-design/references/export.md",
+      "sources": [
+        "diagram-design/references/export.md"
+      ],
+      "rewrite": "Repair fonts, fractional scale and actual rendered sizing."
+    },
+    {
+      "target": "diagram-design/references/verification.md",
+      "sources": [
+        "diagram-design/SKILL.md",
+        "diagram-design/scripts/"
+      ],
+      "rewrite": "Preserve rendering/semantic checks and bounded helpers; repair CSS image coverage."
+    },
+    {
+      "target": "github/scripts/lib.ts",
+      "sources": [
+        "github/scripts/lib.ts"
+      ],
+      "rewrite": "Preserve shared helper dependency; validate all helper imports after packaging."
+    },
+    {
+      "target": "steward/scripts/runtime.py",
+      "sources": [
+        "steward/scripts/runtime.py"
+      ],
+      "rewrite": "None; protect exact state machine and tests, fixtures, default rules as a complete runtime package."
+    },
+    {
+      "target": "ai-engineering/references/derivation/contract.md",
+      "sources": [
+        "faithful-derivation/CONTRACT.md"
+      ],
+      "rewrite": "Preserve derivation contract and domain obligations for complete selected methods; remove core/supplied-only mechanics and update pointers."
+    },
+    {
+      "target": "ai-engineering/methods/derivation-expert-interview.md",
+      "sources": [
+        "faithful-derivation/guides/expert-interview.md"
+      ],
+      "rewrite": "Preserve consequential expert elicitation when the selected design needs unresolved domain judgment."
+    },
+    {
+      "target": "ai-engineering/references/derivation/glossary.md",
+      "sources": [
+        "faithful-derivation/GLOSSARY.md"
+      ],
+      "rewrite": "Preserve exact domain concepts and useful definitions; update method pointers."
+    },
+    {
+      "target": "ai-engineering/templates/review-report.md",
+      "sources": [
+        "faithful-derivation/templates/review-report.md"
+      ],
+      "rewrite": "Retain selected domain-review coverage and result semantics; no universal template for all AI tasks."
+    },
+    {
+      "target": "AGENTS working agreement additions",
+      "sources": [
+        "decision-rights/SKILL.md",
+        "good-judgment/SKILL.md"
+      ],
+      "rewrite": "Proposed exact additions live at candidates/AGENTS.additions.md. Preserve six kinds of standing, one complete challenge, settlement/reopen rules, direct-current-instruction priority and proportional historical lessons. Cut interpretive organizing essay and generic status envelope."
+    }
+  ],
+  "workflow_stress_cases": [
+    {
+      "task": "Tiny TypeScript fix",
+      "path": [
+        "engineering"
+      ],
+      "success": "Direct bounded change and meaningful checks; no compulsory architecture, spec, TDD, or runtime record."
+    },
+    {
+      "task": "Read-only architecture study / typed design",
+      "path": [
+        "engineering"
+      ],
+      "success": "Complete ranking or typed handoff without product edits or renewed permission to start design."
+    },
+    {
+      "task": "Dependency PR",
+      "path": [
+        "review",
+        "github",
+        "engineering/upgrades reference"
+      ],
+      "success": "Current head, usage/runtime compatibility and actual CI coverage; no implementation selected merely by reading a method."
+    },
+    {
+      "task": "Production-only performance failure",
+      "path": [
+        "debugging",
+        "grafana"
+      ],
+      "success": "Comparable observations and causal probe path despite no local red command."
+    },
+    {
+      "task": "Durable routing replacement",
+      "path": [
+        "steward",
+        "engineering",
+        "ai-engineering",
+        "review"
+      ],
+      "success": "Protect accepted simple seam and human permissions; no rejected fingerprints/races/timeouts; separate actors and requested-stage receipts."
+    },
+    {
+      "task": "Steward PLAN acceptance",
+      "path": [
+        "review",
+        "steward/review reference"
+      ],
+      "success": "Independent phase criteria and exact runtime output, not code-only PR verdict."
+    },
+    {
+      "task": "Withdraw a premise / reopen completion",
+      "path": [
+        "steward"
+      ],
+      "success": "Stop only unsupported unfinished branches; cancel actual actors; replace permanent work IDs; withdraw invalid receipts."
+    },
+    {
+      "task": "Edit supplied PR description",
+      "path": [
+        "writing"
+      ],
+      "success": "Preserve supplied meaning and voice; no hidden merge review or new test claims."
+    },
+    {
+      "task": "Write description from current PR",
+      "path": [
+        "writing",
+        "github when needed"
+      ],
+      "success": "Reconstruct aggregate delta and actual evidence; produce proportional reader-facing prose."
+    },
+    {
+      "task": "Known algorithm interactive explanation",
+      "path": [
+        "managed visualize"
+      ],
+      "success": "Native inline explanation without compulsory diagram wrapper."
+    },
+    {
+      "task": "Standalone/source-sensitive diagram",
+      "path": [
+        "diagram-design",
+        "augment-design when branded"
+      ],
+      "success": "Preserve semantics and export fidelity; unknown not permission denial; no diagram-type quota."
+    },
+    {
+      "task": "Interaction uncertainty",
+      "path": [
+        "interface-design"
+      ],
+      "success": "Minimal runnable probe with observed learning and real-state fidelity; no mandatory 3 variants."
+    },
+    {
+      "task": "Customer-evidence-derived work product",
+      "path": [
+        "ai-engineering",
+        "augment-workflows when product graph",
+        "evaluation when comparison asked"
+      ],
+      "success": "Source/decision-time fidelity, justified support and publication, typed validity separate from usefulness."
+    },
+    {
+      "task": "Instruction usefulness / routing eval",
+      "path": [
+        "evaluation",
+        "writing-for-agents"
+      ],
+      "success": "Representative independent with/without comparison; no generic optimality claim from word count."
+    },
+    {
+      "task": "Creative fiction/exercise",
+      "path": [
+        "creative-ideation"
+      ],
+      "success": "Specific strange directions using the actual selected method; no forced grounded business alternative."
+    }
+  ],
+  "behavioral_acceptance": {
+    "status": "Proposed; no empirical baseline-vs-candidate model evaluation has yet run.",
+    "routing": "Exercise positive, negative, collision and multi-skill tasks using actual target-host catalog metadata. Inspect selection and read-only boundaries.",
+    "task_quality": "Compare original and candidate instructions on fresh historical/regression and held-out realistic cases with independent judgments. Measure usable outcome, scope expansion, fidelity, skipped obligations, clarification burden, context/time cost and failure strata.",
+    "runtime": "Run unchanged state-machine and replay tests; compare real end-to-end actor reconciliation, owner correction, support withdrawal, independent acceptance and receipt reopening.",
+    "helpers": "Add meaningful regressions for observed pagination/audit/export errors; inspect actual rendered visuals and applied fonts.",
+    "distribution": "Package and dry-run host-specific projections; check links/assets/metadata/byte limits without pushing. Preserve history and rollback. Do not install until this design is selected for implementation.",
+    "decision": "Adopt only if protected behavior and required quality survive and selection/process burden falls. Split engineering design or change a boundary if observed routing failures justify it."
+  },
+  "status": "Installed locally, meaningfully verified and independently accepted.",
+  "source_commit": "1e8ee5382016cfc770cd066024c54654196ea5cb",
+  "managed": "Unchanged by current owner instruction.",
+  "observed_checks": {
+    "active_catalog": 15,
+    "invocation_case_specifications": 82,
+    "source_entry_points": 36,
+    "entry_word_count": 7044,
+    "source_entry_word_count": 30691,
+    "steward_runtime_tests": 22,
+    "validator_tests": 8,
+    "github_pagination_tests": 4,
+    "brand_audit_tests": 14,
+    "diagram_self_check_tests": 11,
+    "creative_route_assertions": 70,
+    "github_live_public_pr": "cli/cli#14583",
+    "steward_worked_example_cli_blocks": 10,
+    "limits": [
+      "Case specifications are structurally checked, not measured routing results.",
+      "No measured comparative model-quality or host catalog-refresh result.",
+      "No exhaustive diagram-gallery render.",
+      "Managed skills and plugin settings unchanged.",
+      "Filtered Amp projection is not full local asset parity."
+    ],
+    "visual_browser": {
+      "audit_before": 6,
+      "audit_after": 0,
+      "applied_font": "Matter SQ",
+      "svg_css_bounds": [
+        640,
+        321
+      ],
+      "effective_fractional_scale": 1.25,
+      "png_pixels": [
+        800,
+        401
+      ],
+      "narrow_viewport": 375,
+      "narrow_css_bounds": [
+        327,
+        164.5
+      ]
+    }
+  },
+  "installation_review": {
+    "report": "RP-INSTALL-ROOT-1",
+    "review": "RV-INSTALL-ROOT-1",
+    "actor": "/root/final_design_review",
+    "status": "ADHERES",
+    "confidence": "HIGH",
+    "report_revision": 37,
+    "completion_revision": 41,
+    "steward_record": "/Users/danielbolivar/.codex/visualizations/2026/10/06/01a11351-2003-7123-a65b-ed712ba5abb6/skills-redesign/.steward/skills-redesign/record.jsonl"
+  }
+}

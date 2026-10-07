@@ -1,8 +1,7 @@
 # Augment Design System
 
 The brand foundations for Augment, an enterprise AI platform: color, type,
-spacing, material, motion, and controls. Start at `SKILL.md`, which routes you
-through the whole system in seven steps. Come back to this file for values.
+spacing, material, motion, and controls. Start at `SKILL.md`, which selects the relevant surface and methods. Come back to this file for values.
 
 Composition, voice, and review live in `references/`. The system was built from
 the official `use-augment-branding` skill, the source of truth for tokens, logos,

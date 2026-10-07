@@ -1,8 +1,5 @@
 # Volume Generation
 
-Core: external steps below are proposals or supplied evidence; the operational caller executes them.
-
-
 Three traditions for producing many ideas fast:
 - **Crazy 8s** — Google Ventures Sprint method. Codified in *Sprint* (Knapp et al., 2016).
 - **Brainwriting 6-3-5** — Bernd Rohrbach, 1968. German design-method literature.
@@ -108,7 +105,7 @@ named range axes while satisfying the same invariant brief.
 - **Randomness creates candidates, not verdicts.** Preserve the invariant brief
   and use human or domain judgment to select what earns depth.
 - Don't pad to round numbers. If only 5 of the 8 panels produced anything, surface 5.
-- Surface 1–3 to the user, not all 8 / all 108.
+- Surface selections or the complete raw batch according to the request; distinguish raw generation from developed work.
 - Don't conflate volume with depth. Volume is breadth-first; depth comes later with elaboration methods.
 - Respect Young's drop stage. Rushing from gather → idea in one session usually fails.
 
