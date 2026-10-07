@@ -1,7 +1,9 @@
 # Tempo evidence branch
 
 Use Tempo when the question depends on request, job, span, or dependency
-causality. A trace is a specimen; Tempo metrics establish the population.
+causality. A fetched trace is a specimen. Trace-derived metrics can describe the observed
+span population when the deployment supports them; they do not automatically count all
+application requests.
 
 ## Discover
 
@@ -16,9 +18,12 @@ environments. Use the current documentation and metadata response.
 
 ## Measure, then inspect
 
-Use TraceQL metrics range or instant reads to measure frequency, rate, or a
-duration distribution before searching individual traces. Narrow the population
-with verified attributes and preserve the denominator behind any percentage.
+When enabled and available, use TraceQL metrics range or instant reads to measure
+frequency, rate, or duration before treating traces as representative. Check
+[the current metrics contract](https://grafana.com/docs/tempo/latest/metrics-from-traces/metrics-queries/)
+for deployment support and query semantics. Narrow the population with verified
+attributes and preserve the denominator behind a percentage. A known trace ID can be
+inspected directly; unavailable aggregates limit generalization, not all diagnosis.
 
 Then search for a few traces from the measured population and fetch only those
 needed to compare:
@@ -30,12 +35,21 @@ needed to compare:
 - exception events and downstream status; and
 - missing roots, gaps, or incomplete trees that limit interpretation.
 
+Define whether the aggregate counts spans, root operations, or another selected shape.
+Retries and child spans can change the count without changing the number of requests.
+Sampling and incomplete ingestion limit the represented population. Match a slower trace
+to a similar operation/input when possible; unrelated happy-path traffic is a weak control.
+
 ## Interpret
 
 An HTTP status population, span error population, and exception population may
 differ. Report which one was queried. A missing span or event may be an
 instrumentation failure rather than success.
 
-Completion criterion: the Tempo receipt contains the verified attributes,
-population query, specimen search, retrieved trace identifiers in redacted form,
-and the gap between what the traces show and what they cannot generalize.
+Follow the critical path rather than summing overlapping child durations as request
+latency. Parent-child structure shows instrumented relationships; queueing before the
+first span or an uninstrumented dependency may remain outside that picture.
+
+Retain verified selectors, time bounds, population unit/query when available, specimen
+search or known-ID selection, safe trace pointers, and the gap between what those traces
+show and what they can generalize.

@@ -1,8 +1,5 @@
 # Lateral Provocations
 
-Core: external steps below are proposals or supplied evidence; the operational caller executes them.
-
-
 Edward de Bono, 1967–. The PO operator and five provocation moves for breaking pattern lock-in. PO is a linguistic marker that flags a statement as a deliberate provocation, not a claim — to be taken seriously even when implausible.
 
 ## When to use
@@ -48,7 +45,7 @@ Edward de Bono, 1967–. The PO operator and five provocation moves for breaking
 ## Random-word technique
 
 1. Pick a random noun (dictionary at random page; or list of 1000 nouns + random index).
-2. List 5 connections between the random word and your problem, however tenuous.
+2. List several connections between the random word and your problem, including tenuous ones; a five-connection exercise is a useful starting format.
 3. Use the strongest.
 
 Example. Problem: my CLI is hard to discover. Random word: "lighthouse".
@@ -66,9 +63,9 @@ Result: the CLI should signal danger when about to do something irreversible. Co
 1. State the problem.
 2. Pick an operator.
 3. Generate a PO statement.
-4. List 5 consequences if the PO statement were true.
+4. Explore concrete consequences if the PO statement were true. Stay with it past the first easy dismissal.
 5. Pick the strongest consequence.
-6. Translate into a real proposal.
+6. Translate into the result the brief needs: a practical proposal, fictional artifact, scene, image, or other creative work.
 
 ### Stacked operators
 Two operators on the same problem. Intersection often more interesting than either alone. Example: Escape ("po: meetings don't have agendas") + Reversal ("po: attendees set the agenda after the meeting") → an asynchronous "what we ended up discussing" doc, written collectively after the fact.
@@ -77,8 +74,8 @@ Two operators on the same problem. Intersection often more interesting than eith
 
 - Generic provocations ("po: things are different") are placeholders, not provocations. Specify what's changed and how.
 - Don't fake "random" word selection. "Innovation" or "synergy" defeats the operator. Use actual random.
-- Don't end at the provocation. The PO statement is means; an actionable proposal is the end.
-- Take the provocation seriously for at least 5 minutes. Dismissing it defeats the operation.
+- Don't end at a method label or bare provocation when the request needs developed work. In a practical brief, translate the opening into a concrete proposal; artistic work may finish in an expressive form.
+- Take the provocation seriously long enough to work out consequences. A human exercise can use a five-minute timer; elapsed time alone does not show that the operation happened.
 - Pick the operator deliberately. Different operators surface different things: Escape → purpose; Reversal → relationship; Exaggeration → parameter; Distortion → sequencing; Wishful Thinking → constraint.
 
 Source: de Bono, *Lateral Thinking* (Harper, 1970); *Po: Beyond Yes and No* (Penguin, 1972).

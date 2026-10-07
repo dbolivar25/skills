@@ -16,7 +16,7 @@ old description, notification, or remembered head. Capture:
 
 - repository and PR number;
 - URL, title, author, and draft/open/closed/merged state;
-- base branch, head branch, and live head SHA;
+- base branch/ref, head branch, live head SHA, and the actual comparison used;
 - merge state and current review decision;
 - check and CI status;
 - changed files and diff shape; and
@@ -29,6 +29,11 @@ another GitHub surface when thread state matters.
 If local dependencies, credentials, containers, or generated state are unavailable,
 record that as a validation gap. It is not a product finding unless the reviewed
 change caused the failure.
+
+The helpers supply different slices and make multiple requests. A snapshot's complete
+collection counts do not include a source-level review or all inline bodies. If the
+base moved, the head changed, or relevant checks/discussion changed during acquisition,
+refresh the affected facts before using them. Reuse evidence tied to unchanged premises.
 
 ## Read review threads before writing findings
 
@@ -78,7 +83,7 @@ The user must explicitly select the live action:
 - **Resolve** — close a thread after checking that its issue is fixed or its
   disposition is explicitly accepted.
 
-Do not infer approval from “looks good,” infer thread resolution from a reply, or
+Do not infer approval from “looks good” by itself, infer thread resolution from a reply, or
 bundle extra comments into a request for one action.
 
 Before posting an inline comment, verify that its anchor belongs to the current
@@ -90,7 +95,9 @@ comment that cites the location.
 Immediately before mutation:
 
 1. Read the live head SHA again.
-2. If it changed, revalidate every finding and the recommendation.
+2. Recheck the comparison and other action-critical state. If they changed, inspect
+   affected regions and revalidate dependent findings and the recommendation. When the
+   impact cannot be bounded, refresh the whole judgment.
 3. Submit exactly the requested action.
 4. Read back the submitted review, comment, reply, and thread state.
 

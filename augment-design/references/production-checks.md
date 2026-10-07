@@ -1,20 +1,22 @@
 # Producing an Augment surface
 
-These are the implementation and evidence obligations returned by Augment design.
-The operational caller performs them within the task's authority. The design
-skill uses the resulting source, renders and audit observations for assessment.
+Apply the relevant checks while building or editing the requested surface.
+Use current source and rendered observations for an assessment. Evidence from
+one output or state does not establish another output's behavior.
 
-| Stage | Obligation and completion evidence |
+| Concern | What to establish |
 | --- | --- |
-| Moment | One sentence names who is looking, what they want to do and what happens next. It identifies a person and a decision. |
-| Surface | The relevant documents, product UI or marketing branch supplies the floor and facets. Two surfaces are assessed separately. |
-| Composition | The proposed surface follows [composition law](composition.md); its object, state, color and fact ownership are explicit. |
-| Foundations | Every proposed token exists in the packaged foundations or token files. The caller uses those values and utilities; it does not invent a replacement system. |
-| Construction | The caller copies required official assets into the target project and builds from the tokens, utilities and control rules in [the foundations](../readme.md). Cross-project file references are not a shipped asset. This system supplies no components; the foundations explain why. |
-| Copy | Every authored string receives the [voice pass](voice.md), including truth-preserving structural editing. |
-| Verification | Every relevant page or state is rendered and inspected at full and thumbnail size. Print work is checked at print size. The caller runs the audit described in [QA](qa.md) and supplies its findings and disposition. |
+| Moment | Who is looking, what they need to understand or do, and what happens next. |
+| Surface | The document, product UI, or marketing branch supplies the applicable floor and facets. |
+| Composition | The [composition rules](composition.md) make object, state, color, and fact ownership coherent. |
+| Foundations | Use the packaged tokens and utilities instead of inventing a replacement palette or type system. |
+| Construction | Copy official assets into the deliverable/project, or embed them in the selected native format. Cross-project filesystem references are not shipped assets. The [foundations](../readme.md) explain controls and material. |
+| Copy | Apply the [voice pass](voice.md), preserving facts, meaning, certainty, and privacy. |
+| Verification | Inspect relevant pages and states at full and thumbnail size; print at print size; presentations at their intended scale. For HTML, use the bounded [audit](qa.md#audit) where useful and examine its findings. |
 
-A later stage does not satisfy an unmet earlier obligation. Official SVG logos,
-Matter SQ, sentence case, customer-name permission and the relevant branch floor
-remain required. Nothing ships unrendered; output from an automated checker alone
-cannot establish composition or prose quality.
+Use the appropriate native artifact and editor, including the host's LaTeX
+editor for standalone LaTeX. HTML data attributes and the in-page JavaScript
+audit apply to HTML, not to a native document. Official SVG logos, Matter SQ,
+sentence case, customer-name permission, and the applicable branch floor remain
+required. Automated output cannot establish composition, prose quality, or
+publication authority; inspect the rendered deliverable.

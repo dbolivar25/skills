@@ -18,9 +18,16 @@ windows. Compare aggregate hot paths before drilling into one function or
 instance. Keep sampling rate, missing instances, label drift, and deployment
 topology visible.
 
+Check whether the displayed value is total sampled cost or cost normalized by time,
+request volume, or another denominator. More traffic can increase total CPU without
+making each request slower. Equal-duration windows alone do not match workload.
+Use [profile-type documentation](https://grafana.com/docs/pyroscope/latest/introduction/profiling-types/)
+and the actual response to distinguish CPU, allocation, live-memory, and waiting costs.
+
 A hot frame is observed resource consumption, not automatically the cause of a
 user-visible symptom. Correlate its time window and population with the relevant
 metric, log, or trace evidence before handing the hypothesis to diagnosis.
 
-Completion criterion: the receipt names profile type, units, labels, windows,
-comparison basis, dominant frames, and coverage limits.
+Retain profile type, units, labels, windows, comparison/normalization basis, dominant
+frames, and coverage limits that carry the claim. A profile without a comparable baseline
+can still localize current cost, while leaving a before/after claim unresolved.

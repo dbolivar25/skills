@@ -1,8 +1,5 @@
 # Dérive and Mapping
 
-Core: external steps below are proposals or supplied evidence; the operational caller executes them.
-
-
 Three traditions of *attentive movement through territory* as ideation:
 - **Situationist dérive** — Guy Debord, *Théorie de la dérive* (1958). Drift through a city, displacing productive uses with attentive wandering.
 - **Kevin Lynch's cognitive mapping** — *The Image of the City* (1960). Five-element vocabulary for mental maps: paths, edges, districts, nodes, landmarks.

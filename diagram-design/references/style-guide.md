@@ -1,98 +1,39 @@
-# Style Guide
+# Augment diagram skin
 
-**The single source of truth for colors, typography, and tokens.** Every diagram draws from this — not from hex values inlined in other reference files. If you want to change the visual skin of Diagram Design, change this file.
+Use this only for actual Augment work or when explicitly selected. Read [Augment Design](../../augment-design/SKILL.md) for identity, voice, privacy, and the relevant surface rules. Generic and client diagrams select another [skin](skins.md). The gallery's earlier Geist/Instrument Serif treatment is a layout reference, not Augment conformity.
 
-The active skin maps Diagram Design's semantic roles to the Augment design system:
-warm bone paper, cool ink and neutrals, burgundy emphasis on light surfaces, and
-mark pink emphasis on dark surfaces. The pristine Diagram Design skin remains
-recoverable as the `default` profile described in [`profiles.md`](profiles.md).
+## Color roles
 
-To generate your own from a website URL, see [`onboarding.md`](onboarding.md).
+These roles map to the packaged Augment color tokens. A role's appearance does not change the meaning of a source edge or status.
 
----
+| Role | Light | Dark | Use |
+| --- | --- | --- | --- |
+| paper | `#f6f1ef` | `#040919` | Diagram surface |
+| paper-2 | `#e9e1e1` | `#2b2d39` | Secondary surface |
+| ink | `#040919` | `#ffffff` | Primary text and stroke |
+| muted | `#2b2d39` | `#e3e3e8` | Secondary text and ordinary arrows |
+| soft | `#6f7288` | `#afaeb1` | Supporting labels |
+| rule | `rgba(4,9,25,.12)` | `rgba(255,255,255,.16)` | Subtle borders |
+| rule-solid | `#afaeb1` | `rgba(255,255,255,.24)` | Stronger borders |
+| accent | `#660033` | `#cf0147` | Deliberate focal emphasis |
+| accent-tint | `rgba(102,0,51,.08)` | `rgba(207,1,71,.12)` | Focal surface |
+| link | `#6f7288` | `#afaeb1` | Ordinary external/API relationships |
 
-## Tokens
+Source: [Augment color tokens](../../augment-design/tokens/colors.css). Mark pink as a dark diagram focal accent is the retained, explicitly documented diagram adaptation; it broadens Augment's usual identity/artwork-only use. It does not authorize pink arrows, document chrome, or arbitrary uses elsewhere.
 
-### Semantic roles
+Use emphasis deliberately, without turning it into a quota that conceals multiple real failures or statuses. Status colors require real states and redundant labels or marks. For multi-series charts, use approved roles and distinct neutral tones, outlines, dashes, symbols, or small multiples. If a colored series palette is needed beyond the brand's allowed surface roles, resolve that adaptation for the actual task; the old gallery's sage/blue/mustard palette is not an approved Augment token set.
 
-Every token is referred to by **semantic role**, not by its hex value. Type references (`type-*.md`) and SKILL.md say `accent`, not `#f7591f`.
+Check contrast in the actual painted context, including opacity and background. Essential thin rules and graphical distinctions need enough contrast to read. A token name or nominal hex value is not a visibility receipt.
 
-| Role | Purpose | Active (light) | Active (dark) |
-|---|---|---|---|
-| `paper` | Page background, default node fill | `#f6f1ef` (bone-100) | `#040919` (ink) |
-| `paper-2` | Diagram container bg, secondary fill | `#e9e1e1` (bone-500) | `#2b2d39` (woodsmoke) |
-| `ink` | Primary text, primary stroke | `#040919` (ink) | `#ffffff` (white) |
-| `muted` | Secondary text, default arrow stroke | `#2b2d39` (woodsmoke) | `#e3e3e8` (neutral-85) |
-| `soft` | Sublabels, boundary labels | `#6f7288` (cloud-burst) | `#afaeb1` (neutral-100) |
-| `rule` | Hairline borders | `rgba(4,9,25,0.12)` | `rgba(255,255,255,0.16)` |
-| `rule-solid` | Stronger borders, baselines | `#afaeb1` (neutral-100) | `rgba(255,255,255,0.24)` |
-| `accent` | Focal / 1–2 max per diagram | `#660033` (burgundy-600) | `#cf0147` (mark-pink) |
-| `accent-tint` | Fill for accent-bordered boxes | `rgba(102,0,51,0.08)` | `rgba(207,1,71,0.12)` |
-| `link` | HTTP/API calls, external arrows | `#6f7288` (cloud-burst) | `#afaeb1` (neutral-100) |
+## Typography and fonts
 
-> **Brand palette source:** [`augment-design`](../../augment-design/SKILL.md),
-> specifically its packaged `tokens/colors.css`. Burgundy is the light-surface
-> focal accent. Mark pink is the agreed dark-surface adaptation so Diagram
-> Design retains a visible chromatic focal accent; this deliberately broadens
-> Augment's usual identity/artwork-only use of mark pink. Arrows, rules, and
-> links remain cool neutrals under Augment's color-role law.
-
-> **Note:** The pre-baked example HTML files in `assets/` were built under an earlier skin. Regenerating them against the current `style-guide.md` is a v5.1 task. New diagrams the skill produces will use the tokens above.
-
-### Inversion rule (light → dark)
-
-Any `rgba(4,9,25, X)` in light becomes `rgba(255,255,255, X)` in dark. Preserve
-the opacity. Burgundy accent values become mark pink on dark paper.
-
-### Series palette (multi-series chart types only)
-
-A small set of desaturated, editorial-tone colors for chart types that genuinely need to distinguish multiple overlapping entities (currently: **radar**). The "1-focal" rule still holds — `accent` is reserved for the focal series; the palette below covers the rest.
-
-| Token | Light | Dark | Notes |
-|---|---|---|---|
-| `series-1` | `#7c8f6f` (sage) | `#9caf8f` | Non-focal series |
-| `series-2` | `#5e7a9b` (dusty-blue) | `#82a0c0` | Non-focal series |
-| `series-3` | `#b8915a` (mustard) | `#d3ad7a` | Non-focal series |
-| `series-4` | `#9c6b50` (rust-brown) | `#b88670` | Non-focal series |
-| `series-5` | `#6e6479` (slate) | `#8d8298` | Non-focal series |
-
-Fills sit at `0.18` opacity light, `0.22` dark; strokes use the full color. **Don't backfill these tokens to non-chart types** — architecture, swimlane, etc. continue to use muted-ink variants. The series palette is opt-in for diagrams where overlapping shapes demand distinguishable color, not a license to add color elsewhere.
-
-### Terminal skin (opt-in alternate)
-
-A self-contained palette for the terminal-window primitive (see [primitive-terminal.md](primitive-terminal.md)) — a CLI-chrome register for dev-tool posts and technical social cards. It does not replace the default skin above and isn't affected by onboarding; it's a second, fixed skin you opt into per-diagram.
-
-| Token | Hex | Purpose |
-|---|---|---|
-| `terminal-page` | `#0a0a0a` | Page background behind the window |
-| `terminal-paper` | `#141414` | Window body, node fill |
-| `terminal-bar` | `#1b1b1b` | Titlebar strip |
-| `terminal-border` | `#2b2b2b` | Window border, hairlines |
-| `terminal-ink` | `#f5f5f5` | Primary text, primary stroke (same white-smoke as default `ink`) |
-| `terminal-muted` | `#9a9a9a` | Secondary text, sublabels, ring stroke |
-| `terminal-soft` | `#5c5c5c` | Tertiary — inactive dots, spokes |
-| `terminal-accent` | `#ff5a36` | The one accent — focal station, prompt sign, active dot |
-| `terminal-accent-tint` | `rgba(255,90,54,0.12)` | Fill for accent-bordered boxes |
-
-**1-accent rule still holds.** Everything that isn't `terminal-ink` or `terminal-muted`/`terminal-soft` should be `terminal-accent` — never introduce a second hue.
-
----
-
-## Typography
-
-| Role | Family | Size | Weight | Usage |
-|---|---|---|---|---|
-| `title` | Matter SQ | 1.75rem | 400 | Page H1 |
-| `node-name` | Matter SQ | 12px | 600 | Human-readable labels |
-| `sublabel` | SF Mono / Menlo / monospace | 9px | 400 | Port, protocol, URL, field type |
-| `eyebrow` | Matter SQ | 12px | 500, tracked 0.04em, sentence case | Type tags, axis labels |
-| `arrow-label` | Matter SQ | 12px | 400 | Human-readable arrow annotations; technical values use mono |
-| `callout` | Matter SQ *italic* | 14px | 400 | Editorial asides only |
+Matter SQ owns authored text, including titles, names, axis labels, and annotations. System mono is reserved for technical values such as ports, URLs, commands, and field types. Use sentence case. Do not replace Matter with Geist, Instrument Serif, or a blanket developer mono treatment.
 
 ### Font sources
 
-```html
-<style>
+The official family is packaged in [assets/fonts](../assets/fonts/). Copy the used weights beside the artifact or embed them when the output supports it. For example:
+
+```css
 @font-face {
   font-family: "Matter SQ";
   src: url("fonts/MatterSQ-Regular.woff2") format("woff2");
@@ -101,132 +42,22 @@ A self-contained palette for the terminal-window primitive (see [primitive-termi
 }
 @font-face {
   font-family: "Matter SQ";
-  src: url("fonts/MatterSQ-RegularItalic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Matter SQ";
-  src: url("fonts/MatterSQ-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Matter SQ";
   src: url("fonts/MatterSQ-SemiBold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
 }
-</style>
 ```
 
-The complete official Matter SQ family is packaged under `assets/fonts/`. A
-generated standalone file must copy the weights it uses into a `fonts/` directory
-beside the HTML or embed the WOFF2 data; a cross-skill filesystem reference is not
-a shipped font. Use
-`"Matter SQ", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif`
-for authored text and `ui-monospace, "SF Mono", Menlo, monospace` only for
-technical values.
+Use `"Matter SQ", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif` for text and `ui-monospace, "SF Mono", Menlo, monospace` for technical values. Add the packaged italic face when using an italic annotation. Title size, node size, and spacing depend on actual reading distance and density, not the gallery's sample pixel values.
 
-### Korean labels
+Matter SQ does not supply all scripts. For Korean, extend with Noto Sans KR, Apple SD Gothic Neo, or Malgun Gothic; for Traditional Chinese, use Noto Sans TC, PingFang TC, or Microsoft JhengHei; for Simplified Chinese, use corresponding SC families. These Noto faces are not packaged here. Supply the selected fallback when portability requires it and inspect the actual glyphs. Technical identifiers stay as sourced; prose in another language uses a readable text family rather than being forced into tiny mono.
 
-Matter SQ carries no Hangul. A Korean `<text>` element extends its own family — never swap the skin:
+A conservative width estimate counts every Unicode wide/full-width character as roughly 1em, narrow characters by their selected font's advance, and combining marks as zero additional advance. Include digits, punctuation, and spaces. This is an authoring heuristic, not a measurement or bundled check. Measure real rendered text and leave padding. Wrap, enlarge, or attach a full-name legend instead of cutting identity or shrinking dense script below readable size.
 
-```svg
-<text font-family="'Matter SQ', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">결제 서비스</text>
-```
+## Shape and surface
 
-Package Noto Sans KR when a diagram contains Hangul; otherwise the local families
-provide the fallback. Page titles use the same sans stack as labels so mixed
-Matter SQ and Hangul remain in one register.
+Use the brand's 4px spacing rhythm as a starting point. Data coordinates and optical adjustments retain their actual meaning. Light, restrained strokes and modest radii usually work; their thickness must survive the intended export size. Decorative dots, framing, shadows, and terminal treatments are optional surface choices, not default brand requirements.
 
-**Width budget.** Measure per character, not per script: **every Unicode wide or full-width character costs 1em, every other character costs its face's Latin advance** (0.60em sans, 0.62em mono), and nonspacing/enclosing marks cost nothing. Sum over the string and multiply by the font size for the text width, then add padding and round the box up to the next multiple of 4. `verify-treemap.py` enforces exactly this text width for treemap cell labels; the padding and rounding are authoring convention, and no other type carries an automatic check, so on those the budget is yours to hold.
+A container's fill must work in its actual theme. Do not copy a white backend box blindly onto a dark diagram. Dashed, colored, or filled treatments carry only declared meanings. A security boundary needs evidence and a label, not merely an accent stroke.
 
-Counting by script is the trap. `주문 v2.1` is two full-width syllables and five narrow characters; a formula that tallies Hangul, Latin letters, and spaces silently drops `2`, `.`, and `1` and sizes the box for four of its seven characters. Every rendered character costs something — measure per character, never per script.
-
-Three rules follow from Hangul metrics:
-
-- **Sublabels stay Latin.** Ports, protocols, field types, and URLs are Latin anyway — keep the active system mono family there and don't translate them. Hangul in a 9px mono sublabel is unreadable and has no mono face to fall back to.
-- **Floor of 12px.** Hangul goes muddy below 12px. If a Korean name doesn't fit at 12px, cut the name — don't shrink the type.
-- **Arrow labels, eyebrows, and legend text keep the authored-text register.** They remain 12px sentence-case sans, extending Matter SQ with the Korean fallback. Technical values alone use mono.
-
-**Load-bearing rule:** Mono is for *technical* content (ports, commands, URLs,
-field types). Names, page titles, labels, and callouts use Matter SQ. **Never
-JetBrains Mono** as a blanket "dev" font.
-
-### Traditional Chinese labels
-
-Matter SQ carries no Han. A Traditional Chinese `<text>` element extends its own family — never swap the skin:
-
-```svg
-<text font-family="'Matter SQ', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif">請求項比對</text>
-```
-
-Package Noto Sans TC when a diagram contains Traditional Chinese; otherwise the
-local families provide the fallback. Page titles use the same sans stack as
-labels so mixed Matter SQ and Han remain in one register.
-
-**Width budget.** The per-character contract above is unchanged: every Unicode wide or full-width character costs 1em, every other character costs its face's Latin advance, and nonspacing marks cost nothing. Full-width punctuation — `（）「」，。：` — is wide and costs 1em as well, which is the part most often dropped.
-
-Counting by script is the trap. `請求項 v2.1` is three full-width characters and five narrow ones; a formula that tallies Han and Latin letters silently drops `2`, `.`, and `1` and sizes the box for six of its nine characters.
-
-Three rules follow from Han metrics, mirroring the Hangul ones:
-
-- **Sublabels stay Latin.** Ports, protocols, field types, and URLs are Latin anyway — keep the active system mono family there and don't translate them. Han in a 9px mono sublabel is unreadable and has no mono face to fall back to. A sublabel that is prose rather than a value may be Chinese, but it then uses the authored-text register below.
-- **Floor of 12px.** Han packs more strokes than Hangul into the same em box, so the 12px floor binds at least as hard here. If a Chinese name doesn't fit at 12px, cut the name — don't shrink the type.
-- **Arrow labels, eyebrows, and legend text keep the authored-text register.** They remain 12px sentence-case sans, extending Matter SQ with the Chinese fallback. Technical values alone use mono.
-
-Simplified Chinese takes the same three rules with the Simplified stack (`'Noto Sans SC'`, `'PingFang SC'`, `'Microsoft YaHei'`). That face does not ship in the link, so Simplified labels still resolve through whatever the viewer has locally.
-
----
-
-## Stroke, radius, spacing
-
-| Token | Value | Use |
-|---|---|---|
-| `stroke-thin` | `0.8` | Tag-box outlines, leaf nodes |
-| `stroke-default` | `1` | Most strokes |
-| `stroke-strong` | `1.2` | Emphasis strokes |
-| `radius-sm` | `4` | Small tags |
-| `radius-md` | `6` | Node boxes |
-| `radius-lg` | `8` | Containers, rings |
-| `grid` | `4` | Every coord, size, and gap is divisible by 4 (hard rule) |
-
----
-
-## Node type → treatment
-
-Semantic role combinations — reference these by name in type specs.
-
-| Type | Fill | Stroke |
-|---|---|---|
-| `focal` (1–2 max) | `accent-tint` | `accent` |
-| `backend` | `#ffffff` (white) | `ink` |
-| `store` | `ink @ 0.05` | `muted` |
-| `external` | `ink @ 0.03` | `ink @ 0.30` |
-| `input` | `muted @ 0.10` | `soft` |
-| `optional` | `ink @ 0.02` | `ink @ 0.20` dashed `4,3` |
-| `security` | `accent @ 0.05` | `accent @ 0.50` dashed `4,4` |
-
----
-
-## Customizing the skin
-
-Four options:
-
-1. **Run onboarding** — see [`onboarding.md`](onboarding.md). Drop a URL; the skill extracts the palette + fonts and rewrites this file.
-2. **Edit by hand** — change the hex values in the tables above. Run the pre-output taste gate afterward to verify the accent still reads as "focal" against the new paper color.
-3. **Brand handoff** — paste your existing design-token JSON into a new section here and map its tokens to the semantic roles above.
-4. **Client profiles** — save and switch named skins, or bind one to a project, using [`profiles.md`](profiles.md).
-
-### Constraints (don't break these)
-
-- **Contrast**: `ink` must hit WCAG AA on `paper`. `muted` must hit AA on `paper` for 11px+ text.
-- **One accent**: pick one color for `accent`. Two accents erases the focal signal.
-- **No rainbow palette**: if your brand ships 8 colors, pick 3 (paper, ink, accent). The rest become `muted` variants.
-- **Matter SQ + technical mono**: Matter SQ owns authored text, including titles and callouts; system mono is reserved for ports, commands, URLs, field types, and comparable technical values.
-- **Sentence case**: authored labels, tags, axes, and prose use sentence case. Do not turn them into decorative uppercase eyebrows.
-- **No emoji**: use words or approved vector icons; Unicode glyphs are not identity assets.
-- **Paper is warm-neutral, not pure white**: pure white turns the design sterile. Pick a cream, bone, or light grey with a hint of warmth.
-- **Dot pattern is optional, not default**: the 22×22 dot pattern is an opt-in "dotted paper" variant (good for long-form editorial hero diagrams). The default background is a clean `paper` fill, no pattern. When the pattern is enabled, it should sit at ~10% opacity of `ink` on `paper` — visible but quiet.
-- **Container is clean by default**: the diagram sits directly on the page paper, no secondary container background or border. A framed variant (`paper-2` bg + `rule` border + 8px radius + padding) is available as an opt-in for card-heavy layouts, but don't reach for it by default — the extra chrome fights the figure.
+For another brand, use [onboarding](onboarding.md) and [profiles](profiles.md). Those select or save a task/project skin within authorization; they do not rewrite this installed Augment guide during ordinary generation.

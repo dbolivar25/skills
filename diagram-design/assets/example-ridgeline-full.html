@@ -35,7 +35,7 @@
     <div class="header">
       <p class="header-eyebrow">Ridgeline · Diagram Design</p>
       <h1>Checkout is slow in two different ways</h1>
-      <p class="subtitle">Five services, one week of request latency, one amplitude scale. Each ridge is the share of that service's own requests in each 40&nbsp;ms bin — so the ridges compare shape, not traffic. Four of them have a single hump and a thinning tail; checkout-api has a second, smaller peak past 300&nbsp;ms, which is a different failure from simply being slow.</p>
+      <p class="subtitle">Five services, one week of request latency, one amplitude scale. Each ridge is the share of that service's own requests in each 40&nbsp;ms bin — so the ridges compare shape, not traffic. Four of them have a single hump and a thinning tail; checkout-api has a second, smaller peak past 300&nbsp;ms, a distribution shape that a single latency summary would miss.</p>
     </div>
     <div class="diagram-container">
       <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ridgeline-full-title ridgeline-full-desc">
@@ -50,11 +50,7 @@
         <rect width="100%" height="100%" fill="#f5f5f5"/>
         <rect width="100%" height="100%" fill="url(#dots)" opacity="0.55"/>
 
-        <!-- ONE amplitude on every ridge: y = baseline - 2.4 x (share in %). Per-ridge
-             normalisation would let a rare, flat distribution wear the same silhouette
-             as a tight one, which is the single lie this type is built to tell.
-             scripts/verify-ridgeline.py derives the amplitude from the figure and then
-             holds every vertex of every ridge to it. -->
+        <!-- This example uses one amplitude map on every ridge: y = baseline - 2.4 * share in percent. Independently check source shares, normalization and all ridge vertices against that map. Different normalization choices answer different questions and require disclosure. No packaged ridgeline semantic validator is present. -->
         <text transform="rotate(-90 24 264)" x="24" y="264" fill="#4f5d75" font-size="7" font-family="'Geist Mono', monospace" letter-spacing="0.14em" text-anchor="middle">SHARE OF REQUESTS · 1% = 2.4PX ON EVERY RIDGE</text>
 
         <!-- One baseline per ridge, 56px pitch. The baseline is where a bin of zero
@@ -114,11 +110,11 @@
       <div class="card">
         <p class="eyebrow">FOCAL · CHECKOUT-API</p>
         <div class="card-header"><span class="card-dot coral"></span><h3>A second peak is not a long tail</h3></div>
-        <p>About a third of checkout's requests land past 280&nbsp;ms, and they arrive as a distinct bump peaking near 360&nbsp;ms rather than as a thinning tail. A tail says "sometimes slower"; a second peak says there are two paths through the code and one of them is always slow. Its p50 is 160&nbsp;ms and its p99 is 400&nbsp;ms — both true, and neither says the requests between them arrive in two clusters instead of one spread.</p>
+        <p>The bins starting at 280&nbsp;ms contain 33% of checkout's requests. A second local peak occurs in the 360–400&nbsp;ms bin, beyond the primary peak at 160–200&nbsp;ms. This shape can suggest different request populations or behaviors; it does not identify a code path or prove a cause. Exact percentiles require the underlying samples, rather than these grouped shares.</p>
       </div>
       <div class="card">
         <div class="card-header"><span class="card-dot ink-strong"></span><h3>Height is share, so the ridges compare shape</h3></div>
-        <p>static-cdn is the tallest ridge because its requests are concentrated in three bins, not because it serves the most traffic. Each ridge is normalised to its own service's request count and then drawn on one shared amplitude — that is what makes the silhouettes comparable, and it is the one thing a ridgeline must never fudge.</p>
+        <p>auth-api has the tallest peak: 36% in one bin, compared with static-cdn's maximum of 34%. Height measures concentration, not total traffic. Each ridge is normalised to its own service's request count and drawn on one shared amplitude scale, so the silhouettes compare distribution shape.</p>
       </div>
       <div class="card">
         <div class="card-header"><span class="card-dot ink-light"></span><h3>Overlap is deliberate; occlusion would not be</h3></div>

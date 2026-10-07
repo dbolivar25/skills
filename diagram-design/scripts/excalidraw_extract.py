@@ -98,6 +98,8 @@ class Edge:
     id: str
     source: str | None
     target: str | None
+    source_ref: str | None = None
+    target_ref: str | None = None
     label: str = ""
     dashed: bool = False
     bidirectional: bool = False
@@ -119,6 +121,8 @@ class Scene:
             "embeds": 0,
             "deleted_elements": 0,
             "unknown_elements": 0,
+            "invalid_elements": 0,
+            "editor_artifacts": 0,
         }
     )
 
@@ -201,6 +205,7 @@ def parse_scene(path: Path, document: dict[str, Any]) -> Scene:
         for element in document["elements"]
         if isinstance(element, dict) and isinstance(element.get("id"), str)
     ]
+    scene.discarded["invalid_elements"] = len(document["elements"]) - len(elements)
 
     live: list[dict[str, Any]] = []
     for element in elements:
@@ -212,6 +217,8 @@ def parse_scene(path: Path, document: dict[str, Any]) -> Scene:
         live.append(element)
 
     by_id = {element["id"]: element for element in live}
+    if len(by_id) != len(live):
+        _fail("duplicate live element IDs make bindings ambiguous")
 
     # Pass 1: fold bound text into its container (node label or edge label).
     bound_labels: dict[str, list[str]] = {}
@@ -256,6 +263,7 @@ def parse_scene(path: Path, document: dict[str, Any]) -> Scene:
             scene.discarded["freedraw_strokes"] += 1
             continue
         elif kind in ("selection", "laser"):
+            scene.discarded["editor_artifacts"] += 1
             continue  # editor-only artifacts, no content
         else:
             scene.discarded["unknown_elements"] += 1
@@ -303,11 +311,11 @@ def parse_scene(path: Path, document: dict[str, Any]) -> Scene:
 
     # Pass 3: edges. Arrows are directed unless both arrowheads vanish; lines
     # are undirected unless the author added arrowheads.
-    def binding_id(element: dict[str, Any], key: str) -> str | None:
+    def binding_ref(element: dict[str, Any], key: str) -> str | None:
         binding = element.get(key)
         if isinstance(binding, dict) and isinstance(binding.get("elementId"), str):
             bound = binding["elementId"]
-            return bound if bound in node_map else None
+            return bound
         return None
 
     for element in live:
@@ -323,14 +331,20 @@ def parse_scene(path: Path, document: dict[str, Any]) -> Scene:
             _fail("invalid startArrowhead: expected a string or null")
         if end_head is not None and not isinstance(end_head, str):
             _fail("invalid endArrowhead: expected a string or null")
-        start_bound = binding_id(element, "startBinding")
-        end_bound = binding_id(element, "endBinding")
+        start_ref = binding_ref(element, "startBinding")
+        end_ref = binding_ref(element, "endBinding")
+        start_bound = start_ref if start_ref in node_map else None
+        end_bound = end_ref if end_ref in node_map else None
         # The semantic source is the tail, not necessarily startBinding: a
         # start-only arrowhead points from the end binding back to the start.
         source, target = (
             (end_bound, start_bound)
             if start_head and not end_head
             else (start_bound, end_bound)
+        )
+        source_ref, target_ref = (
+            (end_ref, start_ref) if start_head and not end_head
+            else (start_ref, end_ref)
         )
         points = element.get("points")
         waypoints = max(len(points) - 2, 0) if isinstance(points, list) else 0
@@ -339,6 +353,8 @@ def parse_scene(path: Path, document: dict[str, Any]) -> Scene:
                 id=element["id"],
                 source=source,
                 target=target,
+                source_ref=source_ref,
+                target_ref=target_ref,
                 label=label_for(element),
                 dashed=element.get("strokeStyle") in ("dashed", "dotted"),
                 bidirectional=bool(start_head) and bool(end_head),
@@ -572,8 +588,8 @@ def digest(path: Path, scene: Scene, max_rows: int) -> str:
     out.append(f"- shapes: {info['shapes']}")
     out.append(f"- type candidates: {', '.join(info['type_candidates'])}")
     out.append(
-        f"- budget: nodes {'OVER' if info['over_node_budget'] else 'ok'} (max 9), "
-        f"edges {'OVER' if info['over_edge_budget'] else 'ok'} (max 12)"
+        f"- compact-layout density hint: nodes {'OVER' if info['over_node_budget'] else 'ok'} (example 9), "
+        f"edges {'OVER' if info['over_edge_budget'] else 'ok'} (example 12)"
     )
     dropped = {key: count for key, count in scene.discarded.items() if count}
     if dropped:
@@ -602,7 +618,7 @@ def digest(path: Path, scene: Scene, max_rows: int) -> str:
             f"- unconnected: {', '.join(_escape_inline(label) for label in info['orphans'])}"
         )
     if info["collapsible_groups"]:
-        out.append("- collapsible groups (simplify here first):")
+        out.append("- candidate groups (collapse only within authorized fidelity):")
         for group in info["collapsible_groups"]:
             kids = ", ".join(_escape_inline(label) for label in group["child_labels"])
             out.append(

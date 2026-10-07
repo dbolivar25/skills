@@ -1,82 +1,69 @@
-# Idea quality
+# Specificity and idea quality
 
-An idea fails when changing one noun would make it fit a different prompt.
-Apply these tests to every output; naming a method does not excuse generic work.
+Use these diagnostics when work feels interchangeable. They are questions for
+judgment, not a score, novelty quota, proper-noun quota, or universal writing
+style. A deliberately ordinary setting, familiar form, abstract poem, or quiet
+idea can be exact for its brief.
 
-## Reject these shapes
+## Interchangeable shapes
 
-- Trend combinations: “AI-powered Y”, “blockchain X”, “Uber for Z”. Two fashionable
-  nouns do not establish a mechanism. If both were trending in the last 18 months,
-  replace at least one with something obscure, dated or domain-foreign. Missing
-  current trend evidence is a fact need, not permission to invent it.
-- Habit/food trackers, fitness coaches, travel itineraries and productivity or
-  wellness apps without specific friction; solutions beginning “what if we used
-  AR/a chatbot” before there is a problem.
-- A “platform connecting people who want X with people offering X”; recycled
-  two-sided marketplaces, subscription boxes, gig work or niche social networks.
-- Generic fiction/essay frames: small town, unlikely friendship, coming of age,
-  “the changing nature of X” or “technology transforming Y”.
-- Equal-length, identical-shape lists of five. Prefer three for compact variation
-  or seven when breadth earns it; do not pad to a round number.
-- YC-style names: invented two-syllable words, dropped vowels, gratuitous .ai.
-- Marketing prose: empowers, seamless, leverage, innovative, cutting-edge,
-  revolutionary, unlock, holistic, ecosystem, journey, game-changing, powerful;
-  “this is exciting because” or “what makes this special”. Write flatly and
-  concretely as a working artist or engineer speaking to a peer.
+A trend combination such as “AI-powered Y” or “Uber for Z” names categories
+without a mechanism. A marketplace connecting people who want X with people
+offering X, a habit tracker, or a productivity app needs its actual friction and
+behavior to become a direction. Technology should serve the idea rather than
+substitute for it.
 
-## Force specificity without fabricating facts
+Fiction and essays can become generic through a stock setting, assumed conflict,
+or a phrase such as “the changing nature of X.” Inspect the material before
+rejecting the familiar form: a specific friendship or coming-of-age story can
+be the right work. Do not force fiction into a product pitch.
 
-Every noun should answer “which one?” Lisbon, Lagos, Sapporo or Marfa instead of
-“a city”; the 230 people restoring vintage Tannoy speakers instead of “a user
-community”; a git subcommand named after a 17th-century English vice instead of
-“a workflow tool”. These are illustrative prompts, not researched populations.
+Lists should carry the range the request needs. Different ideas may take
+different amounts of space; do not pad or trim them to a fixed count or shape.
+Names and prose should fit their speaker and genre. Promotional language such
+as “revolutionary,” “game-changing,” or “this is exciting because” often covers
+a missing mechanism in a practical brief, but exuberance or parody can belong
+in artistic work.
 
-A stack of React Native, SQLite, GPT-4, Pinecone and Stripe fits almost any product.
-“Uses embeddings” names technology; “ranks unread tabs by how far they have drifted
-from anything you opened in 30 days” names a mechanism bound to a situation.
+## Make the actual idea visible
 
-Examples of concrete directions:
+Concrete material, behavior, language, imagery, and situations help the owner
+understand what exists in the work. A stack of React Native, SQLite, embeddings,
+and Stripe fits many products. “Ranks unread tabs by how far they have drifted
+from anything you opened in 30 days” names a mechanism tied to a situation.
 
-- Manuscript version control modeled on Toni Morrison's numbered binders for
-  *Beloved*, with a `morrison diff` that prints differences as if read aloud.
-  The historical premise needs evidence before presenting it as fact.
-- A heart-rate sonifier making zone-2 pace control the rhythm of Steve Reich's
-  *Music for 18 Musicians*, slowing the piece when the runner slows down.
+Illustrative directions:
 
-Name actual works, people, places and materials where supported. Label fictional
-settings and unverified premises. For fiction, try a deactivated grain elevator
-in eastern Oregon, a manuscript-restoration office at the Bibliothèque Royale de
-Belgique, or a Honda dealership floor in Reno on a Tuesday. Invented narrative
-particulars must not masquerade as field observations.
+- Manuscript version control modeled on numbered archival binders, with a diff
+  read aloud. If attributing the binders to a real writer, verify the historical
+  premise before presenting it as fact.
+- A heart-rate sonifier that makes a runner's pace control the rhythm of Steve
+  Reich's *Music for 18 Musicians*. The named work gives a specific artistic
+  relation; it is not a requirement that every direction cite one.
+- A deactivated grain elevator in eastern Oregon, a manuscript-restoration
+  office, or a Honda dealership floor in Reno on a Tuesday can give fiction
+  useful material. Invented particulars need not masquerade as field observations.
 
-Specify the medium: code in a language, paper in a format, sound on an instrument,
-or an installation in a room with dimensions. “An app” is insufficient; a 200-line
-Python script with SQLite and a Textual TUI identifies a buildable form, but still
-needs its actual mechanism.
+Use real works, places, people, and technical claims where supported. Clearly
+fictional particulars may be invented freely. Specify the medium when it helps
+make the work usable: paper format, instrument, room dimensions, language, or
+physical mechanism. “An app” rarely settles a practical design question; an
+abstract or imagined medium can be deliberate in a poem or fictional artifact.
 
-## Surprise, friction and usefulness
+## Range and deepening
 
-Refuse the first three obvious ideas internally, then regenerate; refuse five on
-AI/startup/habit-tracker/productivity/wellness/fitness/food/travel terrain. Reject
-fashionable pairings among AI, blockchain, AR/VR, IoT, climate, wellness, social,
-no-code, creator and gig-economy categories when the pairing is the whole idea.
+When candidates converge, try the selected method's actual operations, a remote
+analogy, a changed constraint, or [Seeded Range](methods/volume-generation.md#seeded-range).
+Reject a familiar pairing only when it adds no useful relation. Surprise can
+open a direction, but conventional execution may best preserve the premise.
 
-At least one element per idea should require explanation: medium, audience,
-failure mode or unit of measure can carry surprise. Entirely conventional fails;
-entirely strange loses traction. Give real problems: what would be hard, where it
-could fail, who would dislike it, or the question it leaves open. Reassurance
-without a failure mode signals insufficient thought.
+For practical work, expose consequential feasibility questions and the smallest
+useful next step. For artistic work, preserve strangeness, ambiguity, humor,
+beauty, and uselessness when they belong to the work. A fictional manual or
+finished poem is a valid result without a grounded derivative.
 
-“Simple” means a constrained, high-concept idea executable in an afternoon, not
-generic work. Preserve the core's grounded option and real first step.
-
-## Check before returning
-
-Five-test diagnostic: would swapping a noun fit another prompt; are specifics
-absent; is surprise absent; is concrete sensory experience indescribable; would a
-sharp peer be embarrassed to pitch it? Two failures require rewriting.
-
-Final checklist: no suppression-list buzzwords; a specific proper noun and a
-surprising element per idea; different shapes; no padded round-number list;
-no promotional framing; concrete medium; non-generic setting; no recycled YC
-pitch; a mechanism rather than a category. Three failures require regeneration.
+Before returning, ask what the owner can now understand, compare, perform, or
+use. Does swapping one noun leave the work interchangeable? Does a method name
+cover operations never performed? Are specifics invented as evidence? Is the
+work flattened by an unnecessary explanation or practicality demand? Revise the
+actual weakness; no failure count establishes quality.

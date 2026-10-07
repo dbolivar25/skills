@@ -49,7 +49,7 @@ The interesting properties live in the **emergent structure** of the blend — p
 ## Procedure
 
 1. State the home problem in one sentence.
-2. Pick a remote domain you actually know something about. Effective: biology, geology, theology, medicine, military strategy, dance, agriculture, archaeology, cooking, etymology, monastic life, mountaineering. *Avoid* "AI" and "the brain" — slop magnets.
+2. Pick a remote domain with a specific structure you understand: biology, geology, theology, dance, agriculture, archaeology, cooking, etymology, monastic life, or another relevant source. A fashionable domain label is insufficient; AI or the brain still need a real mapped mechanism.
 3. Find one specific structure in the remote domain. Not the whole domain — one mechanism, relationship, or constraint.
 4. Force the mapping. Be explicit about which elements project and which don't.
 5. Look for emergent structure — properties of the blend that weren't in either input.
@@ -76,8 +76,8 @@ The interesting properties live in the **emergent structure** of the blend — p
 
 - "X is like Y" without specificity = cliché, not analogy. Real analogies have *specific* mapped structure.
 - Avoid analogies to currently-trendy frames ("like AI", "like a network", "like a marketplace") — overused, low transfer.
-- Test: can you name three specific things that map and three that don't? If not, the analogy is decorative.
+- Test which consequential relationships map and which fail. A counterexample or mismatch can be more useful than filling a fixed number of correspondences.
 - Resist mixed-metaphor accumulation. One careful analogy beats five sloppy ones.
-- Don't pick "the brain" or "AI" as remote frame. Pre-cooked.
+- Do not let “the brain” or “AI” stand in for a specific remote structure. Study the mechanism before using it.
 
 Sources: Gordon, *Synectics* (Harper, 1961); Koestler, *The Act of Creation* (Hutchinson, 1964); Fauconnier & Turner, *The Way We Think* (Basic Books, 2002).

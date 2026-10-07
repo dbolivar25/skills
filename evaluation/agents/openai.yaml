@@ -1,0 +1,3 @@
+interface:
+  display_name: "Evaluation"
+  short_description: "Measure AI quality and component value"

@@ -1,9 +1,6 @@
 # TRIZ — Theory of Inventive Problem Solving
 
-Core: external steps below are proposals or supplied evidence; the operational caller executes them.
-
-
-Genrich Altshuller, 1946–. Soviet engineering invention method derived from analysis of hundreds of thousands of patents. 40 inventive principles + contradiction matrix + Ideal Final Result. Used by Samsung, Intel, Boeing, P&G.
+Genrich Altshuller's engineering-invention tradition: patent-derived patterns, 40 inventive principles, a contradiction matrix, and the Ideal Final Result. Use the contradiction and actual mechanism, rather than a roster of adopters, to decide whether it helps.
 
 ## Core principle
 
@@ -77,16 +74,16 @@ The **Ideal Final Result**: the desired function performed without the system th
 
 ## Worked example
 
-**Problem**: fast brew time (under 60s) vs full extraction (typically 4 min).
+**Illustrative problem**: a drink service wants short customer waiting time without losing the extraction quality its recipe requires. The waiting-time and quality targets would need actual measurements.
 **Contradiction**: speed vs completeness of extraction.
-**Candidate principles**: 1 (Segmentation), 17 (Another dimension), 19 (Periodic action), 35 (Parameter changes).
+**Candidate principles**: 1 (Segmentation), 10 (Preliminary action), 19 (Periodic action), 35 (Parameter changes).
 **Translations**:
-- Segmentation: pre-extract concentrates; dilute on demand. (Nespresso.)
-- Another dimension: extract under pressure (espresso).
+- Segmentation: compare parallel small batches with one large brew, keeping the same quality target.
+- Preliminary action: prepare a concentrate before the order and dilute on demand. Extraction and delivery happen at different times. This is a proposed mechanism, not how Nespresso capsules work; [Nespresso describes roasting, grinding, sealing, and extraction through ground coffee](https://www.nespresso.com/us/en/glossary).
 - Periodic action: pulse-extract with pauses (some pour-over).
-- Parameter changes: brew at different temperature/pressure (cold brew = low T long time; espresso = high P short time).
+- Parameter changes: compare temperature, pressure, grind, and time under the actual recipe's quality constraints. A principle proposes an experiment, not proof of equivalent extraction.
 
-**IFR comparison**: closest to "no brewing time" is pre-extracted concentrate (Segmentation). Resolves the contradiction by *separating extraction from delivery in time*.
+**IFR comparison**: pre-extracted concentrate may approach “no customer waiting time” by separating extraction from delivery. It does not remove extraction time or storage/quality tradeoffs. Compare the mechanisms against the actual requirements before choosing.
 
 ## Anti-slop notes
 
@@ -127,7 +124,7 @@ Janine Benyus, *Biomimicry* (1997). Evolution has 3.8 billion years of R&D on mo
 
 **Gecko adhesive** ← gecko foot pads. Millions of setae adhering via van der Waals forces. *Operative principle: many small contact points + flexible substrate = strong reversible adhesion.*
 
-**Termite mound HVAC** ← *Macrotermes* mounds maintain near-constant interior temperature in fluctuating Sahel conditions via passive convection. Mick Pearce's Eastgate Centre, Harare, 1996. *Operative principle: passive convection through engineered geometry.*
+**Termite-mound ventilation** ← studies of mound-building termites show geometry and thermal differences driving cyclic airflow for gas exchange. *Operative principle: use environmental temperature variation to drive ventilation through a porous structure.* The old “constant-temperature thermostat” story is too simple; verify the species and measured mechanism. See [King, Ocko, and Mahadevan's flow measurements](https://pmc.ncbi.nlm.nih.gov/articles/PMC4577200/).
 
 **Whale-fin tubercles** ← humpback flipper bumpy leading edges delay stall, reduce drag. Wind-turbine blades, WhalePower. *Operative principle: leading-edge perturbation alters boundary-layer behavior.*
 
@@ -139,7 +136,7 @@ Janine Benyus, *Biomimicry* (1997). Evolution has 3.8 billion years of R&D on mo
 
 **Mussel adhesive** ← *Mytilus* DOPA-rich proteins stick to wet rocks. Surgical adhesives. *Operative principle: catechol chemistry remains effective in water.*
 
-**Mycelial structure** ← fungus binds particles into rigid forms. Ecovative MycoComposite packaging. *Operative principle: cellulose-bonding via biological agents → biodegradable rigid structure.*
+**Mycelial structure** ← fungal growth binds particles into composite forms. *Operative principle: grow a network through a substrate to bind its particles.* [Ecovative describes mycelium binding agricultural byproducts](https://ecovative.com/index.html); the example does not establish a particular chemical bond or every end-use property.
 
 ## Procedure
 
@@ -152,7 +149,7 @@ Janine Benyus, *Biomimicry* (1997). Evolution has 3.8 billion years of R&D on mo
 ## Anti-slop notes
 
 - "[X] inspired by nature" without specifics = marketing. Real biomimicry names the organism, the mechanism, and the operative principle.
-- Avoid "like a colony / swarm / ecosystem" for non-physical problems. Slop magnet.
+- A colony, swarm, or immune-system analogy can help a distributed system only when its operative mechanism and limits are mapped. The label alone adds no mechanism.
 - Don't assume "natural" = "good". Parasitism, deception, exploitation are well-engineered.
 - Resist the spiritual register. Biomimicry is engineering; the slop variant is greeting-card.
 

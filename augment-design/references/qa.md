@@ -1,12 +1,12 @@
 # QA
 
-Nothing ships unrendered. Use these criteria to assess the caller's rendered
-surface and audit observations. Missing observations are evidence needs; the
-operational caller obtains them before delivery.
+Inspect the intended rendered surface and relevant states before delivery.
+Use these criteria for construction or assessment; obtain missing material
+observations instead of treating source code as proof of the render.
 
 ## Render and look
 
-1. Require renders of every relevant page, screen and state, not only the first.
+1. Render every relevant page, screen, and state, not only the first.
 2. Look at each at full size, and read the copy as the reader will.
 3. Look at each at thumbnail size. The first thing you see is the focal point. If
    you see texture instead of a thing, the composition is wrong, so fix that
@@ -15,8 +15,8 @@ operational caller obtains them before delivery.
 
 ## Review questions
 
-Answer each in a sentence. A no is a finding, and you name it with a cause from
-`composition.md`.
+Use the questions relevant to the surface. Name a material failure with a
+visible cause from `composition.md`.
 
 Composition:
 
@@ -25,7 +25,7 @@ Composition:
 - Does every pill carry state that can change?
 - Does every line of small type say something its heading does not?
 - Does every chromatic value have a role, and does the branch allow that role?
-- Does every fact appear once?
+- Does each fact have a clear primary home, with any repetition serving navigation, comparison, accessibility, or a distinct decision?
 - Does each view have one focal point?
 
 Grammar:
@@ -40,26 +40,43 @@ Branch floor:
 
 Copy:
 
-- Run the prose loop in `references/voice.md`.
-- Does any string describe how the artifact was produced?
+- Apply the [voice pass](voice.md).
+- Does a production detail help the reader interpret evidence or take the next action? Cut irrelevant machinery, preserve useful disclosure.
 - Would the conclusion fit a different document? Then it is not a conclusion.
 
 ## Audit
 
-For the audit receipt, the operational caller loads `checks/audit.js` into the
-rendered page and calls `augAudit()`. With the script in the page, appending
-`?augaudit` runs it after load. The checker observes
-what markup and computed style can prove: nested `data-aug-surface` elements,
-chromatic fill and stroke roles, off-scale radius, document body type below the
-branch floor, inconsistent marked repetition, source markup, and whether Matter
-SQ loaded.
+For HTML, load `checks/audit.js` into the rendered page, await
+`document.fonts.ready`, and call `augAudit()`. Appending `?augaudit` runs it after
+load; rerun after asynchronous content or fonts settle. The script returns
+findings, including explicit coverage findings. A zero-finding run means only
+that the covered checks found no issue in that DOM state.
 
-The source must set `data-aug-branch="document|product|marketing"` on the root
-and `data-aug-role` on every chromatic fill and stroke.
+Covered checks:
 
-Treat findings as input to judgment. A finding you can justify is fine, so long
-as you justify it in writing. A clean run you did not examine is not a review,
-because the audit cannot see focal point, eyebrows, second homes, or prose.
+- Visible root and descendant solid backgrounds, visible borders, and computed
+  SVG fill/stroke roles. Modern CSS color notation uses the browser's parser
+  and a one-pixel sRGB canvas; the chroma heuristic and alpha threshold remain
+  a diagnostic, not a palette validator.
+- Generated `::before`/`::after` solid paint, using the host element's role.
+- Off-scale radius, marked nested surfaces and repetition, document body size
+  and the presence of marked source structure.
+- Primary computed font families on elements owning direct text, plus font-face
+  loading. The supplied technical mono token is allowed.
+
+Unclassified colors, SVG paint-server URLs, and background images/gradients
+produce `paint-coverage` findings. Inspect those paint systems directly. The
+script does not trace gradient stops, shadows, filters, compositing, masks,
+external/embedded-image contents, ancestor clipping/occlusion, or all offscreen
+states. Pseudo-element text and glyph-by-glyph font fallback are not certified.
+Even a loaded face and a primary computed family cannot prove every glyph used
+it. Native formats need their own font/export checks and rendered inspection.
+
+Set `data-aug-branch="document|product|marketing"` on one root and
+`data-aug-role="identity|signal|atmosphere|artwork"` on each element with chromatic
+fill or stroke (or the host of generated pseudo paint). Examine the findings
+and resolve or explain material discrepancies. The audit cannot judge focal
+point, duplicate facts, prose, evidence support, or the appropriate color role.
 
 ## When something feels generated
 

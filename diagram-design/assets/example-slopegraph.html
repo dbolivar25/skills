@@ -40,10 +40,7 @@
       <rect width="100%" height="100%" fill="#f5f5f5"/>
       <rect width="100%" height="100%" fill="url(#dots)" opacity="0.55"/>
 
-      <!-- Both axes carry the SAME 100-550 ms scale. That is the whole claim of a
-           slopegraph and the only thing that makes one slope comparable with
-           another; scripts/verify-slopegraph.py enforces it against the values
-           each line declares. -->
+      <!-- Both axes in this example use the same 100–550 ms scale. Independently compare both endpoint positions and labels with the illustrative source values. Source bindings aid traceability but do not prove the geometry. No packaged slopegraph semantic validator is present. -->
       <text transform="rotate(-90 24 230)" x="24" y="230" fill="#4f5d75" font-size="7" font-family="'Geist Mono', monospace" letter-spacing="0.14em" text-anchor="middle">P95 RESPONSE TIME, MS</text>
 
       <!-- No gridlines: every endpoint prints its own value, so a gridline would

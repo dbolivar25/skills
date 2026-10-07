@@ -2,7 +2,8 @@
 // The review conversation for a PR: review bodies, issue comments, and inline
 // threads with resolution state (isResolved/isOutdated; porcelain gh can't get it).
 import { parseArgs } from "node:util";
-import { gh, resolvePr, resolveRepo, run, truncate } from "./lib.ts";
+import { resolvePr, resolveRepo, run, truncate } from "./lib.ts";
+import { prReviews, prComments, prThreads } from "./pr-data.ts";
 
 const USAGE = `usage: pr-threads.ts [pr] [-R owner/repo] [--all] [--author login] [--since ISO] [--full] [--json]
 
@@ -16,7 +17,8 @@ counts them); --all includes them. Omit [pr] to use the current branch's PR.
   --json         structured output, shape:
                  { conversation: [{kind: "review"|"comment", state?, author,
                                    createdAt, body}],
-                   threads: [{isResolved, isOutdated, path, line, originalLine,
+                   coverage: {complete, reviews, issueComments, threads, threadComments},
+                   threads: [{id, isResolved, isOutdated, path, line, originalLine,
                               moreComments,
                               comments: [{author, createdAt, body}]}] }`;
 
@@ -26,6 +28,7 @@ interface Comment {
   body: string;
 }
 interface Thread {
+  id: string;
   isResolved: boolean;
   isOutdated: boolean;
   path: string;
@@ -43,102 +46,30 @@ interface ConvoItem {
   body: string;
 }
 
-const QUERY = `
-query($owner: String!, $repo: String!, $number: Int!, $cursor: String, $withConvo: Boolean!) {
-  repository(owner: $owner, name: $repo) {
-    pullRequest(number: $number) {
-      reviews(last: 50) @include(if: $withConvo) {
-        pageInfo { hasPreviousPage }
-        nodes { author { login } state submittedAt body }
-      }
-      comments(last: 50) @include(if: $withConvo) {
-        pageInfo { hasPreviousPage }
-        nodes { author { login } createdAt body }
-      }
-      reviewThreads(first: 100, after: $cursor) {
-        pageInfo { hasNextPage endCursor }
-        nodes {
-          isResolved isOutdated path line originalLine
-          comments(first: 50) {
-            pageInfo { hasNextPage }
-            nodes { author { login } createdAt body }
-          }
-        }
-      }
-    }
-  }
-}`;
-
-interface Conversation {
-  convo: ConvoItem[];
-  /** True when reviews or comments exist beyond the last-50 window. */
-  moreConvo: boolean;
-  threads: Thread[];
-}
-
-async function fetchConversation(repo: string, pr: number): Promise<Conversation> {
-  const [owner, name] = repo.split("/");
+async function fetchConversation(repo: string, pr: number) {
+  const [reviews, comments, rawThreads] = await Promise.all([
+    prReviews(repo, pr), prComments(repo, pr), prThreads(repo, pr),
+  ]);
   const convo: ConvoItem[] = [];
-  const threads: Thread[] = [];
-  let moreConvo = false;
-  let cursor: string | null = null;
-  let firstPage = true;
-  do {
-    const data = JSON.parse(
-      await gh([
-        "api", "graphql",
-        "-f", `query=${QUERY}`,
-        // -f (raw string) for owner/repo: -F would coerce all-digit names like "2048" to Int
-        "-f", `owner=${owner}`, "-f", `repo=${name}`, "-F", `number=${pr}`,
-        // reviews/comments aren't paginated by the thread cursor; fetch them once
-        "-F", `withConvo=${firstPage}`,
-        ...(cursor ? ["-f", `cursor=${cursor}`] : []),
-      ]),
-    );
-    const p = data.data.repository.pullRequest;
-    if (firstPage) {
-      for (const r of p.reviews.nodes) {
-        // PENDING = the viewer's own draft; empty bodies carry no words (state lives in pr-snapshot)
-        if (r.state === "PENDING" || !r.body?.trim()) continue;
-        convo.push({
-          kind: "review",
-          state: r.state,
-          author: r.author?.login ?? "ghost",
-          createdAt: r.submittedAt,
-          body: r.body,
-        });
-      }
-      for (const c of p.comments.nodes) {
-        convo.push({
-          kind: "comment",
-          author: c.author?.login ?? "ghost",
-          createdAt: c.createdAt,
-          body: c.body,
-        });
-      }
-      moreConvo = p.reviews.pageInfo.hasPreviousPage || p.comments.pageInfo.hasPreviousPage;
-      convo.sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt));
-    }
-    const conn = p.reviewThreads;
-    for (const n of conn.nodes) {
-      threads.push({
-        isResolved: n.isResolved,
-        isOutdated: n.isOutdated,
-        path: n.path,
-        line: n.line,
-        originalLine: n.originalLine,
-        moreComments: n.comments.pageInfo.hasNextPage,
-        comments: n.comments.nodes.map((c: { author: { login: string } | null; createdAt: string; body: string }) => ({
-          author: c.author?.login ?? "ghost",
-          createdAt: c.createdAt,
-          body: c.body,
-        })),
-      });
-    }
-    cursor = conn.pageInfo.hasNextPage ? conn.pageInfo.endCursor : null;
-    firstPage = false;
-  } while (cursor);
-  return { convo, moreConvo, threads };
+  for (const r of reviews) {
+    // Draft and empty review bodies are omitted from the conversation, but counted in coverage.
+    if (r.state === "PENDING" || !r.body?.trim()) continue;
+    if (!r.submittedAt) throw new Error("Submitted review lacks a timestamp");
+    convo.push({ kind: "review", state: r.state, author: r.author?.login ?? "ghost",
+      createdAt: r.submittedAt, body: r.body });
+  }
+  for (const c of comments) {
+    convo.push({ kind: "comment", author: c.author?.login ?? "ghost", createdAt: c.createdAt, body: c.body });
+  }
+  convo.sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt));
+  const threads: Thread[] = rawThreads.map((t) => ({
+    id: t.id, isResolved: t.isResolved, isOutdated: t.isOutdated,
+    path: t.path, line: t.line, originalLine: t.originalLine, moreComments: false,
+    comments: t.comments.nodes.map((c) => ({ author: c.author?.login ?? "ghost", createdAt: c.createdAt, body: c.body })),
+  }));
+  return { convo, threads, coverage: { complete: true, reviews: reviews.length,
+    issueComments: comments.length, threads: threads.length,
+    threadComments: threads.reduce((n, t) => n + t.comments.length, 0) } };
 }
 
 run(async () => {
@@ -158,7 +89,7 @@ run(async () => {
   const pr = await resolvePr(positionals[0], v.repo);
   const repo = await resolveRepo(v.repo);
 
-  let { convo, moreConvo, threads } = await fetchConversation(repo, pr);
+  let { convo, threads, coverage } = await fetchConversation(repo, pr);
   const totalThreads = threads.length;
   let hidden = 0;
   if (!v.all) {
@@ -176,7 +107,7 @@ run(async () => {
     threads = threads.filter((t) => t.comments.some((c) => Date.parse(c.createdAt) >= since));
   }
 
-  if (v.json) return void console.log(JSON.stringify({ conversation: convo, threads }, null, 2));
+  if (v.json) return void console.log(JSON.stringify({ conversation: convo, threads, coverage, filters: { all: !!v.all, author: v.author ?? null, since: v.since ?? null } }, null, 2));
 
   const reviews = convo.filter((i) => i.kind === "review").length;
   const comments = convo.length - reviews;
@@ -195,9 +126,6 @@ run(async () => {
     console.log(`${tag} @${item.author} (${item.createdAt.slice(0, 10)})`);
     console.log(`  ${body.replace(/\n/g, "\n  ")}\n`);
   }
-  if (moreConvo) {
-    console.log("… reviews/comments older than the last 50 omitted\n");
-  }
 
   threads.forEach((t, i) => {
     const state = t.isResolved ? "RESOLVED" : "OPEN";
@@ -208,7 +136,6 @@ run(async () => {
       const body = v.full ? c.body : truncate(c.body, 600);
       console.log(`  @${c.author} (${c.createdAt.slice(0, 10)}): ${body.replace(/\n/g, "\n    ")}`);
     }
-    if (t.moreComments) console.log("  … thread has >50 comments, rest omitted (--json shows the same cap)");
     console.log();
   });
 });

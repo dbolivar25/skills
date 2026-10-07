@@ -1,131 +1,54 @@
-# Personal skill library
+# Personal skills
 
-Delegate a whole job or use a supporting judgment on its own. Each skill owns a
-useful result behind one `SKILL.md` interface. Its references carry the methods,
-examples and constraints that the caller should not have to reconstruct.
+Fifteen entry points own complete jobs. Each entry selects detailed methods only when the job needs them. Always applicable collaboration and decision rules live in the Codex working agreement. Managed skills and plugins are unchanged.
 
-**Core skills** reason over supplied material and return an assessment,
-transformation or design. **Workflows** own acquisition, feedback, execution and
-the combined outcome. A platform skill can supply a bounded operational capability
-inside a larger workflow. Both kinds of skill can be deep; a larger skill earns
-its depth by taking responsibility for how its supporting results fit together.
+| Skill | Job |
+| --- | --- |
+| [Steward](steward/SKILL.md) | Durable intent, changing support, real agents, independent acceptance and evidence of completion |
+| [Engineering](engineering/SKILL.md) | Implementation, refactoring, upgrades, architecture, domain/module design and typed specifications |
+| [Review](review/SKILL.md) | Code, plans, research and reported results; falsification, claims and requested grilling |
+| [Debugging](debugging/SKILL.md) | Reproduction, causal probes, production diagnosis and verified corrections |
+| [Interface Design](interface-design/SKILL.md) | Interaction, visual craft, states, motion, accessibility and useful prototypes |
+| [Augment Design](augment-design/SKILL.md) | Augment identity, voice, fonts, assets, tokens and format-specific production quality |
+| [GitHub](github/SKILL.md) | Complete PR evidence, conversations, CI and requested platform operations |
+| [Grafana](grafana/SKILL.md) | Bounded reproducible metrics, logs, traces and profiles |
+| [Augment Workflows](augment-workflows/SKILL.md) | Live product contracts, explicit graphs, operation authority and observed outcomes |
+| [AI Engineering](ai-engineering/SKILL.md) | Typed AI judgments, faithful derivation, provenance, durable state and publication |
+| [Evaluation](evaluation/SKILL.md) | Representative comparisons, independent judgments, failure analysis and ablations |
+| [Writing](writing/SKILL.md) | Substantive drafting, voice, faithful compression and reviewer-facing explanations |
+| [Writing for Agents](writing-for-agents/SKILL.md) | Invocation, executable demands, conditional context and instruction packaging |
+| [Creative Ideation](creative-ideation/SKILL.md) | The complete 22-method library, exercises and concrete creative work |
+| [Diagram Design](diagram-design/SKILL.md) | Polished standalone diagrams, source imports, semantic forms, skins and export |
 
-## Delegate a job
+## What changed
 
-| Job | Skill | Responsibility it takes over |
-| --- | --- | --- |
-| Implement a selected change | [software-engineering](software-engineering/SKILL.md) | Repository investigation, relevant design judgments, edits and verification; selected TDD, finishing and lint enforcement |
-| Review a change | [review](review/SKILL.md) | Current target, evidence acquisition, falsification and one integrated judgment |
-| Diagnose a failure | [diagnosing-bugs](diagnosing-bugs/SKILL.md) | Reproduction, discriminating probes and supported cause; correction when authorized |
-| Find architectural opportunities | [architecture-scan](architecture-scan/SKILL.md) | Read-only coverage and ranked ownership moves; explicit selection only |
-| Specify a selected change | [tech-spec](tech-spec/SKILL.md) | Source acquisition, decision resolution and a typed contract-and-flow handoff; explicit selection only |
-| Work through a plan's open decisions | [grilling](grilling/SKILL.md) | Dependency-ready question rounds and confirmed shared understanding |
-| Preserve intent through changing work | [steward](steward/SKILL.md) | Durable Intent, State, Record, coordination and evidence for acceptance |
-| Learn through a prototype | [prototype](prototype/SKILL.md) | A runnable experiment, actual observations and their limits |
-| Explain a relationship visually | [show-me](show-me/SKILL.md) | Source grounding, representation, artifact construction and inspection |
-| Operate an Augment workflow | [augment-workflows](augment-workflows/SKILL.md) | Current product contracts, graph design, authorized operations and observed outcomes |
-| Acquire GitHub evidence | [github](github/SKILL.md) | Complete PR/thread/CI observations and precise platform action receipts |
-| Acquire Grafana evidence | [grafana](grafana/SKILL.md) | Bounded telemetry, population comparisons, reproducible queries and coverage limits |
+The October 2026 redesign consolidated 36 public entries into 15. Detailed methods, examples, teaching material, brand assets and useful tools remain reachable through conditional pointers. Steward's runtime, CLI, tests, fixture and default rules retain their original bytes.
 
-A supporting workflow returns to its caller. For example, diagnosis can investigate
-an unexpected failure during implementation without taking over the implementation
-or changing its scope.
+The cuts remove the shared composition protocol, generic assessment envelopes, compulsory global checklists and unsupported universal gates. They also remove standalone selection overhead for methods now owned by these jobs. The complete source dispositions and disclosed losses are in the [migration account](docs/skills-redesign.md) and [resource manifest](docs/skills-redesign.json).
 
-## Use a judgment or transformation
+The first version is committed as `fc4b475`. The [second-pass account](docs/skills-second-pass.md) explains the substantive reference improvements and further cuts, committed as `546b6ac`. Its [file-level evidence](docs/skills-second-pass.json) is a historical snapshot of that accepted stage. The [final cleanup](docs/skills-final-cleanup.md) extracts portable TypeSafe ideas into AI Engineering and removes the optional blank AI review form. Diagram Design retains its complete kit.
 
-These 22 core skills accept relevant context, apply their methods and return work
-the caller can use. Missing evidence produces a precise need with the conclusion
-it affects. The surrounding task or workflow obtains that evidence and continues.
+These are local installed files. Discovery, invocation permission and content loading are separate host mechanisms. A chat that began with the previous catalog may need a fresh session to discover the new names. No host refresh or measured improvement in model quality is claimed.
 
-| Need | Skill | Result |
-| --- | --- | --- |
-| Interpret Daniel's intent and tradeoffs | [good-judgment](good-judgment/SKILL.md) | The distinction that matters and a next move grounded in the current purpose, decisions and evidence |
-| Understand what differs | [understand-change](understand-change/SKILL.md) | Behavior and responsibility map with evidence and gaps |
-| Assess code or contracts | [engineering-judgment](engineering-judgment/SKILL.md) | Applicable engineering obligations or supported weaknesses |
-| Decide what would prove behavior | [verification-design](verification-design/SKILL.md) | Observation seams, independent oracles and required implementation evidence; assessment of supplied proof |
-| Design an interface or ownership boundary | [module-design](module-design/SKILL.md) | Hidden responsibilities, concrete usage and tradeoffs |
-| Assess an upgrade | [dependency-compatibility](dependency-compatibility/SKILL.md) | Usage, upstream and runtime impact, migration needs and proof gaps |
-| Reason from diagnostic observations | [causal-reasoning](causal-reasoning/SKILL.md) | Reproduction adequacy, hypotheses, discriminating probe or supported cause |
-| Design a useful experiment | [experiment-design](experiment-design/SKILL.md) | The smallest distinguishing experiment, or learning from its actual results |
-| Sharpen domain meaning | [domain-modeling](domain-modeling/SKILL.md) | Terms, invariants, counterexamples and proposed glossary/ADR deltas |
-| Assess an addition's continuing cost | [engineering-restraint](engineering-restraint/SKILL.md) | Necessity, alternatives, ownership burden and recommendation |
-| Settle whether an objection may block | [decision-rights](decision-rights/SKILL.md) | Supported next action and settlement |
-| Falsify a candidate | [critique](critique/SKILL.md) | Findings against supplied purpose, constraints and evidence |
-| Help someone judge work | [reviewability](reviewability/SKILL.md) | A faithful PR description, review guide or other account |
-| Design a human experience | [interface-design](interface-design/SKILL.md) | Coherent interaction, composition, state and motion; assessment of supplied renders |
-| Apply Augment identity | [augment-design](augment-design/SKILL.md) | Official resources, brand application and required surface evidence |
-| Derive an AI work product faithfully | [faithful-derivation](faithful-derivation/SKILL.md) | An integrated design or assessment of judgments, fidelity, support, publication policy and evals |
-| Decide what information must survive | [information-preservation](information-preservation/SKILL.md) | Consumer-specific fidelity contract or loss assessment |
-| Assess what evidence supports | [claim-support](claim-support/SKILL.md) | Provenance, contradictions, uncertainty and justified claim strength |
-| Design AI quality measurement | [evaluation-design](evaluation-design/SKILL.md) | Representative cases, oracles, layer checks, comparisons and ablations |
-| Write instructions for an agent | [writing-for-agents](writing-for-agents/SKILL.md) | Reachable, well-structured instructions with clear behavioral demands |
-| Restore human voice | [humanize](humanize/SKILL.md) | Proposed prose that preserves meaning, uncertainty and the intended speaker |
-| Generate or shape ideas | [creative-ideation](creative-ideation/SKILL.md) | A selected method and concrete directions, transformations or exercise proposals |
+## Validate the library
 
-Core skills can themselves be deep compositions. Faithful derivation connects
-preservation, support and evaluation into a coherent work-product design; its
-caller need not assemble those relationships.
+Run from this repository:
 
-## How work composes
-
-A review can use the same engineering and verification judgments as implementation.
-Each caller owns a different outcome and the operations needed to establish it.
-
-```mermaid
-flowchart TD
-  R[Review] --> E[Engineering judgment]
-  S[Software engineering] --> E
-  E --> M[Module design]
-  E --> V[Verification design]
-  M --> V
-  R --> G[GitHub evidence]
-  S --> D[Diagnosing bugs]
-  D --> C[Causal reasoning]
-```
-
-These are conditional dependencies, not a sequence every task must execute.
-A core's inputs and results use the domain's natural form. A workflow resolves
-missing context, integrates conflicting assessments and supplies new observations
-when they change a conclusion. Skill composition does not itself require agents,
-a scheduler or a serialized result protocol.
-
-For a direct request such as “humanize this file,” the surrounding task reads the
-file, supplies the prose to humanize, applies the authorized replacement and checks
-the stored result. The user does not have to assemble a packet or select a generic
-read/write wrapper. For a supplied-only assessment, the core returns its result
-and any evidence need without acquiring live facts.
-
-The [composition contract](contracts/composition.md) defines these responsibilities.
-The [architecture](docs/architecture/composable-skills.md) explains ownership,
-selection, [earlier invocation names](docs/architecture/composable-skills.md#earlier-invocation-names)
-and the worked dependency paths. The
-[accepted proposal](docs/architecture/composable-capabilities-proposal.md) preserves
-the three design walkthroughs and reasons for the cut.
-
-## Scope and distribution
-
-This repository owns 35 personal shared skills. Built-in skills, managed plugins
-and other installations remain outside its scope. Cross-package references
-require their named owners to be available; publishing one package does not
-bundle its dependencies automatically.
-
-Creative ideation retains its 22 named routes within the selected file/size
-budget. Tokens, assets, scripts, runtime code and method attribution remain with
-the capability that owns them.
-
-## Check the library
-
-```sh
+```bash
 ruby scripts/validate-skills.rb
 ruby tests/validate-skills_test.rb
 ruby tests/creative-package_test.rb
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s steward/tests
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s github/tests -p '*_test.py'
+node --test augment-design/checks/audit.test.mjs
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s diagram-design/tests
+scripts/publish-amp --check-working-tree
 ```
 
-The validator checks metadata, owned Markdown links and the
-[invocation corpus](tests/invocation-cases.yml). Those cases specify expected
-selection; they do not measure model routing accuracy. The
-[verification record](docs/architecture/composable-skills-verification.md) separates
-source preservation, structural checks and any behavioral observations.
+The validator checks metadata, owned files and Markdown heading targets, entry pointers, the approved catalog/resource bindings, protected Steward hashes and invocation-case specifications. The 82 routing cases are reviewed expectations, not measured model-routing results. Runtime/helper regressions and actual rendered inspection establish their stated coverage; comparative task quality needs separate evidence.
 
-Catalog reload, installation and publication need their own receipts. Local
-validation does not establish that another host has loaded the changed skills.
+## Distribution
+
+The full local collection includes its cross-package methods and assets. Install the collection coherently; publishing an isolated package does not make a sibling reference available.
+
+The existing Amp filter excludes WOFF2 fonts, Diagram Design, package-local development tests and the brand audit fixtures. Root validation and documentation files remain in the projection. `--check-working-tree` checks the actual local projection without commits or network access. Publication still uses an explicit committed revision and the configured Amp remote. No publication was performed during this migration. The filtered projection is not full local asset parity.

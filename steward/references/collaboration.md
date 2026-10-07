@@ -11,6 +11,8 @@ the Record.
 A **working agent** owns one bounded work item. Its output is a proposal until
 the steward records a report and an independent review accepts it.
 
+Worker edits can already be visible in a shared filesystem. “Proposal” describes their acceptance status, not physical isolation. Give disjoint ownership, inspect the actual diff, and keep integration responsibility with the steward. Do not record acceptance merely because a summary says the change is complete.
+
 A **reviewing agent** checks one reported result against Intent and evidence. It does not
 edit that result, schedule the team, change Intent, or write the Record.
 
@@ -73,8 +75,10 @@ When a working agent returns:
 
 1. Compare its response with the assignment and current Record revision.
 2. Reconcile any intervening Intent or State change.
-3. Record `work.reported` with the actual actor, concise result, and exact
-   evidence.
+3. Verify that the work is currently ACTIVE and the reporting actor still owns
+   that assignment. Only then record `work.reported` with the actual actor,
+   concise result, and exact evidence. A late result from stopped, superseded,
+   or reassigned work is evidence to assess, not a report for that assignment.
 4. Send the report to a separate reviewing agent under the
    [review instructions](review.md).
 5. Record the review.
@@ -95,3 +99,7 @@ A returned result needs recorded review before it can be accepted.
 - Do not broaden fan-out beyond the number of truly independent questions.
 - Do not let peer discussion hide a judgment-changing fact from the Record.
 - On resumption, reconcile the live team before trusting recorded actor status.
+
+Runtime STOPPED is permanent and does not cancel a physical agent. When support
+is withdrawn, inspect affected work and interrupt the actual actors promptly.
+Create replacement work with new identities when a new supported path is needed.

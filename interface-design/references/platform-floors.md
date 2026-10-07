@@ -3,8 +3,7 @@
 Use this reference when judging the credible baseline for a surface. Floors are
 not goals. They are the minimum expectation users bring from familiar software.
 
-Floors drift. Verify current platform guidance and category examples when the
-stakes justify it.
+These are design starting points, not a cached platform specification. When a concrete control, target, permission flow, accessibility requirement, or API matters, check current guidance for the actual platform. Use named products as comparative examples, not as mandatory styles or proof of compliance.
 
 ## Native iOS
 
@@ -145,4 +144,3 @@ Resolved direction:
 
 - Do not hide uncertainty behind polish. Make state, provenance, and recovery
   explicit enough that users can trust the interaction.
-

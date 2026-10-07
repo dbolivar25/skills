@@ -20,8 +20,7 @@ infrastructure with some warmth in it.
 
 ## Expressive license
 
-Atmosphere and artwork are freely available in this branch and nowhere else, and
-the license comes with conditions. Before you use swirl, glow, grain, or an
+This branch permits expressive atmosphere and artwork at scale. Documents have a narrower allowance, and product chrome follows its control grammar. Before you use swirl, glow, grain, or an
 artwork hue, answer three questions:
 
 1. What is this surface's one job?

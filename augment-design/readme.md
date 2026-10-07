@@ -1,8 +1,7 @@
 # Augment Design System
 
 The brand foundations for Augment, an enterprise AI platform: color, type,
-spacing, material, motion, and controls. Start at `SKILL.md`, which routes you
-through the whole system in seven steps. Come back to this file for values.
+spacing, material, motion, and controls. Start at `SKILL.md`, which selects the relevant surface and methods. Come back to this file for values.
 
 Composition, voice, and review live in `references/`. The system was built from
 the official `use-augment-branding` skill, the source of truth for tokens, logos,
@@ -13,17 +12,9 @@ and Matter SQ.
 > building, where they change often. A repositioning should leave the design
 > system untouched.
 
-## There are no components here
+## Use the material in the actual product
 
-That is on purpose, because a partial library promises coverage it cannot keep.
-The first real app needs a table, a menu, a dialog, and a date field on day one,
-finds none of them, and hand-rolls half its surface from somewhere else. Components also
-freeze one rendering of the brand, and then a 22px pill becomes the answer to
-questions nobody asked it.
-
-You get the material instead: tokens, the glow and grain primitives, a few
-utilities, and the control rules below. A full component skin, built in one pass,
-is the intended next step.
+This package supplies tokens, identity assets, glow and grain primitives, utilities, and control guidance. It does not supply a complete component library. Apply the material to the application's established controls and interaction patterns; a brand task does not require rebuilding its components.
 
 ---
 
@@ -80,8 +71,7 @@ Optically align asymmetric glyphs and icons.
 | 16px | Cards and panels |
 | Pill / circle | State pills, chips, avatars |
 
-An inner surface inset from its parent keeps the curves parallel when the inner
-radius equals the outer radius minus the inset.
+For close nested surfaces, outer radius minus inset is a useful starting point for parallel curves. Keep the supplied token language and judge the actual result; border width, shape, and a wide gap can change the optical relationship.
 
 ## Surfaces
 
@@ -216,9 +206,7 @@ The brand ships no icon set, so the identity is the priority asset.
 All of them live in `assets/logo/`. Render logo artwork from these SVGs, or from
 inline SVG that preserves the path exactly.
 
-UI icons come from [Lucide](https://lucide.dev) over CDN: 1.5 to 2px strokes,
-rounded joins, geometric, comfortable next to Matter SQ. **This is a
-substitution, so flag it.** Swap in an official product icon set if one exists.
+Use the application's official icon family when available. [Lucide](https://lucide.dev) is the documented substitute: 1.5 to 2px strokes, rounded joins, geometric forms alongside Matter SQ. Identify the substitution in the delivery notes. Reuse the project's installed package or bundle the needed vectors; a remote CDN is an optional loading choice, not a brand requirement or an offline asset.
 
 No emoji, and no Unicode glyphs standing in for icons.
 

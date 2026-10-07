@@ -1,8 +1,5 @@
 # Jobs to Be Done
 
-Core: external steps below are proposals or supplied evidence; the operational caller executes them.
-
-
 Clayton Christensen et al., *Competing Against Luck* (HarperBusiness, 2016). Customers don't buy products based on demographics — they "hire" products to do specific jobs in specific situations.
 
 ## When to use
@@ -18,7 +15,7 @@ Clayton Christensen et al., *Competing Against Luck* (HarperBusiness, 2016). Cus
 - Artistic or expressive work — "what job is this novel hired to do?" collapses what makes it specific
 - Civic / social design — imports market logic that's wrong here
 - Pure-research questions (no customer, no hire — use compression-progress)
-- You don't have access to actual customers
+- You lack customer evidence and would be presenting a hypothetical job as an observed one
 
 ## Core form
 
@@ -35,7 +32,7 @@ A customer changes from one solution to another when **(push + pull) > (anxiety 
 3. **Anxiety** about the new solution — fears it'll let them down.
 4. **Habit** of the present — inertia.
 
-Most failed product launches don't lose on (2). They have an excellent product. They lose on (3) and (4): unaddressed anxieties + inertia. **Design for forces 3 and 4, not just 2.**
+Investigate all four forces. Anxiety and habit can explain why an appealing new solution is not adopted, but the model does not establish the cause of most failed launches. Use actual switching evidence rather than assuming an excellent product or a reluctant customer.
 
 ## Switch-interview procedure
 
@@ -53,7 +50,7 @@ Then identify the job ("When... I want to... so I can...") and the four forces.
 
 ## Worked example
 
-*Switch from Mendeley to Zotero* (academic citation manager):
+*Illustrative switch from Mendeley to Zotero* (academic citation managers, fictional interview details):
 
 - Push: Mendeley sync failed for 6 months; lost references.
 - Pull: Zotero free, open source, recommended by colleague.

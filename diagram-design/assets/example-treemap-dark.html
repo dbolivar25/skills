@@ -40,12 +40,7 @@
       <rect width="100%" height="100%" fill="#2d3142"/>
       <rect width="100%" height="100%" fill="url(#dots)" opacity="0.55"/>
 
-      <!-- ─── CELLS ─── Squarified layout on a 4px grid. Area is the only
-           encoding: every cell is within 2.7% of its true share, measured as
-           RELATIVE error, because a 0.1pp slip is nothing on Asia and a third
-           of Oceania. Verified by scripts/verify-treemap.py. The non-focal
-           cells run a rank-ordered ink ramp, so their order survives greyscale;
-           the focal cell is marked by its accent stroke, not by tone. ─── -->
+      <!-- Cells use the illustrative declared shares. Compare visible area against those source values, assessing relative error especially for small tiles and gutters. No packaged treemap semantic validator is present. The non-focal ink ramp and focal outline are this example’s styling. -->
 
       <!-- Asia FOCAL: 532×380 -->
       <rect x="40" y="40" width="532" height="380" rx="2" fill="#2d3142"/>

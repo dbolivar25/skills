@@ -35,20 +35,13 @@
     <div class="header">
       <p class="header-eyebrow">Beeswarm · Diagram Design</p>
       <h1>The median hides the tail</h1>
-      <p class="subtitle">A hundred and thirty-eight per-request latency samples for one checkout endpoint, one dot per request on a shared linear axis from zero. The median sits near 105&nbsp;ms and looks perfectly healthy; the story is the three requests past 380&nbsp;ms, because the p99 is what a customer at the wrong moment actually experiences.</p>
+      <p class="subtitle">A hundred and thirty-eight per-request latency samples for one checkout endpoint, one dot per request on a shared linear axis from zero. The median is 122.5&nbsp;ms, while the three slowest requests exceed 380&nbsp;ms. The individual observations show an upper tail that a single summary would hide; whether those delays matter requires the endpoint's performance target and user context.</p>
     </div>
     <div class="diagram-container">
-      <!-- Value axis: 0-440ms over 880px, x = 80 + 2*ms, linear from zero.
-           The vertical (swarm) axis carries NO meaning: each dot's y offset is
-           greedy packing at pitch 10 (2r+2) around the y=230 midline, first
-           free slot alternating above/below, and overlap is never resolved by
-           moving a dot along the value axis. scripts/verify-beeswarm.py derives
-           the value scale from the dots themselves and flags any dot that
-           disagrees with its peers, any overlapping pair, and any second dot
-           radius or non-focal fill. -->
+      <!-- This example uses a linear value axis: x = 80 + 2 * milliseconds over 0–440 ms. Vertical displacement packs equal-size observations around y = 230 at pitch 10 and carries no data meaning. Check one dot per source record, true x positions, counts and collision independently. No packaged beeswarm semantic validator is present. -->
       <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="beeswarm-full-title beeswarm-full-desc">
         <title id="beeswarm-full-title">The median hides the tail</title>
-        <desc id="beeswarm-full-desc">Beeswarm of 138 per-request latency samples for one checkout endpoint on a shared linear value axis from zero; vertical spread is packing only and carries no value, and three requests past 380 ms form the p99 tail.</desc>
+        <desc id="beeswarm-full-desc">Beeswarm of 138 per-request latency samples for one checkout endpoint on a shared linear value axis from zero; vertical spread is packing only and carries no value, and the three slowest requests, past 380 ms, form the upper tail.</desc>
         <defs>
           <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
             <circle cx="1" cy="1" r="0.9" fill="rgba(45,49,66,0.10)"/>
@@ -72,9 +65,7 @@
         <!-- Value axis, from zero. -->
         <line x1="80" y1="420" x2="960" y2="420" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
 
-        <!-- Tick labels are BOUND: data-tick names the (one) value axis and
-             data-value the number the tick claims to sit at. verify-beeswarm.py
-             cross-checks each against the scale the dots themselves describe. -->
+        <!-- The data-tick and data-value attributes record the intended quantitative axis and tick value. Compare them against an independent source scale, rather than fitting a scale from the dots themselves. -->
         <text data-tick="x" data-value="0" x="80" y="440" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">0</text>
         <text data-tick="x" data-value="100" x="280" y="440" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">100</text>
         <text data-tick="x" data-value="200" x="480" y="440" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">200</text>
@@ -365,10 +356,7 @@
         <circle cx="942" cy="230" r="4" fill="#f5f5f5"/>
         <circle data-value="431" data-name="req-4c1f" cx="942" cy="230" r="4" fill="rgba(235,108,54,0.55)" stroke="#eb6c36" stroke-width="1.2"/>
 
-        <!-- Labels: the p99 tail only, one tier per label, alternating sides,
-             each bound to its dot by data-name and tied to it by a hairline
-             leader. verify-beeswarm.py proves each label sits nearer its own
-             dot than any other named dot along the value axis. -->
+        <!-- This example labels selected tail observations, attaching each through data-name and a visible leader. Verify attachment and collision in the rendered figure; metadata alone cannot prove the correct observation is labeled. -->
         <line x1="856" y1="222" x2="856" y2="158" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
         <rect x="826" y="141" width="60" height="12" rx="2" fill="#f5f5f5"/>
         <text data-name="req-77d3" data-role="label" x="856" y="150" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">REQ-77D3</text>
@@ -394,7 +382,7 @@
       <div class="card">
         <div class="card-header"><span class="card-dot coral"></span><h3>The tail is the story</h3></div>
         <p class="eyebrow">Read the swarm, not the middle</p>
-        <p>req-4c1f took 431&nbsp;ms — four times the median — and it is one of three requests past 380&nbsp;ms in a five-minute window. At this rate, roughly one checkout in fifty gets a visibly slow page, which is exactly the reading a single averaged number would have hidden.</p>
+        <p>req-4c1f took 431&nbsp;ms, about 3.5 times the median. It is one of three requests past 380&nbsp;ms in this illustrative five-minute window: 3 of 138, or 2.17%. Those observations describe this sample; they do not establish a future rate or how a customer experienced the page.</p>
       </div>
       <div class="card">
         <div class="card-header"><span class="card-dot ink-strong"></span><h3>Every unit keeps its mark</h3></div>

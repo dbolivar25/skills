@@ -59,6 +59,26 @@ class ValidateSkillsTest < Minitest::Test
     assert run_validator.first
   end
 
+  def test_local_and_cross_file_heading_targets_are_checked
+    write("sample/references/guide.md", "# Guide\n[Local](#absent)\n[Other](other.md#missing)\n")
+    write("sample/references/other.md", "# Present\n")
+    success, output = run_validator
+    refute success
+    assert_includes output, "missing linked heading #absent"
+    assert_includes output, "missing linked heading other.md#missing"
+    write("sample/references/guide.md", "# Guide\n[Local](#guide)\n[Other](other.md#present)\n")
+    assert run_validator.first
+  end
+
+  def test_heading_targets_preserve_unicode_duplicates_and_explicit_anchors
+    write("sample/references/guide.md", "# Pólya's heuristics\n# Pólya's heuristics\n<a id=\"chosen\"></a>\n[One](#p%C3%B3lyas-heuristics)\n[Two](#pólyas-heuristics-1)\n[Named](#chosen)\n")
+    assert run_validator.first
+    write("sample/references/guide.md", "```md\n# Hidden\n```\n[Missing](#hidden)\n")
+    success, output = run_validator
+    refute success
+    assert_includes output, "missing linked heading #hidden"
+  end
+
   def test_branch_collision_requires_distinct_existing_methods
     corpus = YAML.safe_load(File.read(File.join(@root, "tests/invocation-cases.yml")))
     corpus["cases"][1]["expect"]["do_not_load"] = %w[sample support]
@@ -87,5 +107,33 @@ class ValidateSkillsTest < Minitest::Test
     success, output = run_validator
     refute success
     assert_includes output, "invalid agents/openai.yaml"
+  end
+
+  def test_description_does_not_require_a_house_formula
+    write("sample/SKILL.md", "---\nname: sample\ndescription: >-\n  Design a bounded experiment when its result can resolve the user's question.\n---\n")
+    assert run_validator.first
+  end
+
+  def test_inline_instruction_pointer_is_checked
+    write("sample/SKILL.md", "---\nname: sample\ndescription: Select a method for the requested job.\n---\nRead `references/absent.md` when needed.\n")
+    success, output = run_validator
+    refute success
+    assert_includes output, "missing instruction pointer references/absent.md"
+  end
+
+  def test_nested_entry_point_is_rejected
+    write("sample/references/SKILL.md", "# Retired entry\n")
+    success, output = run_validator
+    refute success
+    assert_includes output, "nested skill entry point"
+  end
+
+  def test_case_cannot_exclude_the_selected_entry_point
+    corpus = YAML.safe_load(File.read(File.join(@root, "tests/invocation-cases.yml")))
+    corpus["cases"][0]["expect"]["do_not_read"] = ["sample/SKILL.md"]
+    write("tests/invocation-cases.yml", corpus.to_yaml)
+    success, output = run_validator
+    refute success
+    assert_includes output, "excludes a selected skill entry point"
   end
 end

@@ -1,22 +1,13 @@
 # Choose the method
 
-This is the routing owner. Extract phase (generate, expand, select, unblock,
-subvert, refine, synthesize), domain (text, object, artifact, system, self,
-research, product), and specificity (none, domain, project, concrete problem).
+Choose the missing operation: generate, expand, select, unblock, subvert, refine, or synthesize. Match the domain and available material.
 
 ## Precedence
 
-1. Honor an explicitly named method. If its prerequisites are absent, return the
-   missing input; do not silently substitute or pretend to apply it.
-2. A request for a method recommendation returns 2–3 candidates with one-line
-   reasons and an owner choice, not generated ideas.
-3. Weird/strange/surprising/less-obvious mood selects Lateral Provocations or
-   Pataphysics. High-slop terrain (AI/startup ideas, habit trackers, productivity,
-   wellness, fitness, food or travel apps) selects those methods and rejects five
-   obvious candidates. Keep the actual domain constraints.
-4. Otherwise use phase, then domain. A method's prerequisites and exclusions
-   still apply. If two paths remain genuinely ambiguous, return one question
-   that distinguishes them. Choose by the user's phrasing, not exotic appeal.
+1. Honor a named method. Identify missing prerequisites instead of pretending to apply it.
+2. For recommendations, offer a small set with reasons and a preferred fit. Produce work too when requested.
+3. For strange or less obvious work, consider Lateral Provocations or Pataphysics, especially on familiar startup, productivity, wellness or travel terrain. Preserve domain constraints; a conventional idea can still fit.
+4. Otherwise use operation, then domain. Resolve material ambiguity with a discriminating question while pursuing independent work. Fit outranks exotic appeal.
 
 ## Route and method index
 
@@ -60,32 +51,17 @@ familiar; analogy imports structure. Premortem mitigates failure; Pataphysics
 explores imaginary exceptions. Crazy 8s can start blank; SCAMPER needs a base.
 Dérive explores territory; Affinity synthesizes observations already acquired.
 
-Mood: playful → OuLiPo/Oblique; personal → Discipline/Dérive; critical/political →
-Defamiliarization/Pataphysics/Chance; useful → TRIZ/JTBD; rigorous → Pólya/First
-Principles/Compression. Fit and prerequisites outrank mood.
-
 ## Exceptions and stacks
 
-One method normally. Two require a named reason and an explicit sequence or
-separate jobs: domain framing plus provocation (e.g. JTBD + Lateral for weird
-product ideas); generation then selection (Crazy 8s → premortem); exploration then
-synthesis (Dérive → Affinity); principle then mechanism (TRIZ → Biomimicry).
-Conflicting domain/mood signals can justify such a pair; do not stack automatically
-when one method already fits. Never stack three to mask poor selection.
+Usually one method suffices. Combine for distinct jobs: JTBD + Lateral frames then provokes; Crazy 8s → premortem generates then selects; Dérive → Affinity explores then synthesizes; TRIZ → Biomimicry finds a principle then a mechanism. A pair must earn its second operation.
 
-Essay can pair Defamiliarization with Compression; songwriting Oblique with
-Chance; algorithms Pólya with First Principles; organizations Meadows with
-Alexander; career Dérive with Compression. These are alternatives or justified
-pairs, not mandatory compound routes. New ventures can combine the constraint
-“solve your own itch” with JTBD only when customer evidence is available.
-
-Repeat request → switch method. Frustration → Discipline rather than more ideas.
+When ideas still converge, change the operation or bring in material. Frustration is result feedback, not a diagnosis. Use Discipline when sustaining a practice is the request.
 A request to test whether to start → premortem, without treating it as a veto.
 Do not use SCAMPER without a base, TRIZ for expressive/social questions, Meadows
 for a single creator, or JTBD as market logic for art, civic life or pure research.
 Story Skeletons needs material; it cannot supply a plot from nothing.
 
-Excluded defaults: Hero's Journey/Save the Cat/Three-Act/Story Circle formulas;
+This library deliberately avoids these as automatic defaults: Hero's Journey/Save the Cat/Three-Act/Story Circle formulas;
 Design Thinking as franchise; mind maps/Six Hats/fishbone as generators;
 Disrupt-X/blue-ocean/lean-startup positioning; generic LLM brainstorming. Specific
 traditions, actual generative operations and the user's constraints own the work.

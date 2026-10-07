@@ -1,8 +1,5 @@
 # Premortem and Inversion
 
-Core: external steps below are proposals or supplied evidence; the operational caller executes them.
-
-
 Two methods for failure-oriented ideation:
 - **Premortem** — Gary Klein, *HBR* September 2007. Imagine the project has already failed catastrophically; work backwards to causes.
 - **Inversion** — Charlie Munger via Carl Jacobi: *"Tell me where I'm going to die so I'll never go there."* Solve problems by figuring out how to fail and avoiding that.
@@ -28,7 +25,7 @@ Both exploit prospective hindsight (Mitchell, Russo, Pennington 1989): people ge
 - Early generative phase — corrosive to fragile ideas
 - You can't act on the failure modes (anxiety, not planning)
 - Group lacks psychological safety to articulate fears about the leader's project
-- Decisions that need urgency (premortem takes 60–90 minutes done well)
+- A situation where a workshop would delay a necessary action; a short focused failure check may still help
 
 ## Premortem procedure
 
@@ -36,14 +33,14 @@ Both exploit prospective hindsight (Mitchell, Russo, Pennington 1989): people ge
 2. **Generate failure narratives independently.** Each member writes a paragraph describing what happened, in concrete terms. *Independence is essential* — group brainstorming surfaces socially safe concerns; independent writing surfaces uncomfortable ones.
 3. **Round-robin failure causes.** Each shares one cause; no comment. Continue until exhausted.
 4. **Cluster and assess.** Group similar; estimate probability and severity.
-5. **Generate mitigations for the top 3.** Update the plan.
+5. **Mitigate consequential, addressable causes.** Prioritize by evidence and consequence, rather than a fixed count. Update the plan within its actual authority.
 6. **Re-run periodically.** Failures unlikely at planning time may have become likely.
 
 ## Inversion procedure
 
 1. State the goal: "I want to [original goal]."
 2. Invert: "How would I guarantee the *opposite*?"
-3. List 5–10 things that would guarantee the inverted goal. Be specific.
+3. List specific actions or conditions that would drive failure in this situation. Work beyond the first generic answer without padding the list.
 4. Self-check: which am I accidentally doing or could drift into?
 5. Avoid those; return to original goal.
 
@@ -85,7 +82,7 @@ Jürgen Schmidhuber, *Formal Theory of Creativity* (1990–2010). Beauty = compr
 I(D, O(t)) = B(D, O(t)) − B(D, O(t−1))
 ```
 
-Interestingness = first derivative of beauty over time. Pure noise (no learnable pattern) and fully-known pattern (already compressed) are both boring. Beauty lives between.
+In this observer-relative model, interestingness is the change in compressibility. Unlearnable noise offers no compression progress; a pattern already understood offers little new progress, even if it remains beautiful or useful. This is one account of curiosity, not a universal law of artistic value.
 
 ## When to use
 
@@ -102,7 +99,7 @@ Interestingness = first derivative of beauty over time. Pure noise (no learnable
 ## Procedure
 
 ### For picking a research question
-1. List 5–10 things you currently *cannot predict well* in your domain. Be specific: not "the future of AI", but "why X 7B model trained with technique A performs worse than Y 1.3B model with technique B on benchmark Z".
+1. List consequential things you currently *cannot predict well* in the domain. Be specific: not “the future of AI,” but a concrete difference between two models on a named task under comparable conditions.
 2. For each: would understanding it compress only this fact, or re-organize a broader domain? Prefer the latter.
 3. For each: is the answer learnable from where you are? (Not noise; not too far above your prior.)
 4. Pick the highest learnable compression-progress potential.
@@ -120,15 +117,15 @@ Where is the work entirely predictable? (too known) Entirely unpredictable? (too
 
 ## Worked example
 
-User has three options:
+Illustrative case: the user wants a project that teaches them something, has already built several habit trackers, and has a weak model of rebase internals. They have three options:
 - A. Build a habit tracker.
 - B. Build a tool that explains why a `git rebase --interactive` produced its conflicts, by reconstructing the commit graph mid-rebase.
 - C. Read Lacan.
 
 Analysis:
-- A: no compression progress; user already has model of habit trackers. Reject.
+- A: likely little new learning under the stated prior. A new constraint or an unfamiliar user need could change that judgment.
 - B: high. User doesn't currently have strong model of how rebase constructs intermediate states; building this requires learning that, and the resulting model re-organizes how the user thinks about all VCS internals.
-- C: real compression-progress potential, but prior is missing. Long path to get there. Worthwhile if on the prerequisite track; otherwise read Žižek/Bruce Fink first as scaffolding.
+- C: a different learning direction whose value depends on the user's interest and background. The method cannot assume that prior or rank philosophical study from the label alone.
 
 Recommend B.
 
@@ -138,4 +135,4 @@ Recommend B.
 - Don't claim every idea has high compression-progress. Most don't. The framework is useful because it discriminates.
 - Don't impose this lens on artistic work without acknowledging its limits.
 
-Source: people.idsia.ch/~juergen/creativity.html
+Source: [Schmidhuber's formal account of creativity and compression progress](https://people.idsia.ch/~juergen/creativity.html).

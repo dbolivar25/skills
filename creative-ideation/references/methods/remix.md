@@ -1,8 +1,5 @@
 # Chance and Remix
 
-Core: external steps below are proposals or supplied evidence; the operational caller executes them.
-
-
 Four traditions of surrendering authorial control to procedure:
 - **Surrealist exquisite corpse** — Breton et al., 1925. Folded-paper collaborative writing/drawing.
 - **John Cage's chance operations** — *Music of Changes* (1951). Composed via *I Ching* coin tosses.

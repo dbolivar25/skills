@@ -7,10 +7,10 @@ Ships inside the skill so an installed agent can verify its own output:
 
 Checks the accessible-SVG contract, the single-file safety rules (no remote
 assets beyond the approved Google Fonts stylesheet, no executable attributes,
-no scripts other than the one canonical motion controller), and — when motion
-markup is present — the structural motion contract. This is a distilled
-subset of the repository gates (`lint-skin.py`, `verify-motion.py`), which
-remain the authority for contributions to the repository itself.
+no scripts other than the one canonical motion controller), including CSS url(), @import and image-set references, and — when motion
+markup is present — the structural motion contract. This is a bounded static
+source check, not a browser renderer, CSS cascade evaluator, or certificate of
+semantic fidelity. Referenced local stylesheets are not recursively inspected.
 """
 
 from __future__ import annotations
@@ -42,6 +42,7 @@ class DiagramParser(HTMLParser):
         self.statuses_in_controls = 0
         self.scripts: list[dict[str, object]] = []
         self.styles: list[str] = []
+        self.inline_styles: list[str] = []
         self.svgs: list[dict[str, object]] = []
         self.unsafe: list[str] = []
         self.references: list[tuple[str, str, str]] = []
@@ -67,6 +68,8 @@ class DiagramParser(HTMLParser):
                 self.unsafe.append(f"srcdoc attribute on <{tag}>")
             if key in REFERENCE_ATTRS:
                 self.references.append((tag, data.get("rel", ""), value))
+        if "style" in data:
+            self.inline_styles.append(data["style"])
         if "data-motion-root" in data:
             self.roots.append(data)
             if self._motion_root_depth is None:
@@ -187,14 +190,140 @@ def reference_error(tag: str, rel: str, value: str) -> str | None:
         ":" in stripped.split("/", 1)[0] and not lowered.startswith("data:")
     )
     if not remote:
-        if lowered.startswith("data:") and not lowered.startswith("data:image/"):
-            return f"non-image data URL on <{tag}>: {stripped[:80]}"
+        allowed_font = tag == "CSS url" and lowered.startswith((
+            "data:font/woff2;", "data:font/woff;", "data:application/font-woff;",
+        ))
+        if lowered.startswith("data:") and not (
+            lowered.startswith("data:image/") or allowed_font
+        ):
+            return f"unsupported data URL on <{tag}>: {stripped[:80]}"
         return None
     if tag == "link" and "stylesheet" in rel.casefold().split():
         if is_approved_google_fonts_stylesheet(stripped):
             return None
         return f"remote stylesheet is not the approved Google Fonts /css2 URL: {stripped[:80]}"
     return f"remote reference on <{tag}>: {stripped[:80]}"
+
+
+def css_escape(source: str, index: int) -> tuple[str, int]:
+    """Decode one CSS escape; index points just after the backslash."""
+    if index >= len(source):
+        return "", index
+    if source[index] in "\r\n\f":
+        if source[index:index + 2] == "\r\n":
+            return "", index + 2
+        return "", index + 1
+    match = re.match(r"[0-9a-fA-F]{1,6}", source[index:])
+    if match:
+        codepoint = int(match.group(), 16)
+        index += len(match.group())
+        if index < len(source) and source[index].isspace():
+            index += 2 if source[index:index + 2] == "\r\n" else 1
+        return (chr(codepoint) if 0 < codepoint <= 0x10FFFF and not 0xD800 <= codepoint <= 0xDFFF else "\ufffd"), index
+    return source[index], index + 1
+
+
+def css_string(source: str, index: int) -> tuple[str, int]:
+    quote = source[index]
+    index += 1
+    value = []
+    while index < len(source) and source[index] != quote:
+        if source[index] == "\\":
+            decoded, index = css_escape(source, index + 1)
+            value.append(decoded)
+        else:
+            value.append(source[index])
+            index += 1
+    return "".join(value), min(index + 1, len(source))
+
+
+def css_references(source: str) -> list[tuple[str, str, str]]:
+    """Read URL-bearing CSS syntax without mistaking ordinary text for URLs.
+
+    Recognizes url(), quoted @import, and quoted image-set candidates, including
+    CSS identifier/string escapes. It does not evaluate CSS variables or imports.
+    """
+    references = []
+    index = 0
+    functions: list[str] = []
+    last_identifier = ""
+    import_pending = False
+    at_keyword = False
+    while index < len(source):
+        if source.startswith("/*", index):
+            end = source.find("*/", index + 2)
+            index = len(source) if end < 0 else end + 2
+            continue
+        char = source[index]
+        if char.isspace():
+            index += 1
+            continue
+        if char in "\"'":
+            value, index = css_string(source, index)
+            if import_pending:
+                references.append(("link", "stylesheet", value))
+                import_pending = False
+            elif functions and functions[-1] in {"image-set", "-webkit-image-set"}:
+                references.append(("CSS image-set", "", value))
+            last_identifier = ""
+            continue
+        if char.isalpha() or char in "-_\\" or ord(char) >= 128:
+            name = []
+            while index < len(source):
+                char = source[index]
+                if char == "\\":
+                    decoded, index = css_escape(source, index + 1)
+                    name.append(decoded)
+                elif char.isalnum() or char in "-_" or ord(char) >= 128:
+                    name.append(char)
+                    index += 1
+                else:
+                    break
+            last_identifier = "".join(name).casefold()
+            if at_keyword:
+                import_pending = last_identifier == "import"
+                at_keyword = False
+            elif import_pending and last_identifier != "url":
+                import_pending = False
+            continue
+        if char == "@":
+            at_keyword = True
+            import_pending = False
+            index += 1
+            last_identifier = ""
+            continue
+        if char == "(" and last_identifier == "url":
+            index += 1
+            while index < len(source) and source[index].isspace():
+                index += 1
+            if index < len(source) and source[index] in "\"'":
+                value, index = css_string(source, index)
+                while index < len(source) and source[index].isspace():
+                    index += 1
+            else:
+                value_chars = []
+                while index < len(source) and source[index] != ")":
+                    if source[index] == "\\":
+                        decoded, index = css_escape(source, index + 1)
+                        value_chars.append(decoded)
+                    else:
+                        value_chars.append(source[index])
+                        index += 1
+                value = "".join(value_chars).strip()
+            references.append(("link" if import_pending else "CSS url", "stylesheet" if import_pending else "", value))
+            import_pending = False
+            last_identifier = ""
+            index += 1 if index < len(source) and source[index] == ")" else 0
+            continue
+        if char == "(":
+            functions.append(last_identifier)
+        elif char == ")" and functions:
+            functions.pop()
+        elif char == ";":
+            import_pending = False
+        last_identifier = ""
+        index += 1
+    return references
 
 
 def canonical_controller() -> str:
@@ -355,6 +484,8 @@ def verify(path: Path) -> list[str]:
     parser = parsed_document(source)
     errors: list[str] = []
     errors.extend(parser.unsafe)
+    for css in [*parser.styles, *parser.inline_styles]:
+        parser.references.extend(css_references(css))
     for tag, rel, value in parser.references:
         finding = reference_error(tag, rel, value)
         if finding:

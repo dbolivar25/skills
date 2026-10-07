@@ -3,6 +3,9 @@
 
 require "pathname"
 require "yaml"
+require "json"
+require "digest"
+require "uri"
 
 ROOT = Pathname.new(ARGV.fetch(0, Pathname.new(__dir__).parent.to_s)).expand_path
 CASE_FILE = ROOT.join("tests/invocation-cases.yml")
@@ -40,6 +43,44 @@ def prose(text)
     end
     line
   end.join
+end
+
+# The library uses ordinary ATX Markdown headings and explicit HTML anchors.
+# This checks their local reachability, not a full Markdown renderer.
+def anchors(text)
+  body = prose(text)
+  used = body.scan(/\b(?:id|name)=["']([^"']+)["']/).flatten
+  body.lines.each do |line|
+    heading = line.match(/\A {0,3}\#{1,6}\s+(.+?)\s*\#*\s*$/)
+    next unless heading
+
+    base = heading[1].downcase.gsub(/[^\p{Word}\- ]/, "").tr(" ", "-")
+    slug = base
+    suffix = 0
+    while used.include?(slug)
+      suffix += 1
+      slug = "#{base}-#{suffix}"
+    end
+    used << slug
+  end
+  used
+end
+
+def check_link(document, target, errors)
+  target = target.strip.delete_prefix("<").delete_suffix(">")
+  return if target.empty? || target.match?(/\A[a-z][a-z0-9+.-]*:/i)
+
+  relative, fragment = target.split("#", 2).map { |part| URI::DEFAULT_PARSER.unescape(part) }
+  path = relative.empty? ? document : document.dirname.join(relative).cleanpath
+  unless path.exist?
+    errors << "#{document.relative_path_from(ROOT)}: missing linked file #{target}"
+    return
+  end
+  return unless fragment && !fragment.empty? && path.file? && path.extname.downcase == ".md"
+
+  unless anchors(path.read).include?(fragment)
+    errors << "#{document.relative_path_from(ROOT)}: missing linked heading #{target}"
+  end
 end
 
 errors = []
@@ -88,10 +129,7 @@ skill_files.each do |skill_file|
     errors << "#{directory}: description exceeds 1024 characters" if normalized.length > 1024
     errors << "#{directory}: description cannot contain angle brackets" if normalized.include?("<") || normalized.include?(">")
 
-    unless frontmatter["disable-model-invocation"] == true
-      errors << "#{directory}: model invocation contract must start with 'Use when' or 'Use only when'" unless normalized.match?(/\AUse (?:only )?when\b/)
-      errors << "#{directory}: model invocation contract must state why with 'Load it to' or 'Load it as'" unless normalized.match?(/\bLoad it (?:to|as)\b/)
-    end
+    # Discovery wording is a design judgment. Validate metadata, not a house phrase.
   end
 
   disabled = frontmatter["disable-model-invocation"]
@@ -122,13 +160,52 @@ skill_files.each do |skill_file|
 
   skill_file.dirname.glob("**/*.md").each do |document|
     prose(document.read).scan(LINK_PATTERN).flatten.each do |target|
-      target = target.strip
-      next if target.empty? || target.start_with?("#") || target.match?(/\A[a-z][a-z0-9+.-]*:/i)
-
-      relative = target.delete_prefix("<").delete_suffix(">").split("#", 2).first
-      path = document.dirname.join(relative).cleanpath
-      errors << "#{document.relative_path_from(ROOT)}: missing linked file #{target}" unless path.exist?
+      check_link(document, target, errors)
     end
+  end
+
+  # Entry points also use inline-code pointers. Check package-owned paths while
+  # leaving illustrative project paths and fenced examples alone.
+  prose(text).scan(/`((?:references|methods|templates|vendors|scripts|checks|assets|agents)\/[^`\s]+)`/).flatten.each do |target|
+    relative = target.split("#", 2).first
+    matches = skill_file.dirname.glob(relative)
+    errors << "#{directory}: missing instruction pointer #{target}" if matches.empty?
+  end
+end
+
+# Retired entry points must live outside discovery roots, not under references.
+ROOT.glob("**/SKILL.md").each do |file|
+  errors << "#{file.relative_path_from(ROOT)}: nested skill entry point" unless skill_files.include?(file)
+end
+
+manifest_file = ROOT.join("docs/skills-redesign.json")
+if manifest_file.exist?
+  begin
+    manifest = JSON.parse(manifest_file.read)
+    planned = manifest.fetch("catalog").map { |entry| entry.fetch("name") }.sort
+    errors << "Active catalog differs from the approved redesign" unless skill_names.sort == planned
+    manifest.fetch("planned_resource_bindings").each do |binding|
+      target = binding.fetch("target")
+      next if target == "AGENTS working agreement additions" # Verified against the host file during installation.
+      path = ROOT.join(target)
+      valid = skill_names.include?(target.split("/").first) && path.exist?
+      valid &&= !path.glob("**/*").select(&:file?).empty? if path.directory?
+      errors << "Missing approved resource binding #{target}" unless valid
+    end
+  rescue JSON::ParserError, KeyError, TypeError => e
+    errors << "Invalid redesign manifest: #{e.message}"
+  end
+end
+
+protected_file = ROOT.join("tests/protected-steward.json")
+if protected_file.exist?
+  begin
+    JSON.parse(protected_file.read).each do |target, expected|
+      file = ROOT.join(target)
+      errors << "Protected Steward file differs: #{target}" unless file.file? && Digest::SHA256.file(file).hexdigest == expected
+    end
+  rescue JSON::ParserError, TypeError => e
+    errors << "Invalid protected-file manifest: #{e.message}"
   end
 end
 
@@ -225,6 +302,10 @@ else
         errors << "#{location} references unknown skill #{skill_name}" unless skill_names.include?(skill_name)
       end
       errors << "#{location} repeats a skill across expectation fields" unless references.uniq.length == references.length
+      selected_entries = [primary, *also_load].compact.map { |name| "#{name}/SKILL.md" }
+      unless (selected_entries & excluded_paths).empty?
+        errors << "#{location} excludes a selected skill entry point"
+      end
 
       case kind
       when "positive"
@@ -252,7 +333,7 @@ else
 end
 
 if errors.empty?
-  puts "Validated #{skill_files.length} skills, their invocation contracts, and #{case_count} invocation cases."
+  puts "Validated #{skill_files.length} skill packages and #{case_count} invocation-case specifications (structural checks, not model-routing results)."
   exit 0
 end
 
