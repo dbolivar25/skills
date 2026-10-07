@@ -99,5 +99,3 @@ downstream_consumers:
 ```
 
 The exact schema can vary. The invariant is that the observation's semantics are scoped to the workflow and judgment that produced it.
-
-Source: adapted from the corresponding contract, glossary, reference, guide or template in the personal Faithful Derivation skill.

@@ -1,6 +1,6 @@
 # Domain meaning, examples, and durable decisions
 
-Acquire domain statements, existing glossary/context boundaries, actual code behavior
+Acquire domain statements, existing glossary and bounded context boundaries, actual code behavior
 and examples, settled owner decisions, and the requested documentation scope.
 
 Actively sharpen the model rather than merely consume its vocabulary. Compare terms and
@@ -19,11 +19,11 @@ code or context is an evidence need, not evidence that the user's account is wro
 
 Return settled glossary deltas separately from unresolved proposals. A glossary contains
 domain meaning, not implementation details, a spec or scratch notes. Use the repository's
-glossary format, or [the context format below](#context-format) when no local convention exists.
+glossary format, or [the glossary format below](#glossary-format) when no local convention exists.
 
 Use [the ADR guidance below](#adr-format) when a decision's basis must survive the current
 conversation. Follow repository practice and avoid an ADR for every routine choice.
-Return the target context with the delta.
+Return the target glossary and bounded context with the delta.
 Resolve missing code or glossary evidence and ask owner questions. Persist settled
 language only within the documentation scope, checking current files before edits and
 reading back the result.
@@ -33,14 +33,14 @@ is a settled delta.
 Finish when settled terms and qualifying decisions are coherent with inspected evidence,
 while each unresolved fork remains a concrete question with its reason.
 
-## Context format
+## Glossary format
 
 ### Structure
 
 ```md
-# {Context Name}
+# {Bounded Context Name} Glossary
 
-{One or two sentence description of what this context is and why it exists.}
+{One or two sentence description of this bounded context and the language this glossary covers.}
 
 ## Language
 
@@ -64,23 +64,23 @@ _Avoid_: Client, buyer, account
 - **Include domain language for this context.** A common word such as Order can belong because its meaning and relationship to Invoice matter here. General programming concepts (timeouts, utility patterns) usually belong elsewhere; include one only when the domain gives it a specific meaning or constraint.
 - **Group terms under subheadings** when natural clusters emerge. If all terms belong to a single cohesive area, a flat list is fine.
 
-### Single vs multi-context repos
+### Single vs multiple glossary locations
 
 Follow the existing repository's format and locations. When introducing a glossary,
 these are useful starting shapes, not assumptions about every repository:
 
-**Single context:** One `CONTEXT.md` at the repo root.
+**Single bounded context:** One `GLOSSARY.md` at the repo root.
 
-**Multiple contexts:** A `CONTEXT-MAP.md` at the repo root lists the contexts, where they live, and how they relate to each other:
+**Multiple bounded contexts:** A `GLOSSARY-MAP.md` at the repo root lists the bounded contexts, links their glossaries, and explains how they relate:
 
 ```md
-# Context Map
+# Glossary Map
 
-## Contexts
+## Bounded Contexts
 
-- [Ordering](./src/ordering/CONTEXT.md): receives and tracks customer orders
-- [Billing](./src/billing/CONTEXT.md): generates invoices and processes payments
-- [Fulfillment](./src/fulfillment/CONTEXT.md): manages warehouse picking and shipping
+- [Ordering](./src/ordering/GLOSSARY.md): receives and tracks customer orders
+- [Billing](./src/billing/GLOSSARY.md): generates invoices and processes payments
+- [Fulfillment](./src/fulfillment/GLOSSARY.md): manages warehouse picking and shipping
 
 ## Relationships
 
@@ -89,14 +89,14 @@ these are useful starting shapes, not assumptions about every repository:
 - **Ordering ↔ Billing**: Shared types for `CustomerId` and `Money`
 ```
 
-Infer structure from the actual repository layout and context contents:
+Infer structure from the actual repository layout and glossary contents:
 
-- A `CONTEXT-MAP.md` identifies multiple contexts and their locations.
-- Only a root `CONTEXT.md` indicates a single context.
+- A `GLOSSARY-MAP.md` identifies multiple bounded contexts and their glossary locations.
+- A lone root `GLOSSARY.md` is a starting indication of one glossary scope; check the actual domain boundaries.
 - Neither file means first look for an equivalent glossary or domain document. A root
   glossary can be proposed with the first settled term when no existing owner fits.
 
-For multiple contexts, place the proposed delta in the context supported by the
+For multiple bounded contexts, place the proposed delta in the glossary supported by the
 topic and examples. Missing map contents are an evidence need; an ambiguous
 meaning boundary is an owner decision. Read current files, resolve owner questions, and create files lazily within the
 authorized documentation scope.

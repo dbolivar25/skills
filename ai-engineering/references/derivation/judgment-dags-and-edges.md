@@ -212,5 +212,3 @@ Merge nodes when:
 - separation is only architectural ceremony
 
 The question is not how many agents to use. The question is which boundaries protect faithfulness, evaluation, reuse, parallelism, policy, or efficiency.
-
-Source: adapted from the corresponding contract, glossary, reference, guide or template in the personal Faithful Derivation skill.

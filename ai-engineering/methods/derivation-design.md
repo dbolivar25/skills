@@ -250,5 +250,3 @@ Ask:
 - Which derived states should remain ephemeral?
 
 Completion criterion: optimization does not erase fidelity, support, confidence, gates, evals, or raw-state recoverability.
-
-Source: adapted from the corresponding contract, glossary, reference, guide or template in the personal Faithful Derivation skill.

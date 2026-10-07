@@ -42,6 +42,40 @@ Account for every material changed behavior on both axes, or name what could not
 checked. Prior comments are claims to investigate against current source, not findings
 to copy.
 
+### Use code smells to focus investigation
+
+Use these patterns when changed code suggests a problem with meaning,
+ownership or variation. They are heuristics for investigation, not an additional
+standards authority or a checklist every diff must satisfy. A pattern name alone is
+not a finding. Establish the local mechanism and consequence, try to disprove it,
+and respect repository precedent, governing contracts and accepted settlements.
+Skip tooling-enforced style preferences.
+
+| Pattern and concrete trigger | Investigation and possible correction |
+| --- | --- |
+| **Mysterious Name:** `process(data)` hides that it calculates an invoice's late fee. | Read callers and domain language to identify the actual responsibility. Rename around that meaning; difficulty finding an honest name may reveal an unclear responsibility. |
+| **Duplicated Code:** two handlers repeat the same normalization or retry rule. | Compare their contracts, variation and reasons to change. Extract shared policy when it has one owner; similar syntax alone does not justify coupling independent rules. |
+| **Feature Envy:** a service repeatedly reads another owner's fields to calculate its result. | Trace who owns the data, invariant and policy. Move the behavior toward that owner when it reduces caller knowledge without reversing a deliberate dependency boundary. |
+| **Data Clumps:** `host`, `port` and `tls` repeatedly travel together through calls. | Check whether they express one concept with shared validation or lifecycle. Give that concept a cohesive type when it clarifies the contract; avoid merely wrapping unrelated parameters. |
+| **Primitive Obsession:** `amount: number` loses currency, or `status: string` admits states the domain forbids. | Inspect constructors, validation and consumers for real misuse or duplicated rules. Introduce a small domain type that owns the meaning and invariant when it earns its cost. |
+| **Repeated Switches:** several callers branch on the same `kind` to select the same behavior. | Compare the cases and identify whether one variation rule is being copied. Centralize that rule in one map or dispatch boundary; retain distinct branches when their policies differ. |
+| **Shotgun Surgery:** adding one variant requires scattered edits to the same policy across handlers and serializers. | Trace the logical change to distinguish copied knowledge from necessary integration points. Gather the repeated policy with one owner so future changes stay local. |
+| **Divergent Change:** one service changes for unrelated reasons, such as tax rules and email presentation. | Identify the independent responsibilities and what must remain together to protect an invariant. Split along a stable ownership boundary when it reduces change coupling. |
+| **Speculative Generality:** unused hooks, strategy options or parameters support no requested or established caller need. | Search actual uses, requirements and settled extension choices. Remove or inline unsupported variation while preserving justified production and test seams. |
+| **Message Chains:** `order.customer().account().billingAddress()` exposes a traversal the caller should not need to understand. | Check whether the caller owns that knowledge and whether the chain leaks internal structure. Put the required operation behind its owner when that hides a meaningful dependency. |
+| **Middle Man:** a wrapper mainly forwards arguments to another module. | Apply the deletion test: does removing it eliminate complexity or spread policy, ordering or recovery into callers? Bypass an unearned wrapper; retain a boundary that hides real responsibilities. |
+| **Refused Bequest:** an implementation throws from inherited operations or discards most of its inherited contract. | Trace substituting callers and the promised behavior. Narrow the interface or use composition when inheritance misstates the relationship; an intentionally unsupported capability needs its actual contract assessed. |
+
+For a material ownership or caller-knowledge concern, read
+[module ownership and seams](../../engineering/references/modules.md). For disputed
+domain meaning or invariants, read [domain modeling](../../engineering/references/domain.md).
+For a naming or structural simplification, use
+[finishing](../../engineering/methods/finishing.md) in its read-only findings mode
+unless edits are authorized. These methods deepen the assessment; review still owns
+the integrated judgment and its correction direction.
+
+### Select supporting judgments
+
 Select supporting judgments when they can change the assessment:
 
 | Concern | Capability and required context |

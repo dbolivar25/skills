@@ -22,7 +22,7 @@ test can establish through that interface. Implementation size is not depth.
 ### Vocabulary
 
 Use these terms consistently when describing the design; use the project's
-`CONTEXT.md` vocabulary for its domain concepts.
+`GLOSSARY.md` vocabulary for its domain concepts.
 
 | Term | Meaning and distinction |
 | --- | --- |

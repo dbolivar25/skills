@@ -1,6 +1,6 @@
 ---
 name: engineering
-description: Use for software implementation, refactoring, dependency assessment, domain or module design, an architecture investigation, or a technical specification. Work from the existing system to the concrete design or verified change requested, selecting only the methods that job needs.
+description: Use for software implementation, refactoring, dependency assessment, domain or module design, an architecture investigation, a technical specification, or planning large work with unresolved decisions. Work from the existing system to the concrete design or verified change requested, selecting only the methods that job needs.
 ---
 
 # Engineering
@@ -16,6 +16,7 @@ These are independent jobs, not stages of a mandatory process:
 | Change or refactor existing behavior | Inspect the named seam and callers; use [contracts](references/contracts.md), [module design](references/modules.md), or [behavioral testing](references/testing.md) when a real contract, ownership, or proof question needs depth |
 | Assess an upgrade | Read [upgrades](references/upgrades.md); trace resolved versions, repository usage, primary upstream evidence, and real runtime/platform boundaries |
 | Investigate architecture | Read [architecture study](references/architecture.md); trace the bounded system and evidence halo, then explain it or rank concrete ownership moves when the question calls for recommendations |
+| Find a path through large work with unresolved decisions | Read [decision mapping](methods/decision-mapping.md); discover the questions and dependencies that determine the path, preserving settlements and the requested destination |
 | Produce an implementable technical design | Read [typed specification](references/specification.md); make typed contracts, responsibilities, execution/failure paths, decisions, and proof concrete; select [design alternatives](references/design-alternatives.md) when materially different designs need comparison |
 | Sharpen a domain or module | Read [domain modeling](references/domain.md) or [module design](references/modules.md); test vocabulary/invariants against code, examples, callers and edge cases |
 | Clarify verified code or comments | Read [finishing](methods/finishing.md); reduce reading burden within the authorized scope and recheck any edits |

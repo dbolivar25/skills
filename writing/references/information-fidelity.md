@@ -292,5 +292,3 @@ A dimension can be dropped from active context only when every downstream consum
 A dimension is live at a point in the DAG if some downstream judgment still needs it at a fidelity not yet satisfied by an intermediate representation.
 
 If it is live, do not drop it. If it is no longer live, carrying it forward is cost, noise, and risk.
-
-Source: adapted from the personal Information Preservation skill and its full Compression and Dimensions reference.

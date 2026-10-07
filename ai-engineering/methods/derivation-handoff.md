@@ -31,5 +31,3 @@ When handing off, provide responsibilities, concrete contracts, dependencies, kn
 Warning signs include hidden judgments inside an undifferentiated prompt, one summary feeding incompatible consumers, exact values becoming prose before verification, dropped source pointers, candidate and published output sharing uncontrolled state, model confidence replacing support, and persistence without invalidators. Investigate their consequence rather than treating each shape as automatically wrong.
 
 Finish with the requested handoff or verified implementation stage, remaining decisions and exact evidence limits. Neither a completed mapping nor passing offline checks establishes deployment, publication or production acceptance.
-
-Source: adapted from the corresponding contract, glossary, reference, guide or template in the personal Faithful Derivation skill.

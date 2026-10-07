@@ -16,6 +16,18 @@ A user-invoked skill requires explicit selection. This spends cognitive load bec
 
 Choose autonomous selection when the agent must recognize the job itself. Choose explicit selection for a workflow that should run only when selected. A description or another skill's pointer cannot override invocation policy. Preserve a selection already authorized by the user's request rather than asking for it again.
 
+## Give many explicit workflows a navigation entry
+
+When a library has more explicitly selected workflows than people can readily remember,
+a **router** can provide one known entry that explains which workflow fits the current
+situation. Give each choice a concrete job and a pointer to its owner. For example,
+someone can ask "Which workflow fits this release problem?" and receive a recommendation
+instead of needing to recall every workflow name.
+
+Use this when selection itself is a recurring burden. Keep the actual methods with their
+owners; the navigation entry recommends a route and preserves each workflow's invocation
+policy. It does not grant authority to start an explicit-only workflow.
+
 ## Use actual target-host metadata
 
 Host switches differ. Use the supported mechanism for the target host and preserve unrelated metadata:
@@ -30,7 +42,7 @@ policy:
   allow_implicit_invocation: false
 ```
 
-Codex's `agents/openai.yaml` also carries machine-facing interface metadata and declared MCP tool dependencies. The installed official reference specifies quoted string values, UI display fields and a `default_prompt` that explicitly mentions `$skill-name`. Locate and read that official reference in the current environment when changing metadata; the 2026-10-06 installed version confirms these fields. Verify future field support there rather than copying configuration from a different host or inventing unsupported frontmatter. Changing a description does not silently change invocation authority.
+Codex's `agents/openai.yaml` also carries machine-facing interface metadata and declared MCP tool dependencies. The installed official reference specifies quoted string values, UI display fields and a `default_prompt` that explicitly mentions `$skill-name`. Locate and read that official reference in the current environment when changing metadata. Verify field support there rather than copying configuration from a different host or inventing unsupported frontmatter. Changing a description does not silently change invocation authority.
 
 Keep these mechanisms separate:
 
@@ -57,5 +69,3 @@ Check the actual host's accepted frontmatter, names and limits; YAML fields; ass
 Test relevant explicit invocation, autonomous positive triggers when enabled, negative prompts, neighboring-skill collisions and conditional reference reachability. Retain what the host actually loaded or invoked and what the agent did with it. A smoke test may establish that an explicit skill can load; it cannot establish improved quality across its jobs.
 
 For consequential redesign, compare representative tasks with independent judgments using [evaluation](../evaluation/references/evals-and-ablations.md). Preserve failures where a demand was weakened, a method became unreachable or context was lost. Treat packaging, invocation, execution, output quality and distribution/reload as separate receipts. Finish the requested edit or proposal with the actual evidence and remaining limits.
-
-Source: retains the personal Writing for Agents skill-mechanics method. Codex metadata details were checked against the installed official skill-creator reference during consolidation; verify again when the host changes.

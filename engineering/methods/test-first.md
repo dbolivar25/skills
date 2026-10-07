@@ -7,11 +7,17 @@ branch governs the order in which it is learned.
 
 ## 1. Agree on the behavior and seam
 
-Read project domain/context documentation and governing ADRs. Inspect local test
-patterns. Establish the public interface, test seams, and a prioritized behavior
+Read the relevant `GLOSSARY.md`, project domain documentation, and governing ADRs.
+Inspect local test patterns. Establish the public interface, test seams, and a prioritized behavior
 list, focusing effort on critical paths and complex logic. If the interface is
 unsettled, use [module design](../references/modules.md) before the loop.
 Look for opportunities to hide behavior behind a small interface.
+
+Give each proposed seam a one-line note on what it catches and what it misses, so
+the owner can judge the coverage tradeoff. For example: "The checkout service with
+a fake payment gateway catches order and payment-decision behavior; it misses the
+real gateway's request format and retry responses." Use a real gateway or adapter
+check when the claim depends on that boundary.
 
 Make the interface, seams, and prioritized behaviors explicit enough to drive the
 first cycle. Resolve source-verifiable facts yourself. Ask only for an unsettled
@@ -23,8 +29,9 @@ no separate plan-approval gate.
 
 Write **one test of one behavior**. Run it and see it fail for the intended
 missing behavior. Write only enough implementation to pass it, then check the
-existing relevant suite. This first slice establishes that the path works
-end-to-end; it is not a collection of disconnected shape tests.
+existing relevant suite. This first slice checks one behavior from the selected
+interface to its observable result, with coverage limited to the dependencies
+the test exercises.
 
 Done when the test has the intended red signal, the minimal implementation makes
 it green, and the relevant existing suite remains green.

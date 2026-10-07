@@ -126,5 +126,3 @@ Define decay as part of the output obligation, not as cleanup after rendering.
 If a rendered claim may be challenged, it needs source support or a source-recoverable path. The renderer can omit source details from the visible text, but the workflow should retain enough support for verification, audit, user trust, or correction.
 
 Required access and scope gates must pass before the affected publication. Qualification or weaker wording cannot substitute for permission. A freshness or support gate may allow qualification only when its contract explicitly permits that failure behavior. Recheck gates whose inputs changed after candidate generation.
-
-Source: adapted from the corresponding contract, glossary, reference, guide or template in the personal Faithful Derivation skill.

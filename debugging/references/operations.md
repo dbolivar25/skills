@@ -17,7 +17,7 @@ temporary local instrumentation follow the task's authority and current working 
 When production instrumentation or another probe would exceed that authority, prepare the
 smallest reviewable diagnostic change and resolve the missing authority before executing it.
 
-Read relevant `CONTEXT.md`, ADRs, code/configuration, and current release/runtime evidence.
+Read relevant `GLOSSARY.md`, ADRs, code/configuration, and current release/runtime evidence.
 For an operational target, verify the actual environment and identifiers before a
 mutation. Keep the user's original symptom so a nearby failure cannot replace the task.
 
@@ -154,6 +154,13 @@ its intended failure, apply the correction, and observe it pass. Test-first for 
 regression does not impose the full TDD workflow on the task. If no seam can represent the
 failure, document the missing proof and use the strongest actual runtime observation;
 absence of a seam may justify a separate design finding.
+
+When validating a regression by deliberately mutating code or a fixture, save the
+untouched contents and compare them with the forced version before interpreting the
+run. A targeted diff must show that the intended edit landed in the file and path
+the test exercises. A successful edit command or a marker found elsewhere is not
+that proof. Observe the intended failure, restore the exact prior contents without
+discarding unrelated edits, and rerun the corrected case.
 
 Rerun the original unminimized scenario or matched production observation, plus relevant
 surrounding checks. A green minimized regression does not alone prove that the original

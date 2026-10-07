@@ -99,5 +99,3 @@ Use the [derivation spec layout](../templates/derivation-spec.md) if it helps ma
 - open questions
 
 Return concrete interpretations for the expert to confirm or correct, with source examples and unresolved forks. The interview is complete when the domain decisions needed for the requested stage have answers or explicit owners and evidence needs. If expert confirmation is unavailable, retain that limit; do not label the draft accepted. Do not require the expert to review unchanged fields after every small answer.
-
-Source: adapted from the corresponding contract, glossary, reference, guide or template in the personal Faithful Derivation skill.

@@ -20,12 +20,19 @@ visible, but avoid burying one decisive choice under every independent question 
 large plan. A question depending on an open answer belongs in a later round.
 
 Give each question a short title, enough context to decide, and a recommended answer
-with its reason:
+with its reason. Phrase the question as confirmation of that recommendation so a quick
+"yes" unambiguously accepts it. Keep one recommendation per question so numbered
+answers can identify which choice is settled:
 
 ```md
-1. **<Question title>:** <Question and relevant context>
-   - Recommendation: <answer and reason>
+1. **<Question title>:** <Relevant context>. I recommend <answer> because <reason>.
+   Shall we use that?
 ```
+
+For example: "I recommend keeping the existing API boundary because its callers already
+depend on it. Shall we use that?" A yes settles that boundary choice. Do not attach
+another independent choice to the same confirmation or treat assent to the plan as
+implementation authorization.
 
 Finding discoverable facts belongs to the agent. Making consequential owner choices
 belongs to the user. Gather facts alongside independent frontier questions; do not ask

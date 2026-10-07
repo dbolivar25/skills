@@ -5,7 +5,7 @@ Fourteen entry points own complete jobs. Each entry selects detailed methods onl
 | Skill | Job |
 | --- | --- |
 | [Steward](steward/SKILL.md) | Durable intent, changing support, real agents, independent acceptance and evidence of completion |
-| [Engineering](engineering/SKILL.md) | Implementation, refactoring, upgrades, architecture, domain/module design and typed specifications |
+| [Engineering](engineering/SKILL.md) | Implementation, refactoring, upgrades, architecture, domain/module design, decision planning and typed specifications |
 | [Review](review/SKILL.md) | Code, plans, research and reported results; falsification, claims and requested grilling |
 | [Debugging](debugging/SKILL.md) | Reproduction, causal probes, production diagnosis and verified corrections |
 | [Interface Design](interface-design/SKILL.md) | Interaction, visual craft, states, motion, accessibility and useful prototypes |
@@ -28,6 +28,8 @@ The cuts remove the shared composition protocol, generic assessment envelopes, c
 The first version is committed as `fc4b475`. The [second-pass account](docs/skills-second-pass.md) explains the substantive reference improvements and further cuts, committed as `546b6ac`. Its [file-level evidence](docs/skills-second-pass.json) is a historical snapshot of that accepted stage. The [final cleanup](docs/skills-final-cleanup.md) extracts portable TypeSafe ideas into AI Engineering and removes the optional blank AI review form. Diagram Design retains its complete kit.
 
 Augment Workflows was subsequently retired because the live Augment MCP docs already cover graph authoring, node responsibilities, lifecycle operations and outcome verification. Two general refinements remain in [Engineering's testing method](engineering/references/testing.md) and [AI Engineering's source semantics](ai-engineering/references/derivation/raw-state-and-semantics.md): direct stored-document comparison and parallel-branch subject agreement. The active catalog now contains fourteen skills; the earlier accounts retain their historical scope.
+
+The current refresh adds router-authoring guidance, concrete review patterns, PR visual examples and rollback/consumer questions, and [decision mapping](engineering/methods/decision-mapping.md) with Steward continuity. Small updates verify deliberate debugging mutations, explain test-seam coverage, clarify grilling confirmations and use `GLOSSARY.md` naming. These methods stay with the existing owners. Retro is deferred.
 
 These are local installed files. Discovery, invocation permission and content loading are separate host mechanisms. A chat that began with the previous catalog may need a fresh session to discover the new names. No host refresh or measured improvement in model quality is claimed.
 

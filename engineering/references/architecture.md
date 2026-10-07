@@ -22,8 +22,8 @@ paths. Activity helps choose where to look; it does not prove friction. Infer a 
 boundary when one area clearly dominates. Ask for a scope choice only when competing
 boundaries would materially change the answer.
 
-Find the domain language and decisions governing that boundary: `CONTEXT.md`,
-`CONTEXT-MAP.md`, equivalent local documentation, decision indexes, and relevant ADRs.
+Find the domain language and decisions governing that boundary: `GLOSSARY.md`,
+`GLOSSARY-MAP.md`, equivalent local documentation, decision indexes, and relevant ADRs.
 Search ancestors and repository documentation as well as the named directory. Read the
 sources that govern the question and compare them with local code, tests, and precedent.
 Keep a conflict between a stated model and the implementation visible.

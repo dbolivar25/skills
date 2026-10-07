@@ -101,5 +101,3 @@ An observation or comparison that supplies evidence about quality or locates whe
 ## Ablation
 
 A counterfactual test that removes, changes, or weakens a dimension or representation to see whether output quality changes. Ablations discover which dimensions matter and which carried information is ceremony.
-
-Source: adapted from the corresponding contract, glossary, reference, guide or template in the personal Faithful Derivation skill.

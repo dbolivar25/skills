@@ -355,5 +355,3 @@ Blocks:
 Temporary assumption:
 How to resolve:
 ```
-
-Source: adapted from the corresponding contract, glossary, reference, guide or template in the personal Faithful Derivation skill.

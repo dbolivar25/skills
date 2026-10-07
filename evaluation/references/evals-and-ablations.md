@@ -196,5 +196,3 @@ Optimize only after quality is real. When reducing cost:
 - prove incremental updates respect invalidators
 
 A cost or speed gain that violates protected quality requirements does not justify the change.
-
-Source: retains the personal Evaluation Design method and its evals-and-ablations domain examples, extended to distinguish plans from authorized runs.

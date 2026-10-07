@@ -51,6 +51,8 @@ If several independent items are available, assign them in parallel only when
 their file, authority, and decision surfaces do not conflict. Give workers clear
 ownership and tell them not to revert or overwrite other collaborators' work.
 
+When the assignment uses Engineering's [decision mapping](../../engineering/methods/decision-mapping.md), give the actor the shared map's authoritative location and the relevant named questions. On return or resumption, reconcile the map with current Intent, owner evidence, and accepted reports. Keep question dependencies in the planning result and actor lifecycle in the Record; changed decisions require checking affected questions and work, not maintaining a second status ledger.
+
 ## Keep or replace context
 
 Keep the smallest team that improves discovery. Choose its lifetime based on

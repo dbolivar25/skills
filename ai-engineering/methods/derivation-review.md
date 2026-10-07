@@ -30,5 +30,3 @@ For each actionable finding, give the affected obligation, source location or ob
 Return the supported decision in ordinary language: coherent for the requested stage, needs specific revision, or needs a different derivation shape. State the inspected scope and versions, actual observations and evidence limits even in a short assessment. Separate repairs required for the requested stage from advice or open decisions that may wait. PASS, REVISE and REPLAN may be useful shorthand when the consumer already uses them; they are not mandatory status fields or permission to act. Design adequacy, observed fidelity and runtime acceptance are separate conclusions.
 
 The review is complete when every material obligation and boundary is accounted for or explicitly unresolved, consequential findings can be checked, and the reader understands what evidence supports the recommendation and what remains untested.
-
-Source: adapted from the corresponding contract, glossary, reference, guide or template in the personal Faithful Derivation skill.

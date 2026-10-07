@@ -69,5 +69,3 @@ Architecture earns its place by protecting a judgment, fidelity boundary, suppor
 Retrieving a large pile of context and asking the model to make something good.
 
 The workflow should know what kind of work product it is producing, what judgments it requires, what raw state those judgments depend on, what details must survive exactly, what can be inferred, what must stay source-recoverable, and what should be dropped.
-
-Source: adapted from the corresponding contract, glossary, reference, guide or template in the personal Faithful Derivation skill.

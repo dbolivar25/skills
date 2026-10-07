@@ -25,6 +25,8 @@ The stewarding agent is the sole writer of the append-only Record. Use the exist
 
 Read `references/collaboration.md` for assignment, pausing, replacement, and cancellation. Read `references/review.md` when commissioning or evaluating a report; it owns phase-specific criteria and the exact response contract. Use `references/worked-example.md` when a complete event sequence would clarify recovery, changed support, or owner correction.
 
+For large PLAN work that needs a shared map of unresolved decisions, read Engineering's [decision mapping](../engineering/methods/decision-mapping.md). Preserve its map as the authoritative planning result referenced by the existing Work report and review; use the Record for assignments, live support, and owner Asks. A map does not replace the Record or grant implementation authority.
+
 A source-level gap is yours to investigate. An owner Ask is for a real missing decision or authority, not for an ordinary delegated choice. Existing authorization and informed settlements continue to govern their scope.
 
 ## Preserve live support and authority

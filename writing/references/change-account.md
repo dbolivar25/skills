@@ -27,5 +27,3 @@ Check that each material responsibility is explained, reachable through a useful
 Remove details inherited only from source layout when removal cannot change comprehension or judgment. For consequential compression, use [information fidelity](information-fidelity.md). Keep a contract, surviving tradeoff, uncertainty or validation limit that could change the reader's conclusion. Do not present a planned follow-up as completed, a green build as interaction evidence, or staging behavior as production acceptance.
 
 The account is ready when its reader can understand and navigate the work, distinguish observation from assertion and locate the remaining decision without reconstructing the source from scratch. Write the requested artifact at the scale the work needs; publishing or messaging follows the task's authority.
-
-Source: retains the personal Reviewability explanation and rendering method; source reconstruction is owned by the shared semantic reconstruction method.
