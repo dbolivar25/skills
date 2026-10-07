@@ -1,0 +1,670 @@
+{
+  "stage": "Frozen final-cleanup preparation evidence before independent acceptance and Git delivery; not a mutable mission or landing record.",
+  "checkpoint_commit": "546b6acfa19528ca02060ac3216dc92d594191d9",
+  "record": ".steward/skills-second-pass",
+  "author_report": {
+    "task": "W-CLEAN final AI Engineering cleanup",
+    "actor": "/root/final_ai_cleanup",
+    "baseline_commit": "546b6acfa19528ca02060ac3216dc92d594191d9",
+    "generated_at_utc": "2026-10-07T01:04:36.999860+00:00",
+    "status": "implementation complete and structurally verified; independent acceptance and Git delivery owned by root",
+    "ownership": {
+      "owned": "ai-engineering/**",
+      "writes_outside_owned_files": [
+        "/tmp/skills-final-ai-cleanup-report.json"
+      ],
+      "commits_pushes_pr_actions_external_mutations": 0,
+      "root_owned_files_not_written": "README, docs, tests, infrastructure, .steward and Git delivery",
+      "managed_skills_written": 0
+    },
+    "changes": [
+      {
+        "path": "ai-engineering/SKILL.md",
+        "change": "modified",
+        "actual_change": "Adds mandatory bounded-judgments read before answer-shape/candidate/score/request-composition choices; removes vendor-specific pointer; changes plural template description to retained design template.",
+        "original_sha256": "b6f5f31d92bb931f28d99654a171ef61485f2b933c15cf06beb64b002877ff10",
+        "current_sha256": "c6730b452131d9b546f376e210415da6968f94e2f33c22ce255c13a8526a47fd",
+        "original_lines": 36,
+        "current_lines": 38
+      },
+      {
+        "path": "ai-engineering/references/derivation/contract.md",
+        "change": "modified",
+        "actual_change": "Removes optional review-layout link only; retains all ten semantic obligations, prose/graph/table/spec flexibility, private coverage and completion/authority requirements.",
+        "original_sha256": "4d99b3619848798f308c75ac70393a49ee7e0678379e0505b9d00d14fab5ff73",
+        "current_sha256": "df7a52d99e90d6d9631a9a0dbfa074db4e2b862bdf0d7b0b06f4a3fad73e0901",
+        "original_lines": 28,
+        "current_lines": 28
+      },
+      {
+        "path": "ai-engineering/methods/derivation-review.md",
+        "change": "modified",
+        "actual_change": "Removes optional blank-form link; explicitly retains applicable known regressions/rubric, proposed/executed/independent evidence distinctions, inspected scope/versions/observations/limits, and stage-required repair versus advice/open decisions. Rest of full review method retained.",
+        "original_sha256": "9f49140763290dab829bfc7869b9da513d5276e42feceb05ebb17fc4f70e0a94",
+        "current_sha256": "b859d3ff4d3ed9b6ff3dbdcdbee08d2f8b513c4d5868ea8420449b06b9237dd9",
+        "original_lines": 34,
+        "current_lines": 34
+      },
+      {
+        "path": "ai-engineering/templates/review-report.md",
+        "change": "deleted",
+        "actual_change": "Removes 148-line optional assessment/field layout; does not remove derivation-review.md or semantic coverage contract. Coverage remains owned by full methods and existing references.",
+        "original_sha256": "bf35307fe07ba8fb855320577e33fdafc7043f5d2162ee7a371837bc3a595fe3",
+        "current_sha256": null,
+        "original_lines": 148,
+        "current_lines": null
+      },
+      {
+        "path": "ai-engineering/vendors/typesafe.md",
+        "change": "deleted",
+        "actual_change": "Removes 126-line selected-vendor cookbook, live vendor navigation, dated vendor documentation observations, primitive/API-specific assumptions and vendor-scoped invocation burden. Portable recipes retained under AI Engineering with attribution.",
+        "original_sha256": "91af72f40ef70e6fbdc6bbfa3ab4214a8968a9ce1e7f2c42fd7bdc0670dca011",
+        "current_sha256": null,
+        "original_lines": 126,
+        "current_lines": null
+      },
+      {
+        "path": "ai-engineering/vendors/LICENSE.typesafe",
+        "change": "relocated_from",
+        "actual_change": "Exact MIT notice moved byte-for-byte to package root; empty vendors directory removed.",
+        "original_sha256": "835f233f1d6ed84a9b9a351aba0689b47644a4137d6316911fc7957bde523b02",
+        "current_sha256": null,
+        "original_lines": 21,
+        "current_lines": null,
+        "relocated_to": "ai-engineering/LICENSE.typesafe"
+      },
+      {
+        "path": "ai-engineering/LICENSE.typesafe",
+        "change": "relocated_to",
+        "actual_change": "Exact unchanged TypeSafe AI MIT notice at package root; reached directly from substantial adapted bounded-judgments reference.",
+        "original_sha256": null,
+        "current_sha256": "835f233f1d6ed84a9b9a351aba0689b47644a4137d6316911fc7957bde523b02",
+        "original_lines": null,
+        "current_lines": 21,
+        "relocated_from": "ai-engineering/vendors/LICENSE.typesafe"
+      },
+      {
+        "path": "ai-engineering/references/bounded-judgments.md",
+        "change": "added",
+        "actual_change": "New private vendor-neutral complete operation: answer semantics, self-contained criteria/state, exact candidate selection/coverage, span assembly, scoped retrieval/reranking, dependency-aware batch/speculation, real budget measurement, deterministic composition/policy separation, semantic reuse, candidate classical ML features, source/calibration/escalation checks, and a labeled static teaching example.",
+        "original_sha256": null,
+        "current_sha256": "00f3f8cc91787d92202ec1f3f485c33d8a98440274b66f0a1b78f0ba7f1f1ae1",
+        "original_lines": null,
+        "current_lines": 67
+      }
+    ],
+    "unchanged_owned_baseline_files": [
+      {
+        "path": "ai-engineering/agents/openai.yaml",
+        "sha256": "44e53615ee5d0d89f425289928c0423f3e9dd61083977e0985f4fbea7a9fee3c",
+        "verified_byte_identical": true
+      },
+      {
+        "path": "ai-engineering/methods/derivation-design.md",
+        "sha256": "b2453dab7e14a5ddb05911b83d11969ab7e4c3597c35a9f911c60e666085d32f",
+        "verified_byte_identical": true
+      },
+      {
+        "path": "ai-engineering/methods/derivation-expert-interview.md",
+        "sha256": "8ae9cda05fb5a6a8e91e7ff949f6f7883e4c664cee2f89227a9ae0826923ac16",
+        "verified_byte_identical": true
+      },
+      {
+        "path": "ai-engineering/methods/derivation-handoff.md",
+        "sha256": "a54db0292dd5995eb68b269a7f063aaf2e12c833e0bb910ff0e79013b95ae53c",
+        "verified_byte_identical": true
+      },
+      {
+        "path": "ai-engineering/references/derivation/anti-patterns.md",
+        "sha256": "6b2f66d7ed8106044fc502806089f851cb6cbc94f94d0924b27de6b8571554ca",
+        "verified_byte_identical": true
+      },
+      {
+        "path": "ai-engineering/references/derivation/durable-state-and-promotion.md",
+        "sha256": "94d5d33ada524d97ba258a467e6b73e26f5361acea191a12988002405221b1eb",
+        "verified_byte_identical": true
+      },
+      {
+        "path": "ai-engineering/references/derivation/glossary.md",
+        "sha256": "f6d38e98c777ad296c9489d6dacef5f938d8a2598940c7109e69fe38564227d8",
+        "verified_byte_identical": true
+      },
+      {
+        "path": "ai-engineering/references/derivation/judgment-dags-and-edges.md",
+        "sha256": "30ebdbfdccc8db53d3653ea66975f43b408ac367317c61dcf943398c8e18938b",
+        "verified_byte_identical": true
+      },
+      {
+        "path": "ai-engineering/references/derivation/publication-and-rendering.md",
+        "sha256": "ef958a069cc1aa8c8e1f8ad0fbedff28fdd9babf54b6d36f7b0f243a1a4cb5d7",
+        "verified_byte_identical": true
+      },
+      {
+        "path": "ai-engineering/references/derivation/raw-state-and-semantics.md",
+        "sha256": "5680a4cedec57b98345468c04de4a6623a24dbcef6d2993dcdfe87fd239b00bd",
+        "verified_byte_identical": true
+      },
+      {
+        "path": "ai-engineering/templates/derivation-spec.md",
+        "sha256": "36411f4f220168dcbde82ca77931309828b0b95f0a555ef57e82fc7a310315bc",
+        "verified_byte_identical": true
+      }
+    ],
+    "final_owned_artifact_hashes": [
+      {
+        "path": "ai-engineering/LICENSE.typesafe",
+        "sha256": "835f233f1d6ed84a9b9a351aba0689b47644a4137d6316911fc7957bde523b02",
+        "fully_reread_after_edit": true
+      },
+      {
+        "path": "ai-engineering/SKILL.md",
+        "sha256": "c6730b452131d9b546f376e210415da6968f94e2f33c22ce255c13a8526a47fd",
+        "fully_reread_after_edit": true
+      },
+      {
+        "path": "ai-engineering/agents/openai.yaml",
+        "sha256": "44e53615ee5d0d89f425289928c0423f3e9dd61083977e0985f4fbea7a9fee3c",
+        "fully_reread_after_edit": true
+      },
+      {
+        "path": "ai-engineering/methods/derivation-design.md",
+        "sha256": "b2453dab7e14a5ddb05911b83d11969ab7e4c3597c35a9f911c60e666085d32f",
+        "fully_reread_after_edit": true
+      },
+      {
+        "path": "ai-engineering/methods/derivation-expert-interview.md",
+        "sha256": "8ae9cda05fb5a6a8e91e7ff949f6f7883e4c664cee2f89227a9ae0826923ac16",
+        "fully_reread_after_edit": true
+      },
+      {
+        "path": "ai-engineering/methods/derivation-handoff.md",
+        "sha256": "a54db0292dd5995eb68b269a7f063aaf2e12c833e0bb910ff0e79013b95ae53c",
+        "fully_reread_after_edit": true
+      },
+      {
+        "path": "ai-engineering/methods/derivation-review.md",
+        "sha256": "b859d3ff4d3ed9b6ff3dbdcdbee08d2f8b513c4d5868ea8420449b06b9237dd9",
+        "fully_reread_after_edit": true
+      },
+      {
+        "path": "ai-engineering/references/bounded-judgments.md",
+        "sha256": "00f3f8cc91787d92202ec1f3f485c33d8a98440274b66f0a1b78f0ba7f1f1ae1",
+        "fully_reread_after_edit": true
+      },
+      {
+        "path": "ai-engineering/references/derivation/anti-patterns.md",
+        "sha256": "6b2f66d7ed8106044fc502806089f851cb6cbc94f94d0924b27de6b8571554ca",
+        "fully_reread_after_edit": true
+      },
+      {
+        "path": "ai-engineering/references/derivation/contract.md",
+        "sha256": "df7a52d99e90d6d9631a9a0dbfa074db4e2b862bdf0d7b0b06f4a3fad73e0901",
+        "fully_reread_after_edit": true
+      },
+      {
+        "path": "ai-engineering/references/derivation/durable-state-and-promotion.md",
+        "sha256": "94d5d33ada524d97ba258a467e6b73e26f5361acea191a12988002405221b1eb",
+        "fully_reread_after_edit": true
+      },
+      {
+        "path": "ai-engineering/references/derivation/glossary.md",
+        "sha256": "f6d38e98c777ad296c9489d6dacef5f938d8a2598940c7109e69fe38564227d8",
+        "fully_reread_after_edit": true
+      },
+      {
+        "path": "ai-engineering/references/derivation/judgment-dags-and-edges.md",
+        "sha256": "30ebdbfdccc8db53d3653ea66975f43b408ac367317c61dcf943398c8e18938b",
+        "fully_reread_after_edit": true
+      },
+      {
+        "path": "ai-engineering/references/derivation/publication-and-rendering.md",
+        "sha256": "ef958a069cc1aa8c8e1f8ad0fbedff28fdd9babf54b6d36f7b0f243a1a4cb5d7",
+        "fully_reread_after_edit": true
+      },
+      {
+        "path": "ai-engineering/references/derivation/raw-state-and-semantics.md",
+        "sha256": "5680a4cedec57b98345468c04de4a6623a24dbcef6d2993dcdfe87fd239b00bd",
+        "fully_reread_after_edit": true
+      },
+      {
+        "path": "ai-engineering/templates/derivation-spec.md",
+        "sha256": "36411f4f220168dcbde82ca77931309828b0b95f0a555ef57e82fc7a310315bc",
+        "fully_reread_after_edit": true
+      }
+    ],
+    "preservation_checks": {
+      "exact_mit_notice_byte_identical": true,
+      "original_notice_sha256": "835f233f1d6ed84a9b9a351aba0689b47644a4137d6316911fc7957bde523b02",
+      "ten_semantic_contract_obligations_byte_identical": true,
+      "design_scaffold_byte_identical": true,
+      "full_design_handoff_interview_and_derivation_references_byte_identical_except_contract_layout_pointer": true,
+      "catalog_top_level_ai_owner_preserved": true,
+      "protected_packages_read_only_baseline_check": {
+        "diagram-design": {
+          "baseline_file_count": 328,
+          "all_baseline_files_byte_identical": true,
+          "worker_writes": 0
+        },
+        "steward": {
+          "baseline_file_count": 12,
+          "all_baseline_files_byte_identical": true,
+          "worker_writes": 0
+        }
+      }
+    },
+    "per_idea_preservation_ownership_map": [
+      {
+        "idea": "Code owns known rules, calculations, exact lookups, control and effects",
+        "portable_destination": "ai-engineering/references/bounded-judgments.md#choose-what-the-answer-means",
+        "preservation": "Model supplies contextual judgment; code validates typed arguments and controls authorized branch/effects.",
+        "existing_semantic_owner": "SKILL.md inference contract and publication-and-rendering.md",
+        "removed_vendor_specifics": null
+      },
+      {
+        "idea": "Route and fill known arguments",
+        "portable_destination": "ai-engineering/references/bounded-judgments.md#choose-what-the-answer-means",
+        "preservation": "Handler selection may include typed arguments; code validation and authority remain separate.",
+        "existing_semantic_owner": "SKILL.md consuming seam",
+        "removed_vendor_specifics": null
+      },
+      {
+        "idea": "Select rather than regenerate exact source values",
+        "portable_destination": "ai-engineering/references/bounded-judgments.md#supply-state-and-select-exact-source-values",
+        "preservation": "Deterministically construct sourced candidates/spans; select intended candidate; exact copy or allowed normalization.",
+        "existing_semantic_owner": null,
+        "removed_vendor_specifics": null
+      },
+      {
+        "idea": "Candidate coverage and no-match distinctions",
+        "portable_destination": "ai-engineering/references/bounded-judgments.md#supply-state-and-select-exact-source-values",
+        "preservation": "Omitted values require expanded coverage/alternate extraction/escalation; complete-set no-match differs from unavailable source or service failure.",
+        "existing_semantic_owner": "SKILL.md inference contract; raw-state-and-semantics.md",
+        "removed_vendor_specifics": null
+      },
+      {
+        "idea": "Structure recovery and source-span document assembly",
+        "portable_destination": "ai-engineering/references/bounded-judgments.md#supply-state-and-select-exact-source-values",
+        "preservation": "Code may assemble selected spans into a formatted document or reading guide while retaining source pointers and needed context.",
+        "existing_semantic_owner": "ai-engineering/references/derivation/publication-and-rendering.md and writing information-fidelity",
+        "removed_vendor_specifics": null
+      },
+      {
+        "idea": "Retrieving and reranking evidence",
+        "portable_destination": "ai-engineering/references/bounded-judgments.md#supply-state-and-select-exact-source-values",
+        "preservation": "Scoped candidate retrieval then question-specific reranking; retrieval coverage separately from rank quality; retain useful spans/context.",
+        "existing_semantic_owner": "ai-engineering/references/derivation/raw-state-and-semantics.md; Evaluation retrieval checks",
+        "removed_vendor_specifics": null
+      },
+      {
+        "idea": "Choice, independent presence/multilabel, scored degree",
+        "portable_destination": "ai-engineering/references/bounded-judgments.md#choose-what-the-answer-means",
+        "preservation": "Competing options versus independently applicable labels versus ordered degree; table defines consumer design consequences.",
+        "existing_semantic_owner": null,
+        "removed_vendor_specifics": "Choice/Noul/Score names, answer-distribution formulas and provider claims are not generalized."
+      },
+      {
+        "idea": "Self-contained instructions and criteria; comparable score levels",
+        "portable_destination": "ai-engineering/references/bounded-judgments.md#choose-what-the-answer-means",
+        "preservation": "Definitions, exclusions, contrasts/examples; internal IDs supply no meaning; concrete levels resolve overlaps and unknown evidence; same meanings/scope/scale across comparable items.",
+        "existing_semantic_owner": null,
+        "removed_vendor_specifics": null
+      },
+      {
+        "idea": "Relevant structured state",
+        "portable_destination": "ai-engineering/references/bounded-judgments.md#supply-state-and-select-exact-source-values",
+        "preservation": "Sources, identities, relationships, policy and decision-time facts; named fields for multipart state; strings for simple state; evidence distinct from instructions.",
+        "existing_semantic_owner": "ai-engineering/references/derivation/raw-state-and-semantics.md",
+        "removed_vendor_specifics": null
+      },
+      {
+        "idea": "Narrow useful judgments without universal atomic-only decomposition",
+        "portable_destination": "ai-engineering/references/bounded-judgments.md#choose-what-the-answer-means",
+        "preservation": "Coherent contextual or joint judgment permitted; split only when independently useful dimensions have different inputs/failure handling/consumers.",
+        "existing_semantic_owner": "ai-engineering/references/derivation/judgment-dags-and-edges.md node granularity/joint inference",
+        "removed_vendor_specifics": null
+      },
+      {
+        "idea": "Independent same-state batching and useful speculative branches",
+        "portable_destination": "ai-engineering/references/bounded-judgments.md#compose-around-actual-dependencies",
+        "preservation": "Batch only independent fixed-state judgments where supported; explicit branch premises and available evidence; code consumes applicable answers, unused uncertainty need not block.",
+        "existing_semantic_owner": "ai-engineering/references/derivation/judgment-dags-and-edges.md real dependency/policy design",
+        "removed_vendor_specifics": null
+      },
+      {
+        "idea": "Actual dependencies and real request/token/latency costs",
+        "portable_destination": "ai-engineering/references/bounded-judgments.md#compose-around-actual-dependencies",
+        "preservation": "Earlier-answer-dependent retrieval/state/options wait; measure requests, input/output tokens, retries, cost and end-to-end latency on same workload; unused speculative questions still cost.",
+        "existing_semantic_owner": "ai-engineering/references/derivation/judgment-dags-and-edges.md and Evaluation efficiency checks",
+        "removed_vendor_specifics": null
+      },
+      {
+        "idea": "Reusable dimensions with deterministic weights/thresholds/filters",
+        "portable_destination": "ai-engineering/references/bounded-judgments.md#compose-around-actual-dependencies",
+        "preservation": "Recombine only within contract when evidence, meanings, scope and relevant freshness unchanged; changed meaning/purpose invalidates old numbers; no claim of fresh inference.",
+        "existing_semantic_owner": "ai-engineering/references/derivation/durable-state-and-promotion.md",
+        "removed_vendor_specifics": null
+      },
+      {
+        "idea": "Hard policy separate from compensating preferences",
+        "portable_destination": "ai-engineering/references/bounded-judgments.md#compose-around-actual-dependencies",
+        "preservation": "Noncompensating access/any-serious-violation conditions enforced separately; favorable score cannot cancel them.",
+        "existing_semantic_owner": "ai-engineering/references/derivation/publication-and-rendering.md; SKILL.md authority",
+        "removed_vendor_specifics": null
+      },
+      {
+        "idea": "Judged dimensions as classical ML features with labeled outcomes",
+        "portable_destination": "ai-engineering/references/bounded-judgments.md#compose-around-actual-dependencies",
+        "preservation": "Candidate features for a new ML consumer require explicit meaning/reuse, decision-time feature boundaries, protected development/holdout and baseline contribution evaluation; training/integration not implied.",
+        "existing_semantic_owner": "ai-engineering/references/derivation/durable-state-and-promotion.md; Evaluation",
+        "removed_vendor_specifics": null
+      },
+      {
+        "idea": "Verify fields and claims; calibration and escalation",
+        "portable_destination": "ai-engineering/references/bounded-judgments.md#verify-support-and-the-consumer",
+        "preservation": "Check source support, consumer errors and service failures; calibration requires target data/consequences; escalate/abstain/withhold according to contract with no added effect authority.",
+        "existing_semantic_owner": "Review claim-support, Evaluation and publication-and-rendering.md",
+        "removed_vendor_specifics": null
+      },
+      {
+        "idea": "React to changing state without treating inferred state as observed facts",
+        "portable_destination": "ai-engineering/SKILL.md and ai-engineering/references/derivation/durable-state-and-promotion.md",
+        "preservation": "Existing workflow scope, invalidators, support/freshness checks and recompute/stale/withhold semantics remain unchanged rather than duplicated.",
+        "existing_semantic_owner": null,
+        "removed_vendor_specifics": null
+      },
+      {
+        "idea": "Vendor/tool behavior uses current official docs and installed implementation",
+        "portable_destination": "ai-engineering/SKILL.md#define-the-inference-contract",
+        "preservation": "Generic installed API and current primary-doc verification remains; chosen implementation output contract checked in bounded method.",
+        "existing_semantic_owner": null,
+        "removed_vendor_specifics": "Selected TypeSafe requirement, live docs navigation table, vendor SDK links, dated documentation observations and named primitive/API contracts removed."
+      },
+      {
+        "idea": "Typed shape is separate from truth, support, coverage and authority",
+        "portable_destination": "ai-engineering/references/bounded-judgments.md#verify-support-and-the-consumer",
+        "preservation": "Explicit format/semantic/coverage/composition/service checks and shared source/effect contracts retained.",
+        "existing_semantic_owner": "SKILL.md integrate-and-verify; derivation contract",
+        "removed_vendor_specifics": null
+      },
+      {
+        "idea": "Complete derivation review without optional report fields",
+        "portable_destination": "ai-engineering/methods/derivation-review.md",
+        "preservation": "Full backward source/transformation/dependency/support/publication/lifetime/evaluation trace, falsification, material-obligation completeness, evidence strength, recommendations and authority boundaries retained; public result can be concise.",
+        "existing_semantic_owner": "ai-engineering/references/derivation/contract.md owns ten required coverage obligations; design scaffold retained",
+        "removed_vendor_specifics": null
+      }
+    ],
+    "precise_cuts_and_relocations": {
+      "removed_resources": [
+        "ai-engineering/vendors/typesafe.md",
+        "ai-engineering/templates/review-report.md"
+      ],
+      "license_relocation": {
+        "from": "ai-engineering/vendors/LICENSE.typesafe",
+        "to": "ai-engineering/LICENSE.typesafe",
+        "byte_identical": true
+      },
+      "repaired_owned_callers": [
+        "SKILL.md vendor pointer and template wording",
+        "references/derivation/contract.md review-layout pointer",
+        "methods/derivation-review.md review-layout pointer"
+      ],
+      "attribution": "Substantial bounded-judgments adaptation links exact root LICENSE.typesafe notice; TypeSafe name remains only in attribution/notice.",
+      "excluded_scope": [
+        "creative cleanup",
+        "diagram kit simplification",
+        "Steward runtime changes",
+        "managed skills",
+        "new public owner",
+        "provider APIs/primitives"
+      ]
+    },
+    "verification": [
+      {
+        "command": "ruby scripts/validate-skills.rb",
+        "result": "PASS: 15 packages and 82 invocation-case specifications",
+        "proves": "Combined worktree structural metadata, links, approved bindings, protected-file checks and fixture structure; root already updated external bindings/cases."
+      },
+      {
+        "command": "ruby tests/validate-skills_test.rb",
+        "result": "PASS: 10 runs, 39 assertions, 0 failures/errors/skips; final rerun seed 8880",
+        "proves": "Validator regression behavior, not AI quality or actual host routing."
+      },
+      {
+        "command": "git diff --check",
+        "result": "PASS",
+        "proves": "Current combined worktree whitespace/error check."
+      },
+      {
+        "command": "Python baseline byte/hash, obligation block, exact span and arithmetic assertions",
+        "result": "PASS",
+        "proves": "Exact license relocation, unchanged design scaffold/ten obligations/protected baseline packages, example source slices/coverage miss and ranking/policy arithmetic."
+      },
+      {
+        "command": "Fully reread all 16 final owned artifacts and compare to accepted baseline",
+        "result": "DONE",
+        "proves": "Manual authoring/preservation review, not independent acceptance."
+      }
+    ],
+    "walkthroughs": [
+      {
+        "name": "Exact source selection and coverage",
+        "evidence_kind": "static teaching walkthrough with executed deterministic assertions; no model/host run",
+        "source_id": "message:a",
+        "source": "Payment for INV-007 is due 2026-10-12; renewal is 2027-01-09. One user cannot sign in.",
+        "candidates": [
+          {
+            "candidate_id": "c1",
+            "source_id": "message:a",
+            "span_start_zero_based": 27,
+            "span_end_exclusive": 37,
+            "exact_value": "2026-10-12"
+          },
+          {
+            "candidate_id": "c2",
+            "source_id": "message:a",
+            "span_start_zero_based": 50,
+            "span_end_exclusive": 60,
+            "exact_value": "2027-01-09"
+          }
+        ],
+        "question": "Select the payment due date for INV-007; choices c1, c2, no_match; tie/ambiguity and unknown handling defined by contract.",
+        "illustrative_selection": "c1",
+        "copied_value": "2026-10-12",
+        "coverage_counterexample": "ISO-only parser finds zero candidates in Payment for INV-007 is due next Friday. Source contains a due-date expression, so the empty set is a coverage gap, not absence evidence; expand/alternate/escalate before no-match.",
+        "executed_assertions": [
+          "ISO candidates have exact source spans and values",
+          "selected c1 source slice is 2026-10-12",
+          "relative-date expression is omitted by the ISO pattern"
+        ]
+      },
+      {
+        "name": "Degree versus probability and noncompensating policy",
+        "evidence_kind": "static teaching walkthrough with executed arithmetic/policy assertions; no quality/calibration result",
+        "criteria": {
+          "urgency": "0 >30 days; 1 8-30 days; 2 <=7 days or overdue; absent/unknown evidence separate",
+          "impact": "0 no task completion blocked; 1 other blocked work; 2 multiple users blocked from critical operation; insufficient user/criticality evidence unknown"
+        },
+        "meaning": "Urgency 1 is a timing band, not 50% probability of urgency. Reported probability/confidence has separate semantics and needs calibration.",
+        "first_weights": {
+          "scores": {
+            "T17": 1.75,
+            "T18": 1.25
+          },
+          "order": [
+            "T17",
+            "T18"
+          ],
+          "withheld": [
+            "T19"
+          ]
+        },
+        "second_weights": {
+          "scores": {
+            "T17": 1.25,
+            "T18": 1.75
+          },
+          "order": [
+            "T18",
+            "T17"
+          ],
+          "withheld": [
+            "T19"
+          ]
+        },
+        "policy": "T19 visibility fails and T19 is withheld regardless of its 2/2 favorable degrees."
+      },
+      {
+        "name": "Reweight without stale semantic reuse",
+        "evidence_kind": "static contract walkthrough; only unchanged-meaning arithmetic was executed",
+        "unchanged_meaning": "Changing .75/.25 to .25/.75 reverses T17/T18 ranking while same verified source evidence, decision time, criteria, scope and gates apply.",
+        "invalidating_change": "Redefining urgency from due-date timing to operations stopped now invalidates old urgency values. Recompute appropriate evidence-dependent judgment; do not reweight old timing values as the new concept. Persistent or new-consumer reuse reaches the unchanged promotion owner."
+      },
+      {
+        "name": "Dependency-aware batching",
+        "evidence_kind": "static execution-plan walkthrough; no observed requests/tokens/latency",
+        "first_state": "message:a and all current same-state evidence",
+        "independent_in_first_batch": [
+          "route choice",
+          "invoice reference presence",
+          "sign-in problem presence",
+          "payment-date selection",
+          "billing-specific question only if explicit premise and same-state evidence suffice"
+        ],
+        "dependent_path": [
+          "route selects needed records",
+          "retrieve selected records",
+          "new judgment consuming retrieved records"
+        ],
+        "consumer": "Only applicable branch answers consumed; unused-branch uncertainty does not block selected branch.",
+        "cost_limit": "A one-request batch is conditional on implementation support. Count actual retrieval and later inference requests, retries, all input/output tokens including unused branches, cost and end-to-end latency; no speed/cost gain claimed."
+      },
+      {
+        "name": "Concise derivation review without a blank form",
+        "evidence_kind": "static illustrative review; not observed empirical behavior or independent acceptance",
+        "example_assessment": "Needs revision before confident display. In this conceptual ISO-parser/consumer example, due next Friday is missing from the candidate set, so no-match does not establish that no payment due date exists. Expand coverage or use the defined fallback, retain source identity and distinguish unknown/source failure from a supported negative. Existing access gates remain required. This is a design finding from a static case; model execution, calibration, host source recovery, publication and runtime acceptance remain untested.",
+        "private_coverage": "Review still traces all material applicable obligations, boundaries, support, gates, lifetime and quality evidence under the ten-obligation contract; irrelevant layers are not invented. The finding has location/case, mechanism, consequence and smallest repair, and the result states stage/evidence limits without filling 148 lines of fields."
+      },
+      {
+        "name": "Feature discovery retains decision-time boundary",
+        "evidence_kind": "static conditional design walkthrough; no model trained or quality comparison",
+        "example": "Urgency and impact at the decision time could be candidate features for a ticket-outcome predictor when later labeled outcomes exist. The later outcome is a label/adjudication source, never added to the earlier feature inputs. This new consumer needs explicit meanings/reuse and a protected baseline/holdout evaluation before calling the dimensions useful or integrating a trained model."
+      }
+    ],
+    "known_defects": [],
+    "limits": [
+      "No observed target-host invocation, reference loading or execution; invocation cases and walkthroughs are structural/intent evidence only.",
+      "No empirical model quality, calibration, request/token cost or latency experiment was run; no improvement claim is made.",
+      "No current provider-specific API behavior was asserted or integrated; generic installed API/primary-doc verification remains required when implementing.",
+      "Independent reviewer acceptance, integration, commit, push, GitHub review and merge remain root responsibilities.",
+      "The worker read the memory registry briefly but used current task/baseline instructions rather than historical memory lessons; no memory-derived fact was adopted."
+    ]
+  },
+  "root_integration": {
+    "actor": "/root",
+    "changes": [
+      {
+        "path": "README.md",
+        "checkpoint_sha256": "42517a8322dc97c5e641e2efba7ff248eeecd1abfb1775bce7192185f1f94b34",
+        "current_sha256": "dc66b62b3000afa845f193060a280fe74a1ad36aa405f065a1002fcf2aef7275"
+      },
+      {
+        "path": "docs/skills-redesign.md",
+        "checkpoint_sha256": "69310e859806656033f66b7b0afcc9ff33f069ae6e94cbc650db44329275c709",
+        "current_sha256": "3dd82154b8ed4039086302d07bfdf31864bfcd7a3a7ea030c1d70d7ac30ca6fb"
+      },
+      {
+        "path": "docs/skills-redesign.json",
+        "checkpoint_sha256": "752b20b8b17dcda7ac4b9faaebb3a427a9ced2129bd917108a8328e13fb4accf",
+        "current_sha256": "a6f97f079bfb850672992411d1eb46bff44693d1766f6d152ddb1741eea310dd"
+      },
+      {
+        "path": "docs/skills-second-pass.md",
+        "checkpoint_sha256": "2c70f60d28c34da5350268e5291193f7727b30a964b72e1901fb5b46ae414957",
+        "current_sha256": "351db9278c03fbc1d7a1687924a41693523cbea3c2f9f388c17dc2d6343d1c54"
+      },
+      {
+        "path": "docs/skills-second-pass.json",
+        "checkpoint_sha256": "9cccaea0a08621799f519e31100ce3abe23f878aff7a8ba70ffe75e681ee1cad",
+        "current_sha256": "c7861783e4322bb2a7bacb191123b3df5b6e0a99d93ba4a7768e39d7fe6ef97b"
+      },
+      {
+        "path": "tests/invocation-cases.yml",
+        "checkpoint_sha256": "8a4cd729ad5bc90e8ba659faae2079126f0b43dc8fa613cdc5bb27697649e0d3",
+        "current_sha256": "5da96cf880eea51c900356cf720b46d2ba3638ad434b6a84eacd92defbde6627"
+      },
+      {
+        "path": "docs/skills-final-cleanup.md",
+        "checkpoint_sha256": null,
+        "current_sha256": "635864bd28102dd29f8656339761c794b0035a1c76be880ec83f17c0d8b2c7e5"
+      }
+    ],
+    "preservation": {
+      "diagram-design": {
+        "baseline_file_count": 328,
+        "all_checkpoint_bytes_unchanged": true
+      },
+      "steward": {
+        "baseline_file_count": 12,
+        "all_checkpoint_bytes_unchanged": true
+      },
+      "protected_steward": {
+        "count": 6,
+        "hashes": {
+          "steward/scripts/runtime.py": "6b7143d0d0bd992a1cf453776f13d651e16a66573318ccc3f0261a334a70e278",
+          "steward/scripts/steward.py": "b20e249581e599ca8e49e944ae45f11e0fcb7ac4bd91c3674c1c39ea5aa8129a",
+          "steward/tests/fixtures/trajectories.json": "c2f00fba342975ea366574f4ca9b40399013aa3af6c4b494b79ed7fb7bafdf6a",
+          "steward/tests/test_replays.py": "f8c4b834ebfa5b6a6f6c48ee7626c64e3f88d063dac8e7c3eaf1fb73eb1e595e",
+          "steward/tests/test_state_machine.py": "938458dff5e2792178aa8a006f186d9bf9aaffa88bd91b73e980e57a4fd725f5",
+          "steward/rules/default-rules.json": "6adb6e96b8dbb2569cd110a4e81daf6546dc2cbe65b5a9eccdbca9ac317827ca"
+        },
+        "all_match": true
+      },
+      "archive": {
+        "root": "/Users/danielbolivar/.agents/skills-archive/2026-10-06-ai-cleanup",
+        "all_exact_checkpoint_copies": true,
+        "hashes": {
+          "ai-engineering/vendors/typesafe.md": "91af72f40ef70e6fbdc6bbfa3ab4214a8968a9ce1e7f2c42fd7bdc0670dca011",
+          "ai-engineering/templates/review-report.md": "bf35307fe07ba8fb855320577e33fdafc7043f5d2162ee7a371837bc3a595fe3",
+          "ai-engineering/vendors/LICENSE.typesafe": "835f233f1d6ed84a9b9a351aba0689b47644a4137d6316911fc7957bde523b02"
+        }
+      },
+      "exact_mit_and_design_scaffold": true,
+      "second_pass_evidence": {
+        "historical_evidence_unchanged_except_snapshotContext": true,
+        "added_context": {
+          "checkpointCommit": "546b6acfa19528ca02060ac3216dc92d594191d9",
+          "meaning": "Historical accepted second-pass evidence snapshot. Per-file hashes and landing assertions describe that stage; later authorized cleanup is documented separately.",
+          "laterCleanup": "docs/skills-final-cleanup.md",
+          "currentFileAssertions": false
+        }
+      }
+    },
+    "verification": {
+      "library_regressions": "81 pass in separate real reviewer execution: Steward22, GitHub4, brand14, validator10, creative2, Diagram29",
+      "packages_and_cases": "15 packages and 82 structural invocation-case specifications pass",
+      "working_tree_amp_projection": "Pass; no publication",
+      "diff_check": "Pass",
+      "actual_root_preservation_checks": "All checkpoint Diagram and Steward files, six protected hashes, three archive copies, license and design scaffold exact"
+    },
+    "target_observation": {
+      "repository": "dbolivar25/skills",
+      "primary_branch": "main",
+      "viewer_permission": "ADMIN",
+      "origin_main_commit": "1e8ee5382016cfc770cd066024c54654196ea5cb",
+      "actions_workflows": 0,
+      "active_rulesets": [],
+      "branch_rules": [],
+      "branch_protection": "404 with verified admin/push access",
+      "candidate_stage": "checkpoint HEAD plus listed uncommitted approved cleanup",
+      "merge_state": "pending; no landing receipt yet"
+    }
+  },
+  "limits": [
+    "Static walkthroughs and invocation-case specifications do not establish model quality or target-host routing.",
+    "No comparative model quality, calibration, latency or cost experiment; no provider API integrated.",
+    "Historical second-pass artifact coverage keeps its stated limits.",
+    "This frozen account predates independent cleanup acceptance and GitHub delivery; actual receipts belong to the Steward Record.",
+    "No customer mutation, managed-skill change, deployment or Amp publication."
+  ]
+}

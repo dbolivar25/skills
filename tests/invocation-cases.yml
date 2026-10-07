@@ -1149,9 +1149,10 @@ cases:
     also_load: []
     do_not_load: []
     read:
-    - ai-engineering/vendors/typesafe.md
+    - ai-engineering/references/bounded-judgments.md
     do_not_read: []
-  why: Vendor mechanics are conditional on an explicit selection.
+  why: The portable judgment method applies; selected vendor mechanics come from
+    installed types and current official documentation rather than a cached cookbook.
 - id: small-ai-judgment
   kind: collision
   prompt: Add one typed AI judgment to this local routing function.
@@ -1160,9 +1161,9 @@ cases:
     also_load:
     - engineering
     do_not_load: []
-    read: []
+    read:
+    - ai-engineering/references/bounded-judgments.md
     do_not_read:
-    - ai-engineering/vendors/typesafe.md
     - ai-engineering/methods/derivation-design.md
   why: A small inference does not require a whole derivation architecture or a selected
     vendor.

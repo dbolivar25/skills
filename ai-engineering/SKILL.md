@@ -11,11 +11,13 @@ Choose the depth by the job. A bounded classifier or extraction replacement need
 
 ## Define the inference contract
 
+Before choosing answer shapes, candidates, scoring or request composition for a classifier, extraction, ranking or routing job, read [bounded judgments](references/bounded-judgments.md). It covers focused judgments and their deterministic composition without requiring a complete derivation architecture.
+
 Specify the input available at decision time, permitted evidence, typed output and its meaning, consumer behavior, failure/abstention path, and consequential mistakes. A no-match result, unavailable evidence, negative finding and service failure can require different consumer behavior; preserve those distinctions instead of forcing a successful label. Keep permissions, human authority, routing modes, effects, and retry/delivery policy in the appropriate code or workflow structure.
 
 Use representative examples and edge cases to sharpen the contract. When unresolved expert or domain judgment governs the work product, read [the expert-interview method](methods/derivation-expert-interview.md) and obtain that judgment without treating unavailable expertise as model certainty. A confidence number is not calibrated probability or permission to act. Distinguish observed source facts, bounded model judgments, and owner decisions.
 
-For a small classifier, extraction, ranking, or routing replacement, use the existing seam. A design or assessment returns the supported contract and proposal; implement and exercise changes only within the task's authorized scope. Read [the selected TypeSafe reference](vendors/typesafe.md) only when TypeSafe is selected or directly relevant. Verify installed APIs and current primary documentation; do not substitute a promotional pattern for repository evidence.
+For a small classifier, extraction, ranking, or routing replacement, use the existing seam. A design or assessment returns the supported contract and proposal; implement and exercise changes only within the task's authorized scope. Verify installed APIs and current primary documentation; do not substitute a promotional pattern for repository evidence.
 
 ## Preserve faithful derivation when needed
 
@@ -27,7 +29,7 @@ For consequential claims, read [claim support](../review/references/claim-suppor
 
 Derived interpretations remain workflow-scoped until an explicit consumer, support, fidelity, freshness/invalidation, and maintenance contract earns reuse. Read [durable state and promotion](references/derivation/durable-state-and-promotion.md) before persisting or reusing semantic state. Separate candidate generation from display, send, persistence, or action. Read [publication and rendering](references/derivation/publication-and-rendering.md) and enforce required support, scope, access, freshness, and contradiction gates with their explicit failure behavior. Qualification cannot substitute for a required access gate. Define relevant decay and source recovery.
 
-Use [derivation design](methods/derivation-design.md) to produce a coherent design, [derivation review](methods/derivation-review.md) to assess an existing path, or [implementation handoff](methods/derivation-handoff.md) to map an accepted design into the target system. Their templates offer useful layouts; the contract owns the required semantic coverage. Do not turn a small inference into a fifteen-section report.
+Use [derivation design](methods/derivation-design.md) to produce a coherent design, [derivation review](methods/derivation-review.md) to assess an existing path, or [implementation handoff](methods/derivation-handoff.md) to map an accepted design into the target system. The design template offers a useful layout; the contract owns the required semantic coverage. Do not turn a small inference into a fifteen-section report.
 
 ## Integrate and verify
 

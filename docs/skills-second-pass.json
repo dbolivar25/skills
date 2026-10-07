@@ -7810,5 +7810,11 @@
       "kind": "DONE"
     },
     "meaning": "Final static observation after actual distinct reviews and coverage/integration/verification/acceptance receipts; this account is not a second mutable work record."
+  },
+  "snapshotContext": {
+    "checkpointCommit": "546b6acfa19528ca02060ac3216dc92d594191d9",
+    "meaning": "Historical accepted second-pass evidence snapshot. Per-file hashes and landing assertions describe that stage; later authorized cleanup is documented separately.",
+    "laterCleanup": "docs/skills-final-cleanup.md",
+    "currentFileAssertions": false
   }
 }

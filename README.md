@@ -26,7 +26,7 @@ The October 2026 redesign consolidated 36 public entries into 15. Detailed metho
 
 The cuts remove the shared composition protocol, generic assessment envelopes, compulsory global checklists and unsupported universal gates. They also remove standalone selection overhead for methods now owned by these jobs. The complete source dispositions and disclosed losses are in the [migration account](docs/skills-redesign.md) and [resource manifest](docs/skills-redesign.json).
 
-The first version is committed as `fc4b475`. The [second-pass account](docs/skills-second-pass.md) explains the substantive reference improvements and further cuts. Its [file-level evidence](docs/skills-second-pass.json) distinguishes edits, preserved material and relocations. These second-pass changes remain uncommitted.
+The first version is committed as `fc4b475`. The [second-pass account](docs/skills-second-pass.md) explains the substantive reference improvements and further cuts, committed as `546b6ac`. Its [file-level evidence](docs/skills-second-pass.json) is a historical snapshot of that accepted stage. The [final cleanup](docs/skills-final-cleanup.md) extracts portable TypeSafe ideas into AI Engineering and removes the optional blank AI review form. Diagram Design retains its complete kit.
 
 These are local installed files. Discovery, invocation permission and content loading are separate host mechanisms. A chat that began with the previous catalog may need a fresh session to discover the new names. No host refresh or measured improvement in model quality is claimed.
 

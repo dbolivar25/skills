@@ -21,7 +21,7 @@ Account for each applicable obligation below. A missing required input, unresolv
 
 ## Shape and completion
 
-Use a prose account, annotated graph, tables or a spec at the scale the job needs. The [design layout](../../templates/derivation-spec.md) and [review layout](../../templates/review-report.md) are aids, not required report formats. Keep enough private coverage to find omissions even when the public result is short.
+Use a prose account, annotated graph, tables or a spec at the scale the job needs. The [design layout](../../templates/derivation-spec.md) is an aid, not a required report format. Keep enough private coverage to find omissions even when the public result is short.
 
 A design is coherent when each material obligation has a judgment, evidence path, fidelity contract and relevant effect/lifetime policy, or a named unresolved decision. A review must also state what actual sources and behavior were inspected. A handoff must identify implementation responsibilities and verification obligations; only observed implementation results establish execution. None of these results supplies publication or operational authority beyond the surrounding task.
 

@@ -905,12 +905,12 @@
       "rewrite": "Retain conditional complete artifact, no universal use."
     },
     {
-      "target": "ai-engineering/vendors/typesafe.md",
+      "target": "ai-engineering/references/bounded-judgments.md",
       "sources": [
         "typesafe-ai/SKILL.md",
         "typesafe-ai/LICENSE"
       ],
-      "rewrite": "Remove standalone promotion; retain selected-vendor method and attribution/license."
+      "rewrite": "Owner-authorized final cleanup: portable TypeSafe method retained under AI Engineering with exact MIT notice at package root; standalone vendor cookbook archived after extraction."
     },
     {
       "target": "evaluation/references/evals-and-ablations.md",
@@ -1076,11 +1076,11 @@
       "rewrite": "Preserve exact domain concepts and useful definitions; update method pointers."
     },
     {
-      "target": "ai-engineering/templates/review-report.md",
+      "target": "ai-engineering/methods/derivation-review.md",
       "sources": [
         "faithful-derivation/templates/review-report.md"
       ],
-      "rewrite": "Retain selected domain-review coverage and result semantics; no universal template for all AI tasks."
+      "rewrite": "Owner-authorized final cleanup: optional blank reporting form retired; substantive review obligations retained in the method and derivation contract."
     },
     {
       "target": "AGENTS working agreement additions",
@@ -1274,5 +1274,12 @@
     "steward_record": "/Users/danielbolivar/.codex/visualizations/2026/10/06/01a11351-2003-7123-a65b-ed712ba5abb6/skills-redesign/.steward/skills-redesign/record.jsonl"
   },
   "first_version_commit": "fc4b475123099e75bc3b675ce0696cc0d0e0a1e7",
-  "second_pass_account": "docs/skills-second-pass.json"
+  "second_pass_account": "docs/skills-second-pass.json",
+  "approved_followup_cleanup": {
+    "checkpoint_commit": "546b6acfa19528ca02060ac3216dc92d594191d9",
+    "scope": "Extract transferable TypeSafe ideas and retire standalone vendor cookbook and optional blank AI review form; preserve diagram kit and Steward runtime.",
+    "account": "docs/skills-final-cleanup.md",
+    "authorization": "Daniel: agreed get those cleaned up and lets merge",
+    "binding_semantics": "Resource targets follow the current authorized suite. Original first-version source decisions and observed checks remain historical evidence."
+  }
 }

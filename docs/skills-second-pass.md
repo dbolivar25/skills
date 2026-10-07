@@ -1,6 +1,8 @@
 # Skills second pass
 
-The first version is committed as `fc4b475123099e75bc3b675ce0696cc0d0e0a1e7`. This second pass keeps the same fifteen owners and improves the instructions and references behind them. Its changes are installed locally and remain uncommitted.
+The first version is committed as `fc4b475123099e75bc3b675ce0696cc0d0e0a1e7`. This second pass keeps the same fifteen owners and improves the instructions and references behind them. Its accepted changes are committed as `546b6acfa19528ca02060ac3216dc92d594191d9`.
+
+This account and its evidence manifest describe that historical checkpoint. The subsequent owner-authorized TypeSafe extraction and AI review-form cleanup are in [the final cleanup account](skills-final-cleanup.md). The snapshot's per-file hashes and delivery statements describe its own stage, rather than the later checkout.
 
 The design principle is simple: make the job easy to recognize, reach the needed method before its judgment, and preserve the depth that makes that method useful. A reference should help the agent perform an operation, rather than impose a report form or make an example look like a universal law.
 
@@ -48,6 +50,6 @@ The final checks pass 81 library regression tests and the 82 structural invocati
 
 The evidence manifest records actual checks and independent review. Local file and heading reachability, protected hashes, runtime/helper regression tests and the working-tree Amp projection are distinct from observed task quality. The pilot is a directed harness, not autonomous host routing or a comparative benchmark. The gallery inspection covers the touched pages, not all 153 historical examples. Corrected chart captions preserve plotted values, geometry and paint; illustrative data is not an authenticated production measurement.
 
-A separate reviewer accepted the final integrated result against the original request and current Steward Intent. The reviewer independently checked the file coverage and hashes, ran all 81 library regressions and both pilot tests, and assessed the substantive methods and representative artifacts. The actual Steward Record derives `DONE` from the accepted work and distinct completion receipts. Its protected runtime remains unchanged.
+A separate reviewer accepted the integrated second-pass result against the original request and its Steward Intent. The reviewer independently checked the file coverage and hashes, ran all 81 library regressions and both pilot tests, and assessed the substantive methods and representative artifacts. The actual Steward Record derived `DONE` at revision 28 from the accepted work and distinct completion receipts. Its protected runtime remains unchanged.
 
 Managed skills/plugins, global working agreements and customer state are outside this pass. No push or publication is included. The full local suite must be distributed coherently because methods cross owner boundaries. The existing Amp filter still excludes Diagram Design, WOFF2 fonts, package-local tests and brand audit fixtures; root validation and documentation remain. Its successful projection does not establish full local asset parity. Fresh host discovery and empirical improvement remain separate observations.

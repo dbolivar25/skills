@@ -2,7 +2,7 @@
 
 The owner approved the 15-skill proposal and asked to leave managed skills unchanged. The implementation follows that scope.
 
-This account describes the first version, committed as `fc4b475123099e75bc3b675ce0696cc0d0e0a1e7` before the authorized full second pass. Current reference changes and further disclosed cuts are in the [second-pass account](skills-second-pass.md).
+This account describes the first version, committed as `fc4b475123099e75bc3b675ce0696cc0d0e0a1e7` before the authorized full second pass. Subsequent changes and further disclosed cuts are in the [second-pass account](skills-second-pass.md) and [final cleanup account](skills-final-cleanup.md). The resource manifest follows the current approved targets while retaining the historical source decisions and first-version checks.
 
 ## Preservation and recovery
 
