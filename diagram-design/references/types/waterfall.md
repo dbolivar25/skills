@@ -10,4 +10,4 @@ Distinguish additions, reductions, subtotals, and totals with labels and a redun
 
 Independently verify signs, running sums, totals, subtotal resets, scale, and rendered boundaries from the source table. Inspect small changes, negative crossings, zero cases, label placement, and the exported plot at reading size. Optional data bindings support traceability; no supplied helper validates waterfall arithmetic automatically.
 
-Reference layouts: [waterfall](../../assets/example-waterfall.html), [full](../../assets/example-waterfall-full.html), [dark](../../assets/example-waterfall-dark.html).
+Reference layouts: [waterfall](../../assets/example-waterfall.html), [full](../../assets/index.html#example-waterfall-full), [dark](../../assets/index.html#example-waterfall-dark).

@@ -10,4 +10,4 @@ If tasks are grouped or summarized, keep the mapping and avoid implying a group'
 
 Check dates, durations, dependencies, and milestone positions independently. Inspect short tasks, overlapping labels, month boundaries, current-time markers, and the export at delivery size.
 
-Reference layouts: [Gantt](../../assets/example-gantt.html), [full](../../assets/example-gantt-full.html), [dark](../../assets/example-gantt-dark.html).
+Reference layouts: [Gantt](../../assets/example-gantt.html), [full](../../assets/index.html#example-gantt-full), [dark](../../assets/index.html#example-gantt-dark).

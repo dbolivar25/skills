@@ -10,4 +10,4 @@ Lay out the main path first, then side dependencies. Orthogonal routes often mak
 
 Check by tracing one representative request and each boundary crossing against the source. Inspect secondary paths, reverse arrows, labels, and disconnected components. If the view omits implementation detail, state its scope and keep an identity mapping to the detailed source.
 
-Worked layouts: [architecture](../../assets/example-architecture.html), [full](../../assets/example-architecture-full.html), [dark](../../assets/example-architecture-dark.html). Their fonts and colors are sample styling.
+Worked layouts: [architecture](../../assets/example-architecture.html), [full](../../assets/index.html#example-architecture-full), [dark](../../assets/index.html#example-architecture-dark). Their fonts and colors are sample styling.

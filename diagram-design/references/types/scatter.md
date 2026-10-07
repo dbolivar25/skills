@@ -10,4 +10,4 @@ Handle crowding with transparency, smaller marks, faceting, or explicit density 
 
 Check source-to-point correspondence, units, domain, transforms, and exclusions independently. Inspect dense clusters, overlapping points, clipped extremes, and any trend at final size. Optional data attributes help trace identity but do not prove the marks are correct.
 
-Reference layouts: [scatter](../../assets/example-scatter.html), [full](../../assets/example-scatter-full.html), [dark](../../assets/example-scatter-dark.html).
+Reference layouts: [scatter](../../assets/example-scatter.html), [full](../../assets/index.html#example-scatter-full), [dark](../../assets/index.html#example-scatter-dark).

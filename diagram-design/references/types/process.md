@@ -12,4 +12,4 @@ Route edges after ordering is settled. If the complete process is too dense, cho
 
 Verify one ordinary execution and relevant exceptions against the source. Check actors, inputs, outputs, stage order, decisions, feedback, and endpoint visibility in the final artifact.
 
-Reference layouts: [process](../../assets/example-process.html), [full](../../assets/example-process-full.html), [dark](../../assets/example-process-dark.html). Fixed cell dimensions and sample counts are optional layout starting points.
+Reference layouts: [process](../../assets/example-process.html), [full](../../assets/index.html#example-process-full), [dark](../../assets/index.html#example-process-dark). Fixed cell dimensions and sample counts are optional layout starting points.

@@ -121,6 +121,12 @@ production migration path. Name missing observations and the claims they prevent
 checking. Report precisely what each substitute proved and what still needs evidence
 from the actual implementation.
 
+For a complete document replacement, compare the authored source with the actual
+returned or stored document mechanically. Use captured bytes or a schema-aware
+comparison that allows only legitimate normalization while preserving meaningful
+order, values and fields. A model's reconstruction of the document is not readback
+evidence.
+
 ## Preserve evidence when moving a seam
 
 Replace shallow-module tests only **after** tests through the deeper interface cover the

@@ -12,4 +12,4 @@ Lay out the dominant path, then route additional edges without reassigning stage
 
 Verify every transformation's input and output, external boundaries, edge direction, and data identity against the source. Inspect empty cells, crossings, long labels, and all side paths at the actual delivery size.
 
-Reference layouts: [data flow](../../assets/example-data-flow.html), [full](../../assets/example-data-flow-full.html), [dark](../../assets/example-data-flow-dark.html). The example geometry and short payload codes are recipes, not a universal schema.
+Reference layouts: [data flow](../../assets/example-data-flow.html), [full](../../assets/index.html#example-data-flow-full), [dark](../../assets/index.html#example-data-flow-dark). The example geometry and short payload codes are recipes, not a universal schema.

@@ -8,4 +8,4 @@ Preserve parent-child membership and identity. Leave enough inset space for pare
 
 Check every containment relationship and sibling placement against the source. Inspect the deepest labels, shared-scope exceptions, unknown membership, and exported bounds.
 
-Reference layouts: [nested](../../assets/example-nested.html), [full](../../assets/example-nested-full.html), [dark](../../assets/example-nested-dark.html).
+Reference layouts: [nested](../../assets/example-nested.html), [full](../../assets/index.html#example-nested-full), [dark](../../assets/index.html#example-nested-dark).

@@ -10,4 +10,4 @@ Show enough fields to answer the question. If collapsing field lists, disclose t
 
 Size rows for their labels and route edges behind table boxes. Exact row heights and port offsets are optional geometry. Compare the final diagram against the schema, including composite keys, nullable foreign keys, duplicate references, action semantics, and clipped field labels.
 
-Reference layouts: [database schema](../../assets/example-db-schema.html), [full](../../assets/example-db-schema-full.html), [dark](../../assets/example-db-schema-dark.html).
+Reference layouts: [database schema](../../assets/example-db-schema.html), [full](../../assets/index.html#example-db-schema-full), [dark](../../assets/index.html#example-db-schema-dark).

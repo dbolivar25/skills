@@ -10,4 +10,4 @@ When representing replicas as a stack or count badge, make clear whether the cou
 
 Verify placement, instance counts, environment, connection direction, and boundary crossings from configuration or current evidence. Inspect long host names and nested labels at the destination size. Unknown placement remains explicit rather than being assigned to a convenient box.
 
-Reference layouts: [deployment](../../assets/example-deployment.html), [full](../../assets/example-deployment-full.html), [dark](../../assets/example-deployment-dark.html).
+Reference layouts: [deployment](../../assets/example-deployment.html), [full](../../assets/index.html#example-deployment-full), [dark](../../assets/index.html#example-deployment-dark).

@@ -10,4 +10,4 @@ A horizontal spine with diagonal bones gives clear grouping. Derive label space 
 
 Verify each cause's category, wording, status, and evidence against the investigation. Inspect subordinate connectors and the effect label at reading size. Preserve important counterevidence and avoid presenting a list of plausible reasons as a settled diagnosis.
 
-Reference layouts: [fishbone](../../assets/example-fishbone.html), [full](../../assets/example-fishbone-full.html), [dark](../../assets/example-fishbone-dark.html).
+Reference layouts: [fishbone](../../assets/example-fishbone.html), [full](../../assets/index.html#example-fishbone-full), [dark](../../assets/index.html#example-fishbone-dark).

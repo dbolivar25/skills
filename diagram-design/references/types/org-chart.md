@@ -10,4 +10,4 @@ Keep labels readable and attach connectors to the right role. Contact informatio
 
 Verify relationship direction, role names, assignment status, and boundaries against the current source. Inspect long titles and multiple managers at the final size.
 
-Reference layouts: [organization](../../assets/example-org-chart.html), [full](../../assets/example-org-chart-full.html), [dark](../../assets/example-org-chart-dark.html).
+Reference layouts: [organization](../../assets/example-org-chart.html), [full](../../assets/index.html#example-org-chart-full), [dark](../../assets/index.html#example-org-chart-dark).

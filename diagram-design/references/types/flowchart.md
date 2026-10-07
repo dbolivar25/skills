@@ -8,4 +8,4 @@ The arrows define order. Rearranging boxes is safe only when the edge structure 
 
 Trace ordinary, exceptional, and looping executions against the source. Check that each branch reaches the intended next action or end state, that guards are unambiguous, and that arrows are visible at their endpoints.
 
-Reference layouts: [flowchart](../../assets/example-flowchart.html), [full](../../assets/example-flowchart-full.html), [dark](../../assets/example-flowchart-dark.html).
+Reference layouts: [flowchart](../../assets/example-flowchart.html), [full](../../assets/index.html#example-flowchart-full), [dark](../../assets/index.html#example-flowchart-dark).

@@ -8,4 +8,4 @@ For defense layers, identify the threat or failure mode each addresses and what 
 
 Size for labels and optional subcomponents. Layer heights can be decorative unless they encode a disclosed quantity. Check order, interface direction, scope, and any coverage claims against the source.
 
-Reference layouts: [layers](../../assets/example-layers.html), [full](../../assets/example-layers-full.html), [dark](../../assets/example-layers-dark.html).
+Reference layouts: [layers](../../assets/example-layers.html), [full](../../assets/index.html#example-layers-full), [dark](../../assets/index.html#example-layers-dark).

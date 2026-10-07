@@ -10,4 +10,4 @@ Grouped bars compare series within categories. Stacked bars compare totals and p
 
 If categories are aggregated into Other, retain the members and reconciliation outside the plot. Calculate totals, stack boundaries, signs, and scales from the source before drawing. Check each visible bar against those calculations, including zero, missing, and negative cases.
 
-Layout references: [bar](../../assets/example-bar.html), [full](../../assets/example-bar-full.html), [dark](../../assets/example-bar-dark.html). Sample counts, spacing, and palette are adaptable.
+Layout references: [bar](../../assets/example-bar.html), [full](../../assets/index.html#example-bar-full), [dark](../../assets/index.html#example-bar-dark). Sample counts, spacing, and palette are adaptable.

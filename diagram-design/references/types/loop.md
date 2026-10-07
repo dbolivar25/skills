@@ -10,4 +10,4 @@ For a circular recipe, station centers can use x = cx + R·cos θ and y = cy + R
 
 Trace one full traversal and the feedback's effect on the next one. Check payload identity, all supported read/write paths, persistent state, delays, termination conditions, and unknowns. Inspect central congestion and arrow visibility at delivery size.
 
-Reference layouts: [loop](../../assets/example-loop.html), [full](../../assets/example-loop-full.html), [dark](../../assets/example-loop-dark.html).
+Reference layouts: [loop](../../assets/example-loop.html), [full](../../assets/index.html#example-loop-full), [dark](../../assets/index.html#example-loop-dark).

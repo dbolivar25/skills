@@ -10,4 +10,4 @@ A scenario matrix names four internally coherent possible worlds. It does not au
 
 Check axis independence, directions, thresholds, source positions, and scenario consistency. Inspect boundary cases, quadrant labels, crowded points, and any uncertainty at final size.
 
-Reference layouts: [quadrant](../../assets/example-quadrant.html), [full](../../assets/example-quadrant-full.html), [dark](../../assets/example-quadrant-dark.html).
+Reference layouts: [quadrant](../../assets/example-quadrant.html), [full](../../assets/index.html#example-quadrant-full), [dark](../../assets/index.html#example-quadrant-dark).

@@ -10,4 +10,4 @@ If showing degree or impact badges, say whether counts cover the displayed view 
 
 Check every edge and direction against the source, including shared dependencies, optional edges, disconnected nodes, and all cycles in scope. Trace the selected component's requirements and the reverse impact question separately. Inspect edge labels, merge points, and high-degree nodes at delivery size.
 
-Reference layouts: [dependency](../../assets/example-dependency.html), [full](../../assets/example-dependency-full.html), [dark](../../assets/example-dependency-dark.html).
+Reference layouts: [dependency](../../assets/example-dependency.html), [full](../../assets/index.html#example-dependency-full), [dark](../../assets/index.html#example-dependency-dark).

@@ -6,4 +6,4 @@ Show intervals as intervals and milestones as points. Label the time scale, time
 
 Check source dates and coordinate placement independently. Inspect overlapping events, long labels, interval boundaries, uncertainty ranges, and the delivered size. Use Gantt when task durations and dependencies are the main question.
 
-Reference layouts: [timeline](../../assets/example-timeline.html), [full](../../assets/example-timeline-full.html), [dark](../../assets/example-timeline-dark.html).
+Reference layouts: [timeline](../../assets/example-timeline.html), [full](../../assets/index.html#example-timeline-full), [dark](../../assets/index.html#example-timeline-dark).

@@ -10,4 +10,4 @@ Use direct series labels or a legend with distinct, accessible marks. For many s
 
 Calculate scales and any aggregate or trend from the source, then check coordinate positions and missing intervals independently. Inspect endpoints, overlapping series, clipped extrema, axis labels, and the intended reading size.
 
-Reference layouts: [line](../../assets/example-line.html), [full](../../assets/example-line-full.html), [dark](../../assets/example-line-dark.html).
+Reference layouts: [line](../../assets/example-line.html), [full](../../assets/index.html#example-line-full), [dark](../../assets/index.html#example-line-dark).

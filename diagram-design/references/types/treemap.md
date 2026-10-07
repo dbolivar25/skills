@@ -10,4 +10,4 @@ Place labels inside their true tile bounds when they fit. Otherwise use leaders,
 
 Independently compare tile areas, hierarchy membership, counts, and totals with the source. A data-share attribute attached to a tile is not independent proof of its geometry. Inspect the smallest tiles, nested gutters, rounded values, label clipping, and any focus or tooltip state in the delivered artifact.
 
-Reference layouts: [treemap](../../assets/example-treemap.html), [full](../../assets/example-treemap-full.html), [dark](../../assets/example-treemap-dark.html).
+Reference layouts: [treemap](../../assets/example-treemap.html), [full](../../assets/index.html#example-treemap-full), [dark](../../assets/index.html#example-treemap-dark).

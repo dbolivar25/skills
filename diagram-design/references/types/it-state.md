@@ -12,4 +12,4 @@ Start with the main operational path, place stores and external systems, then ro
 
 Verify component identity, environment, connection direction, boundary placement, and claimed pain or benefit against source evidence. Trace a representative operation and inspect every route that crosses a container. Compare current and proposed maps for intentional differences.
 
-Reference layouts: [IT state](../../assets/example-it-state.html), [full](../../assets/example-it-state-full.html), [dark](../../assets/example-it-state-dark.html). Their exact coordinates and sample narrative describe those examples.
+Reference layouts: [IT state](../../assets/example-it-state.html), [full](../../assets/index.html#example-it-state-full), [dark](../../assets/index.html#example-it-state-dark). Their exact coordinates and sample narrative describe those examples.

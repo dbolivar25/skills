@@ -10,4 +10,4 @@ Each group's baseline is a layout position. Its silhouette height follows the se
 
 Compute bins or density from source data before drawing. Check normalization, domain, labels, and extrema independently. Inspect overlap, tiny tails, and boundary clipping at the delivered size. Optional source bindings are useful receipts; no supplied helper validates distribution semantics automatically.
 
-Reference layouts: [ridgeline](../../assets/example-ridgeline.html), [full](../../assets/example-ridgeline-full.html), [dark](../../assets/example-ridgeline-dark.html).
+Reference layouts: [ridgeline](../../assets/example-ridgeline.html), [full](../../assets/index.html#example-ridgeline-full), [dark](../../assets/index.html#example-ridgeline-dark).

@@ -41,6 +41,8 @@ Shared retrieval infrastructure is allowed and useful when it stays close to neu
 
 This substrate helps workflows find raw state. It is not the work product's semantic understanding.
 
+When parallel branches read evidence independently, have each identify the subject and scope it actually read. Check that identity at the join and handle disagreement explicitly before combining their judgments. Plausible typed output does not establish that a branch read the intended subject.
+
 ## Workflow-Derived Semantics
 
 Workflow-derived semantics are interpretations made for a purpose:

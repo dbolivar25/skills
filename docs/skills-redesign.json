@@ -105,18 +105,6 @@
       ]
     },
     {
-      "name": "augment-workflows",
-      "job": "Live Augment graph authoring, operation, review, and diagnosis",
-      "why_separate": "Product lifecycle authority, canonical resources, graph contracts, and outcome observations.",
-      "methods": [
-        "live product entry roots",
-        "explicit graph/control/effects",
-        "branch subject agreement",
-        "stored-document readback",
-        "lifecycle and runtime proof"
-      ]
-    },
-    {
       "name": "ai-engineering",
       "job": "Bounded AI inference and faithful derived work products",
       "why_separate": "Crosses semantic quality, source fidelity, typed consumer behavior, and publication/delivery boundaries.",
@@ -1189,7 +1177,7 @@
       "task": "Customer-evidence-derived work product",
       "path": [
         "ai-engineering",
-        "augment-workflows when product graph",
+        "live Augment MCP workflow docs when product graph",
         "evaluation when comparison asked"
       ],
       "success": "Source/decision-time fidelity, justified support and publication, typed validity separate from usefulness."
@@ -1281,5 +1269,37 @@
     "account": "docs/skills-final-cleanup.md",
     "authorization": "Daniel: agreed get those cleaned up and lets merge",
     "binding_semantics": "Resource targets follow the current authorized suite. Original first-version source decisions and observed checks remain historical evidence."
-  }
+  },
+  "approved_followup_retirements": [
+    {
+      "name": "augment-workflows",
+      "authorization": "Daniel: gone. any other thoughts?",
+      "removed_commit": "9fa9048511ef628fb36ec83cd1f0aac19290d0f2",
+      "reason": "Live Augment MCP docs already cover graph authoring, bounded node responsibilities, canonical resource discovery, draft/release/execution authority and observed outcomes.",
+      "platform_sources": [
+        "decisionsite://docs",
+        "decisionsite://docs/workflows/authoring",
+        "decisionsite://docs/workflows/operating",
+        "decisionsite://docs/workflows/nodes/ds.aiAgent.perItem.in1.success1.error1",
+        "decisionsite://docs/skills/designing",
+        "decisionsite://docs/skills/using"
+      ],
+      "retained_refinements": [
+        {
+          "idea": "Mechanically compare actual returned/stored document with authored source; model reconstruction is not readback evidence.",
+          "target": "engineering/references/testing.md"
+        },
+        {
+          "idea": "Parallel branches identify the subject and scope actually read; joins handle disagreement explicitly.",
+          "target": "ai-engineering/references/derivation/raw-state-and-semantics.md"
+        }
+      ],
+      "recovery": {
+        "source_commit": "b115afa232e244fda2e52772890830ed0aaeebe4",
+        "archived_path": "/Users/danielbolivar/.agents/skills-archive/2026-10-06-augment-workflows/augment-workflows/SKILL.md",
+        "sha256": "abea8faba7b04bcbea07587671cd9971beb013bb8753c78ab6e1d80fc08582bc"
+      },
+      "history": "The catalog and workflow stress routes describe the current fourteen-skill suite. Original source decisions and prior stage evidence retain their historical meaning."
+    }
+  ]
 }

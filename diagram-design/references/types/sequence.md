@@ -10,4 +10,4 @@ Arrange lifelines for readability while keeping message order intact. Self-messa
 
 Check the ordinary path, branch guards, parallel regions, retries, replies, and lifecycle events against the source. Inspect fragment nesting, note placement, label collisions, and arrowheads at delivery size. Import helpers provide only part of this information; consult the source and their coverage report before reproducing a sequence.
 
-Reference layouts: [sequence](../../assets/example-sequence.html), [full](../../assets/example-sequence-full.html), [dark](../../assets/example-sequence-dark.html).
+Reference layouts: [sequence](../../assets/example-sequence.html), [full](../../assets/index.html#example-sequence-full), [dark](../../assets/index.html#example-sequence-dark).

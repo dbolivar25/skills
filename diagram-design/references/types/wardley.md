@@ -10,4 +10,4 @@ Keep component labels and dependencies readable. Use a legend for current, propo
 
 Verify the user anchor, dependency chain, evolution judgments, and recommendations against the source. Inspect ambiguous positions, crossing dependencies, and any current-versus-proposed distinction at the delivered size.
 
-Reference layouts: [Wardley](../../assets/example-wardley.html), [full](../../assets/example-wardley-full.html), [dark](../../assets/example-wardley-dark.html).
+Reference layouts: [Wardley](../../assets/example-wardley.html), [full](../../assets/index.html#example-wardley-full), [dark](../../assets/index.html#example-wardley-dark).

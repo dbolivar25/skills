@@ -10,4 +10,4 @@ Keep tied and overlapping items identifiable with combined labels, small multipl
 
 Independently recompute ranks from the metric and declared convention. Check eligibility, ties, missing snapshots, endpoint labels, and the rendered rank positions. Any task-specific geometric check must resolve transforms rather than assuming attributes are screen coordinates.
 
-Reference layouts: [bump](../../assets/example-bump.html), [full](../../assets/example-bump-full.html), [dark](../../assets/example-bump-dark.html).
+Reference layouts: [bump](../../assets/example-bump.html), [full](../../assets/index.html#example-bump-full), [dark](../../assets/index.html#example-bump-dark).

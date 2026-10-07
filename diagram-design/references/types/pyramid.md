@@ -8,4 +8,4 @@ In a quantitative funnel, retain stage counts, denominators, cohort definitions,
 
 A measured zero and an unknown count need different treatment. Verify geometry, cohort continuity, missing stages, and any conversion rates against the source. Inspect narrow labels and the exported shape at reading size.
 
-Reference layouts: [pyramid](../../assets/example-pyramid.html), [full](../../assets/example-pyramid-full.html), [dark](../../assets/example-pyramid-dark.html).
+Reference layouts: [pyramid](../../assets/example-pyramid.html), [full](../../assets/index.html#example-pyramid-full), [dark](../../assets/index.html#example-pyramid-dark).

@@ -278,29 +278,28 @@ cases:
   prompt: Build an Augment workflow that derives a customer-facing decision brief
     from CRM state and renders it as an Augment document.
   expect:
-    primary: augment-workflows
+    primary: ai-engineering
     also_load:
-    - ai-engineering
     - augment-design
     do_not_load: []
     read: []
     do_not_read: []
-  why: Workflow mechanics own the executable graph, derivation owns evidential fidelity,
-    and Augment design owns the visible branded surface.
+  why: Live Augment MCP docs own graph mechanics. AI Engineering owns the derived
+    work product's fidelity and Augment Design owns the visible branded surface.
 - id: mechanical-workflow-inspection
-  kind: collision
+  kind: negative
   prompt: Inspect this Decision Site workflow for invalid node references and lifecycle
     errors. It does not generate a visible AI work product.
   expect:
-    primary: augment-workflows
+    primary: null
     also_load: []
     do_not_load:
     - ai-engineering
     - augment-design
     read: []
     do_not_read: []
-  why: The request is limited to executable workflow mechanics and explicitly excludes
-    the neighboring derivation and presentation triggers.
+  why: Live Augment MCP docs and tool contracts cover this mechanical inspection.
+    It does not need a local derivation or presentation skill.
 - id: compare-module-seams
   kind: collision
   prompt: Compare two interface and seam shapes for this TypeScript module. Do not
@@ -708,7 +707,6 @@ cases:
     also_load: []
     do_not_load:
     - ai-engineering
-    - augment-workflows
     read: []
     do_not_read: []
   why: Support returns provenance and justified confidence without a product pipeline.

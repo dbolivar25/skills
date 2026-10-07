@@ -28,6 +28,8 @@ Use hierarchy, alignment, labels, grouping, and restrained emphasis to make the 
 
 For conversational interactive explanations, read and use the current host's visualization capability. For a standalone shared artifact, use the selected HTML, SVG, PNG, plotting, or source-diagram method. Preserve accessible text, keyboard interaction where applicable, reduced motion, and honest behavior.
 
+For a worked example or icon source, use [targeted asset retrieval](references/asset-sources.md). The galleries bundle dark/full examples and original SVG sources; retrieve only the chosen source before adapting or exporting it. Templates remain standalone files.
+
 ## Verify the intended output
 
 Read `references/export.md` and `references/verification.md` for the selected output. Inspect the rendered artifact, important states, labels, collisions, bounds, readability, and semantic fidelity. Check actual export dimensions, fonts, scaling, and destination rendering. A parser or self-check can establish only its inspected conditions.

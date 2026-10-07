@@ -8,4 +8,4 @@ Arrow direction defines the allowed transition. Label guards clearly enough to d
 
 Walk representative event sequences and boundary conditions against the source. Check outgoing guards, retry paths, terminal states, and nested scope. Inspect labels and arrow endpoints at the delivered size.
 
-Reference layouts: [state](../../assets/example-state.html), [full](../../assets/example-state-full.html), [dark](../../assets/example-state-dark.html).
+Reference layouts: [state](../../assets/example-state.html), [full](../../assets/index.html#example-state-full), [dark](../../assets/index.html#example-state-dark).

@@ -10,4 +10,4 @@ Choose a deterministic packing method when reproducibility matters. Collision ch
 
 Check one dot per retained record, all measured coordinates, group membership, and count reconciliation from source data. Inspect duplicate values, dense stacks, boundary clipping, labels, and any tooltip or focus state used in the delivered artifact.
 
-Reference layouts: [beeswarm](../../assets/example-beeswarm.html), [full](../../assets/example-beeswarm-full.html), [dark](../../assets/example-beeswarm-dark.html).
+Reference layouts: [beeswarm](../../assets/example-beeswarm.html), [full](../../assets/index.html#example-beeswarm-full), [dark](../../assets/index.html#example-beeswarm-dark).

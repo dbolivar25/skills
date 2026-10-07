@@ -10,4 +10,4 @@ Keep each story under its actual activity. If a story supports several activitie
 
 Verify activity order, story membership, user outcome, priority meaning, and release status against the source. Inspect crowded columns, release boundaries, card labels, and any filtering or expansion state used in the artifact.
 
-Reference layouts: [story map](../../assets/example-story-map.html), [full](../../assets/example-story-map-full.html), [dark](../../assets/example-story-map-dark.html).
+Reference layouts: [story map](../../assets/example-story-map.html), [full](../../assets/index.html#example-story-map-full), [dark](../../assets/index.html#example-story-map-dark).

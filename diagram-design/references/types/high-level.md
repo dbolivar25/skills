@@ -14,4 +14,4 @@ A stage grid is an optional construction aid. Measure label and icon bounds, res
 
 Check the view against an inventory and connection list. Trace a producer-to-consumer path, inspect shared-service scope, identify unknowns, and reconcile omitted detail. Verify legends, long names, group boundaries, and exported bounds at the intended reading size.
 
-Reference layouts: [high-level](../../assets/example-high-level.html), [full](../../assets/example-high-level-full.html), [dark](../../assets/example-high-level-dark.html), plus the horizontal and vertical data-lake examples in the [gallery](../../assets/index.html). Those assets retain full worked geometry and sample styling.
+Reference layouts: [high-level](../../assets/example-high-level.html), [full](../../assets/index.html#example-high-level-full), [dark](../../assets/index.html#example-high-level-dark), plus the horizontal and vertical data-lake examples in the [gallery](../../assets/index.html). Those assets retain full worked geometry and sample styling.

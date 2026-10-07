@@ -10,4 +10,4 @@ Keep stage order and supporting quotes or evidence attached to their actual stag
 
 Verify stage coverage, source attribution, current-versus-proposed status, and any sentiment encoding. Inspect dense columns, evidence labels, unknown states, and the actual slide or document size.
 
-Reference layouts: [journey](../../assets/example-journey.html), [full](../../assets/example-journey-full.html), [dark](../../assets/example-journey-dark.html).
+Reference layouts: [journey](../../assets/example-journey.html), [full](../../assets/index.html#example-journey-full), [dark](../../assets/index.html#example-journey-dark).

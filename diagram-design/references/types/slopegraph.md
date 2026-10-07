@@ -10,4 +10,4 @@ When one endpoint is missing, show the known value and the missing status or exp
 
 Verify against an independent table of source values, endpoint coordinates, and signed deltas. Check both sides and ties at the final size. There is no packaged automated slopegraph encoding validator; optional data attributes support manual or task-specific checks only.
 
-Reference layouts: [slopegraph](../../assets/example-slopegraph.html), [full](../../assets/example-slopegraph-full.html), [dark](../../assets/example-slopegraph-dark.html).
+Reference layouts: [slopegraph](../../assets/example-slopegraph.html), [full](../../assets/index.html#example-slopegraph-full), [dark](../../assets/index.html#example-slopegraph-dark).

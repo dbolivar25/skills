@@ -10,4 +10,4 @@ Include a legend for unfamiliar notation, but do not display unused relationship
 
 Check declarations, relationship kinds, endpoint orientation, multiplicities, and ownership against the source model or code. Inspect long signatures, diamond and triangle placement, and exports at actual reading size. Consult official UML material when formal semantics determine the result.
 
-Reference layouts: [UML class](../../assets/example-uml-class.html), [full](../../assets/example-uml-class-full.html), [dark](../../assets/example-uml-class-dark.html).
+Reference layouts: [UML class](../../assets/example-uml-class.html), [full](../../assets/index.html#example-uml-class-full), [dark](../../assets/index.html#example-uml-class-dark).

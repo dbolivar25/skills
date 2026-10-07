@@ -10,4 +10,4 @@ Keep series identifiable with outlines, marks, labels, and a clear legend. Too m
 
 Verify normalization, criterion directions, coordinates, missing scores, and legend identity from source data. Inspect overlaps and labels at delivery size. Use a palette suitable to the chosen skin rather than assuming the gallery palette is universal.
 
-Reference layouts: [radar](../../assets/example-radar.html), [full](../../assets/example-radar-full.html), [dark](../../assets/example-radar-dark.html).
+Reference layouts: [radar](../../assets/example-radar.html), [full](../../assets/index.html#example-radar-full), [dark](../../assets/index.html#example-radar-dark).

@@ -8,4 +8,4 @@ Place categories in their meaningful cyclic order when there is one. Equal angul
 
 Calculate radii and ring values from source data. Check coordinates, scale, zero, missing, and maximum values independently. There is no packaged radial semantic validator or element allowlist that proves the figure correct. Inspect inner labels, crowded outer labels, and the final export.
 
-Reference layouts: [polar](../../assets/example-polar.html), [full](../../assets/example-polar-full.html), [dark](../../assets/example-polar-dark.html).
+Reference layouts: [polar](../../assets/example-polar.html), [full](../../assets/index.html#example-polar-full), [dark](../../assets/index.html#example-polar-dark).

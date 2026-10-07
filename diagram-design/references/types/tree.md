@@ -8,4 +8,4 @@ Orthogonal shared buses can make siblings readable when the junction clearly mea
 
 Verify every parent, the root, collapsed branches, and any shared-identity exception against the source. Inspect deep labels, branch junctions, and reading order at delivery size. For stable block identity and sidecars, use the traceable-block pattern in [semantic patterns](../semantic-patterns.md).
 
-Reference layouts: [tree](../../assets/example-tree.html), [full](../../assets/example-tree-full.html), [dark](../../assets/example-tree-dark.html).
+Reference layouts: [tree](../../assets/example-tree.html), [full](../../assets/index.html#example-tree-full), [dark](../../assets/index.html#example-tree-dark).

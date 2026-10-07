@@ -10,4 +10,4 @@ Label important flows and nodes without covering the bands. Color has a declared
 
 Independently check every width, node total, and aggregate against the flow table. Inspect merges, splits, crossing order, tiny paths, and clipping at the final size. A multi-column layout is optional; use as many stages as the real flow needs.
 
-Reference layouts: [Sankey](../../assets/example-sankey.html), [full](../../assets/example-sankey-full.html), [dark](../../assets/example-sankey-dark.html).
+Reference layouts: [Sankey](../../assets/example-sankey.html), [full](../../assets/index.html#example-sankey-full), [dark](../../assets/index.html#example-sankey-dark).

@@ -10,4 +10,4 @@ Keep centers at their measured coordinates. Improve overlap through drawing orde
 
 Compute position and area from an independent source table. Check zero, extreme, missing, and overlapping cases; compare rendered radii after transforms. Inspect the smallest readable marks and legend at delivery size. There is no supplied automatic bubble semantic validator.
 
-Reference layouts: [bubble](../../assets/example-bubble.html), [full](../../assets/example-bubble-full.html), [dark](../../assets/example-bubble-dark.html).
+Reference layouts: [bubble](../../assets/example-bubble.html), [full](../../assets/index.html#example-bubble-full), [dark](../../assets/index.html#example-bubble-dark).

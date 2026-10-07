@@ -10,4 +10,4 @@ For a large board, aggregate deliberately and reconcile displayed counts with th
 
 Check state membership, counts, IDs, blocked status, and any limit violations against the source snapshot. Inspect crowded columns, long titles, overflow, and interaction states if cards expand or filter.
 
-Reference layouts: [Kanban](../../assets/example-kanban.html), [full](../../assets/example-kanban-full.html), [dark](../../assets/example-kanban-dark.html).
+Reference layouts: [Kanban](../../assets/example-kanban.html), [full](../../assets/index.html#example-kanban-full), [dark](../../assets/index.html#example-kanban-dark).

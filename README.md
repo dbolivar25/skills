@@ -1,6 +1,6 @@
 # Personal skills
 
-Fifteen entry points own complete jobs. Each entry selects detailed methods only when the job needs them. Always applicable collaboration and decision rules live in the Codex working agreement. Managed skills and plugins are unchanged.
+Fourteen entry points own complete jobs. Each entry selects detailed methods only when the job needs them. Always applicable collaboration and decision rules live in the Codex working agreement. Managed skills and plugins are unchanged.
 
 | Skill | Job |
 | --- | --- |
@@ -12,7 +12,6 @@ Fifteen entry points own complete jobs. Each entry selects detailed methods only
 | [Augment Design](augment-design/SKILL.md) | Augment identity, voice, fonts, assets, tokens and format-specific production quality |
 | [GitHub](github/SKILL.md) | Complete PR evidence, conversations, CI and requested platform operations |
 | [Grafana](grafana/SKILL.md) | Bounded reproducible metrics, logs, traces and profiles |
-| [Augment Workflows](augment-workflows/SKILL.md) | Live product contracts, explicit graphs, operation authority and observed outcomes |
 | [AI Engineering](ai-engineering/SKILL.md) | Typed AI judgments, faithful derivation, provenance, durable state and publication |
 | [Evaluation](evaluation/SKILL.md) | Representative comparisons, independent judgments, failure analysis and ablations |
 | [Writing](writing/SKILL.md) | Substantive drafting, voice, faithful compression and reviewer-facing explanations |
@@ -22,11 +21,13 @@ Fifteen entry points own complete jobs. Each entry selects detailed methods only
 
 ## What changed
 
-The October 2026 redesign consolidated 36 public entries into 15. Detailed methods, examples, teaching material, brand assets and useful tools remain reachable through conditional pointers. Steward's runtime, CLI, tests, fixture and default rules retain their original bytes.
+The initial October 2026 redesign consolidated 36 public entries into 15. Detailed methods, examples, teaching material, brand assets and useful tools remain reachable through conditional pointers. Steward's runtime, CLI, tests, fixture and default rules retain their original bytes.
 
 The cuts remove the shared composition protocol, generic assessment envelopes, compulsory global checklists and unsupported universal gates. They also remove standalone selection overhead for methods now owned by these jobs. The complete source dispositions and disclosed losses are in the [migration account](docs/skills-redesign.md) and [resource manifest](docs/skills-redesign.json).
 
 The first version is committed as `fc4b475`. The [second-pass account](docs/skills-second-pass.md) explains the substantive reference improvements and further cuts, committed as `546b6ac`. Its [file-level evidence](docs/skills-second-pass.json) is a historical snapshot of that accepted stage. The [final cleanup](docs/skills-final-cleanup.md) extracts portable TypeSafe ideas into AI Engineering and removes the optional blank AI review form. Diagram Design retains its complete kit.
+
+Augment Workflows was subsequently retired because the live Augment MCP docs already cover graph authoring, node responsibilities, lifecycle operations and outcome verification. Two general refinements remain in [Engineering's testing method](engineering/references/testing.md) and [AI Engineering's source semantics](ai-engineering/references/derivation/raw-state-and-semantics.md): direct stored-document comparison and parallel-branch subject agreement. The active catalog now contains fourteen skills; the earlier accounts retain their historical scope.
 
 These are local installed files. Discovery, invocation permission and content loading are separate host mechanisms. A chat that began with the previous catalog may need a fresh session to discover the new names. No host refresh or measured improvement in model quality is claimed.
 

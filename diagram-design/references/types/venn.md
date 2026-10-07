@@ -8,4 +8,4 @@ Label exclusive regions and shared intersections unambiguously. Distinguish an e
 
 Check memberships, region counts, unions, and intersections independently. Inspect tiny regions, label attachment, and any quantitative area claim at delivery size.
 
-Reference layouts: [Venn](../../assets/example-venn.html), [full](../../assets/example-venn-full.html), [dark](../../assets/example-venn-dark.html).
+Reference layouts: [Venn](../../assets/example-venn.html), [full](../../assets/index.html#example-venn-full), [dark](../../assets/index.html#example-venn-dark).
